@@ -4,6 +4,7 @@ namespace Acme\DemoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * TblCatalogueProduct
@@ -748,5 +749,82 @@ class TblCatalogueProduct
     public function getFeaturevalues()
     {
         return $this->featurevalues;
+    }
+    
+    public function getAbsoluteimg()
+    {
+        return null === $this->img
+            ? null
+            : $this->getUploadRootDir().'/'.$this->img;
+    }
+
+    public function getWebimg()
+    {
+        return null === $this->img
+            ? null
+            : $this->getUploadDir().'/'.$this->img;
+    }
+
+    protected function getUploadRootDir()
+    {
+        // il percorso assoluto della cartella dove i
+        // documenti caricati verranno salvati
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+    }
+
+    protected function getUploadDir()
+    {
+        // togliamo __DIR_ in modo da visualizzare
+        // correttamente nella vista il file caricato
+        return 'uploads/documents';
+    }
+    
+    /**
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
+    /**
+     * Sets file.
+     *
+     * @param UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file.
+     *
+     * @return UploadedFile
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+    
+    public function upload()
+    {
+        // la proprietà file può essere vuota se il campo non è obbligatorio
+        if (null === $this->getFile()) {
+            return;
+        }
+    
+        // si utilizza il nome originale del file ma è consigliabile
+        // un processo di sanitizzazione almeno per evitare problemi di sicurezza
+    
+        // move accetta come parametri la cartella di destinazione
+        // e il nome del file di destinazione
+        $this->getFile()->move(
+            $this->getUploadRootDir(),
+            $this->getFile()->getClientOriginalName()
+        );
+    
+        // impostare la proprietà del percorso al nome del file dove è stato salvato il file
+        $this->path = $this->file->getClientOriginalName();
+    
+        // impostare a null la proprietà file dato che non è più necessaria
+        $this->file = null;
     }
 }

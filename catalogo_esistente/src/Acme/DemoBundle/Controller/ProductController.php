@@ -7,6 +7,7 @@ use Acme\DemoBundle\Entity\TblCatalogueProduct as Product;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Acme\DemoBundle\Form\TblCatalogueProductType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProductController extends Controller
 {
@@ -20,8 +21,9 @@ class ProductController extends Controller
 
         if ($form->isValid()) {
             // esegue alcune azioni, salvare il prodotto nella base dati
-            
             $em = $this->getDoctrine()->getManager();
+            
+            $product->upload();
             
             $em->persist($product);
             $em->flush();

@@ -23,7 +23,7 @@ class TblCatalogueFeatureType extends AbstractType
             ->add('compulsory')
             ->add('display')
             ->add('position')
-            ->add('featurevalues')
+            //->add('featurevalues')
         ;
     }
     

@@ -23,7 +23,7 @@ class TblCatalogueProductType extends AbstractType
             ->add('shortDescription')
             ->add('cod')
             ->add('imgThumb')
-            ->add('img')
+            ->add('img','file')
             ->add('imgFiniture1')
             ->add('imgFiniture2')
             ->add('idTblPhotoCat')
