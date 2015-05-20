@@ -1,0 +1,75 @@
+qweb_cms_catalogo_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: QwebCMSCatalogoBundle:Default:index }
+    
+welcome:
+    path:     /
+    defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allProduct }
+
+products:
+    path:     /products
+    defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allProduct }
+    
+create_product:
+    path:     /products/new
+    defaults: { _controller: QwebCMSCatalogoBundle:Product:create }
+
+show_product:
+    path:     /product/show/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Product:show }
+
+update_product:
+    path:     /product/update/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Product:update }
+
+delete_product:
+    path:     /product/delete/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Product:delete }
+    
+categories:
+    path:     /categories
+    defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allCategory }
+    
+create_category:
+    path:     /categories/new
+    defaults: { _controller: QwebCMSCatalogoBundle:Category:create }
+
+show_category:
+    path:     /category/show/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Category:show }
+
+update_category:
+    path:     /category/update/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Category:update }
+
+delete_category:
+    path:     /category/delete/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Category:delete }
+
+features:
+    path:     /features
+    defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allFeature }
+    
+create_features:
+    path:     /features/new
+    defaults: { _controller: QwebCMSCatalogoBundle:Feature:create }
+    
+show_features:
+    path:     /feature/show/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Feature:show }
+    
+update_features:
+    path:     /feature/update/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Feature:update }
+    
+delete_features:
+    path:     /feature/delete/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Feature:delete }
+
+featurevalues:
+    path:     /featurevalues
+    defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allFeatureValue }
+    
+create_featurevalues:
+    path:     /featurevalues/new
+    defaults: { _controller: QwebCMSCatalogoBundle:Featurevalue:create }

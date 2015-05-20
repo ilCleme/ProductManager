@@ -21,21 +21,12 @@ class TblCatalogueProductType extends AbstractType
             ->add('description')
             ->add('descriptionNotag')
             ->add('shortDescription')
-            ->add('cod')
-            ->add('imgThumb')
             ->add('img','file')
-            ->add('imgFiniture1')
-            ->add('imgFiniture2')
+            //->add('img','elfinder', array('instance'=>'form', 'enable'=>true))
             ->add('idTblPhotoCat')
             ->add('template')
             ->add('pub')
-            ->add('featured')
             ->add('position')
-            ->add('idOld')
-            ->add('priceList')
-            ->add('priceSale')
-            ->add('priceOffer')
-            ->add('puntoVendita')
             ->add('categories', 'entity', array(
                 'class' => 'Acme\DemoBundle\Entity\TblCatalogueCategory',
                 'property' => 'title',
@@ -66,6 +57,6 @@ class TblCatalogueProductType extends AbstractType
      */
     public function getName()
     {
-        return 'acme_demobundle_tblcatalogueproduct';
+        return 'product';
     }
 }

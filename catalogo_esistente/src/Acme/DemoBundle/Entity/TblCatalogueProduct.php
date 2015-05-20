@@ -59,37 +59,9 @@ class TblCatalogueProduct
     /**
      * @var string
      *
-     * @ORM\Column(name="cod", type="string", length=255, nullable=false)
-     */
-    private $cod;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="img_thumb", type="string", length=255, nullable=true)
-     */
-    private $imgThumb;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="img", type="string", length=255, nullable=true)
      */
     private $img;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="img_finiture1", type="string", length=255, nullable=true)
-     */
-    private $imgFiniture1;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="img_finiture2", type="string", length=255, nullable=true)
-     */
-    private $imgFiniture2;
 
     /**
      * @var integer
@@ -112,12 +84,6 @@ class TblCatalogueProduct
      */
     private $pub;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="featured", type="boolean", nullable=true)
-     */
-    private $featured;
 
     /**
      * @var integer
@@ -125,41 +91,6 @@ class TblCatalogueProduct
      * @ORM\Column(name="position", type="integer", nullable=false)
      */
     private $position;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_old", type="bigint", nullable=false)
-     */
-    private $idOld;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="price_list", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $priceList;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="price_sale", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $priceSale;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="price_offer", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $priceOffer;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="punto_vendita", type="string", length=255, nullable=true)
-     */
-    private $puntoVendita;
 
     /**
      * @var integer
@@ -331,52 +262,6 @@ class TblCatalogueProduct
     }
 
     /**
-     * Set cod
-     *
-     * @param string $cod
-     * @return TblCatalogueProduct
-     */
-    public function setCod($cod)
-    {
-        $this->cod = $cod;
-
-        return $this;
-    }
-
-    /**
-     * Get cod
-     *
-     * @return string 
-     */
-    public function getCod()
-    {
-        return $this->cod;
-    }
-
-    /**
-     * Set imgThumb
-     *
-     * @param string $imgThumb
-     * @return TblCatalogueProduct
-     */
-    public function setImgThumb($imgThumb)
-    {
-        $this->imgThumb = $imgThumb;
-
-        return $this;
-    }
-
-    /**
-     * Get imgThumb
-     *
-     * @return string 
-     */
-    public function getImgThumb()
-    {
-        return $this->imgThumb;
-    }
-
-    /**
      * Set img
      *
      * @param string $img
@@ -397,52 +282,6 @@ class TblCatalogueProduct
     public function getImg()
     {
         return $this->img;
-    }
-
-    /**
-     * Set imgFiniture1
-     *
-     * @param string $imgFiniture1
-     * @return TblCatalogueProduct
-     */
-    public function setImgFiniture1($imgFiniture1)
-    {
-        $this->imgFiniture1 = $imgFiniture1;
-
-        return $this;
-    }
-
-    /**
-     * Get imgFiniture1
-     *
-     * @return string 
-     */
-    public function getImgFiniture1()
-    {
-        return $this->imgFiniture1;
-    }
-
-    /**
-     * Set imgFiniture2
-     *
-     * @param string $imgFiniture2
-     * @return TblCatalogueProduct
-     */
-    public function setImgFiniture2($imgFiniture2)
-    {
-        $this->imgFiniture2 = $imgFiniture2;
-
-        return $this;
-    }
-
-    /**
-     * Get imgFiniture2
-     *
-     * @return string 
-     */
-    public function getImgFiniture2()
-    {
-        return $this->imgFiniture2;
     }
 
     /**
@@ -515,29 +354,6 @@ class TblCatalogueProduct
     }
 
     /**
-     * Set featured
-     *
-     * @param boolean $featured
-     * @return TblCatalogueProduct
-     */
-    public function setFeatured($featured)
-    {
-        $this->featured = $featured;
-
-        return $this;
-    }
-
-    /**
-     * Get featured
-     *
-     * @return boolean 
-     */
-    public function getFeatured()
-    {
-        return $this->featured;
-    }
-
-    /**
      * Set position
      *
      * @param integer $position
@@ -560,121 +376,7 @@ class TblCatalogueProduct
         return $this->position;
     }
 
-    /**
-     * Set idOld
-     *
-     * @param integer $idOld
-     * @return TblCatalogueProduct
-     */
-    public function setIdOld($idOld)
-    {
-        $this->idOld = $idOld;
-
-        return $this;
-    }
-
-    /**
-     * Get idOld
-     *
-     * @return integer 
-     */
-    public function getIdOld()
-    {
-        return $this->idOld;
-    }
-
-    /**
-     * Set priceList
-     *
-     * @param float $priceList
-     * @return TblCatalogueProduct
-     */
-    public function setPriceList($priceList)
-    {
-        $this->priceList = $priceList;
-
-        return $this;
-    }
-
-    /**
-     * Get priceList
-     *
-     * @return float 
-     */
-    public function getPriceList()
-    {
-        return $this->priceList;
-    }
-
-    /**
-     * Set priceSale
-     *
-     * @param float $priceSale
-     * @return TblCatalogueProduct
-     */
-    public function setPriceSale($priceSale)
-    {
-        $this->priceSale = $priceSale;
-
-        return $this;
-    }
-
-    /**
-     * Get priceSale
-     *
-     * @return float 
-     */
-    public function getPriceSale()
-    {
-        return $this->priceSale;
-    }
-
-    /**
-     * Set priceOffer
-     *
-     * @param float $priceOffer
-     * @return TblCatalogueProduct
-     */
-    public function setPriceOffer($priceOffer)
-    {
-        $this->priceOffer = $priceOffer;
-
-        return $this;
-    }
-
-    /**
-     * Get priceOffer
-     *
-     * @return float 
-     */
-    public function getPriceOffer()
-    {
-        return $this->priceOffer;
-    }
-
-    /**
-     * Set puntoVendita
-     *
-     * @param string $puntoVendita
-     * @return TblCatalogueProduct
-     */
-    public function setPuntoVendita($puntoVendita)
-    {
-        $this->puntoVendita = $puntoVendita;
-
-        return $this;
-    }
-
-    /**
-     * Get puntoVendita
-     *
-     * @return string 
-     */
-    public function getPuntoVendita()
-    {
-        return $this->puntoVendita;
-    }
-
+    
     /**
      * Get id
      *
@@ -751,80 +453,4 @@ class TblCatalogueProduct
         return $this->featurevalues;
     }
     
-    public function getAbsoluteimg()
-    {
-        return null === $this->img
-            ? null
-            : $this->getUploadRootDir().'/'.$this->img;
-    }
-
-    public function getWebimg()
-    {
-        return null === $this->img
-            ? null
-            : $this->getUploadDir().'/'.$this->img;
-    }
-
-    protected function getUploadRootDir()
-    {
-        // il percorso assoluto della cartella dove i
-        // documenti caricati verranno salvati
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
-    }
-
-    protected function getUploadDir()
-    {
-        // togliamo __DIR_ in modo da visualizzare
-        // correttamente nella vista il file caricato
-        return 'uploads/documents';
-    }
-    
-    /**
-     * @Assert\File(maxSize="6000000")
-     */
-    private $file;
-
-    /**
-     * Sets file.
-     *
-     * @param UploadedFile $file
-     */
-    public function setFile(UploadedFile $file = null)
-    {
-        $this->file = $file;
-    }
-
-    /**
-     * Get file.
-     *
-     * @return UploadedFile
-     */
-    public function getFile()
-    {
-        return $this->file;
-    }
-    
-    public function upload()
-    {
-        // la proprietà file può essere vuota se il campo non è obbligatorio
-        if (null === $this->getFile()) {
-            return;
-        }
-    
-        // si utilizza il nome originale del file ma è consigliabile
-        // un processo di sanitizzazione almeno per evitare problemi di sicurezza
-    
-        // move accetta come parametri la cartella di destinazione
-        // e il nome del file di destinazione
-        $this->getFile()->move(
-            $this->getUploadRootDir(),
-            $this->getFile()->getClientOriginalName()
-        );
-    
-        // impostare la proprietà del percorso al nome del file dove è stato salvato il file
-        $this->path = $this->file->getClientOriginalName();
-    
-        // impostare a null la proprietà file dato che non è più necessaria
-        $this->file = null;
-    }
 }

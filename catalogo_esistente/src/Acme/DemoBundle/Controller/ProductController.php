@@ -16,15 +16,41 @@ class ProductController extends Controller
         $product = new Product();
         
         $form = $this->createForm(new TblCatalogueProductType(), $product);
-        
+        //$form = $this->createFormBuilder()
+        //    ->add('elfinder','elfinder', array('instance'=>'form', 'enable'=>true))
+        //    ->getForm();
         $form->handleRequest($request);
-
+        
         if ($form->isValid()) {
             // esegue alcune azioni, salvare il prodotto nella base dati
             $em = $this->getDoctrine()->getManager();
             
-            $product->upload();
+            $error					= false;
             
+            $absolutedir			= dirname(__FILE__);
+            $dir					= 'uploads/documents/';
+            $serverdir				= $dir;
+            $filename				= array();
+            
+            $json                   = $_POST['product']['img'];
+            
+            $json					= json_decode($json);
+            $tmp					= explode(',',$json->data);
+            $imgdata 				= base64_decode($tmp[1]);
+            
+            $extensions				= explode('.',$json->name);
+            $extension              = strtolower($extensions[1]);
+            $fname					= substr($json->name,0,-(strlen($extension) + 1)).'.'.substr(sha1(time()),0,6).'.'.$extension;
+            
+            
+            $handle					= fopen($serverdir.$fname,'a+');
+            fwrite($handle, $imgdata);
+            fclose($handle);
+            
+            $filename[]				= $fname;
+            
+            //$form['img']->getData()->move($dir, $someNewFilename);
+            $product->setImg($dir.'/'.$fname);
             $em->persist($product);
             $em->flush();
             
