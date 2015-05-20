@@ -1,7 +1,19 @@
 qweb_cms_catalogo_homepage:
     path:     /hello/{name}
     defaults: { _controller: QwebCMSCatalogoBundle:Default:index }
+
+admin:
+    path:   /admin
+    defaults: { _controller: QwebCMSCatalogoBundle:Default:admin }
     
+login_route:
+    path:   /login
+    defaults: { _controller: QwebCMSCatalogoBundle:Security:login }
+    
+login_check:
+    path:   /login_check
+    defaults: { _controller: QwebCMSCatalogoBundle:Security:loginCheck }
+
 welcome:
     path:     /
     defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allProduct }
