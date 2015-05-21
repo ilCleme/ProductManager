@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new QwebCMS\CatalogoBundle\QwebCMSCatalogoBundle(),
+            new QwebCMS\UserBundle\QwebCMSUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
