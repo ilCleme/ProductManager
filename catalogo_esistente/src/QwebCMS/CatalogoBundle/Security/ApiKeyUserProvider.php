@@ -3,12 +3,18 @@
 namespace QwebCMS\CatalogoBundle\Security;
 
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\User\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Doctrine\ORM\EntityManager;
+use QwebCMS\UserBundle\Entity\User;
 
-class ApiKeyUserProvider implements UserProviderInterface
+class ApiKeyUserProvider extends EntityManager implements UserProviderInterface
 {
+    public function __construct(EntityManager $em)
+    {
+        $this->em = $em;
+    }
+
     public function getUsernameForApiKey($apiKey)
     {
         // Cerca il nome utente in base al token nella base dati, tramite
@@ -20,13 +26,23 @@ class ApiKeyUserProvider implements UserProviderInterface
 
     public function loadUserByUsername($username)
     {
-        return new User(
-            $username,
-            null,
-            // i ruoli dell'utente. Potrebbero essere determinati
-            // dinamicamente in qualche modo
-            array('ROLE_ADMIN')
-        );
+        
+        $query = $this->em->createQuery(
+            'SELECT p
+            FROM QwebCMS\UserBundle\Entity\User p
+            WHERE p.username =  :username'
+        )->setParameter('username', $username);
+        
+        $user = $query->getResult();
+        
+        return $user;
+        //return new User(
+        //    $username,
+        //    null,
+        //    // i ruoli dell'utente. Potrebbero essere determinati
+        //    // dinamicamente in qualche modo
+        //    array('ROLE_ADMIN')
+        //);
     }
 
     public function refreshUser(UserInterface $user)

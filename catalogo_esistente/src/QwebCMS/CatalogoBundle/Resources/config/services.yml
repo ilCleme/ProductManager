@@ -5,3 +5,4 @@ services:
 
     fornitore_utenti_apikey:
         class: QwebCMS\CatalogoBundle\Security\ApiKeyUserProvider
+        arguments: [ @doctrine.orm.entity_manager ]
