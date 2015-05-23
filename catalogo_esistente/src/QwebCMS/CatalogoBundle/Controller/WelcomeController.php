@@ -29,6 +29,8 @@ class WelcomeController extends Controller
             );
         }
         
+        //$_SESSION['login'] = 1;
+        
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallproduct.html.twig',

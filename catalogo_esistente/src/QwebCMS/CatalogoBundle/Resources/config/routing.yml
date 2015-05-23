@@ -4,7 +4,7 @@ qweb_cms_catalogo_homepage:
 
 admin:
     path:   /admin
-    defaults: { _controller: QwebCMSCatalogoBundle:Default:admin }
+    defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allProduct }
     
 login_route:
     path:   /login

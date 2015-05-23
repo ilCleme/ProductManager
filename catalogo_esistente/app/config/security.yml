@@ -23,7 +23,10 @@ security:
         #                password: $2a$04$zOkekOi0GH.N96V0eXAkQ.irzdMnK/ihT/Ncm.wE4TR3MzMNoQShu
         #                roles: 'ROLE_ADMIN'
         administrators:
-            entity: { class: QwebCMSUserBundle:User, property: username }
+            entity: { class: QwebCMSUserBundle:User }
+        
+        apiprovider:
+            id: fornitore_utenti_apikey
 
     # the main part of the security, where you can set up firewalls
     # for specific sections of your app
@@ -33,9 +36,15 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         
+        secured_area:
+            pattern: ^/
+            stateless: false
+            simple_preauth:
+                authenticator: autenticatore_apikey
+
         default:
             anonymous: ~
-            #http_basic: ~
+            http_basic: ~
             form_login:
                 login_path: /login
                 check_path: /login_check

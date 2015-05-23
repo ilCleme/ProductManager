@@ -2,3 +2,6 @@ services:
 #    qweb_cms_catalogo.example:
 #        class: QwebCMS\CatalogoBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+    fornitore_utenti_apikey:
+        class: QwebCMS\CatalogoBundle\Security\ApiKeyUserProvider
