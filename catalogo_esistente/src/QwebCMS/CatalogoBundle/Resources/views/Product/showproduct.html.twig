@@ -1,13 +1,11 @@
-{# src/Acme/DemoBundle/Resources/views/Random/index.html.twig #}
-{% extends '::base.html.twig' %}
+{# src/QwebCMS/CatalogoBundle/Resources/views/Random/index.html.twig #}
+{% extends '::layout.html.twig' %}
 
 {% block title %}Prodotti{% endblock %}
 
-{% block stylesheets %}
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">    
-{% endblock %}
+{% block stylesheets %}{% endblock %}
 
-{% block body %}
+{% block content %}
     <div class="container">
         <div class="panel panel-default">
             <!-- Default panel contents -->
@@ -17,14 +15,9 @@
             <ul class="list-group">
                 <li class="list-group-item">Nome Prodotto: {{product.title}}</li>
                 <li class="list-group-item">Descrizione: {{product.description}}</li>
-                <li class="list-group-item">Codice: {{product.cod}}</li>
-                <li class="list-group-item">Prezzo Offerta: {{product.priceOffer}}</li>
             </ul>
         </div>
     </div>
 {% endblock %}
 
-{% block javascripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>    
-{% endblock %}
+{% block javascripts %}{% endblock %}

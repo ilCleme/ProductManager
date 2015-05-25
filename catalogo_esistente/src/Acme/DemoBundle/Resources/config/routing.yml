@@ -1,30 +1,30 @@
-_welcome:
-    path:     /
-    defaults: { _controller: AcmeDemoBundle:Welcome:index }
+#_welcome:
+#    path:     /
+#    defaults: { _controller: AcmeDemoBundle:Welcome:index }
     
-products:
-    path:     /products
-    defaults: { _controller: AcmeDemoBundle:Welcome:allProduct }
+#products:
+#    path:     /products
+#    defaults: { _controller: AcmeDemoBundle:Welcome:allProduct }
     
-create_product:
-    path:     /products/new
-    defaults: { _controller: AcmeDemoBundle:Product:create }
+#create_product:
+#    path:     /products/new
+#    defaults: { _controller: AcmeDemoBundle:Product:create }
 
-show_product:
-    path:     /product/show/{id}
-    defaults: { _controller: AcmeDemoBundle:Product:show }
+#show_product:
+#    path:     /product/show/{id}
+#    defaults: { _controller: AcmeDemoBundle:Product:show }
 
-update_product:
-    path:     /product/update/{id}
-    defaults: { _controller: AcmeDemoBundle:Product:update }
+#update_product:
+#    path:     /product/update/{id}
+#    defaults: { _controller: AcmeDemoBundle:Product:update }
 
-delete_product:
-    path:     /product/delete/{id}
-    defaults: { _controller: AcmeDemoBundle:Product:delete }
+#delete_product:
+#    path:     /product/delete/{id}
+#    defaults: { _controller: AcmeDemoBundle:Product:delete }
     
-categories:
-    path:     /categories
-    defaults: { _controller: AcmeDemoBundle:Welcome:allCategory }
+#categories:
+#    path:     /categories
+#    defaults: { _controller: AcmeDemoBundle:Welcome:allCategory }
     
 create_category:
     path:     /categories/new
@@ -34,17 +34,17 @@ show_category:
     path:     /category/show/{id}
     defaults: { _controller: AcmeDemoBundle:Category:show }
 
-update_category:
-    path:     /category/update/{id}
-    defaults: { _controller: AcmeDemoBundle:Category:update }
+#update_category:
+#    path:     /category/update/{id}
+#    defaults: { _controller: AcmeDemoBundle:Category:update }
 
 delete_category:
     path:     /category/delete/{id}
     defaults: { _controller: AcmeDemoBundle:Category:delete }
 
-features:
-    path:     /features
-    defaults: { _controller: AcmeDemoBundle:Welcome:allFeature }
+#features:
+#    path:     /features
+#    defaults: { _controller: AcmeDemoBundle:Welcome:allFeature }
     
 create_features:
     path:     /features/new
@@ -54,17 +54,17 @@ show_features:
     path:     /feature/show/{id}
     defaults: { _controller: AcmeDemoBundle:Feature:show }
     
-update_features:
-    path:     /feature/update/{id}
-    defaults: { _controller: AcmeDemoBundle:Feature:update }
+#update_features:
+#    path:     /feature/update/{id}
+#    defaults: { _controller: AcmeDemoBundle:Feature:update }
     
 delete_features:
     path:     /feature/delete/{id}
     defaults: { _controller: AcmeDemoBundle:Feature:delete }
 
-featurevalues:
-    path:     /featurevalues
-    defaults: { _controller: AcmeDemoBundle:Welcome:allFeatureValue }
+#featurevalues:
+#    path:     /featurevalues
+#    defaults: { _controller: AcmeDemoBundle:Welcome:allFeatureValue }
     
 create_featurevalues:
     path:     /featurevalues/new

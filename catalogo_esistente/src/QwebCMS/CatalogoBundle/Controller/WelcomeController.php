@@ -9,13 +9,25 @@ class WelcomeController extends Controller
 {
     public function indexAction()
     {
-        /*
-         * The action's view can be rendered using render() method
-         * or @Template annotation as demonstrated in DemoController.
-         *
-         */
-
-        return $this->render('QwebCMSCatalogoBundle:Welcome:index.html.twig');
+        $product = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
+            ->findAll();
+            
+        $category = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+            
+        $feature = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
+            ->findAll();
+        
+        $featurevalue = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')
+            ->findAll();
+            
+        return $this->render('QwebCMSCatalogoBundle:Welcome:index.html.twig',
+            array('products' => $product, 'categories' => $category, 'features' => $feature, 'featurevalues' => $featurevalue)
+            );
     }
     
     public function allProductAction(){

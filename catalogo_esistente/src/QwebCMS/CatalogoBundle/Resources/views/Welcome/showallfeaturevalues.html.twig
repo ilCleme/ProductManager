@@ -1,43 +1,60 @@
-{# src/Acme/DemoBundle/Resources/views/Random/index.html.twig #}
-{% extends '::base.html.twig' %}
+{# src/QwebCMS/CatalogoBundle/Resources/views/Welcome/index.html.twig #}
+{% extends '::layout.html.twig' %}
 
-{% block title %}Valori Caratteristica{% endblock %}
+{% block title %}Featurevalues{% endblock %}
 
-{% block stylesheets %}
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">    
-{% endblock %}
-
-{% block body %}
-<div class="container">
-    <div class="panel panel-default">
-        <!-- Default panel contents -->
-        <div class="panel-heading"><h1>Valori Caratteristica</h1></div>
-        <div class="panel-body">
-            <p>Elenco di tutte i valori usabili di Caratteristiche</p>
+{% block content %}
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>Prodotti</h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <i class="fa fa-wrench"></i>
+            </a>
+            <!--<a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>-->
         </div>
-        
-        <!-- Table -->
-        <table class="table">
-            
-            {% for featurevalue in featurevalues %}
-            <tr>
-                <td>
-                    {{featurevalue.title}}
-                </td>
-                <td>
-                    {{featurevalue.link}}
-                </td>
-                <td>
-                    {{featurevalue.img}}
-                </td>
-            </tr>
-            {% endfor %}
-            
-        </table>
+    </div>
+    <div class="ibox-content">
+        <div class="table-responsive">
+            <table class="table table-striped" >
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Descrizione</th>
+                    <th>Immagine</th>
+                    <th>Azione</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for featurevalue in featurevalues %}
+                    <tr>
+                        <td>
+                            {{featurevalue.idTblCatalogueFeaturevalue}}
+                        </td>
+                        <td>
+                            {{featurevalue.title}}
+                        </td>
+                        <td>
+                            {{featurevalue.link}}
+                        </td>
+                        <td>
+                            {{featurevalue.img}}
+                        </td>
+                        {#<td>
+                            <a href="/product/update/{{product.idTblCatalogueProduct}}" title="Modifica"><i class="fa fa-edit"></i></a>
+                        </td>#}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}
 
-{% block javascripts %}
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>    
-{% endblock %}

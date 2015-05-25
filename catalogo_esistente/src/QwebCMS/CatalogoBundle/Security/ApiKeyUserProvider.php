@@ -62,6 +62,6 @@ class ApiKeyUserProvider extends EntityManager implements UserProviderInterface
 
     public function supportsClass($class)
     {
-        return 'Symfony\Component\Security\Core\User\User' === $class;
+        return 'QwebCMS\UserBundle\Entity\User' === $class;
     }
 }
