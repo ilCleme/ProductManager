@@ -6,7 +6,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Doctrine\ORM\EntityManager;
-use QwebCMS\UserBundle\Entity\User;
+use QwebCMS\UserBundle\Entity\User as User;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class ApiKeyUserProvider extends EntityManager implements UserProviderInterface
 {
@@ -27,6 +28,8 @@ class ApiKeyUserProvider extends EntityManager implements UserProviderInterface
     public function loadUserByUsername($username)
     {
         
+        $user = new User;
+        
         $query = $this->em->createQuery(
             'SELECT p
             FROM QwebCMS\UserBundle\Entity\User p
@@ -35,14 +38,12 @@ class ApiKeyUserProvider extends EntityManager implements UserProviderInterface
         
         $user = $query->getResult();
         
-        return $user;
-        //return new User(
-        //    $username,
-        //    null,
-        //    // i ruoli dell'utente. Potrebbero essere determinati
-        //    // dinamicamente in qualche modo
-        //    array('ROLE_ADMIN')
-        //);
+        if (count($user) > 0){
+            return $user[0];    
+        } else {
+            throw new AuthenticationException('Utente inesistente');
+        }
+        
     }
 
     public function refreshUser(UserInterface $user)

@@ -41,6 +41,9 @@ security:
             stateless: false
             simple_preauth:
                 authenticator: autenticatore_apikey
+            logout:
+                path:   /logout
+                target: /login
 
         default:
             anonymous: ~

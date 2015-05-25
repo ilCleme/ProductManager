@@ -7,11 +7,14 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use QwebCMS\UserBundle\Entity\User as User;
+use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
 
-class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
+class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
     protected $userProvider;
 
@@ -25,11 +28,8 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
         // cerca il parametro apikey
         $apiKey = $request->query->get('apikey');
 
-        // oppure, cerca un header "apikey"
-        // $apiKey = $request->headers->get('apikey');
-
         if (!$apiKey) {
-            throw new BadCredentialsException('Chiave API non trovata');
+            throw new AuthenticationException('chiave per autenticazione non trovata');
         }
 
         return new PreAuthenticatedToken(
@@ -43,7 +43,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
     {
         $apiKey = $token->getCredentials();
         $username = $this->userProvider->getUsernameForApiKey($apiKey);
-
+        
         // User è l'entità che rappresenta l'utente
         $user = $token->getUser();
         if ($user instanceof User) {
@@ -62,7 +62,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
         }
 
         $user = $this->userProvider->loadUserByUsername($username);
-
+    
         return new PreAuthenticatedToken(
             $user,
             $apiKey,
@@ -78,6 +78,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface
     
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-        return new Response("Autenticazione fallita.", 403);
+        //var_dump($exception);
+        return new Response($exception->getMessage(), 403);
     }
 }
