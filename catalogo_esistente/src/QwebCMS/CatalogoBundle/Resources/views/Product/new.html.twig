@@ -1,32 +1,92 @@
 {# src/Acme/DemoBundle/Resources/views/Random/index.html.twig #}
-{% extends '::base.html.twig' %}
+{% extends '::layout.html.twig' %}
 
 {% block title %}Inserisci nuovo prodotto{% endblock %}
 
 {% block stylesheets %}
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">    
+    {#<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">    #}
 {% endblock %}
 
-{% block body %}
-    <div class="container">
+{% block content %}
+    <div>
     {{ form_start(form) }}
-    
-    {{ form_label(form.img) }}
-    {{ form_errors(form.img) }}
-    <div class="dropzone" data-download="false" data-width="300" data-height="200" data-originalsize="false" data-ajax="false" data-resize="true">
-        {{ form_widget(form.img) }}
+    <div class="form-group">
+        {{ form_label(form.idTblCatalogueProduct, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+        {{ form_errors(form.idTblCatalogueProduct) }}
+        {{ form_widget(form.idTblCatalogueProduct, {'attr': {'class': 'form-control'}}) }}
     </div>
-    <input type="submit" value="Salva">
+    <div class="form-group">
+        {{ form_label(form.img, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+        {{ form_errors(form.img) }}
+        <div class="dropzone" data-download="false" data-width="300" data-height="200" data-originalsize="false" data-ajax="false" data-resize="true">
+            {{ form_widget(form.img, {'attr': {'class': 'control-label'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.title, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+        {{ form_errors(form.title) }}
+        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.description, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+        {{ form_errors(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.descriptionNotag, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+        {{ form_errors(form.descriptionNotag) }}
+        {{ form_widget(form.descriptionNotag, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.shortDescription, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+        {{ form_errors(form.shortDescription) }}
+        {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.idTblPhotoCat, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+        {{ form_errors(form.idTblPhotoCat) }}
+        {{ form_widget(form.idTblPhotoCat, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.pub, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+        {{ form_errors(form.pub) }}
+        <div class="checkbox">
+            <label>
+                {{ form_widget(form.pub) }}
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.position, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+        {{ form_errors(form.position) }}
+        {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.categories, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-2'}}) }}
+        {{ form_errors(form.categories) }}
+        <div class="col-lg-4 m-l-n">
+            {{ form_widget(form.categories, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.featurevalues, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-2'}}) }}
+        {{ form_errors(form.featurevalues) }}
+        <div class="col-lg-4 m-l-n">
+            {{ form_widget(form.featurevalues, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Salva</button>
     {{ form_end(form) }}
     
     </div>
     
-    <script>
-    $('.dropzone').html5imageupload();
-    </script>
+    
 {% endblock %}
 
 {% block javascripts %}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>    
+    <script>
+    $('.dropzone').html5imageupload();
+    </script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>    #}
 {% endblock %}

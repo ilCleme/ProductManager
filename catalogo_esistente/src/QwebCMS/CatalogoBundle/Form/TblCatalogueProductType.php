@@ -16,28 +16,28 @@ class TblCatalogueProductType extends AbstractType
     {
         $builder
             ->add('idTblCatalogueProduct')
-            ->add('idTblLingua')
+            ->add('idTblLingua', 'hidden')
             ->add('title')
             ->add('description')
             ->add('descriptionNotag')
             ->add('shortDescription')
-            ->add('img','file')
+            ->add('img','image')
             //->add('img','elfinder', array('instance'=>'form', 'enable'=>true))
             ->add('idTblPhotoCat')
-            ->add('template')
+            ->add('template', 'hidden')
             ->add('pub')
             ->add('position')
             ->add('categories', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
                 'property' => 'title',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => false
               ))
             ->add('featurevalues', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
                 'property' => 'title',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => false
               ))
         ;
     }
