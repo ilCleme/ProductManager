@@ -1,0 +1,32 @@
+{# src/Acme/DemoBundle/Resources/views/Random/index.html.twig #}
+{% extends '::base.html.twig' %}
+
+{% block title %}Inserisci nuovo prodotto{% endblock %}
+
+{% block stylesheets %}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">    
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+    {{ form_start(form) }}
+    
+    <div class="dropzone" data-download="false" data-width="100" data-height="200" data-originalsize="false" data-ajax="false" data-resize="true">
+        {{ form_label(form.img) }}
+        {{ form_errors(form.img) }}
+        {{ form_widget(form.img) }}
+    </div>
+    <input type="submit" value="Salva">
+    {{ form_end(form) }}
+    
+    </div>
+    
+    <script>
+    $('.dropzone').html5imageupload();
+    </script>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>    
+{% endblock %}
