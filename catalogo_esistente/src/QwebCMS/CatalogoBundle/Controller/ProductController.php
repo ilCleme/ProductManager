@@ -135,9 +135,9 @@ class ProductController extends Controller
         
         $form->handleRequest($request);
 
+        //var_dump($form->isSubmitted());
         if ($form->isValid()) {
             // esegue alcune azioni, salvare il prodotto nella base dati
-            
             $em = $this->getDoctrine()->getManager();
             
             $em->remove($product);

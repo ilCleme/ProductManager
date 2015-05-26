@@ -3,11 +3,28 @@
 
 {% block title %}Prodotti{% endblock %}
 
+{% block pagetitle %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-sm-4">
+            <h2>Lista Prodotti</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="/">Dashboard</a>
+                </li>
+                <li class="active">
+                    <strong>Prodotti</strong>
+                </li>
+            </ol>
+        </div>
+    </div>
+{% endblock %}
+
 {% block content %}
 <div class="ibox float-e-margins">
     <div class="ibox-title">
         <h5>Prodotti</h5>
         <div class="ibox-tools">
+            <a class="btn btn-primary btn-xs" href="{{ path('create_product') }}">Crea nuovo Prodotto</a>
             <a class="collapse-link">
                 <i class="fa fa-chevron-up"></i>
             </a>
@@ -44,6 +61,7 @@
                         </td>
                         <td>
                             <a href="/product/update/{{product.idTblCatalogueProduct}}" title="Modifica"><i class="fa fa-edit"></i></a>
+                            <a href="/product/delete/{{product.idTblCatalogueProduct}}" title="Elimina"><i class="fa fa-times"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
