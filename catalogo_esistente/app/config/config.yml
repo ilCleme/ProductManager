@@ -110,3 +110,8 @@ services:
     autenticatore_apikey:
         class:     QwebCMS\CatalogoBundle\Security\ApiKeyAuthenticator
         arguments: ["@fornitore_utenti_apikey"]
+
+oneup_uploader:
+    mappings:
+        gallery:
+            frontend: dropzone

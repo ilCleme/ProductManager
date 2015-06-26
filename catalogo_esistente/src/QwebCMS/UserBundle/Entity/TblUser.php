@@ -310,4 +310,5 @@ class TblUser implements UserInterface, \Serializable
     {
         return $this->checkbox1TblGruppi;
     }
+
 }

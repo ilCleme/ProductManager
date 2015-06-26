@@ -15,31 +15,33 @@ class TblCatalogueProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblCatalogueProduct')
-            ->add('idTblLingua', 'hidden')
-            ->add('title')
-            ->add('description')
-            ->add('descriptionNotag')
-            ->add('shortDescription')
-            ->add('img','image')
-            //->add('img','elfinder', array('instance'=>'form', 'enable'=>true))
-            ->add('idTblPhotoCat')
-            ->add('template', 'hidden')
-            ->add('pub')
-            ->add('position')
-            ->add('categories', 'entity', array(
-                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
-                'property' => 'title',
-                'multiple' => true,
-                'expanded' => false
-              ))
-            ->add('featurevalues', 'entity', array(
-                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
-                'property' => 'title',
-                'multiple' => true,
-                'expanded' => false
-              ))
-        ;
+        ->add('idTblCatalogueProduct','hidden')
+        ->add('idTblLingua', 'hidden')
+        ->add('title')
+        ->add('description')
+        ->add('descriptionNotag', 'hidden')
+        ->add('shortDescription')
+        ->add('img','file')
+        ->add('idTblPhotoCat', 'hidden')
+        ->add('template', 'hidden')
+        ->add('pub')
+        ->add('position')
+        ->add('categories', 'entity', array(
+            'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
+            'property' => 'title',
+            'multiple' => true,
+            'expanded' => false
+        ))
+        ->add('featurevalues', 'entity', array(
+            'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
+            'property' => 'title',
+            'multiple' => true,
+            'expanded' => false
+        ))
+        ->add('save', 'submit', array('label' => 'Crea Prodotto'))
+        ->add('saveAndContinue', 'submit', array('label' => 'Salva e continua'))
+
+    ;
     }
     
     /**

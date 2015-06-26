@@ -206,4 +206,108 @@ class TblUser implements UserInterface, \Serializable
         return true;
     }
 
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     * @return TblUser
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string 
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * Set cognome
+     *
+     * @param string $cognome
+     * @return TblUser
+     */
+    public function setCognome($cognome)
+    {
+        $this->cognome = $cognome;
+
+        return $this;
+    }
+
+    /**
+     * Get cognome
+     *
+     * @return string 
+     */
+    public function getCognome()
+    {
+        return $this->cognome;
+    }
+
+
+
+    /**
+     * Get login
+     *
+     * @return string 
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * Set checkboxTblGruppi
+     *
+     * @param string $checkboxTblGruppi
+     * @return TblUser
+     */
+    public function setCheckboxTblGruppi($checkboxTblGruppi)
+    {
+        $this->checkboxTblGruppi = $checkboxTblGruppi;
+
+        return $this;
+    }
+
+    /**
+     * Get checkboxTblGruppi
+     *
+     * @return string 
+     */
+    public function getCheckboxTblGruppi()
+    {
+        return $this->checkboxTblGruppi;
+    }
+
+    /**
+     * Set checkbox1TblGruppi
+     *
+     * @param string $checkbox1TblGruppi
+     * @return TblUser
+     */
+    public function setCheckbox1TblGruppi($checkbox1TblGruppi)
+    {
+        $this->checkbox1TblGruppi = $checkbox1TblGruppi;
+
+        return $this;
+    }
+
+    /**
+     * Get checkbox1TblGruppi
+     *
+     * @return string 
+     */
+    public function getCheckbox1TblGruppi()
+    {
+        return $this->checkbox1TblGruppi;
+    }
 }

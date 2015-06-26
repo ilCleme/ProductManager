@@ -21,9 +21,11 @@
 
     <link href="{{ asset('admin-style/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('admin-style/css/style.css') }}" rel="stylesheet">
+    <link href="{{asset('admin-style/css/plugins/dropzone/basic.css')}}" rel="stylesheet">
+    <link href="{{asset('admin-style/css/plugins/dropzone/dropzone.css')}}" rel="stylesheet">
         
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    <link href="{{asset('assets/css/demo.html5imageupload.css')}}" rel="stylesheet">
+    {#<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.css" />#}
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -42,7 +44,7 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element">
                             <span>
-                                <img alt="image" class="img-circle" src="{{ asset('admin-style/img/q.png') }}" />
+                                <img alt="image" class="" src="{{ asset('admin-style/img/q.png') }}" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
@@ -61,7 +63,7 @@
                             </ul>#}
                         </div>
                         <div class="logo-element">
-                            <img alt="image" class="img-circle" src="{{ asset('admin-style/img/q_s.png') }}" />
+                            <img alt="image" class="" src="{{ asset('admin-style/img/q_s.png') }}" />
                         </div>
                     </li>
 
@@ -164,8 +166,6 @@
 
     <!-- Toastr -->
     <script src="{{ asset('admin-style/js/plugins/toastr/toastr.min.js') }}"></script>
-    
-    <script src="{{asset('assets/js/html5imageupload.js?v1.4.3')}}"></script>
 
     {% block javascripts %}{% endblock %}
 </body>

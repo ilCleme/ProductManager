@@ -11,3 +11,7 @@ elfinder:
 
 logout:
     path:   /logout
+
+oneup_uploader:
+    resource: .
+    type: uploader

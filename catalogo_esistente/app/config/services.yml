@@ -9,3 +9,8 @@ services:
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 #    fornitore_utenti_apikey:
 #        class: QwebCMS\CatalogoBundle\Security\ApiKeyUserProvider
+      catalogobundle.upload_listener:
+              class: QwebCMS\CatalogoBundle\EventListener\UploadListener
+              tags:
+                  - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
+              arguments: ['@doctrine']
