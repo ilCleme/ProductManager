@@ -58,11 +58,15 @@ class ProductController extends Controller
 
             } else {
 
-                // Save product and redirect user to products list
-                $product->setIdTblCatalogueProduct(0);
-                $em->persist($product);
+                // Create a new empty Album for this product
+                $album = new Album();
+                $album->setNome($product->getTitle());
+                $em->persist($album);
                 $em->flush();
 
+                // Save product and redirect user to products list
+                $product->setIdTblCatalogueProduct(0);
+                $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
                 $product->setIdTblCatalogueProduct($product->getId());
 
                 $em->persist($product);
