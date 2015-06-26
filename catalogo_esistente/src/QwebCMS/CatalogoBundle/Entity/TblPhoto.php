@@ -28,16 +28,16 @@ class TblPhoto
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tbl_photo", type="bigint", options={"default":0})
+     * @ORM\Column(name="id_tbl_photo", type="bigint")
      */
-    private $idTblPhoto;
+    private $idTblPhoto = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tbl_lingua", type="bigint", options={"default":4})
+     * @ORM\Column(name="id_tbl_lingua", type="bigint")
      */
-    private $idTblLingua;
+    private $idTblLingua = 4;
 
     /**
      * @var string
@@ -63,37 +63,37 @@ class TblPhoto
     /**
      * @var integer
      *
-     * @ORM\Column(name="thumbnail_x", type="bigint", options={"default":0})
+     * @ORM\Column(name="thumbnail_x", type="bigint")
      */
-    private $thumbnailX;
+    private $thumbnailX = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="thumbnail_y", type="bigint", options={"default":0})
+     * @ORM\Column(name="thumbnail_y", type="bigint")
      */
-    private $thumbnailY;
+    private $thumbnailY = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tbl_photo_cat", type="bigint", options={"default":0})
+     * @ORM\Column(name="id_tbl_photo_cat", type="bigint")
      */
-    private $idTblPhotoCat;
+    private $idTblPhotoCat = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="posizione", type="bigint", options={"default":0})
+     * @ORM\Column(name="posizione", type="bigint")
      */
-    private $posizione;
+    private $posizione = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="pub", type="bigint", options={"default":1})
+     * @ORM\Column(name="pub", type="bigint")
      */
-    private $pub;
+    private $pub = 1;
 
     /**
      * @var \DateTime

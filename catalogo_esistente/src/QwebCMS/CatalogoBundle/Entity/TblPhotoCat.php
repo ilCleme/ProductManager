@@ -28,23 +28,23 @@ class TblPhotoCat
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_padre", type="bigint", nullable=false, options={"default":0})
+     * @ORM\Column(name="id_padre", type="bigint", nullable=false)
      */
-    private $idPadre;
+    private $idPadre = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tbl_photo_cat", type="bigint", nullable=false, options={"default":0})
+     * @ORM\Column(name="id_tbl_photo_cat", type="bigint", nullable=false)
      */
-    private $idTblPhotoCat;
+    private $idTblPhotoCat = 0;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tbl_lingua", type="bigint", options={"default":4})
+     * @ORM\Column(name="id_tbl_lingua", type="bigint")
      */
-    private $idTblLingua;
+    private $idTblLingua = 4;
 
     /**
      * @var string
@@ -56,9 +56,9 @@ class TblPhotoCat
     /**
      * @var integer
      *
-     * @ORM\Column(name="num", type="integer", options={"default":50})
+     * @ORM\Column(name="num", type="integer")
      */
-    private $num;
+    private $num = 50;
 
     /**
      * @var string
@@ -72,7 +72,7 @@ class TblPhotoCat
      *
      * @ORM\Column(name="posizione", type="integer")
      */
-    private $posizione;
+    private $posizione = 1;
 
     /**
      * @var boolean
