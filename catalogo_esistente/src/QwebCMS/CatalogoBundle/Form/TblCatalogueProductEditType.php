@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class TblCatalogueProductType extends AbstractType
+class TblCatalogueProductEditType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -18,10 +18,10 @@ class TblCatalogueProductType extends AbstractType
         ->add('idTblCatalogueProduct','hidden')
         ->add('idTblLingua', 'hidden')
         ->add('title')
-        ->add('description')
+        ->add('description', 'hidden')
         ->add('descriptionNotag', 'hidden')
-        ->add('shortDescription')
-        ->add('img','file')
+        ->add('shortDescription', 'hidden')
+        ->add('img')
         ->add('idTblPhotoCat', 'hidden')
         ->add('template', 'hidden')
         ->add('pub')
@@ -38,8 +38,7 @@ class TblCatalogueProductType extends AbstractType
             'multiple' => true,
             'expanded' => false
         ))
-        ->add('save', 'submit', array('label' => 'Salva'))
-        ->add('saveAndContinue', 'submit', array('label' => 'Salva e continua'))
+        ->add('save', 'submit', array('label' => 'Modifica Prodotto'))
 
     ;
     }
@@ -59,6 +58,6 @@ class TblCatalogueProductType extends AbstractType
      */
     public function getName()
     {
-        return 'product_new';
+        return 'product_edit';
     }
 }

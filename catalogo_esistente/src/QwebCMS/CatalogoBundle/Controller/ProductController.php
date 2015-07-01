@@ -8,6 +8,7 @@ use QwebCMS\CatalogoBundle\Entity\TblPhotoCat as Album;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductType;
+use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ProductController extends Controller
@@ -76,8 +77,7 @@ class ProductController extends Controller
             }
 
         }
-        
-        
+
         return $this->render('QwebCMSCatalogoBundle:Product:new.html.twig', array(
             'form' => $form->createView(),
             'id_album' => 0
@@ -115,7 +115,7 @@ class ProductController extends Controller
             );
         }
         
-        $form = $this->createForm(new TblCatalogueProductType(), $product);
+        $form = $this->createForm(new TblCatalogueProductEditType(), $product);
         
         $form->handleRequest($request);
 
@@ -130,8 +130,9 @@ class ProductController extends Controller
         }
     
         // passo l'oggetto $product a un template
-        return $this->render('QwebCMSCatalogoBundle:Product:new.html.twig', array(
+        return $this->render('QwebCMSCatalogoBundle:Product:update.html.twig', array(
             'form' => $form->createView(),
+            'product' => $product
         ));
     }
     
