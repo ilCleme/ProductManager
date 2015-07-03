@@ -39,6 +39,7 @@ class UploadListener {
          * Torno dei dati informativi tramite la response
          */
         $response->offsetSet('id_album', $id_album );
+        $response->offsetSet('config', $event->getConfig() );
     }
 
 }

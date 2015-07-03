@@ -81,3 +81,11 @@ featurevalues:
 create_featurevalues:
     path:     /featurevalues/new
     defaults: { _controller: QwebCMSCatalogoBundle:Featurevalue:create }
+
+update_featurevalues:
+    path:     /featurevalues/update/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Featurevalue:update }
+
+delete_featurevalues:
+    path:     /featurevalues/delete/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Featurevalue:delete }

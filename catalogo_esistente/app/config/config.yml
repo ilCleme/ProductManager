@@ -115,3 +115,5 @@ oneup_uploader:
     mappings:
         gallery:
             frontend: dropzone
+            storage:
+              directory:  '/uploads/gallery'

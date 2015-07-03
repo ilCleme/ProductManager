@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title %} Dashboard {% endblock %}</title>
+    <title>{% block title %} Dashboard {% endblock %} - Catalogo Enteweb</title>
 
     <!-- CSS Files -->
     <link href="{{ asset('admin-style/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -56,13 +56,15 @@
                                     <span class="text-muted text-xs block">{{ app.user.username }}</span>
                                 </span>
                             </a>
-                            {#<ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            {#
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="profile.html">Profile</a></li>
                                 <li><a href="contacts.html">Contacts</a></li>
                                 <li><a href="mailbox.html">Mailbox</a></li>
                                 <li class="divider"></li>
                                 <li><a href="login.html">Logout</a></li>
-                            </ul>#}
+                            </ul>
+                            #}
                         </div>
                         <div class="logo-element">
                             <img alt="image" class="" src="{{ asset('admin-style/img/q_s.png') }}" />
@@ -73,10 +75,10 @@
                         <a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">Catalogo</span> <span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             {% set currentPath = app.request.attributes.get('_route') %}
-                            <li class="active"><a href="{{ path('products') }}">Prodotti</a></li>
-                            <li ><a href="{{ path('categories') }}">Categorie</a></li>
-                            <li ><a href="{{ path('features') }}">Feature</a></li>
-                            <li ><a href="{{ path('featurevalues') }}">Featurevalues</a></li>
+                            <li><a href="{{ path('products') }}">Prodotti</a></li>
+                            <li><a href="{{ path('categories') }}">Categorie</a></li>
+                            <li><a href="{{ path('features') }}">Feature</a></li>
+                            <li><a href="{{ path('featurevalues') }}">Featurevalues</a></li>
                         </ul>
                     </li>
                 </ul>

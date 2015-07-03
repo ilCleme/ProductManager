@@ -3,6 +3,10 @@
 
 {% block title %}Prodotti{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('admin-style/css/plugins/sweetalert/sweetalert.css') }}"/>
+{% endblock %}
+
 {% block pagetitle %}
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-sm-4">
@@ -70,5 +74,24 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <!-- SWEET ALERT -->
+    <script src="{{ asset('admin-style/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <script>
+            $(document).ready(function(){
+                swal({
+                    title: "Cancellato!",
+                    text: "{{ flashMessage }}",
+                    type: "success"
+                });
+            });
+        </script>
+    {% endfor %}
+
 {% endblock %}
 

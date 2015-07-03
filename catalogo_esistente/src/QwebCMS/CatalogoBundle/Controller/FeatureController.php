@@ -85,8 +85,9 @@ class FeatureController extends Controller
         }
     
         // passo l'oggetto $feature a un template
-        return $this->render('QwebCMSCatalogoBundle:Feature:new.html.twig', array(
+        return $this->render('QwebCMSCatalogoBundle:Feature:update.html.twig', array(
             'form' => $form->createView(),
+            'feature' => $feature
         ));
     }
     
@@ -101,24 +102,19 @@ class FeatureController extends Controller
                 'Nessuna categoria di feature trovata per l\'id '.$id
             );
         }
-        
-        $form = $this->createForm(new TblCatalogueFeatureType(), $feature);
-        
-        $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            
-            $em = $this->getDoctrine()->getManager();
-            
-            $em->remove($feature);
-            $em->flush();
-            return $this->redirect($this->generateUrl('features'));
-        }
-    
-        // passo l'oggetto $feature a un template
-        return $this->render('QwebCMSCatalogoBundle:Feature:delete.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        // esegue alcune azioni, salvare il prodotto nella base dati
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($feature);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'La feature è stata eliminata!'
+        );
+
+        return $this->redirect($this->generateUrl('features'));
     }
 }

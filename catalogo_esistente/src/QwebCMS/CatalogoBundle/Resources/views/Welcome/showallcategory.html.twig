@@ -3,6 +3,10 @@
 
 {% block title %}Categorie{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('admin-style/css/plugins/sweetalert/sweetalert.css') }}"/>
+{% endblock %}
+
 {% block pagetitle %}
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-sm-4">
@@ -20,7 +24,6 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="ibox float-e-margins">
     <div class="ibox-title">
         <h5>Categorie</h5>
@@ -61,6 +64,7 @@
                         </td>
                         <td>
                             <a href="/category/update/{{category.idTblCatalogueCategory}}" title="Modifica"><i class="fa fa-edit"></i></a>
+                            <a href="/category/delete/{{category.idTblCatalogueCategory}}" title="Elimina"><i class="fa fa-times"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
@@ -69,4 +73,23 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <!-- SWEET ALERT -->
+    <script src="{{ asset('admin-style/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <script>
+            $(document).ready(function(){
+                swal({
+                    title: "Cancellata!",
+                    text: "{{ flashMessage }}",
+                    type: "success"
+                });
+            });
+        </script>
+    {% endfor %}
+
 {% endblock %}

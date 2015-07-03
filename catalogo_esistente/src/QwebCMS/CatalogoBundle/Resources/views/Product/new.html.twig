@@ -141,8 +141,8 @@
 
                 url: "{{ oneup_uploader_endpoint('gallery') }}",
                 autoProcessQueue: false,
-                uploadMultiple: false,
-                //parallelUploads: 100,
+                uploadMultiple: true,
+                parallelUploads: 10,
                 maxFiles: 100,
                 addRemoveLinks: true,
                 headers:{"id_album": "{{ id_album }}"},

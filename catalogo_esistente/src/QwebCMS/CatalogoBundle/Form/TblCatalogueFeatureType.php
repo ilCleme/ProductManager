@@ -15,15 +15,16 @@ class TblCatalogueFeatureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblCatalogueFeature')
-            ->add('idTblLingua')
+            ->add('idTblCatalogueFeature','hidden')
+            ->add('idTblLingua','hidden')
             ->add('title')
             ->add('description')
             ->add('typeInput')
             ->add('compulsory')
             ->add('display')
-            ->add('position')
+            ->add('position', 'hidden')
             //->add('featurevalues')
+            ->add('save', 'submit', array('label' => 'Salva'))
         ;
     }
     

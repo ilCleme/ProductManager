@@ -105,6 +105,7 @@ class ProductController extends Controller
     
     public function updateAction($id, Request $request)
     {
+        // Getting product information
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
             ->find($id);
@@ -114,57 +115,57 @@ class ProductController extends Controller
                 'Nessun prodotto trovato per l\'id '.$id
             );
         }
-        
+
+        // Getting photo of product
+        $photos= $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
+            ->findBy(array('idTblPhotoCat' => $product->getIdTblPhotoCat() ));
+
         $form = $this->createForm(new TblCatalogueProductEditType(), $product);
         
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             // esegue alcune azioni, salvare il prodotto nella base dati
-            
             $em = $this->getDoctrine()->getManager();
             
             $em->persist($product);
             $em->flush();
+
             return $this->redirect($this->generateUrl('products'));
         }
-    
+
+
         // passo l'oggetto $product a un template
         return $this->render('QwebCMSCatalogoBundle:Product:update.html.twig', array(
             'form' => $form->createView(),
-            'product' => $product
+            'product' => $product,
+            'immagini' => $photos
         ));
     }
-    
+
     public function deleteAction($id, Request $request)
     {
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
-            ->find($id); 
-    
+            ->find($id);
+
         if (!$product) {
             throw $this->createNotFoundException(
                 'Nessun prodotto trovato per l\'id '.$id
             );
         }
-        
-        $form = $this->createForm(new TblCatalogueProductType(), $product);
-        
-        $form->handleRequest($request);
 
-        //var_dump($form->isSubmitted());
-        if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            $em = $this->getDoctrine()->getManager();
-            
-            $em->remove($product);
-            $em->flush();
-            return $this->redirect($this->generateUrl('products'));
-        }
-    
-        // passo l'oggetto $product a un template
-        return $this->render('QwebCMSCatalogoBundle:Product:delete.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($product);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'Il prodotto è stato eliminato!'
+        );
+
+        return $this->redirect($this->generateUrl('products'));
     }
 }

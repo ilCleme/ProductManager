@@ -17,14 +17,14 @@ class TblCatalogueFeature
      *
      * @ORM\Column(name="id_tbl_catalogue_feature", type="bigint", nullable=false)
      */
-    private $idTblCatalogueFeature;
+    private $idTblCatalogueFeature = 0;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="id_tbl_lingua", type="boolean", nullable=false)
      */
-    private $idTblLingua;
+    private $idTblLingua = 4;
 
     /**
      * @var string
@@ -66,7 +66,7 @@ class TblCatalogueFeature
      *
      * @ORM\Column(name="position", type="integer", nullable=false)
      */
-    private $position;
+    private $position = 0;
 
     /**
      * @var integer
