@@ -85,8 +85,9 @@ class FeaturevalueController extends Controller
         }
     
         // passo l'oggetto $featurevalues a un template
-        return $this->render('QwebCMSCatalogoBundle:Featurevalue:new.html.twig', array(
+        return $this->render('QwebCMSCatalogoBundle:Featurevalue:update.html.twig', array(
             'form' => $form->createView(),
+            'featurevalue' => $featurevalues
         ));
     }
     
@@ -101,24 +102,20 @@ class FeaturevalueController extends Controller
                 'Nessun categoria trovato per l\'id '.$id
             );
         }
-        
-        $form = $this->createForm(new TblCatalogueFeaturevalueType(), $featurevalues);
-        
-        $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            
-            $em = $this->getDoctrine()->getManager();
-            
-            $em->remove($featurevalues);
-            $em->flush();
-            return $this->redirect($this->generateUrl('featurevalues'));
-        }
-    
-        // passo l'oggetto $featurevalues a un template
-        return $this->render('QwebCMSCatalogoBundle:Featurevalue:delete.html.twig', array(
-            'form' => $form->createView(),
-        ));
+
+        // esegue alcune azioni, salvare il prodotto nella base dati
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($featurevalues);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'La featurevalues è stata eliminata!'
+        );
+
+        return $this->redirect($this->generateUrl('featurevalues'));
     }
 }

@@ -17,14 +17,14 @@ class TblCatalogueCategory
      *
      * @ORM\Column(name="id_tbl_catalogue_category", type="bigint", nullable=false)
      */
-    private $idTblCatalogueCategory;
+    private $idTblCatalogueCategory = 0;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="id_tbl_lingua", type="boolean", nullable=false)
+     * @ORM\Column(name="id_tbl_lingua", type="bigint", nullable=false)
      */
-    private $idTblLingua;
+    private $idTblLingua = 4;
 
     /**
      * @var string
@@ -41,13 +41,6 @@ class TblCatalogueCategory
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="img", type="string", length=255, nullable=true)
-     */
-    private $img;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="pub", type="boolean", nullable=false)
@@ -59,7 +52,7 @@ class TblCatalogueCategory
      *
      * @ORM\Column(name="position", type="integer", nullable=false)
      */
-    private $position;
+    private $position = 0;
 
     /**
      * @var integer
@@ -187,29 +180,6 @@ class TblCatalogueCategory
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set img
-     *
-     * @param string $img
-     * @return TblCatalogueCategory
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
-
-        return $this;
-    }
-
-    /**
-     * Get img
-     *
-     * @return string 
-     */
-    public function getImg()
-    {
-        return $this->img;
     }
 
     /**

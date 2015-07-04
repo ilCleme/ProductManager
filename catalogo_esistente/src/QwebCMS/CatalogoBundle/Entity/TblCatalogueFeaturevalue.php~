@@ -294,4 +294,37 @@ class TblCatalogueFeaturevalue
     {
         return $this->productsWithFeaturevalue;
     }
+
+    /**
+     * Add features
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features
+     * @return TblCatalogueFeaturevalue
+     */
+    public function addFeature(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features)
+    {
+        $this->features[] = $features;
+
+        return $this;
+    }
+
+    /**
+     * Remove features
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features
+     */
+    public function removeFeature(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features)
+    {
+        $this->features->removeElement($features);
+    }
+
+    /**
+     * Get features
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFeatures()
+    {
+        return $this->features;
+    }
 }

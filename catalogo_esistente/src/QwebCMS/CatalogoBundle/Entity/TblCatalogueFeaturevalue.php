@@ -17,14 +17,14 @@ class TblCatalogueFeaturevalue
      *
      * @ORM\Column(name="id_tbl_catalogue_featurevalue", type="bigint", nullable=false)
      */
-    private $idTblCatalogueFeaturevalue;
+    private $idTblCatalogueFeaturevalue = 0;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="id_tbl_lingua", type="boolean", nullable=false)
      */
-    private $idTblLingua;
+    private $idTblLingua = 4;
 
     /**
      * @var string
@@ -59,7 +59,7 @@ class TblCatalogueFeaturevalue
      *
      * @ORM\Column(name="position", type="integer", nullable=false)
      */
-    private $position;
+    private $position = 0;
 
     /**
      * @var integer
@@ -169,7 +169,7 @@ class TblCatalogueFeaturevalue
     /**
      * Get img
      *
-     * @return string 
+     * @return string
      */
     public function getImg()
     {

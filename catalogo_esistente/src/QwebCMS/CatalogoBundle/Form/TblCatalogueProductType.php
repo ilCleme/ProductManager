@@ -15,31 +15,35 @@ class TblCatalogueProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblCatalogueProduct')
-            ->add('idTblLingua')
-            ->add('title')
-            ->add('description')
-            ->add('descriptionNotag')
-            ->add('shortDescription')
-            ->add('img','file')
-            //->add('img','elfinder', array('instance'=>'form', 'enable'=>true))
-            ->add('idTblPhotoCat')
-            ->add('template')
-            ->add('pub')
-            ->add('position')
-            ->add('categories', 'entity', array(
-                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
-                'property' => 'title',
-                'multiple' => true,
-                'expanded' => true
-              ))
-            ->add('featurevalues', 'entity', array(
-                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
-                'property' => 'title',
-                'multiple' => true,
-                'expanded' => true
-              ))
-        ;
+        ->add('idTblCatalogueProduct','hidden')
+        ->add('idTblLingua', 'hidden')
+        ->add('title')
+        ->add('description')
+        ->add('descriptionNotag', 'hidden')
+        ->add('shortDescription')
+        ->add('img','file')
+        ->add('idTblPhotoCat', 'hidden')
+        ->add('template', 'hidden')
+        ->add('pub')
+        ->add('position')
+        ->add('categories', 'entity', array(
+            'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
+            'property' => 'title',
+            'multiple' => true,
+            'expanded' => false,
+            'required' => false
+        ))
+        ->add('featurevalues', 'entity', array(
+            'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
+            'property' => 'title',
+            'multiple' => true,
+            'expanded' => false,
+            'required' => false
+        ))
+        ->add('save', 'submit', array('label' => 'Salva'))
+        ->add('saveAndContinue', 'submit', array('label' => 'Salva e continua'))
+
+    ;
     }
     
     /**
@@ -57,6 +61,6 @@ class TblCatalogueProductType extends AbstractType
      */
     public function getName()
     {
-        return 'product';
+        return 'product_new';
     }
 }

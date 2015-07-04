@@ -15,20 +15,22 @@ class TblCatalogueFeaturevalueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblCatalogueFeaturevalue')
-            ->add('idTblLingua')
+            ->add('idTblCatalogueFeaturevalue', 'hidden')
+            ->add('idTblLingua', 'hidden')
             ->add('title')
             ->add('img')
             ->add('link')
             ->add('link2')
-            ->add('position')
+            ->add('position', 'hidden')
             //->add('productsWithFeaturevalue')
             ->add('features', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',
                 'property' => 'title',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
+                'required' => false
               ))
+            ->add('save', 'submit', array('label' => 'Salva'))
         ;
     }
     

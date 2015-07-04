@@ -15,20 +15,21 @@ class TblCatalogueCategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblCatalogueCategory')
-            ->add('idTblLingua')
+            ->add('idTblCatalogueCategory', 'hidden')
+            ->add('idTblLingua', 'hidden')
             ->add('title')
             ->add('description')
-            ->add('img')
             ->add('pub')
-            ->add('position')
+            ->add('position','hidden')
             //->add('products')
             ->add('categoriesParent', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
                 'property' => 'title',
                 'multiple' => true,
-                'expanded' => true
-              ))
+                'expanded' => true,
+                'required' => false
+            ))
+            ->add('save', 'submit', array('label' => 'Salva'))
             //->add('categoriesParent')
         ;
     }

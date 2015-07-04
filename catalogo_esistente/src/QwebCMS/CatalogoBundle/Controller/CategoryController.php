@@ -13,22 +13,20 @@ class CategoryController extends Controller
     public function createAction(Request $request)
     {
         $category = new Category();
-        
+
         $form = $this->createForm(new TblCatalogueCategoryType(), $category);
-        
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            
+
             $em = $this->getDoctrine()->getManager();
-            
+
             $em->persist($category);
             $em->flush();
-            
-            //Aggiornare il valore del campo id_tbl_catalogue_category con il nuovo id
+
             $category->setIdTblCatalogueCategory($category->getId());
-            
+
             $em->persist($category);
             $em->flush();
             return $this->redirect($this->generateUrl('categories'));
@@ -101,24 +99,19 @@ class CategoryController extends Controller
                 'Nessun categoria trovato per l\'id '.$id
             );
         }
-        
-        $form = $this->createForm(new TblCatalogueCategoryType(), $category);
-        
-        $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            
-            $em = $this->getDoctrine()->getManager();
-            
-            $em->remove($category);
-            $em->flush();
-            return $this->redirect($this->generateUrl('categories'));
-        }
-    
-        // passo l'oggetto $category a un template
-        return $this->render('QwebCMSCatalogoBundle:Category:delete.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        // esegue alcune azioni, salvare il prodotto nella base dati
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($category);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add(
+            'notice',
+            'La categoria è stata eliminata!'
+        );
+
+        return $this->redirect($this->generateUrl('categories'));
     }
 }

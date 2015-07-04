@@ -52,7 +52,7 @@ class TblCatalogueProduct
     /**
      * @var string
      *
-     * @ORM\Column(name="short_description", type="text", nullable=true)
+     * @ORM\Column(name="short_description", type="string", length=255, nullable=true)
      */
     private $shortDescription;
 
@@ -120,6 +120,7 @@ class TblCatalogueProduct
     public function __construct() {
         $this->categories = new ArrayCollection();
         $this->featurevalues = new ArrayCollection();
+        $this->idTblLingua = 4;
     }
 
 

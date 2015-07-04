@@ -1,0 +1,15 @@
+{# src/Acme/DemoBundle/Resources/views/Random/index.html.twig #}
+{% extends '::layout.html.twig' %}
+
+{% block title %}Elimina prodotto{% endblock %}
+
+{% block content %}
+    <div class="container">
+    {{ form_start(form) }}
+    {{ form_widget(form.idTblCatalogueProduct) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-w-m btn-danger" type="submit">Elimina</button>
+    {{ form_end(form) }}
+    
+    </div>
+{% endblock %}
