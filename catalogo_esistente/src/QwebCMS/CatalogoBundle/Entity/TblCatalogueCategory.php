@@ -15,6 +15,15 @@ class TblCatalogueCategory
     /**
      * @var integer
      *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id_tbl_catalogue_category", type="bigint", nullable=false)
      */
     private $idTblCatalogueCategory = 0;
@@ -41,11 +50,11 @@ class TblCatalogueCategory
     private $description;
 
     /**
-     * @var boolean
+     * @var string
      *
-     * @ORM\Column(name="pub", type="boolean", nullable=false)
+     * @ORM\Column(name="img", type="string", length=255, nullable=true)
      */
-    private $pub;
+    private $img;
 
     /**
      * @var integer
@@ -53,15 +62,6 @@ class TblCatalogueCategory
      * @ORM\Column(name="position", type="integer", nullable=false)
      */
     private $position = 0;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="bigint")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
 
     /**
      * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct", mappedBy="categories")
@@ -401,5 +401,28 @@ class TblCatalogueCategory
     public function getCategoriesParent()
     {
         return $this->categoriesParent;
+    }
+
+    /**
+     * Set img
+     *
+     * @param string $img
+     * @return TblCatalogueCategory
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    /**
+     * Get img
+     *
+     * @return string 
+     */
+    public function getImg()
+    {
+        return $this->img;
     }
 }

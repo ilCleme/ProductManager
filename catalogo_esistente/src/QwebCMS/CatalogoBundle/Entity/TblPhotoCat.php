@@ -65,7 +65,7 @@ class TblPhotoCat
      *
      * @ORM\Column(name="smarty_template", type="string", length=255)
      */
-    private $smartyTemplate;
+    private $smartyTemplate = '';
 
     /**
      * @var integer
@@ -77,16 +77,16 @@ class TblPhotoCat
     /**
      * @var boolean
      *
-     * @ORM\Column(name="set_loop", type="boolean", nullable=false)
+     * @ORM\Column(name="set_loop", type="boolean", nullable=true)
      */
-    private $setLoop;
+    private $setLoop = 0;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="set_random", type="boolean", nullable=false)
+     * @ORM\Column(name="set_random", type="boolean", nullable=true)
      */
-    private $setRandom;
+    private $setRandom = 0;
 
 
     /**
