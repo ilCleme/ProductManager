@@ -1,0 +1,22 @@
+{# app/Resources/views/security/login.html.twig #}
+{# ... probabilmente si vorrà estendere il proprio template di base, p.e. base.html.twig #}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData) }}</div>
+{% endif %}
+
+<form action="{{ path('login_check') }}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="_password" />
+
+    {#
+        Se si vuole controllare l'URL a cui l'utente viene
+        rinviato in caso di successo (approfondito più avanti)
+        <input type="hidden" name="_target_path" value="/account" />
+    #}
+
+    <button type="submit">login</button>
+</form>

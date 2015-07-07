@@ -1,0 +1,17 @@
+qweb_cms_user:
+    resource: "@QwebCMSUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+qweb_cms_catalogo:
+    resource: "@QwebCMSCatalogoBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+elfinder:
+    resource: "@FMElfinderBundle/Resources/config/routing.yml"
+
+logout:
+    path:   /logout
+
+oneup_uploader:
+    resource: .
+    type: uploader
