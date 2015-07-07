@@ -41,20 +41,6 @@ class TblCatalogueFeaturevalue
     private $img;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="link", type="string", length=255, nullable=true)
-     */
-    private $link;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="link2", type="string", length=255, nullable=true)
-     */
-    private $link2;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="position", type="integer", nullable=false)

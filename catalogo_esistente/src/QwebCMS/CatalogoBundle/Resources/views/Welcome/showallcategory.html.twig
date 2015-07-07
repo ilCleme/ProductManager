@@ -51,7 +51,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                    {% for category in categories %}
+
+                {% for category in categories %}
                     <tr>
                         <td>
                             {{category.idTblCatalogueCategory}}
@@ -67,7 +68,8 @@
                             <a href="/category/delete/{{category.idTblCatalogueCategory}}" title="Elimina"><i class="fa fa-times"></i></a>
                         </td>
                     </tr>
-                    {% endfor %}
+                {% endfor %}
+
                 </tbody>
             </table>
         </div>

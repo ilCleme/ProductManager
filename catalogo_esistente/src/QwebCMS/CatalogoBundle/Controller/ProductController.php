@@ -91,10 +91,10 @@ class ProductController extends Controller
             ->find($id);
     
         if (!$product) {
-            throw $this->createNotFoundException(
-                'Nessun prodotto trovato per l\'id '.$id
-            );
-        }
+        throw $this->createNotFoundException(
+            'Nessun prodotto trovato per l\'id '.$id
+        );
+    }
     
         // passo l'oggetto $product a un template
         return $this->render(

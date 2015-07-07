@@ -143,19 +143,6 @@ class TblUser implements UserInterface, \Serializable
     }
 
     /**
-     * Set login
-     *
-     * @param string $login
-     * @return User
-     */
-    public function setlogin($login)
-    {
-        $this->login = $login;
-
-        return $this;
-    }
-
-    /**
      * Set password
      *
      * @param string $password
@@ -311,4 +298,17 @@ class TblUser implements UserInterface, \Serializable
         return $this->checkbox1TblGruppi;
     }
 
+
+    /**
+     * Set login
+     *
+     * @param string $login
+     * @return TblUser
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
+
+        return $this;
+    }
 }

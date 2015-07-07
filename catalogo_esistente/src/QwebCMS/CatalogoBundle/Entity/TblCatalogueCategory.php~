@@ -15,16 +15,25 @@ class TblCatalogueCategory
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tbl_catalogue_category", type="bigint", nullable=false)
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idTblCatalogueCategory;
+    private $id;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="id_tbl_lingua", type="boolean", nullable=false)
+     * @ORM\Column(name="id_tbl_catalogue_category", type="bigint", nullable=false)
      */
-    private $idTblLingua;
+    private $idTblCatalogueCategory = 0;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_tbl_lingua", type="bigint", nullable=false)
+     */
+    private $idTblLingua = 4;
 
     /**
      * @var string
@@ -48,27 +57,11 @@ class TblCatalogueCategory
     private $img;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="pub", type="boolean", nullable=false)
-     */
-    private $pub;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="position", type="integer", nullable=false)
      */
-    private $position;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="bigint")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    private $position = 0;
 
     /**
      * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct", mappedBy="categories")
@@ -187,29 +180,6 @@ class TblCatalogueCategory
     public function getDescription()
     {
         return $this->description;
-    }
-
-    /**
-     * Set img
-     *
-     * @param string $img
-     * @return TblCatalogueCategory
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
-
-        return $this;
-    }
-
-    /**
-     * Get img
-     *
-     * @return string 
-     */
-    public function getImg()
-    {
-        return $this->img;
     }
 
     /**
@@ -431,5 +401,28 @@ class TblCatalogueCategory
     public function getCategoriesParent()
     {
         return $this->categoriesParent;
+    }
+
+    /**
+     * Set img
+     *
+     * @param string $img
+     * @return TblCatalogueCategory
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    /**
+     * Get img
+     *
+     * @return string 
+     */
+    public function getImg()
+    {
+        return $this->img;
     }
 }

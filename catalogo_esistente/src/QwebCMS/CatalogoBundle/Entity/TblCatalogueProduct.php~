@@ -17,6 +17,15 @@ class TblCatalogueProduct
     /**
      * @var integer
      *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id_tbl_catalogue_product", type="bigint", nullable=false)
      */
     private $idTblCatalogueProduct;
@@ -52,9 +61,16 @@ class TblCatalogueProduct
     /**
      * @var string
      *
-     * @ORM\Column(name="short_description", type="text", nullable=true)
+     * @ORM\Column(name="short_description", type="string", length=255, nullable=true)
      */
     private $shortDescription;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cod", type="string", length=255, nullable=true)
+     */
+    private $cod;
 
     /**
      * @var string
@@ -84,22 +100,19 @@ class TblCatalogueProduct
      */
     private $pub;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="featured", type="boolean", nullable=false)
+     */
+    private $featured;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="position", type="integer", nullable=false)
+     * @ORM\Column(name="position", type="integer", nullable=true)
      */
     private $position;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="bigint")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
     
     /**
      *  @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory", inversedBy="products")
@@ -454,4 +467,50 @@ class TblCatalogueProduct
         return $this->featurevalues;
     }
     
+
+    /**
+     * Set cod
+     *
+     * @param string $cod
+     * @return TblCatalogueProduct
+     */
+    public function setCod($cod)
+    {
+        $this->cod = $cod;
+
+        return $this;
+    }
+
+    /**
+     * Get cod
+     *
+     * @return string 
+     */
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    /**
+     * Set featured
+     *
+     * @param boolean $featured
+     * @return TblCatalogueProduct
+     */
+    public function setFeatured($featured)
+    {
+        $this->featured = $featured;
+
+        return $this;
+    }
+
+    /**
+     * Get featured
+     *
+     * @return boolean 
+     */
+    public function getFeatured()
+    {
+        return $this->featured;
+    }
 }

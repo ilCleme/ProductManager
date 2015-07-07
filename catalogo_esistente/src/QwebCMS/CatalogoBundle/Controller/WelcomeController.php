@@ -3,6 +3,7 @@
 namespace QwebCMS\CatalogoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct as Product;
 
 class WelcomeController extends Controller
@@ -30,23 +31,37 @@ class WelcomeController extends Controller
             );
     }
     
-    public function allProductAction(){
+    public function allProductAction(Request $request){
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
             ->findAll();
+
+        /*if ($request->query->get('filterValue') == 'JESOLO'){
+            $em    = $this->get('doctrine.orm.entity_manager');
+            $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a WHERE a.title = :filterValue ";
+            $dql->setParameter(array(
+                'filterValue', $request->query->get('filterValue')
+            ));
+            $product = $em->createQuery($dql);
+        }*/
 
         if (!$product) {
             throw $this->createNotFoundException(
                 'Nessun prodotto trovato per l\'id '.$id
             );
         }
-        
-        //$_SESSION['login'] = 1;
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $product,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('number', 10)/*limit per page*/
+        );
         
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallproduct.html.twig',
-            array('products' => $product)
+            array('products' => $product, 'pagination' => $pagination)
         );
     }
     

@@ -20,6 +20,8 @@ class AppKernel extends Kernel
             new QwebCMS\CatalogoBundle\QwebCMSCatalogoBundle(),
             new QwebCMS\UserBundle\QwebCMSUserBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
