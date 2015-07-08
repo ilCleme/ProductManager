@@ -26,7 +26,7 @@ class ProductController extends Controller
             $em = $this->getDoctrine()->getManager();
 
 
-            if($form->get('saveAndContinue')->isClicked()){
+            if($form->get('saveAndContinue')->isClicked()) {
 
                 // Create a new empty Album for this product
                 $album = new Album();
@@ -46,16 +46,19 @@ class ProductController extends Controller
 
                 $form = $this->createForm(new TblCatalogueProductType(), $product);
 
-                if ($product->getIdTblPhotoCat() != null){
+                if ($product->getIdTblPhotoCat() != null) {
                     $id_album = $product->getIdTblPhotoCat();
                 } else {
                     $id_album = 0;
                 }
 
                 return $this->render('QwebCMSCatalogoBundle:Product:new.html.twig', array(
-                    'form' => $form->createView(),
+                    'form'     => $form->createView(),
                     'id_album' => $id_album
                 ));
+            } elseif($form->get('saveAndExit')->isClicked()) {
+
+                return $this->redirect($this->generateUrl('products'));
 
             } else {
 

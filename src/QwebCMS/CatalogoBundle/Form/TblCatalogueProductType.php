@@ -41,6 +41,7 @@ class TblCatalogueProductType extends AbstractType
         ))
         ->add('save', 'submit', array('label' => 'Salva'))
         ->add('saveAndContinue', 'submit', array('label' => 'Salva e continua'))
+        ->add('saveAndExit', 'submit', array('label' => 'Salva ed Esci'))
 
     ;
     }

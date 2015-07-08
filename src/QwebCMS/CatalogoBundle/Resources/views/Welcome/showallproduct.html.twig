@@ -59,7 +59,9 @@
                 </thead>
                 <tbody>
                 {# table body #}
+                {#
                 {{ knp_pagination_filter(pagination, {'product.title': 'Nome Prodotto', 'product.shortDescription': 'Descrizione'}) }}
+                #}
                 {% for product in pagination %}
                     <tr {% if loop.index is odd %}class="color"{% endif %}>
 
