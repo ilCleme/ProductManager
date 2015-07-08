@@ -1,0 +1,23 @@
+{# src/QwebCMS/CatalogoBundle/Resources/views/Random/index.html.twig #}
+{% extends '::layout.html.twig' %}
+
+{% block title %}Prodotti{% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><h1>Prodotto {{product.title}}</h1></div>
+            
+            <!-- List Group -->
+            <ul class="list-group">
+                <li class="list-group-item">Nome Prodotto: {{product.title}}</li>
+                <li class="list-group-item">Descrizione: {{product.description}}</li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}
