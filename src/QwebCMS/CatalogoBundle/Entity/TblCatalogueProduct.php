@@ -98,7 +98,7 @@ class TblCatalogueProduct
      *
      * @ORM\Column(name="featured", type="boolean", nullable=false)
      */
-    private $featured;
+    private $featured = 0;
 
     /**
      * @var integer

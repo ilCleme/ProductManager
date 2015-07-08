@@ -56,7 +56,7 @@ class TblPhoto
     /**
      * @var string
      *
-     * @ORM\Column(name="img_big", type="string", length=255)
+     * @ORM\Column(name="img_big", type="string", length=255, nullable=true)
      */
     private $imgBig;
 
@@ -103,7 +103,7 @@ class TblPhoto
     /**
      * @var string
      *
-     * @ORM\Column(name="didascalia", type="string", length=255)
+     * @ORM\Column(name="didascalia", type="string", length=255, nullable=true)
      */
     private $didascalia;
 

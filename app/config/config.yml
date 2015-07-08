@@ -116,7 +116,7 @@ oneup_uploader:
         gallery:
             frontend: dropzone
             storage:
-              directory:  '/uploads/gallery'
+              directory:  'uploads/gallery'
 
 knp_paginator:
     page_range: 10                      # default page range used in pagination control
@@ -129,3 +129,15 @@ knp_paginator:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
         filtration: KnpPaginatorBundle:Pagination:filtration.html.twig
+
+liip_imagine:
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        my_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [120, 90], mode: outbound }
