@@ -113,6 +113,13 @@ class TblCatalogueFieldsearch
     /**
      * @var integer
      *
+     * @ORM\Column(name="inherit_from", type="integer", nullable=false)
+     */
+    private $inheritFrom = 0;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="id", type="bigint")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
@@ -451,5 +458,28 @@ class TblCatalogueFieldsearch
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set inheritFrom
+     *
+     * @param integer $inheritFrom
+     * @return TblCatalogueFieldsearch
+     */
+    public function setInheritFrom($inheritFrom)
+    {
+        $this->inheritFrom = $inheritFrom;
+
+        return $this;
+    }
+
+    /**
+     * Get inheritFrom
+     *
+     * @return integer 
+     */
+    public function getInheritFrom()
+    {
+        return $this->inheritFrom;
     }
 }

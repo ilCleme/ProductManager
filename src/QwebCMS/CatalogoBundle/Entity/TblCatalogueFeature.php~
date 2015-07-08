@@ -36,7 +36,7 @@ class TblCatalogueFeature
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=false)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
@@ -322,5 +322,28 @@ class TblCatalogueFeature
     public function getFeaturevalues()
     {
         return $this->featurevalues;
+    }
+
+    /**
+     * Set inheritFrom
+     *
+     * @param integer $inheritFrom
+     * @return TblCatalogueFeature
+     */
+    public function setInheritFrom($inheritFrom)
+    {
+        $this->inheritFrom = $inheritFrom;
+
+        return $this;
+    }
+
+    /**
+     * Get inheritFrom
+     *
+     * @return integer 
+     */
+    public function getInheritFrom()
+    {
+        return $this->inheritFrom;
     }
 }

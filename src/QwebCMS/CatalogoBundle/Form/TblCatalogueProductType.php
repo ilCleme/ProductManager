@@ -21,7 +21,6 @@ class TblCatalogueProductType extends AbstractType
         ->add('description')
         ->add('descriptionNotag', 'hidden')
         ->add('shortDescription')
-        ->add('img','file')
         ->add('idTblPhotoCat', 'hidden')
         ->add('template', 'hidden')
         ->add('pub')

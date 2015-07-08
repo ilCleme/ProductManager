@@ -73,13 +73,6 @@ class TblCatalogueProduct
     private $cod;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="img", type="string", length=255, nullable=true)
-     */
-    private $img;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="id_tbl_photo_cat", type="integer", nullable=false)

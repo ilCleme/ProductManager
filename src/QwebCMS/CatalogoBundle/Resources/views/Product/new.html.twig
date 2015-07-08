@@ -20,7 +20,6 @@
                     <li class="active"><a data-toggle="tab" href="#tab-1"> Informazioni Prodotto</a></li>
                     <li class="disabled"><a>Immagini</a></li>
                     {% endif %}
-
                 </ul>
                 <div class="tab-content">
                     {% if id_album > 0 %}
@@ -45,11 +44,6 @@
                                     {{ form_label(form.shortDescription, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.shortDescription) }}
                                     {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control'}}) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ form_label(form.img, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                    {{ form_errors(form.img) }}
-                                    {{ form_widget(form.img, {'attr': {'class': 'control-label'}}) }}
                                 </div>
                             </div>
 
