@@ -86,54 +86,69 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
-                                    {{ form_label(form.save, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
-                                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
-                                </div>
+
                             </fieldset>
                         </div>
                     </div>
 
                     <div id="tab-4" class="tab-pane">
                         <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-stripped">
-                                    <thead>
-                                    <tr>
-                                        <th>
-                                            Anteprima
-                                        </th>
-                                        <th>
-                                            URL
-                                        </th>
-                                        <th>
-                                            Posizione
-                                        </th>
-                                        <th>
-                                            Azioni
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {% for immagine in immagini %}
-                                        <tr>
-                                            <td>
-                                                <img src="{{ asset(immagine.img) }}" class="img-responsive" />
-                                            </td>
-                                            <td>
-                                                {{ immagine.img }}
-                                            </td>
-                                            <td>
-                                                {{ immagine.posizione }}
-                                            </td>
-                                            <td></td>
-
-                                        </tr>
-                                    {% endfor %}
-                                    </tbody>
-                                </table>
+                            <div class="col-md-12">
+                                <div id="my-awesome-dropzone" class="dropzone" action="#">
+                                    <div class="dropzone-previews"></div>
+                                    <button type="submit" class="btn btn-primary pull-right save_image">Salva Immagini</button>
+                                </div>
                             </div>
+
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-stripped">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                Anteprima
+                                            </th>
+                                            <th>
+                                                URL
+                                            </th>
+                                            <th>
+                                                Posizione
+                                            </th>
+                                            <th>
+                                                Azioni
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for immagine in immagini %}
+                                            <tr>
+                                                <td>
+                                                    <img class="img-responsive" src="{{ asset(immagine.img) | imagine_filter('img_preview')}}" class="img-responsive" />
+                                                </td>
+                                                <td>
+                                                    {{ immagine.img }}
+                                                </td>
+                                                <td>
+                                                    {{ immagine.posizione }}
+                                                </td>
+                                                <td></td>
+
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                         </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        {{ form_label(form.save, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+
+                        {{ form_label(form.exit, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                        {{ form_widget(form.exit, {'attr': {'class': 'btn btn-primary'}}) }}
                     </div>
                 </div>
             </div>
@@ -152,6 +167,9 @@
     <!-- SUMMERNOTE -->
     <script src="{{ asset('admin-style/js/plugins/summernote/summernote.min.js') }}"></script>
 
+    <!-- DROPZONE -->
+    <script src="{{ asset('admin-style/js/plugins/dropzone/dropzone.js') }}"></script>
+
     <script>
         $(document).ready(function(){
 
@@ -160,6 +178,35 @@
                     $("#product_edit_description").val($(".summernote").code());
                 }
             });
+
+            Dropzone.options.myAwesomeDropzone = {
+
+                url: "{{ oneup_uploader_endpoint('gallery') }}",
+                autoProcessQueue: false,
+                //uploadMultiple: true,
+                parallelUploads: 10,
+                maxFiles: 100,
+                addRemoveLinks: true,
+                headers:{"id_album": "{{ product.idTblPhotoCat }}"},
+
+                // Dropzone settings
+                init: function() {
+                    var myDropzone = this;
+
+                    this.element.querySelector(".save_image").addEventListener("click", function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        myDropzone.processQueue();
+                    });
+                    this.on("sendingmultiple", function() {
+                    });
+                    this.on("successmultiple", function(files, response) {
+                    });
+                    this.on("errormultiple", function(files, response) {
+                    });
+                }
+
+            }
 
         });
     </script>

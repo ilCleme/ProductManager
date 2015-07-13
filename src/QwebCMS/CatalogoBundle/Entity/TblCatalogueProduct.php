@@ -269,6 +269,29 @@ class TblCatalogueProduct
     }
 
     /**
+     * Set img
+     *
+     * @param string $img
+     * @return TblCatalogueProduct
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    /**
+     * Get img
+     *
+     * @return string
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
      * Set idTblPhotoCat
      *
      * @param integer $idTblPhotoCat

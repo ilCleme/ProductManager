@@ -39,7 +39,8 @@ class TblCatalogueProductEditType extends AbstractType
             'expanded' => false,
             'required' => false
         ))
-        ->add('save', 'submit', array('label' => 'Modifica Prodotto'))
+        ->add('exit', 'submit', array('label' => 'Modifica Prodotto'))
+        ->add('save', 'submit', array('label' => 'Modifica e continua'))
 
     ;
     }

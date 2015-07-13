@@ -8,10 +8,10 @@ use QwebCMS\CatalogoBundle\Entity\TblPhoto as Foto;
 
 class UploadListener{
 
-    public function __construct($doctrine)
+    public function __construct($doctrine, $container)
     {
         $this->doctrine = $doctrine;
-        //$this->container = $container;
+        $this->container = $container;
     }
 
     public function onUpload(PostPersistEvent $event)
@@ -26,17 +26,13 @@ class UploadListener{
          */
         $file_upload = $event->getFile();
 
-        /*$imagemanagerResponse = $this->container
+        $imagemanagerResponse = $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
-            ->filterAction(
-                $request,         // http request
-                'uploads/foo.jpg',      // original image you want to apply a filter to
-                'my_thumb'              // filter defined in config.yml
-            );
+            ->filterAction($this->container->get('request'), $file_upload, 'img_preview');
 
         // string to put directly in the "src" of the tag <img>
         $cacheManager = $this->container->get('liip_imagine.cache.manager');
-        $srcPath = $cacheManager->getBrowserPath('uploads/foo.jpg', 'my_thumb');*/
+        $srcPath = $cacheManager->getBrowserPath($file_upload, 'img_preview');
 
         $foto = new Foto();
         $foto->setNome($file_upload->getFilename());
@@ -48,12 +44,16 @@ class UploadListener{
         $em->persist($foto);
         $em->flush();
 
+        $foto->setIdTblPhoto($foto->getId());
+        $em->persist($foto);
+        $em->flush();
+
         /*
          * Torno dei dati informativi tramite la response
          */
         $response->offsetSet('id_album', $id_album );
         $response->offsetSet('config', $event->getConfig() );
-        //$response->offsetSet('src_path', $srcPath );
+        $response->offsetSet('src_path', $srcPath );
     }
 
 }
