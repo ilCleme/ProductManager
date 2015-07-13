@@ -48,14 +48,14 @@
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables">
                 <thead>
-                <tr>
-                    {# sorting of properties based on query components #}
-                    <th>{{ knp_pagination_sortable(pagination, '#', 'a.idTblCatalogueProduct') }}</th>
-                    <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Prodotto', 'a.title') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Descrizione', 'a.shortDescription') }}</th>
-                    <th>{{ knp_pagination_sortable(pagination, 'Codice', 'a.cod') }}</th>
-                    <th>Azioni</th>
-                </tr>
+                    <tr>
+                        {# sorting of properties based on query components #}
+                        <th>{{ knp_pagination_sortable(pagination, '#', 'a.idTblCatalogueProduct') }}</th>
+                        <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Prodotto', 'a.title') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Descrizione', 'a.shortDescription') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Codice', 'a.cod') }}</th>
+                        <th>Azioni</th>
+                    </tr>
                 </thead>
                 <tbody>
                 {# table body #}
@@ -64,7 +64,6 @@
                 #}
                 {% for product in pagination %}
                     <tr {% if loop.index is odd %}class="color"{% endif %}>
-
                         <td>{{ product.id }}</td>
                         <td>{{ product.title }}</td>
                         <td>{{ product.shortDescription }}</td>
