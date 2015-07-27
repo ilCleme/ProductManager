@@ -17,7 +17,11 @@ welcome:
 products:
     path:     /products
     defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allProduct }
-    
+
+upload_product_photo:
+    path:     /products/uploadphoto
+    defaults: { _controller: QwebCMSCatalogoBundle:Product:uploadPhoto }
+
 create_product:
     path:     /products/new
     defaults: { _controller: QwebCMSCatalogoBundle:Product:create }

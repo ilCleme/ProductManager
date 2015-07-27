@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductType;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use QwebCMS\CatalogoBundle\Entity\TblPhoto as Foto;
 
 class ProductController extends Controller
 {
@@ -24,7 +25,6 @@ class ProductController extends Controller
         if ($form->isValid()) {
             // esegue alcune azioni, salvare il prodotto nella base dati
             $em = $this->getDoctrine()->getManager();
-
 
             if($form->get('saveAndContinue')->isClicked()) {
 
@@ -56,6 +56,7 @@ class ProductController extends Controller
                     'form'     => $form->createView(),
                     'id_album' => $id_album
                 ));
+
             } elseif($form->get('saveAndExit')->isClicked()) {
 
                 return $this->redirect($this->generateUrl('products'));
@@ -94,10 +95,10 @@ class ProductController extends Controller
             ->find($id);
     
         if (!$product) {
-        throw $this->createNotFoundException(
-            'Nessun prodotto trovato per l\'id '.$id
-        );
-    }
+            throw $this->createNotFoundException(
+                'Nessun prodotto trovato per l\'id '.$id
+            );
+        }
     
         // passo l'oggetto $product a un template
         return $this->render(
@@ -143,7 +144,6 @@ class ProductController extends Controller
             $em->flush();
         }
 
-
         // passo l'oggetto $product a un template
         return $this->render('QwebCMSCatalogoBundle:Product:update.html.twig', array(
             'form' => $form->createView(),
@@ -174,6 +174,48 @@ class ProductController extends Controller
             'Il prodotto è stato eliminato!'
         );
 
-        return $this->redirect($this->generateUrl('products'));
+
+    }
+
+    public function uploadPhotoAction(Request $request)
+    {
+        $absolutedir			= $request->server->get('DOCUMENT_ROOT');
+
+        $dir					= '/uploads/gallery/';
+        $serverdir				= $absolutedir.$dir;
+        $filename				= array();
+
+        $json = array();
+        $json['data'] = $request->request->get('data');
+        $json['name'] = $request->request->get('name');
+        $json['id_album'] = $request->request->get('id_album');
+        $json['id_prodotto'] = $request->request->get('id_prodotto');
+        $name = $json['name'];
+
+        $tmp					= explode(',',$json['data']);
+        $imgdata 				= base64_decode($tmp[1]);
+        $extension				= explode('.',$name);
+        $fname					= substr($json['name'],0,-(strlen($extension[0]) + 1)).'.'.substr(sha1(time()),0,6).'.'.$extension[1];
+
+        $handle					= fopen($serverdir.$fname,'w');
+        fwrite($handle, $imgdata);
+        fclose($handle);
+
+        $filename[]				= $fname;
+
+        $foto = new Foto();
+        $foto->setNome($fname);
+        $foto->setImg($dir.$fname);
+        $foto->setIdTblPhotoCat($json['id_album']);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($foto);
+        $em->flush();
+
+        $foto->setIdTblPhoto($foto->getId());
+        $em->persist($foto);
+        $em->flush();
+
+        return $request->server->get('DOCUMENT_ROOT');
     }
 }
