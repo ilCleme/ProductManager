@@ -216,6 +216,6 @@ class ProductController extends Controller
         $em->persist($foto);
         $em->flush();
 
-        return $request->server->get('DOCUMENT_ROOT');
+        return new Response($fname);
     }
 }
