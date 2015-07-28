@@ -3,7 +3,9 @@
 
 {% block title %}Crea Nuovo Prodotto{% endblock %}
 
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/html5imageupload.css') }}" rel="stylesheet">
+{% endblock %}
 
 {% block content %}
 <div>
@@ -16,9 +18,11 @@
                     {% if id_album > 0 %}
                     <li class=""><a data-toggle="tab" href="#tab-1"> Informazioni Prodotto</a></li>
                     <li class="active"><a data-toggle="tab" href="#tab-2">Info Aggiuntive</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-3">HTML5 IMAGE UPLOAD</a></li>
                     {% else %}
                     <li class="active"><a data-toggle="tab" href="#tab-1"> Informazioni Prodotto</a></li>
                     <li class="disabled"><a>Immagini</a></li>
+                    <li class="disabled"><a>HTML5 IMAGE UPLOAD</a></li>
                     {% endif %}
                 </ul>
                 <div class="tab-content">
@@ -114,6 +118,17 @@
                             </div>
                         </div>
                     </div>
+
+
+                    <div id="tab-3" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="html5imageupload" data-originalsave="true" data-width="960" data-height="540" data-url="{{ path('upload_product_photo') }}" data-resize="true">
+                                    <input type="file" name="thumb" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -130,6 +145,9 @@
 
     <!-- DROPZONE -->
     <script src="{{ asset('admin-style/js/plugins/dropzone/dropzone.js') }}"></script>
+
+    <!-- HTML5 IMAGE UPLOAD -->
+    <script src="{{ asset('assets/js/html5imageupload.js') }}"></script>
 
     <!-- SCRIPT UPLOAD IMMAGINI CON DROPZONE PERSONALIZZATO -->
     <script>
@@ -163,6 +181,8 @@
                 }
 
             }
+
+            $('.html5imageupload').html5imageupload({data: {id_album: '{{ id_album }}'}});
 
         });
     </script>

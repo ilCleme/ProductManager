@@ -126,9 +126,10 @@ knp_paginator:
         sort_direction_name: ord       # sort direction query parameter name
         distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
     template:
-        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig     # sliding pagination controls template
-        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig # sort link template
-        filtration: KnpPaginatorBundle:Pagination:filtration.html.twig
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+        sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
+        #filtration: KnpPaginatorBundle:Pagination:filtration.html.twig
+        filtration: QwebCMSCatalogoBundle:Welcome:filter.html.twig
 
 liip_imagine:
     resolvers:

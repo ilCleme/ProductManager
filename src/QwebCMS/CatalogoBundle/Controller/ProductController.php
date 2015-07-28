@@ -174,7 +174,7 @@ class ProductController extends Controller
             'Il prodotto è stato eliminato!'
         );
 
-
+        return $this->redirectToRoute('products');
     }
 
     public function uploadPhotoAction(Request $request)
@@ -215,7 +215,7 @@ class ProductController extends Controller
         $foto->setIdTblPhoto($foto->getId());
         $em->persist($foto);
         $em->flush();
-
+        
         return new Response($fname);
     }
 }

@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class TblPhotoRepository extends EntityRepository
 {
+    public function findLastPhotoByAlbum($id_album)
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM QwebCMSCatalogoBundle:TblPhoto p WHERE p.idTblPhotoCat = :id_album LIMIT 1 ORDER BY p.idTblPhoto ASC'
+            )
+            ->setParameter('id_album', $id_album)
+            ->getResult();
+    }
 }

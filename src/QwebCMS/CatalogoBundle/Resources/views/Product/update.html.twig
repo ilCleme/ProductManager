@@ -57,7 +57,7 @@
                                         {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
-                                                                <div class="form-group">
+                                <div class="form-group">
                                     {{ form_label(form.pub, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-2'}}) }}
                                     {{ form_errors(form.pub) }}
                                     <div class="col-sm-10 checkbox">
@@ -149,7 +149,7 @@
                         <div class="panel-body">
                             <div class="col-md-12">
                                 <div class="html5imageupload" data-originalsave="true" data-width="960" data-height="540" data-url="{{ path('upload_product_photo') }}" data-resize="true">
-                                    <input type="file" name="thumb" required="required" />
+                                    <input type="file" name="thumb" />
                                 </div>
                             </div>
                         </div>
