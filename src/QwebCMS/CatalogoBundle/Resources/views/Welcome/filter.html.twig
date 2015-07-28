@@ -1,29 +1,34 @@
-<div class="col-md-6 ">
-    <form method="get" action="{{ action }}" enctype="application/x-www-form-urlencoded" class="pull-left">
+<div class="col-md-9 ">
+    <form method="get" action="{{ action }}" enctype="application/x-www-form-urlencoded" class="pull-left form-inline">
+        <div class="form-group">
+            {#<label class="control-label">Filtra per:</label>#}
+            <div class="">
+                <select class="form-control" name="{{ filterFieldName }}">
+                    {% for field, label in fields %}
+                        <option value="{{ field }}"{% if selectedField == field %} selected="selected"{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <select name="{{ filterFieldName }}">
-            {% for field, label in fields %}
-                <option value="{{ field }}"{% if selectedField == field %} selected="selected"{% endif %}>{{ label }}</option>
-            {% endfor %}
-        </select>
-
-        <input type="text" value="{{ selectedValue }}" name="{{ filterValueName }}" />
-
-        <button>{{ options.button }}</button>
+        </div>
+        <div class="form-group">
+            <input type="text" value="{{ selectedValue }}" name="{{ filterValueName }}" class="form-control"/>
+        </div>
+            <button class="btn btn-white">Cerca</button>
 
     </form>
 </div>
 
-<div class="col-md-6">
-    <form method="get" action="{{ action }}" enctype="application/x-www-form-urlencoded" class="pull-right">
-
-        <select name="number">
-            <option>10</option>
-            <option>20</option>
-            <option>50</option>
-        </select>
-
-        <button>{{ options.button }}</button>
+<div class="col-md-3">
+    <form method="get" action="{{ action }}" enctype="application/x-www-form-urlencoded" class="pull-right form-inline">
+        <div class="form-group">
+            <select class="form-control" name="number">
+                <option>10</option>
+                <option>20</option>
+                <option>50</option>
+            </select>
+        </div>
+        <button class="btn btn-white">Per page</button>
 
     </form>
 </div>

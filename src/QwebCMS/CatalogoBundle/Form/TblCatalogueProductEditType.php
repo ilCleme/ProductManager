@@ -23,7 +23,9 @@ class TblCatalogueProductEditType extends AbstractType
         ->add('shortDescription')
         ->add('idTblPhotoCat', 'hidden')
         ->add('template', 'hidden')
-        ->add('pub')
+        ->add('pub', 'checkbox', array(
+                'required'  => false,
+            ))
         ->add('position')
         ->add('categories', 'entity', array(
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
