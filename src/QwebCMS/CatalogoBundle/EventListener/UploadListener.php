@@ -18,7 +18,7 @@ class UploadListener{
     {
         $request = $event->getRequest();
         $response = $event->getResponse();
-        $id_album = $request->headers->get('id_album');
+        $id_album = $request->headers->get('id-album');
 
         /*
          * Estraggo il file dalla request e salvo i suoi dati su DB,
@@ -51,7 +51,7 @@ class UploadListener{
         /*
          * Torno dei dati informativi tramite la response
          */
-        $response->offsetSet('id_album', $id_album );
+        $response->offsetSet('id-album', $id_album );
         $response->offsetSet('config', $event->getConfig() );
         $response->offsetSet('src_path', $srcPath );
     }
