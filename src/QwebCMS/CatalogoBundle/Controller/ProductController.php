@@ -215,7 +215,6 @@ class ProductController extends Controller
         $foto->setIdTblPhoto($foto->getId());
         $em->persist($foto);
         $em->flush();
-
         return new Response($fname);
     }
 }
