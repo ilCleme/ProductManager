@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c62dc223135e23d73a0ec0bf8df626b7",
+    "hash": "b6f08e9221271293440d565a440266c8",
     "packages": [
         {
             "name": "components/elfinder",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/helios-ag/elfinder-component.git",
-                "reference": "f9a5f24a34d3327291104f8239203689b9d81ed2"
+                "reference": "8a84025abec9258a325081649541b8b2b28b18f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/helios-ag/elfinder-component/zipball/f9a5f24a34d3327291104f8239203689b9d81ed2",
-                "reference": "f9a5f24a34d3327291104f8239203689b9d81ed2",
+                "url": "https://api.github.com/repos/helios-ag/elfinder-component/zipball/8a84025abec9258a325081649541b8b2b28b18f1",
+                "reference": "8a84025abec9258a325081649541b8b2b28b18f1",
                 "shasum": ""
             },
             "require": {
-                "components/jquery": "~1.8.0",
-                "components/jqueryui": "1.11.1",
+                "components/jquery": "^1.8",
+                "components/jqueryui": "~1.11.1",
                 "robloach/component-installer": "*"
             },
             "type": "component",
@@ -61,20 +61,20 @@
                 "elfinder",
                 "file manager"
             ],
-            "time": "2014-10-05 07:00:18"
+            "time": "2015-06-30 13:38:48"
         },
         {
             "name": "components/jquery",
-            "version": "1.8.3",
+            "version": "1.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/jquery.git",
-                "reference": "a94bf4baa9955613937d4f4c083c9d95ad0564fb"
+                "reference": "b29a6cdaacadf0f1e136f36b8f492e0a061c1caf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/jquery/zipball/a94bf4baa9955613937d4f4c083c9d95ad0564fb",
-                "reference": "a94bf4baa9955613937d4f4c083c9d95ad0564fb",
+                "url": "https://api.github.com/repos/components/jquery/zipball/b29a6cdaacadf0f1e136f36b8f492e0a061c1caf",
+                "reference": "b29a6cdaacadf0f1e136f36b8f492e0a061c1caf",
                 "shasum": ""
             },
             "require": {
@@ -85,6 +85,12 @@
                 "component": {
                     "scripts": [
                         "jquery.js"
+                    ],
+                    "files": [
+                        "jquery.min.js",
+                        "jquery-migrate.js",
+                        "jquery-migrate.min.js",
+                        "jquery.min.map"
                     ]
                 }
             },
@@ -95,30 +101,29 @@
             "authors": [
                 {
                     "name": "John Resig",
-                    "email": "jeresig@gmail.com",
-                    "homepage": "http://ejohn.org/"
+                    "email": "jeresig@gmail.com"
                 }
             ],
             "description": "jQuery JavaScript Library",
             "homepage": "http://jquery.com",
-            "time": "2013-04-05 19:32:49"
+            "time": "2015-05-08 06:09:58"
         },
         {
             "name": "components/jqueryui",
-            "version": "1.11.1",
+            "version": "1.11.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/components/jqueryui.git",
-                "reference": "39890e8599bdd79c423ea21b967195106800b87d"
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/components/jqueryui/zipball/39890e8599bdd79c423ea21b967195106800b87d",
-                "reference": "39890e8599bdd79c423ea21b967195106800b87d",
+                "url": "https://api.github.com/repos/components/jqueryui/zipball/c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
+                "reference": "c34f8dbf3ba57b3784b93f26119f436c0e8288e1",
                 "shasum": ""
             },
             "require": {
-                "components/jquery": ">=1.8"
+                "components/jquery": ">=1.6"
             },
             "type": "component",
             "extra": {
@@ -178,10 +183,15 @@
                     "name": "Corey Frang",
                     "email": "gnarf37@gmail.com",
                     "homepage": "http://gnarf.net"
+                },
+                {
+                    "name": "Felix Nagel",
+                    "email": "info@felixnagel.com",
+                    "homepage": "http://www.felixnagel.com"
                 }
             ],
             "description": "jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of the jQuery JavaScript Library. Whether you're building highly interactive web applications or you just need to add a date picker to a form control, jQuery UI is the perfect choice.",
-            "time": "2014-08-13 21:01:50"
+            "time": "2015-03-13 14:48:12"
         },
         {
             "name": "doctrine/annotations",
@@ -871,12 +881,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/migrations.git",
-                "reference": "70c580174e4e16a79296a02256fb40a34192731c"
+                "reference": "78954cce4962a4655ff47c0751eb78021fbaf2cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/migrations/zipball/70c580174e4e16a79296a02256fb40a34192731c",
-                "reference": "70c580174e4e16a79296a02256fb40a34192731c",
+                "url": "https://api.github.com/repos/doctrine/migrations/zipball/78954cce4962a4655ff47c0751eb78021fbaf2cc",
+                "reference": "78954cce4962a4655ff47c0751eb78021fbaf2cc",
                 "shasum": ""
             },
             "require": {
@@ -884,9 +894,6 @@
                 "php": ">=5.4.0",
                 "symfony/console": "~2.3",
                 "symfony/yaml": "~2.3"
-            },
-            "conflict": {
-                "doctrine/orm": "<2.4"
             },
             "require-dev": {
                 "doctrine/coding-standard": "dev-master",
@@ -930,7 +937,7 @@
                 "database",
                 "migrations"
             ],
-            "time": "2015-06-29 10:57:05"
+            "time": "2015-07-05 21:24:36"
         },
         {
             "name": "doctrine/orm",
@@ -1007,16 +1014,16 @@
         },
         {
             "name": "helios-ag/fm-elfinder-bundle",
-            "version": "5.0.4",
+            "version": "5.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/helios-ag/FMElfinderBundle.git",
-                "reference": "0c8565e585f064705f10a6ac23a34f9f3e8220e8"
+                "reference": "c1ebef8029ed2295365dbd55a3bcf3010debf4bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/helios-ag/FMElfinderBundle/zipball/0c8565e585f064705f10a6ac23a34f9f3e8220e8",
-                "reference": "0c8565e585f064705f10a6ac23a34f9f3e8220e8",
+                "url": "https://api.github.com/repos/helios-ag/FMElfinderBundle/zipball/c1ebef8029ed2295365dbd55a3bcf3010debf4bc",
+                "reference": "c1ebef8029ed2295365dbd55a3bcf3010debf4bc",
                 "shasum": ""
             },
             "require": {
@@ -1063,20 +1070,20 @@
                 "elfinder",
                 "file manager"
             ],
-            "time": "2015-04-11 05:12:04"
+            "time": "2015-07-16 05:41:02"
         },
         {
             "name": "helios-ag/fm-elfinder-php-connector",
-            "version": "2.2.1",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/helios-ag/ElFinderPHP.git",
-                "reference": "a0352962c134ec572d52cd2836477abd4c9dc0ba"
+                "reference": "a77479725f066c2119515eced0caa8e0c0579972"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/helios-ag/ElFinderPHP/zipball/a0352962c134ec572d52cd2836477abd4c9dc0ba",
-                "reference": "a0352962c134ec572d52cd2836477abd4c9dc0ba",
+                "url": "https://api.github.com/repos/helios-ag/ElFinderPHP/zipball/a77479725f066c2119515eced0caa8e0c0579972",
+                "reference": "a77479725f066c2119515eced0caa8e0c0579972",
                 "shasum": ""
             },
             "require": {
@@ -1116,7 +1123,7 @@
                 "elfinder",
                 "filemanager"
             ],
-            "time": "2015-03-14 15:22:56"
+            "time": "2015-07-16 05:40:37"
         },
         {
             "name": "imagine/imagine",
@@ -1556,16 +1563,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "b287fbbe1ca27847064beff2bad7fb6920bf08cc"
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/b287fbbe1ca27847064beff2bad7fb6920bf08cc",
-                "reference": "b287fbbe1ca27847064beff2bad7fb6920bf08cc",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dc5150cc608f2334c72c3b6a553ec9668a4156b0",
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0",
                 "shasum": ""
             },
             "require": {
@@ -1602,7 +1609,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14.x-dev"
+                    "dev-master": "1.15.x-dev"
                 }
             },
             "autoload": {
@@ -1628,7 +1635,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-06-19 13:29:54"
+            "time": "2015-07-12 13:54:09"
         },
         {
             "name": "oneup/uploader-bundle",
@@ -1943,6 +1950,64 @@
             "time": "2015-05-28 14:22:40"
         },
         {
+            "name": "stfalcon/tinymce-bundle",
+            "version": "dev-master",
+            "target-dir": "Stfalcon/Bundle/TinymceBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stfalcon/TinymceBundle.git",
+                "reference": "758c19947b04d93d9d79e0ae8432beaccc0097f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/758c19947b04d93d9d79e0ae8432beaccc0097f2",
+                "reference": "758c19947b04d93d9d79e0ae8432beaccc0097f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/symfony": ">=2.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.3.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Stfalcon\\Bundle\\TinymceBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stepan Tanasiychuk",
+                    "email": "ceo@stfalcon.com",
+                    "homepage": "http://blog.stfalcon.com"
+                },
+                {
+                    "name": "Igor Negrutsa",
+                    "email": "progi2007@gmail.com",
+                    "homepage": "http://igor-negrutsa.info"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://github.com/stfalcon/TinymceBundle/contributors"
+                }
+            ],
+            "description": "This Bundle integrates TinyMCE WYSIWYG editor into a Symfony2 project.",
+            "keywords": [
+                "editor",
+                "tinymce",
+                "wysiwyg"
+            ],
+            "time": "2014-09-15 12:37:07"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v5.4.1",
             "source": {
@@ -2178,16 +2243,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.6.9",
+            "version": "v2.6.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "b06539573ccf64dd3a62852685f052553d02c5ba"
+                "reference": "c6ab380a577e7bfb8db6e6f3105f470f97c83235"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/b06539573ccf64dd3a62852685f052553d02c5ba",
-                "reference": "b06539573ccf64dd3a62852685f052553d02c5ba",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/c6ab380a577e7bfb8db6e6f3105f470f97c83235",
+                "reference": "c6ab380a577e7bfb8db6e6f3105f470f97c83235",
                 "shasum": ""
             },
             "require": {
@@ -2291,7 +2356,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-05-29 22:55:07"
+            "time": "2015-07-26 10:44:22"
         },
         {
             "name": "twig/extensions",
@@ -2457,7 +2522,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/migrations": 20,
-        "doctrine/doctrine-migrations-bundle": 20
+        "doctrine/doctrine-migrations-bundle": 20,
+        "stfalcon/tinymce-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
