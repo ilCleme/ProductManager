@@ -130,15 +130,3 @@ knp_paginator:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
         #filtration: KnpPaginatorBundle:Pagination:filtration.html.twig
         filtration: QwebCMSCatalogoBundle:Welcome:filter.html.twig
-
-liip_imagine:
-    resolvers:
-       default:
-          web_path: ~
-
-    filter_sets:
-        cache: ~
-        img_preview:
-            quality: 75
-            filters:
-                thumbnail: { size: [120, 90], mode: outbound }
