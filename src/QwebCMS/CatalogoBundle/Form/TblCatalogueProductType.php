@@ -19,6 +19,7 @@ class TblCatalogueProductType extends AbstractType
         ->add('idTblLingua', 'hidden')
         ->add('title')
         ->add('description')
+        ->add('cod')
         ->add('descriptionNotag', 'hidden')
         ->add('shortDescription')
         ->add('idTblPhotoCat', 'hidden')

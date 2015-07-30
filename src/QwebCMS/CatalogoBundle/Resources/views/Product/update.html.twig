@@ -35,61 +35,69 @@
 
                     <div id="tab-1" class="tab-pane active">
                         <div class="panel-body">
-                            <fieldset class="form-horizontal">
+                            <div class="col-lg-12">
                                 <div class="form-group">
-                                    {{ form_label(form.title, label|default(null) ,{'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                                    {{ form_label(form.title, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.title) }}
-                                    <div class="col-sm-10">
-                                        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
+                                    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form_label(form.shortDescription, label|default(null) ,{'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                                    {{ form_label(form.shortDescription, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.shortDescription) }}
-                                    <div class="col-sm-10">
-                                        {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
+                                    {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form_label(form.description, label|default(null) ,{'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+                                    {{ form_label(form.description, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.description) }}
-                                    <div class="col-sm-10">
-                                        {{ form_widget(form.description, {'attr': {'class': 'form-control tinymce'}}) }}
-                                    </div>
+                                    {{ form_widget(form.description, {'attr': {'class': 'form-control tinymce'}}) }}
                                 </div>
+                            </div>
+
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    {{ form_label(form.pub, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                                    {{ form_label(form.cod, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_errors(form.cod) }}
+                                    {{ form_widget(form.cod, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    {{ form_label(form.pub, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.pub) }}
-                                    <div class="col-sm-10 checkbox">
+                                    <div class="checkbox">
                                         <label>
                                             {{ form_widget(form.pub) }}
                                         </label>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    {{ form_label(form.position, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                                    {{ form_label(form.position, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.position) }}
-                                    <div class="col-sm-10">
-                                        {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
+                                    {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
                                 </div>
+                            </div>
+
+                            <div class="col-lg-12">
                                 <div class="form-group">
-                                    {{ form_label(form.categories, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                                    {{ form_label(form.categories, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
                                     {{ form_errors(form.categories) }}
-                                    <div class="col-sm-10">
+                                    <div class="col-lg-12 m-l-n">
                                         {{ form_widget(form.categories, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    {{ form_label(form.featurevalues, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                                    {{ form_label(form.featurevalues, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
                                     {{ form_errors(form.featurevalues) }}
-                                    <div class="col-sm-10">
+                                    <div class="col-lg-12 m-l-n">
                                         {{ form_widget(form.featurevalues, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
                                     </div>
                                 </div>
+                            </div>
 
-
-                            </fieldset>
                         </div>
                     </div>
 
@@ -148,7 +156,7 @@
                     <div id="tab-5" class="tab-pane">
                         <div class="panel-body">
                             <div class="col-md-12">
-                                <div class="html5imageupload" data-originalsave="true" data-width="960" data-height="540" data-url="{{ path('upload_product_photo') }}" data-resize="true">
+                                <div class="html5imageupload" data-smaller="true" data-canvas-image-only="true" data-originalsize="false" data-width="960" data-height="540" data-url="{{ path('upload_product_photo') }}" data-resize="true">
                                     <input type="file" name="thumb" />
                                 </div>
                             </div>
