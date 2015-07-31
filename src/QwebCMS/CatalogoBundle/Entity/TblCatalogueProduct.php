@@ -126,7 +126,7 @@ class TblCatalogueProduct
     public function __construct() {
         $this->categories = new ArrayCollection();
         $this->featurevalues = new ArrayCollection();
-        $this->idTblLingua = 4;
+        $this->setIdTblLingua(4);
     }
 
 
