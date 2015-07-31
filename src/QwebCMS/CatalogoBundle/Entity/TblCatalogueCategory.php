@@ -85,8 +85,8 @@ class TblCatalogueCategory
     
     public function __construct() {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->friendsWithMe = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->myFriends = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->parentOfCategories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categoriesParent = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
