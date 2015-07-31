@@ -183,29 +183,6 @@ class TblCatalogueCategory
     }
 
     /**
-     * Set pub
-     *
-     * @param boolean $pub
-     * @return TblCatalogueCategory
-     */
-    public function setPub($pub)
-    {
-        $this->pub = $pub;
-
-        return $this;
-    }
-
-    /**
-     * Get pub
-     *
-     * @return boolean 
-     */
-    public function getPub()
-    {
-        return $this->pub;
-    }
-
-    /**
      * Set position
      *
      * @param integer $position
