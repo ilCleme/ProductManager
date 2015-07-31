@@ -85,12 +85,14 @@ class ProductController extends Controller
                 $em->persist($album);
                 $em->flush();
 
-                // Save product and redirect user to products list
+                // Save product information on database
                 $product->setIdTblCatalogueProduct(0);
                 $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
-                $product->setIdTblCatalogueProduct($product->getId());
-
                 $em->persist($product);
+                $em->flush();
+
+                // Copy id product on idTblCatalogueProduct field
+                $product->setIdTblCatalogueProduct($product->getId());
                 $em->flush();
                 return $this->redirect($this->generateUrl('products'));
 
