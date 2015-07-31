@@ -44,11 +44,11 @@ class CategoryController extends Controller
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
             ->find($id);
     
-        if (!$category) {
+        /*if (!$category) {
             throw $this->createNotFoundException(
                 'Nessuna categoria trovata per l\'id '.$id
             );
-        }
+        }*/
     
         // passo l'oggetto $category a un template
         return $this->render('QwebCMSCatalogoBundle:Category:showcategory.html.twig',
