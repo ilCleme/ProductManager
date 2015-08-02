@@ -81,8 +81,8 @@
                         <td>{{ product.cod }}</td>
                         <td>{% if product.pub == 1 %}<i class="text-info fa fa-lg fa-check"></i>{% else %}<i class="text-danger fa fa-lg fa-times"></i>{% endif %}</td>
                         <td>
-                            <a href="/product/update/{{product.idTblCatalogueProduct}}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
-                            <a href="/product/delete/{{product.idTblCatalogueProduct}}" title="Elimina" class="btn btn-danger btn-circle"><i class="fa fa-lg fa-times"></i></a>
+                            <a href="{{ path('update_product', {'id' : product.idTblCatalogueProduct}) }}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
+                            <a href="{{ path('delete_product', {'id' : product.idTblCatalogueProduct}) }}" title="Elimina" class="btn btn-danger btn-circle"><i class="fa fa-lg fa-times"></i></a>
                         </td>
                     </tr>
                 {% endfor %}
