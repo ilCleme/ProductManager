@@ -109,11 +109,11 @@ class WelcomeController extends Controller
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
             ->findAll();
 
-        if (!$feature) {
+        /*if (!$feature) {
             throw $this->createNotFoundException(
                 'Nessuna feature trovata!'
             );
-        }
+        }*/
         
         // passo l'oggetto $product a un template
         return $this->render(
@@ -127,11 +127,11 @@ class WelcomeController extends Controller
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')
             ->findAll();
 
-        if (!$featurevalue) {
+        /*if (!$featurevalue) {
             throw $this->createNotFoundException(
                 'Nessuna feature trovata!'
             );
-        }
+        }*/
         
         // passo l'oggetto $product a un template
         return $this->render(
