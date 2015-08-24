@@ -93,3 +93,7 @@ update_featurevalues:
 delete_featurevalues:
     path:     /featurevalues/delete/{id}
     defaults: { _controller: QwebCMSCatalogoBundle:Featurevalue:delete }
+
+delete_photo:
+    path:     /foto/cancella/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Foto:cancella }
