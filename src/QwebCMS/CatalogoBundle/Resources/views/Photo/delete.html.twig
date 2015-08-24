@@ -1,0 +1,11 @@
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <script>
+        $(document).ready(function(){
+            swal({
+                title: "Cancellato!",
+                text: "{{ flashMessage }}",
+                type: "success"
+            });
+        });
+    </script>
+{% endfor %}

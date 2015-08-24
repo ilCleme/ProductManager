@@ -1,0 +1,7 @@
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    swal({
+        title: "Cancellato!",
+        text: "{{ flashMessage }}",
+        type: "success"
+    });
+{% endfor %}
