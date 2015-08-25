@@ -13,14 +13,12 @@ class CategoryController extends Controller
     public function createAction(Request $request)
     {
         $category = new Category();
-
-        $form = $this->createForm(new TblCatalogueCategoryType(), $category);
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(new TblCatalogueCategoryType($em), $category);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-
-            $em = $this->getDoctrine()->getManager();
 
             $em->persist($category);
             $em->flush();

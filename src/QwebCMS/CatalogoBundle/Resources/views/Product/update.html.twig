@@ -7,6 +7,7 @@
     <link href="{{ asset('admin-style/css/plugins/summernote/summernote.css') }}" rel="stylesheet">
     <link href="{{ asset('admin-style/css/plugins/summernote/summernote-bs3.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/html5imageupload.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('admin-style/css/plugins/sweetalert/sweetalert.css') }}"/>
 {% endblock %}
 
 {% block content %}
@@ -119,9 +120,6 @@
                                                 Anteprima
                                             </th>
                                             <th>
-                                                URL
-                                            </th>
-                                            <th>
                                                 Posizione
                                             </th>
                                             <th>
@@ -136,13 +134,14 @@
                                                     <img class="img-responsive" src="{{ asset(immagine.img) | imagine_filter('img_preview')}}" />
                                                 </td>
                                                 <td>
-                                                    {{ immagine.img }}
-                                                </td>
-                                                <td>
                                                     {{ immagine.posizione }}
                                                 </td>
-                                                <td></td>
-
+                                                <td>
+                                                    {#
+                                                    <a href="/product/update/{{product.idTblCatalogueProduct}}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
+                                                    #}
+                                                    <a href="{{ path('delete_photo', {'id': immagine.idTblPhoto}) }}" title="Elimina" class="cancella-foto btn btn-danger"><i class="fa fa-lg fa-times"></i></a>
+                                                </td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>
@@ -192,14 +191,11 @@
     <!-- HTML5 IMAGE UPLOAD -->
     <script src="{{ asset('assets/js/html5imageupload.js') }}"></script>
 
+    <!-- SWEET ALERT -->
+    <script src="{{ asset('admin-style/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+
     <script>
         $(document).ready(function(){
-
-            $('.summernote').summernote({
-                onkeyup: function(e) {
-                    $("#product_edit_description").val($(".summernote").code());
-                }
-            });
 
             Dropzone.options.myAwesomeDropzone = {
 
@@ -232,7 +228,54 @@
 
             $('.html5imageupload').html5imageupload({data: {id_album: '{{ product.idTblPhotoCat }}', id_prodotto: '{{ product.idTblCatalogueProduct }}'}});
 
+            $('.cancella-foto').click(function(e){
+                e.preventDefault();
+                var tr_parent = $(this).parent().parent();
+                var a_href = $(this).attr('href');
+                console.log(a_href);
+                $.ajax({
+                    method: "POST",
+                    url: a_href,
+                    dataType: "html"
+                })
+                .done(function( msg ) {
+                    $( "body" ).append( msg );
+                    tr_parent.hide();
+                });
+            });
+
+            /*$('.cancella-foto').click(function () {
+                e.preventDefault();
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: true
+                }, function () {
+                    var tr_parent = $(this).parent().parent();
+                    var a_href = $(this).attr('href');
+                    console.log(a_href);
+                    $.ajax({
+                        method: "POST",
+                        url: a_href,
+                        dataType: "html"
+                    })
+                    .done(function( msg ) {
+                        $( "body" ).append( msg );
+                        tr_parent.hide();
+                    });
+
+                });
+            });*/
+
+
         });
     </script>
     {{ tinymce_init() }}
+    <script>
+
+    </script>
 {% endblock %}
