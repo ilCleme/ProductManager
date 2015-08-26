@@ -57,11 +57,7 @@ class ProductController extends Controller
                     'id_album' => $id_album
                 ));
 
-            } elseif($form->get('saveAndExit')->isClicked()) {
-
-                return $this->redirect($this->generateUrl('products'));
-
-            } else {
+            } elseif($form->get('save')->isClicked()) {
 
                 // Create a new empty Album for this product
                 $album = new Album();
@@ -80,6 +76,8 @@ class ProductController extends Controller
                 $em->flush();
                 return $this->redirect($this->generateUrl('products'));
 
+            } else {
+                return $this->redirect($this->generateUrl('products'));
             }
 
         }
