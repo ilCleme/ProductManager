@@ -59,22 +59,6 @@ class ProductController extends Controller
 
             } elseif($form->get('saveAndExit')->isClicked()) {
 
-                // Create a new empty Album for this product
-                $album = new Album();
-                $album->setNome($product->getTitle());
-                $em->persist($album);
-                $em->flush();
-
-                // Save product information on database
-                $product->setIdTblCatalogueProduct(0);
-                $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
-                $em->persist($product);
-                $em->flush();
-
-                // Copy id product on idTblCatalogueProduct field
-                $product->setIdTblCatalogueProduct($product->getId());
-                $em->flush();
-
                 return $this->redirect($this->generateUrl('products'));
 
             } else {
