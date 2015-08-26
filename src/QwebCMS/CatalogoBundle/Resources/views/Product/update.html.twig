@@ -29,8 +29,8 @@
             <div class="tabs-container">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#tab-1">Informazioni Prodotto</a></li>
-                    <li class=""><a data-toggle="tab" href="#tab-4">Images</a></li>
-                    <li class=""><a data-toggle="tab" href="#tab-5">HTML5 IMAGE UPLOAD</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-4">Immagini</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-5">Personalizza</a></li>
                 </ul>
                 <div class="tab-content">
 
@@ -137,9 +137,6 @@
                                                     {{ immagine.posizione }}
                                                 </td>
                                                 <td>
-                                                    {#
-                                                    <a href="/product/update/{{product.idTblCatalogueProduct}}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
-                                                    #}
                                                     <a href="{{ path('delete_photo', {'id': immagine.idTblPhoto}) }}" title="Elimina" class="cancella-foto btn btn-danger"><i class="fa fa-lg fa-times"></i></a>
                                                 </td>
                                             </tr>
