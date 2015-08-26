@@ -67,9 +67,9 @@ class UploadListener{
         /*
          * Torno dei dati informativi tramite la response
          */
-        $response->offsetSet('id-album', $id_album );
-        $response->offsetSet('config', $event->getConfig() );
-        $response->offsetSet('src_path', $srcPath );
+        //$response->offsetSet('id-album', $id_album );
+        //$response->offsetSet('config', $event->getConfig() );
+        //$response->offsetSet('src_path', $foto->getImg() );
     }
 
 }

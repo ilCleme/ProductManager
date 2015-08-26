@@ -219,6 +219,9 @@
                     });
                     this.on("errormultiple", function(files, response) {
                     });
+                    this.on("queuecomplete", function(files, response) {
+                        setTimeout("location.reload(true);", 1000);
+                    });
                 }
 
             }
