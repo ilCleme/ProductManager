@@ -32,11 +32,6 @@ liip_imagine:
                 web_root: %kernel.root_dir%/../public_html  # %kernel.root_dir%/../web
                 cache_prefix: media/cache # media/cache
 
-    loaders:
-        default:
-            filesystem:
-                data_root: /home/catalogoqweb/public_html/
-
     filter_sets:
         cache: ~
         img_preview:
