@@ -52,7 +52,7 @@ class UploadListener{
 
         $foto = new Foto();
         $foto->setNome($file_upload->getFilename());
-        $foto->setImg($file_upload->getPathname());
+        $foto->setImg('/'.$file_upload->getPathname());
         $foto->setIdTblPhotoCat($id_album);
 
         $em = $this->doctrine->getManager();
