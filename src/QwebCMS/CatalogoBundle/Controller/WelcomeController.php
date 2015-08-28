@@ -127,21 +127,38 @@ class WelcomeController extends Controller
         );
     }
     
-    public function allFeatureAction(){
-        $feature = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
-            ->findAll();
+    public function allFeatureAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueFeature a";
+        $feature = $em->createQuery($dql);
 
-        /*if (!$feature) {
-            throw $this->createNotFoundException(
-                'Nessuna feature trovata!'
-            );
-        }*/
+        if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $feature = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueFeature a WHERE a.title LIKE :filterValue ');
+            $feature->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%'
+            ));
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueFeature' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $feature = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueFeature a WHERE a.idTblCatalogueFeature LIKE :filterValue ');
+            $feature->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%'
+            ));
+        }
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $feature,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('number', 10)/*limit per page*/
+        );
         
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallfeatures.html.twig',
-            array('features' => $feature)
+            array('features' => $feature, 'pagination' => $pagination)
         );
     }
     
