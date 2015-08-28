@@ -86,21 +86,44 @@ class WelcomeController extends Controller
         );
     }
     
-    public function allCategoryAction(){
-        $category = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+    public function allCategoryAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a";
+        $category = $em->createQuery($dql);
+
+        if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.title LIKE :filterValue ');
+            $category->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%'
+            ));
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueCategory' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.idTblCatalogueCategory LIKE :filterValue ');
+            $category->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%'
+            ));
+        }
 
         if (!$category) {
             throw $this->createNotFoundException(
                 'Nessuna categoria trovata!'
             );
         }
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $category,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('number', 10)/*limit per page*/
+        );
         
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallcategory.html.twig',
-            array('categories' => $category)
+            array('categories' => $category, 'pagination' => $pagination)
         );
     }
     
