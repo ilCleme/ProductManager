@@ -162,21 +162,38 @@ class WelcomeController extends Controller
         );
     }
     
-    public function allFeatureValueAction(){
-        $featurevalue = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')
-            ->findAll();
+    public function allFeatureValueAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueFeaturevalue a";
+        $featurevalue = $em->createQuery($dql);
 
-        /*if (!$featurevalue) {
-            throw $this->createNotFoundException(
-                'Nessuna feature trovata!'
-            );
-        }*/
+        if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $featurevalue = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueFeaturevalue a WHERE a.title LIKE :filterValue ');
+            $featurevalue->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%'
+            ));
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueFeaturevalue' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $featurevalue = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueFeaturevalue a WHERE a.idTblCatalogueFeaturevalue LIKE :filterValue ');
+            $featurevalue->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%'
+            ));
+        }
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $featurevalue,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('number', 10)/*limit per page*/
+        );
         
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallfeaturevalues.html.twig',
-            array('featurevalues' => $featurevalue)
+            array('featurevalues' => $featurevalue, 'pagination' => $pagination)
         );
     }
 }
