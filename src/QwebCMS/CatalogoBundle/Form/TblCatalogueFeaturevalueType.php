@@ -18,9 +18,7 @@ class TblCatalogueFeaturevalueType extends AbstractType
             ->add('idTblCatalogueFeaturevalue', 'hidden')
             ->add('idTblLingua', 'hidden')
             ->add('title')
-            ->add('img')
-            ->add('link')
-            ->add('link2')
+            ->add('img', 'hidden')
             ->add('position', 'hidden')
             //->add('productsWithFeaturevalue')
             ->add('features', 'entity', array(
