@@ -163,52 +163,6 @@ class TblCatalogueFeaturevalue
     }
 
     /**
-     * Set link
-     *
-     * @param string $link
-     * @return TblCatalogueFeaturevalue
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
-
-        return $this;
-    }
-
-    /**
-     * Get link
-     *
-     * @return string 
-     */
-    public function getLink()
-    {
-        return $this->link;
-    }
-
-    /**
-     * Set link2
-     *
-     * @param string $link2
-     * @return TblCatalogueFeaturevalue
-     */
-    public function setLink2($link2)
-    {
-        $this->link2 = $link2;
-
-        return $this;
-    }
-
-    /**
-     * Get link2
-     *
-     * @return string 
-     */
-    public function getLink2()
-    {
-        return $this->link2;
-    }
-
-    /**
      * Set position
      *
      * @param integer $position
