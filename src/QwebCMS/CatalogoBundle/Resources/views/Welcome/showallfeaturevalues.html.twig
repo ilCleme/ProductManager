@@ -8,60 +8,53 @@
 {% endblock %}
 
 {% block pagetitle %}
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-sm-4">
-            <h2>Lista Featurevalues</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="/">Dashboard</a>
-                </li>
-                <li class="active">
-                    <strong>Featurevalues</strong>
-                </li>
-            </ol>
-        </div>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Lista Featurevalues</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">Dashboard</a>
+            </li>
+            <li class="active">
+                <strong>Featurevalues</strong>
+            </li>
+        </ol>
     </div>
+</div>
 {% endblock %}
 
 {% block content %}
 <div class="ibox float-e-margins">
     <div class="ibox-title">
-        <h5>Featurevalues</h5>
+        <h5>Featurevalues <span>{{ pagination.getTotalItemCount }}</span></h5>
         <div class="ibox-tools">
             <a class="btn btn-primary btn-xs" href="{{ path('create_featurevalues') }}">Crea nuova FeatureValues</a>
             <a class="collapse-link">
                 <i class="fa fa-chevron-up"></i>
             </a>
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-wrench"></i>
-            </a>
-            <!--<a class="close-link">
-                <i class="fa fa-times"></i>
-            </a>-->
         </div>
     </div>
     <div class="ibox-content">
+        {{ knp_pagination_filter(pagination, {'title': 'Nome Featurevalue', 'idTblCatalogueFeaturevalue':'Id'}) }}
+        <div class="clearfix"></div>
         <div class="table-responsive">
-            <table class="table table-striped" >
+            <table class="table table-striped table-bordered table-hover dataTables">
                 <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nome</th>
-                    <th>Azione</th>
-                </tr>
+                    <tr>
+                        {# sorting of properties based on query components #}
+                        <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.idTblCatalogueFeaturevalue') }}</th>
+                        <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Featurevalue', 'a.title') }}</th>
+                        <th>Azioni</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    {% for featurevalue in featurevalues %}
+                    {% for featurevalue in pagination %}
                     <tr>
+                        <td>{{featurevalue.idTblCatalogueFeaturevalue}}</td>
+                        <td>{{featurevalue.title}}</td>
                         <td>
-                            {{featurevalue.idTblCatalogueFeaturevalue}}
-                        </td>
-                        <td>
-                            {{featurevalue.title}}
-                        </td>
-                        <td>
-                            <a href="/featurevalues/update/{{featurevalue.idTblCatalogueFeaturevalue}}" title="Modifica"><i class="fa fa-edit"></i></a>
-                            <a href="/featurevalues/delete/{{featurevalue.idTblCatalogueFeaturevalue}}" title="Elimina"><i class="fa fa-trash-o"></i></a>
+                            <a href="{{ path('update_featurevalues', {'id' : featurevalue.idTblCatalogueFeaturevalue}) }}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
+                            <a href="{{ path('delete_featurevalues', {'id' : featurevalue.idTblCatalogueFeaturevalue}) }}" title="Elimina" class="btn btn-danger btn-circle"><i class="fa fa-lg fa-times"></i></a>
                         </td>
                     </tr>
                     {% endfor %}
