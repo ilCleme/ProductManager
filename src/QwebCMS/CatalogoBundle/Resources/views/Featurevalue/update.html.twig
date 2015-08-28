@@ -43,34 +43,7 @@
                                 {{ form_errors(form.title) }}
                                 {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                             </div>
-                            <div class="form-group">
-                                {{ form_label(form.img, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                {{ form_errors(form.img) }}
-                                {{ form_widget(form.img, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(form.link, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                {{ form_errors(form.link) }}
-                                {{ form_widget(form.link, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            <div class="form-group">
-                                {{ form_label(form.link2, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                {{ form_errors(form.link2) }}
-                                {{ form_widget(form.link2, {'attr': {'class': 'form-control'}}) }}
-                            </div>
-                            {#
-                            <div class="form-group">
-                                {{ form_label(form.pub, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                {{ form_errors(form.pub) }}
-                                <div class="checkbox">
-                                    <label>
-                                        {{ form_widget(form.pub) }}
-                                    </label>
-                                </div>
-                            </div>
-                            #}
                         </div>
-
                         <div class="col-md-6">
                             {{ form_label(form.features, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
                             {{ form_errors(form.features) }}
