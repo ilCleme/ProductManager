@@ -43,7 +43,6 @@
                     <tr>
                         {# sorting of properties based on query components #}
                         <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.idTblCatalogueProduct') }}</th>
-                        <th>Foto</th>
                         <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Prodotto', 'a.title') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Descrizione', 'a.shortDescription') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Codice', 'a.cod') }}</th>
@@ -55,15 +54,6 @@
                 {% for product in pagination %}
                     <tr {% if loop.index is odd %}class="color"{% endif %}>
                         <td>{{ product.id }}</td>
-                        <td>
-                            {% if loop.index is odd %}
-                                <img class="img-responsive" src="{{ '/media/cache/img_preview/public/immobili_in_vendita/th2/1943th2_s.jpg' | imagine_filter('img_preview')}}" />
-                            {% elseif loop.index % 2 == 0 %}
-                                <img class="img-responsive" src="{{ '/media/cache/img_preview/public/vendite_fotogallery/2067/Thumbnail_X70Y0_2.jpg' | imagine_filter('img_preview')}}" />
-                            {% elseif loop.index % 3 == 0 %}
-                                <img class="img-responsive" src="{{ '/media/cache/img_preview/public/immobili_in_vendita/th2/golf01th2_s.jpg' | imagine_filter('img_preview')}}" />
-                            {% endif %}
-                        </td>
                         <td>{{ product.title }}</td>
                         <td>{{ product.shortDescription }}</td>
                         <td>{{ product.cod }}</td>
