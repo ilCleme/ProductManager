@@ -114,6 +114,8 @@ class ProductController extends Controller
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
             ->find($id);
+
+        $product->setIdTblLingua(4);
     
         if (!$product) {
             throw $this->createNotFoundException(
@@ -133,14 +135,14 @@ class ProductController extends Controller
         if ($form->get('exit')->isClicked() && $form->isValid()) {
             // esegue alcune azioni, salvare il prodotto nella base dati
             $em = $this->getDoctrine()->getManager();
-            $product->setIdTblLingua(4);
+
             $em->persist($product);
             $em->flush();
 
             return $this->redirect($this->generateUrl('products'));
         } elseif($form->get('save')->isClicked() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $product->setIdTblLingua(4);
+
             $em->persist($product);
             $em->flush();
         }
