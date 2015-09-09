@@ -70,7 +70,7 @@ class TblPhotoCat
     /**
      * @var string
      *
-     * @ORM\Column(name="smarty_template_alternativo", type="string", length=255)
+     * @ORM\Column(name="smarty_template_alternativo", type="string", length=255, nullable=true)
      */
     private $smartyTemplateAlternativo = '';
 
