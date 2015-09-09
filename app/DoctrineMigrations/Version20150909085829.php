@@ -29,7 +29,7 @@ class Version20150909085829 extends AbstractMigration
         $this->addSql('ALTER TABLE cross_tbl_catalogue_product_x_tbl_catalogue_featurevalue ADD CONSTRAINT FK_73EE4A46943B391C FOREIGN KEY (id_item) REFERENCES tbl_catalogue_product (id)');
         $this->addSql('ALTER TABLE cross_tbl_catalogue_product_x_tbl_catalogue_featurevalue ADD CONSTRAINT FK_73EE4A461BB9D5A2 FOREIGN KEY (id_parent) REFERENCES tbl_catalogue_featurevalue (id)');
         */
-        $this->addSql('ALTER TABLE tbl_photo DROP id_tbl_page, DROP datamod, DROP link');
+        //$this->addSql('ALTER TABLE tbl_photo DROP id_tbl_page, DROP datamod, DROP link');
     }
 
     /**
