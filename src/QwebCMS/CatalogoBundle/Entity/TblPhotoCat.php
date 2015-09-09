@@ -68,6 +68,13 @@ class TblPhotoCat
     private $smartyTemplate = '';
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="smarty_template_alternativo", type="string", length=255)
+     */
+    private $smartyTemplateAlternativo = '';
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="posizione", type="integer")
@@ -312,5 +319,28 @@ class TblPhotoCat
      */
     public function setIdTblPhotoCatValue(){
         $this->setIdTblPhotoCat($this->getId());
+    }
+
+    /**
+     * Set smartyTemplateAlternativo
+     *
+     * @param string $smartyTemplateAlternativo
+     * @return TblPhotoCat
+     */
+    public function setSmartyTemplateAlternativo($smartyTemplateAlternativo)
+    {
+        $this->smartyTemplateAlternativo = $smartyTemplateAlternativo;
+
+        return $this;
+    }
+
+    /**
+     * Get smartyTemplateAlternativo
+     *
+     * @return string 
+     */
+    public function getSmartyTemplateAlternativo()
+    {
+        return $this->smartyTemplateAlternativo;
     }
 }
