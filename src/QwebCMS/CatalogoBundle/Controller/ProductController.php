@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductType;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditType;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use QwebCMS\CatalogoBundle\Entity\TblPhoto as Foto;
 
 class ProductController extends Controller
@@ -37,6 +36,7 @@ class ProductController extends Controller
                 // Save product information on database
                 $product->setIdTblCatalogueProduct(0);
                 $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
+                $product->setIdTblLingua(4);
                 $em->persist($product);
                 $em->flush();
 
@@ -68,6 +68,7 @@ class ProductController extends Controller
                 // Save product information on database
                 $product->setIdTblCatalogueProduct(0);
                 $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
+                $product->setIdTblLingua(4);
                 $em->persist($product);
                 $em->flush();
 
@@ -132,14 +133,14 @@ class ProductController extends Controller
         if ($form->get('exit')->isClicked() && $form->isValid()) {
             // esegue alcune azioni, salvare il prodotto nella base dati
             $em = $this->getDoctrine()->getManager();
-            
+            $product->setIdTblLingua(4);
             $em->persist($product);
             $em->flush();
 
             return $this->redirect($this->generateUrl('products'));
         } elseif($form->get('save')->isClicked() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
+            $product->setIdTblLingua(4);
             $em->persist($product);
             $em->flush();
         }
