@@ -64,6 +64,13 @@ class TblCatalogueCategory
     private $position = 0;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="pub", type="boolean", nullable=false)
+     */
+    private $pub;
+
+    /**
      * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct", mappedBy="categories")
      **/
     private $products;
@@ -336,5 +343,28 @@ class TblCatalogueCategory
     public function getImg()
     {
         return $this->img;
+    }
+
+    /**
+     * Set pub
+     *
+     * @param boolean $pub
+     * @return TblCatalogueCategory
+     */
+    public function setPub($pub)
+    {
+        $this->pub = $pub;
+
+        return $this;
+    }
+
+    /**
+     * Get pub
+     *
+     * @return boolean 
+     */
+    public function getPub()
+    {
+        return $this->pub;
     }
 }

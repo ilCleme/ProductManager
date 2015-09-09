@@ -19,7 +19,7 @@ class TblCatalogueCategoryType extends AbstractType
             ->add('idTblLingua', 'hidden')
             ->add('title')
             ->add('description')
-
+            ->add('pub')
             ->add('position','hidden')
             //->add('products')
             ->add('categoriesParent', 'entity', array(
