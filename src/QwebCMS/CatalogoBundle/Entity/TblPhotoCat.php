@@ -72,7 +72,7 @@ class TblPhotoCat
      *
      * @ORM\Column(name="smarty_template_alternativo", type="string", length=255, nullable=true)
      */
-    private $smartyTemplateAlternativo = '';
+    private $smartyTemplateAlternativo = 'preview-album-immobile.tpl';
 
     /**
      * @var integer
