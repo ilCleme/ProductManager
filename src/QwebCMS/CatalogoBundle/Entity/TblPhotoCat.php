@@ -65,7 +65,7 @@ class TblPhotoCat
      *
      * @ORM\Column(name="smarty_template", type="string", length=255)
      */
-    private $smartyTemplate = '';
+    private $smartyTemplate = 'album-immobile.tpl';
 
     /**
      * @var string
