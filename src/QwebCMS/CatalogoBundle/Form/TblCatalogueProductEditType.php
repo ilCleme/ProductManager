@@ -22,6 +22,8 @@ class TblCatalogueProductEditType extends AbstractType
         ->add('cod')
         ->add('descriptionNotag', 'hidden')
         ->add('shortDescription')
+        ->add('coordinate')
+        ->add('indirizzo')
         ->add('idTblPhotoCat', 'hidden')
         ->add('template', 'hidden')
         ->add('pub', 'checkbox', array(

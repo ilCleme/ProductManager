@@ -87,6 +87,20 @@ class TblCatalogueProduct
     private $template;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="coordinate", type="string", length=255, nullable=true)
+     */
+    private $coordinate;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="indirizzo", type="string", length=255, nullable=true)
+     */
+    private $indirizzo;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="pub", type="boolean", nullable=false)
@@ -98,7 +112,7 @@ class TblCatalogueProduct
      *
      * @ORM\Column(name="featured", type="boolean", nullable=false)
      */
-    private $featured = 0;
+    private $featured;
 
     /**
      * @var integer
@@ -505,5 +519,51 @@ class TblCatalogueProduct
     public function getFeatured()
     {
         return $this->featured;
+    }
+
+    /**
+     * Set coordinate
+     *
+     * @param string $coordinate
+     * @return TblCatalogueProduct
+     */
+    public function setCoordinate($coordinate)
+    {
+        $this->coordinate = $coordinate;
+
+        return $this;
+    }
+
+    /**
+     * Get coordinate
+     *
+     * @return string 
+     */
+    public function getCoordinate()
+    {
+        return $this->coordinate;
+    }
+
+    /**
+     * Set indirizzo
+     *
+     * @param string $indirizzo
+     * @return TblCatalogueProduct
+     */
+    public function setIndirizzo($indirizzo)
+    {
+        $this->indirizzo = $indirizzo;
+
+        return $this;
+    }
+
+    /**
+     * Get indirizzo
+     *
+     * @return string 
+     */
+    public function getIndirizzo()
+    {
+        return $this->indirizzo;
     }
 }
