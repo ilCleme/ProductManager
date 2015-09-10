@@ -32,14 +32,14 @@ class TblCatalogueProductEditType extends AbstractType
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
             'property' => 'title',
             'multiple' => true,
-            'expanded' => false,
+            'expanded' => true,
             'required' => false
         ))
         ->add('featurevalues', 'entity', array(
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
             'property' => 'title',
             'multiple' => true,
-            'expanded' => false,
+            'expanded' => true,
             'required' => false
         ))
         ->add('exit', 'submit', array('label' => 'Salva ed Esci'))
