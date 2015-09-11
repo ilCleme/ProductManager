@@ -132,8 +132,8 @@ class TblCatalogueProduct
     /**
      *  @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue", inversedBy="productsWithFeaturevalue")
      *  @ORM\JoinTable(name="cross_tbl_catalogue_product_x_tbl_catalogue_featurevalue",
-     *      joinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id")})
+     *      joinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id")})
      */
     private $featurevalues;
     
