@@ -20,9 +20,9 @@ class TblCatalogueFeaturevalue
     private $idTblCatalogueFeaturevalue = 0;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="id_tbl_lingua", type="boolean", nullable=false)
+     * @ORM\Column(name="id_tbl_lingua", type="bigint", nullable=false)
      */
     private $idTblLingua = 4;
 
