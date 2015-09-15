@@ -65,6 +65,29 @@
                                     {{ form_widget(form.coordinate, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    {{ form_label(form.classeEnergetica, 'Classe Energetica'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_errors(form.classeEnergetica) }}
+                                    {{ form_widget(form.classeEnergetica, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    {{ form_label(form.planimetria, 'Planimetria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_errors(form.planimetria) }}
+                                    {{ form_widget(form.planimetria, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    {{ form_label(form.prezzo, 'Prezzo'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_errors(form.prezzo) }}
+                                    {{ form_widget(form.prezzo, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
 
                             <div class="col-lg-4">
                                 <div class="form-group">
