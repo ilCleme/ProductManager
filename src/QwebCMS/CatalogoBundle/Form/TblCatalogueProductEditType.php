@@ -24,6 +24,9 @@ class TblCatalogueProductEditType extends AbstractType
         ->add('shortDescription')
         ->add('coordinate')
         ->add('indirizzo')
+        ->add('classeEnergetica')
+        ->add('prezzo')
+        ->add('planimetria', 'hidden')
         ->add('idTblPhotoCat', 'hidden')
         ->add('template', 'hidden')
         ->add('pub', 'checkbox', array(
@@ -41,7 +44,7 @@ class TblCatalogueProductEditType extends AbstractType
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
             'property' => 'title',
             'group_by' => 'featureTitle',
-            'multiple' => false,
+            'multiple' => true,
             'expanded' => false,
             'required' => false
         ))
