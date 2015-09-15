@@ -35,17 +35,17 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    {{ form_label(form.title, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_label(form.title, 'Titolo / Nome immobile'|default(null) ,{'label_attr': {'class': 'control-label text-success'}}) }}
                                     {{ form_errors(form.title) }}
                                     {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form_label(form.shortDescription, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_label(form.shortDescription, 'Breve Descrizione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.shortDescription) }}
                                     {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                                 <div class="form-group">
-                                    {{ form_label(form.description, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_label(form.description, 'Descrizione Completa Immobile'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.description) }}
                                     {{ form_widget(form.description, {'attr': {'class': 'form-control tinymce'}}) }}
                                 </div>
@@ -53,14 +53,14 @@
 
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    {{ form_label(form.indirizzo, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_label(form.indirizzo, 'Indirizzo'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.indirizzo) }}
                                     {{ form_widget(form.indirizzo, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    {{ form_label(form.coordinate, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_label(form.coordinate, 'Coordinate'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.coordinate) }}
                                     {{ form_widget(form.coordinate, {'attr': {'class': 'form-control'}}) }}
                                 </div>
@@ -68,7 +68,7 @@
 
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    {{ form_label(form.cod, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_label(form.cod, 'Codice'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.cod) }}
                                     {{ form_widget(form.cod, {'attr': {'class': 'form-control'}}) }}
                                 </div>
@@ -76,7 +76,7 @@
 
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    {{ form_label(form.pub, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_label(form.pub, 'Pubblica'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.pub) }}
                                     <div class="checkbox">
                                         <label>
@@ -88,7 +88,7 @@
 
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    {{ form_label(form.position, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_label(form.position, 'Posizione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.position) }}
                                     {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
                                 </div>
@@ -96,14 +96,14 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    {{ form_label(form.categories, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                                    {{ form_label(form.categories, 'Categorie'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.categories) }}
                                     <div class="col-lg-12 m-l-n">
                                         {{ form_widget(form.categories, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    {{ form_label(form.featurevalues, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                                    {{ form_label(form.featurevalues, 'Caratteristiche'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.featurevalues) }}
                                     <div class="col-lg-12 m-l-n">
                                         {{ form_widget(form.featurevalues, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
