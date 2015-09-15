@@ -267,4 +267,13 @@ class TblCatalogueFeaturevalue
     {
         return $this->features;
     }
+
+    public function getFeatureTitle()
+    {
+        $feature = $this->getFeatures()->current();
+        if ($feature && ($title = $feature->getTitle())){
+            return $title;
+        }
+        return null;
+    }
 }
