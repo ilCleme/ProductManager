@@ -9,7 +9,8 @@ class NomeNamer implements NamerInterface
 {
     public function name(FileInterface $file)
     {
-
-        return sprintf('%s', $file->getClientOriginalName());
+        $stringa = $file->getClientOriginalName();
+        $stringa = str_replace(" ", "", $stringa);
+        return sprintf('%s', $stringa);
     }
 }
