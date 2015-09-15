@@ -101,6 +101,27 @@ class TblCatalogueProduct
     private $indirizzo;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="classe_energetica", type="string", length=255, nullable=true)
+     */
+    private $classe_energetica;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prezzo", type="string", length=255, nullable=true)
+     */
+    private $prezzo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="planimetria", type="string", length=255, nullable=true)
+     */
+    private $planimetria;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="pub", type="boolean", nullable=false)
@@ -565,5 +586,74 @@ class TblCatalogueProduct
     public function getIndirizzo()
     {
         return $this->indirizzo;
+    }
+
+    /**
+     * Set classe_energetica
+     *
+     * @param string $classeEnergetica
+     * @return TblCatalogueProduct
+     */
+    public function setClasseEnergetica($classeEnergetica)
+    {
+        $this->classe_energetica = $classeEnergetica;
+
+        return $this;
+    }
+
+    /**
+     * Get classe_energetica
+     *
+     * @return string 
+     */
+    public function getClasseEnergetica()
+    {
+        return $this->classe_energetica;
+    }
+
+    /**
+     * Set prezzo
+     *
+     * @param string $prezzo
+     * @return TblCatalogueProduct
+     */
+    public function setPrezzo($prezzo)
+    {
+        $this->prezzo = $prezzo;
+
+        return $this;
+    }
+
+    /**
+     * Get prezzo
+     *
+     * @return string 
+     */
+    public function getPrezzo()
+    {
+        return $this->prezzo;
+    }
+
+    /**
+     * Set planimetria
+     *
+     * @param string $planimetria
+     * @return TblCatalogueProduct
+     */
+    public function setPlanimetria($planimetria)
+    {
+        $this->planimetria = $planimetria;
+
+        return $this;
+    }
+
+    /**
+     * Get planimetria
+     *
+     * @return string 
+     */
+    public function getPlanimetria()
+    {
+        return $this->planimetria;
     }
 }
