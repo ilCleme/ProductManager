@@ -33,12 +33,18 @@ liip_imagine:
     filter_sets:
         cache: ~
         img_preview:
-            quality: 75
+            quality: 100
             filters:
-                thumbnail: { size: [120, 90], mode: outbound }
+                thumbnail: { size: [196, 147], mode: outbound }
         big_thumb_1:
+            quality: 100
             filters:
-                thumbnail: { size: [800, 600], mode: outbound }
+                thumbnail: { size: [360, 270], mode: outbound }
         big_thumb:
+            quality: 100
             filters:
-                relative_resize: { widen: 800 }
+                relative_resize: { widen: 700 }
+        big_thumb_2:
+            quality: 100
+            filters:
+                relative_resize: { widen: 1200 }
