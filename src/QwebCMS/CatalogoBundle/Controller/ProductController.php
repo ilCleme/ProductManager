@@ -225,27 +225,15 @@ class ProductController extends Controller
             ->get('liip_imagine.controller')
             ->filterAction($request, $dir.$fname, 'img_preview');
 
-        // string to put directly in the "src" of the tag <img>
-        //$cacheManager = $this->container->get('liip_imagine.cache.manager');
-        //$srcPath = $cacheManager->getBrowserPath( $dir.$fname, 'img_preview');
-
         // RedirectResponse object
         $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($request, $dir.$fname, 'big_thumb');
 
-        // string to put directly in the "src" of the tag <img>
-        //$cacheManager = $this->container->get('liip_imagine.cache.manager');
-        //$srcPath = $cacheManager->getBrowserPath( $dir.$fname, 'big_thumb');
-
         // RedirectResponse object
         $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($request, $dir.$fname, 'big_thumb_1');
-
-        // string to put directly in the "src" of the tag <img>
-        //$cacheManager = $this->container->get('liip_imagine.cache.manager');
-        //$srcPath = $cacheManager->getBrowserPath( $dir.$fname, 'big_thumb_1');
 
         return new Response($fname);
     }
