@@ -31,25 +31,13 @@ class UploadListener{
             ->get('liip_imagine.controller')
             ->filterAction($this->container->get('request'), $file_upload, 'img_preview');
 
-        // string to put directly in the "src" of the tag <img>
-        //$cacheManager = $this->container->get('liip_imagine.cache.manager');
-        //$srcPath = $cacheManager->getBrowserPath($file_upload, 'img_preview');
-
         $imagemanagerResponse = $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($this->container->get('request'), $file_upload, 'big_thumb');
 
-        // string to put directly in the "src" of the tag <img>
-        //$cacheManager = $this->container->get('liip_imagine.cache.manager');
-        //$srcPath = $cacheManager->getBrowserPath($file_upload, 'big_thumb');
-
         $imagemanagerResponse = $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($this->container->get('request'), $file_upload, 'big_thumb_1');
-
-        // string to put directly in the "src" of the tag <img>
-        //$cacheManager = $this->container->get('liip_imagine.cache.manager');
-        //$srcPath = $cacheManager->getBrowserPath($file_upload, 'big_thumb_1');
 
         $foto = new Foto();
         $foto->setNome($file_upload->getFilename());
