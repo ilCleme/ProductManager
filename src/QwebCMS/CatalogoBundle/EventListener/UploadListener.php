@@ -16,6 +16,7 @@ class UploadListener{
 
     public function onUpload(PostPersistEvent $event)
     {
+
         $request = $event->getRequest();
         $response = $event->getResponse();
         $id_album = $request->headers->get('id-album');

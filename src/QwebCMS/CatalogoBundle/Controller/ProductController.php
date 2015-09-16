@@ -126,7 +126,8 @@ class ProductController extends Controller
         // Getting photo of product
         $photos= $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
-            ->findBy(array('idTblPhotoCat' => $product->getIdTblPhotoCat() ));
+            ->findBy( array('idTblPhotoCat' => $product->getIdTblPhotoCat()),
+                array('posizione' => 'ASC'));
 
         $form = $this->createForm(new TblCatalogueProductEditType(), $product);
         
