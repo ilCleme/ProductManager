@@ -4,6 +4,7 @@ namespace QwebCMS\CatalogoBundle\EventListener;
 
 use Oneup\UploaderBundle\Event\PostPersistEvent;
 use QwebCMS\CatalogoBundle\Entity\TblPhoto as Foto;
+use QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct as Prodotto;
 
 
 class UploadListener{
@@ -16,15 +17,28 @@ class UploadListener{
 
     public function onUpload(PostPersistEvent $event)
     {
+        $type = $event->getType();
 
+        if ($type == 'gallery'){
+            $this->uploadGalleryType($event);
+        } elseif ($type == 'planimetrie') {
+            $this->uploadPlanimetriaType($event);
+        }
+
+        /*
+         * Torno dei dati informativi tramite la response
+         */
+        //$response->offsetSet('id-album', $id_album );
+        //$response->offsetSet('config', $event->getConfig() );
+        //$response->offsetSet('src_path', $foto->getImg() );
+        //$response->offsetSet('type', $event->getType() );
+    }
+
+    public function uploadGalleryType(PostPersistEvent $event){
         $request = $event->getRequest();
         $response = $event->getResponse();
         $id_album = $request->headers->get('id-album');
 
-        /*
-         * Estraggo il file dalla request e salvo i suoi dati su DB,
-         * usando l'entità Foto
-         */
         $file_upload = $event->getFile();
 
         $imagemanagerResponse = $imagemanagerResponse = $this->container
@@ -52,13 +66,29 @@ class UploadListener{
         $foto->setIdTblPhoto($foto->getId());
         $em->persist($foto);
         $em->flush();
+    }
 
-        /*
-         * Torno dei dati informativi tramite la response
-         */
-        //$response->offsetSet('id-album', $id_album );
-        //$response->offsetSet('config', $event->getConfig() );
-        //$response->offsetSet('src_path', $foto->getImg() );
+    public function uploadPlanimetriaType(PostPersistEvent $event){
+        $request = $event->getRequest();
+        $id_product = $request->headers->get('id-product');
+
+        $file_upload = $event->getFile();
+
+        $imagemanagerResponse = $imagemanagerResponse = $this->container
+            ->get('liip_imagine.controller')
+            ->filterAction($this->container->get('request'), $file_upload, 'big_thumb');
+
+        $imagemanagerResponse = $imagemanagerResponse = $this->container
+            ->get('liip_imagine.controller')
+            ->filterAction($this->container->get('request'), $file_upload, 'big_thumb_1');
+
+        $em = $this->doctrine->getManager();
+
+        $product = $em->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')->find($id_product);
+        $product->setPlanimetria('/'.$file_upload->getPathname());
+
+        $em->persist($product);
+        $em->flush();
     }
 
 }

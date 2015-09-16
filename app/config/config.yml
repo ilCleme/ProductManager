@@ -119,6 +119,12 @@ oneup_uploader:
             storage:
               directory:  'uploads/gallery'
 
+        planimetrie:
+            frontend: dropzone
+            namer: custom_namer
+            storage:
+              directory:  'uploads/planimetrie'
+
 knp_paginator:
     page_range: 10                      # default page range used in pagination control
     default_options:

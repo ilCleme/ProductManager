@@ -85,6 +85,9 @@
                                     {{ form_label(form.planimetria, 'Planimetria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.planimetria) }}
                                     {{ form_widget(form.planimetria, {'attr': {'class': 'form-control'}}) }}
+                                    <div id="drop-planimetria" class="dropzone col-lg-12" action="#">
+                                        <div class="dropzone-previews"></div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -286,6 +289,32 @@
                     });
                     this.on("queuecomplete", function(files, response) {
                         setTimeout("location.reload(true);", 1000);
+                    });
+                }
+
+            }
+
+            Dropzone.options.dropPlanimetria = {
+
+                url: "{{ oneup_uploader_endpoint('planimetrie') }}",
+                autoProcessQueue: true,
+                //uploadMultiple: true,
+                parallelUploads: 1,
+                maxFiles: 1,
+                addRemoveLinks: true,
+                headers:{"id-product": "{{ product.idTblCatalogueProduct }}"},
+
+                // Dropzone settings
+                init: function() {
+                    var dropPlanimetriaObject = this;
+                    this.on("sendingmultiple", function() {
+                    });
+                    this.on("successmultiple", function(files, response) {
+                    });
+                    this.on("errormultiple", function(files, response) {
+                    });
+                    this.on("queuecomplete", function(files, response) {
+                        //setTimeout("location.reload(true);", 1000);
                     });
                 }
 
