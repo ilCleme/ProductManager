@@ -46,6 +46,7 @@
                         <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Prodotto', 'a.title') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Descrizione', 'a.shortDescription') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Codice', 'a.cod') }}</th>
+                        <th>Categoria</th>
                         <th>Stato</th>
                         <th>Azioni</th>
                     </tr>
@@ -57,6 +58,11 @@
                         <td>{{ product.title }}</td>
                         <td>{{ product.shortDescription }}</td>
                         <td>{{ product.cod }}</td>
+                        <td>
+                        {% for category in product.categories %}
+                        {{ category.title }}
+                        {% endfor %}
+                        </td>
                         <td>{% if product.pub == 1 %}<i class="text-info fa fa-lg fa-check"></i>{% else %}<i class="text-danger fa fa-lg fa-times"></i>{% endif %}</td>
                         <td>
                             <a href="{{ path('update_product', {'id' : product.idTblCatalogueProduct}) }}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
