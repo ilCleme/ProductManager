@@ -30,15 +30,15 @@ class TblCatalogueProductEditType extends AbstractType
         ->add('idTblPhotoCat', 'hidden')
         ->add('template', 'hidden')
         ->add('pub', 'checkbox', array(
-                'required'  => false,
-            ))
+            'required'  => false,
+        ))
         ->add('position')
         ->add('categories', 'entity', array(
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
             'property' => 'title',
-            'multiple' => true,
+            'multiple' => false,
             'expanded' => false,
-            'required' => false
+            'required' => true
         ))
         ->add('featurevalues', 'entity', array(
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',

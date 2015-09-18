@@ -36,9 +36,9 @@ class TblCatalogueProductType extends AbstractType
         ->add('categories', 'entity', array(
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
             'property' => 'title',
-            'multiple' => true,
+            'multiple' => false,
             'expanded' => false,
-            'required' => false
+            'required' => true
         ))
         ->add('featurevalues', 'entity', array(
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
