@@ -35,7 +35,7 @@ class TblPhotoCat
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tbl_photo_cat", type="bigint", nullable=false)
+     * @ORM\Column(name="id_tbl_photo_cat", type="integer", nullable=false)
      */
     private $idTblPhotoCat = 0;
 

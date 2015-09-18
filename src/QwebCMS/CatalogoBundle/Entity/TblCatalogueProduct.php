@@ -463,6 +463,19 @@ class TblCatalogueProduct
     }
 
     /**
+     * Set categories
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories
+     */
+    public function setCategories($categories)
+    {
+        if (!is_array($categories)) {
+            $categories = array($categories);
+        }
+        $this->categories = $categories;
+    }
+
+    /**
      * Add featurevalues
      *
      * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $featurevalues
