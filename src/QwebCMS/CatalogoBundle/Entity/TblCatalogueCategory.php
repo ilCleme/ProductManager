@@ -92,8 +92,8 @@ class TblCatalogueCategory
     /**
      * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature", inversedBy="categories")
      * @ORM\JoinTable(name="cross_tbl_catalogue_category_x_tbl_catalogue_feature",
-     *      joinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id")}
+     *      joinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id_tbl_catalogue_category")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id_tbl_catalogue_feature")}
      *      )
      **/
     protected $features;
