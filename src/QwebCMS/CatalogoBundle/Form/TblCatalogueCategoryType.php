@@ -29,6 +29,13 @@ class TblCatalogueCategoryType extends AbstractType
                 'expanded' => true,
                 'required' => false
             ))
+            ->add('features', 'entity', array(
+                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',
+                'property' => 'title',
+                'multiple' => true,
+                'expanded' => true,
+                'required' => false
+            ))
             ->add('save', 'submit', array('label' => 'Salva'))
             //->add('categoriesParent')
         ;

@@ -88,6 +88,15 @@ class TblCatalogueCategory
      *      )
      **/
     protected $categoriesParent;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature", inversedBy="categories")
+     * @ORM\JoinTable(name="cross_tbl_catalogue_category_x_tbl_catalogue_feature",
+     *      joinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id")}
+     *      )
+     **/
+    protected $features;
     
     
     public function __construct() {
@@ -366,5 +375,38 @@ class TblCatalogueCategory
     public function getPub()
     {
         return $this->pub;
+    }
+
+    /**
+     * Add features
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features
+     * @return TblCatalogueCategory
+     */
+    public function addFeature(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features)
+    {
+        $this->features[] = $features;
+
+        return $this;
+    }
+
+    /**
+     * Remove features
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features
+     */
+    public function removeFeature(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features)
+    {
+        $this->features->removeElement($features);
+    }
+
+    /**
+     * Get features
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFeatures()
+    {
+        return $this->features;
     }
 }

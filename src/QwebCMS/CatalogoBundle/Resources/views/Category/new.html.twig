@@ -64,10 +64,16 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     {{ form_errors(form.categoriesParent) }}
-                                    {{ form_label(form.categoriesParent, label|default(null) ,{'label_attr': {'class': ''}}) }}
+                                    {{ form_label(form.categoriesParent, 'Categoria padre'|default(null) ,{'label_attr': {'class': ''}}) }}
                                     {{ form_widget(form.categoriesParent, {'attr': {'class': 'col-lg-12', 'multiple':'true'}}) }}
                                 </div>
-
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    {{ form_errors(form.features) }}
+                                    {{ form_label(form.features, 'Categorie di caratteristiche'|default(null) ,{'label_attr': {'class': ''}}) }}
+                                    {{ form_widget(form.features, {'attr': {'class': 'col-lg-12', 'multiple':'true'}}) }}
+                                </div>
                             </div>
 
                             <div class="col-md-12">

@@ -89,6 +89,11 @@ class TblCatalogueFeature
      **/
     private $featurevalues;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory", mappedBy="features")
+     **/
+    private $categories;
+
 
     /**
      * Set idTblCatalogueFeature
@@ -345,5 +350,38 @@ class TblCatalogueFeature
     public function getInheritFrom()
     {
         return $this->inheritFrom;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories
+     * @return TblCatalogueFeature
+     */
+    public function addCategory(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories
+     */
+    public function removeCategory(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }
