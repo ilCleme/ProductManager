@@ -227,6 +227,7 @@ class ProductController extends Controller
         $em->persist($foto);
         $em->flush();
 
+        $dir					= '/web/uploads/gallery/';
         // RedirectResponse object
         $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
