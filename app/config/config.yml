@@ -150,6 +150,8 @@ liip_imagine:
             quality: 100
             filters:
                 relative_resize: { widen: 1200 }
+            post_processors:
+                jpegoptim: {}
 
 
 knp_paginator:
