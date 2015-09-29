@@ -184,8 +184,15 @@ class ProductController extends Controller
     public function uploadPhotoAction(Request $request)
     {
         $absolutedir			= $request->server->get('DOCUMENT_ROOT');
-        var_dump($absolutedir);
-        $dir					= '/uploads/gallery/';
+        $webserver              = strstr($absolutedir, 'public_html');
+
+        if (strlen($webserver) > 0){
+            $dir					= '/catalogo/web/uploads/gallery/';
+        } else {
+            $dir					= '/uploads/gallery/';
+        }
+
+
         $serverdir				= $absolutedir.$dir;
         $filename				= array();
 
