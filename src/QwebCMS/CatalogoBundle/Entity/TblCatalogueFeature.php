@@ -50,7 +50,7 @@ class TblCatalogueFeature
     /**
      * @var boolean
      *
-     * @ORM\Column(name="compulsory", type="boolean", nullable=false)
+     * @ORM\Column(name="compulsory", type="integer", nullable=false)
      */
     private $compulsory;
 

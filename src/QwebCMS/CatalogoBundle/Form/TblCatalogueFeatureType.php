@@ -19,9 +19,18 @@ class TblCatalogueFeatureType extends AbstractType
             ->add('idTblLingua','hidden')
             ->add('title')
             ->add('description')
-            ->add('typeInput')
-            ->add('compulsory')
-            ->add('display')
+            ->add('typeInput', 'choice', array(
+                'choices'   =>  array('select' => 'Insieme con selezione singola (select)', 'checkbox' => 'Insieme con selezione multipla (checkbox)'),
+                'required'  =>  true
+            ))
+            ->add('compulsory', 'choice', array(
+                'choices'   =>  array('1' => 'Si', '0' => 'No'),
+                'expanded'  =>  true,
+                'multiple'  =>  false
+            ))
+            ->add('display', 'choice', array(
+                'choices'   =>  array('float:left' => 'Su unica riga', '' => 'Un valore per riga')
+            ))
             ->add('position', 'hidden')
             //->add('featurevalues')
             ->add('save', 'submit', array('label' => 'Salva'))
@@ -43,6 +52,6 @@ class TblCatalogueFeatureType extends AbstractType
      */
     public function getName()
     {
-        return 'acme_demobundle_tblcataloguefeature';
+        return 'feature';
     }
 }

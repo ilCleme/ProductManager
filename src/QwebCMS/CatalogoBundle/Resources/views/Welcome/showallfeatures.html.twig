@@ -10,13 +10,13 @@
 {% block pagetitle %}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>Lista Feature</h2>
+        <h2>Categorie di Caratteristiche</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/">Dashboard</a>
             </li>
             <li class="active">
-                <strong>Feature</strong>
+                <strong>Caratteristiche</strong>
             </li>
         </ol>
     </div>
@@ -26,12 +26,9 @@
 {% block content %}
 <div class="ibox float-e-margins">
     <div class="ibox-title">
-        <h5>Feature <span>{{ pagination.getTotalItemCount }}</span></h5>
+        <h5>Categorie trovate <span>{{ pagination.getTotalItemCount }}</span></h5>
         <div class="ibox-tools">
-            <a class="btn btn-primary btn-xs" href="{{ path('create_features') }}">Crea nuova Feature</a>
-            <a class="collapse-link">
-                <i class="fa fa-chevron-up"></i>
-            </a>
+            <a class="btn btn-primary btn-xs" href="{{ path('create_featurevalues') }}"><i class="fa fa-lg fa-plus"></i> Aggiungi Categoria</a>
         </div>
     </div>
     <div class="ibox-content">
@@ -43,20 +40,20 @@
                     <tr>
                         {# sorting of properties based on query components #}
                         <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.idTblCatalogueFeature') }}</th>
-                        <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Feature', 'a.title') }}</th>
+                        <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Categoria', 'a.title') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Tipo di input', 'a.typeInput') }}</th>
-                        <th>Azioni</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for feature in pagination %}
                     <tr {% if loop.index is odd %}class="color"{% endif %}>
                         <td>{{feature.idTblCatalogueFeature}}</td>
-                        <td>{{feature.title}}</td>
+                        <td><a href="{{ path('category_featurevalue', {'id' : feature.idTblCatalogueFeature}) }}" title="Modifica" >{{feature.title}}</a></td>
                         <td>{{feature.typeInput}}</td>
                         <td>
-                            <a href="{{ path('update_features', {'id' : feature.idTblCatalogueFeature}) }}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
-                            <a href="{{ path('delete_features', {'id' : feature.idTblCatalogueFeature}) }}" title="Elimina" class="btn btn-danger btn-circle"><i class="fa fa-lg fa-times"></i></a>
+                            <a href="{{ path('update_features', {'id' : feature.idTblCatalogueFeature}) }}" title="Modifica" class="btn btn-primary btn-xs btn-warning"><i class="fa fa-lg fa-edit"></i> Modifica</a>
+                            <a href="{{ path('delete_features', {'id' : feature.idTblCatalogueFeature}) }}" title="Elimina" class="btn btn-primary btn-xs btn-danger"><i class="fa fa-lg fa-times"></i> Elimina</a>
                         </td>
                     </tr>
                     {% endfor %}

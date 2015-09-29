@@ -21,11 +21,10 @@
 
     <link href="{{ asset('admin-style/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('admin-style/css/style.css') }}" rel="stylesheet">
-    <link href="{{asset('admin-style/css/plugins/dropzone/basic.css')}}" rel="stylesheet">
-    <link href="{{asset('admin-style/css/plugins/dropzone/dropzone.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin-style/css/plugins/dropzone/basic.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-style/css/plugins/dropzone/dropzone.css') }}" rel="stylesheet">
         
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    {#<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.css" />#}
+    <link href="{{ asset('favicon.ico') }}" rel="icon" type="image/x-icon"/>
 
     {% block stylesheets %}{% endblock %}
     
@@ -77,8 +76,8 @@
                             {% set currentPath = app.request.attributes.get('_route') %}
                             <li><a href="{{ path('products') }}">Prodotti</a></li>
                             <li><a href="{{ path('categories') }}">Categorie</a></li>
-                            <li><a href="{{ path('features') }}">Categorie caratteristiche</a></li>
-                            <li><a href="{{ path('featurevalues') }}">Caratteristiche</a></li>
+                            <li><a href="{{ path('features') }}">Caratteristiche</a></li>
+                            {#<li><a href="{{ path('featurevalues') }}">Caratteristiche</a></li>#}
                         </ul>
                     </li>
                 </ul>
@@ -124,7 +123,7 @@
                             <a href="http://www.qweb.eu">Credits</a>
                         </div>
                         <div>
-                            <strong>Copyright</strong> Qwebsrl &copy; 2014-2015
+                            <strong>Copyright</strong> Qwebsrl &copy; 2015
                         </div>
                     </div>
                         {% endblock %}
@@ -138,24 +137,31 @@
     <script src="{{ asset('admin-style/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
     <script src="{{ asset('admin-style/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
+    {#
     <!-- Flot -->
     <script src="{{ asset('admin-style/js/plugins/flot/jquery.flot.js') }}"></script>
     <script src="{{ asset('admin-style/js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
     <script src="{{ asset('admin-style/js/plugins/flot/jquery.flot.spline.js') }}"></script>
     <script src="{{ asset('admin-style/js/plugins/flot/jquery.flot.resize.js') }}"></script>
     <script src="{{ asset('admin-style/js/plugins/flot/jquery.flot.pie.js') }}"></script>
+    #}
 
+    {#
     <!-- Peity -->
     <script src="{{ asset('admin-style/js/plugins/peity/jquery.peity.min.js') }}"></script>
     <script src="{{ asset('admin-style/js/demo/peity-demo.js') }}"></script>
+    #}
 
     <!-- Custom and plugin javascript -->
     <script src="{{ asset('admin-style/js/inspinia.js') }}"></script>
     <script src="{{ asset('admin-style/js/plugins/pace/pace.min.js') }}"></script>
 
+    {#
     <!-- jQuery UI -->
     <script src="{{ asset('admin-style/js/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    #}
 
+    {#
     <!-- GITTER -->
     <script src="{{ asset('admin-style/js/plugins/gritter/jquery.gritter.min.js') }}"></script>
 
@@ -167,6 +173,7 @@
 
     <!-- ChartJS-->
     <script src="{{ asset('admin-style/js/plugins/chartJs/Chart.min.js') }}"></script>
+    #}
 
     <!-- Toastr -->
     <script src="{{ asset('admin-style/js/plugins/toastr/toastr.min.js') }}"></script>

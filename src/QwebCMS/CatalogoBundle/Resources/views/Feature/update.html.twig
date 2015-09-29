@@ -39,41 +39,30 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ form_label(form.title, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_label(form.title, 'Nome categoria Caratteristiche'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_errors(form.title) }}
                                 {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="form-group">
-                                {{ form_label(form.description, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_label(form.description, 'Breve descrizione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_errors(form.description) }}
                                 {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="form-group">
-                                {{ form_label(form.typeInput, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_label(form.typeInput, 'Tipo di input'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_errors(form.typeInput) }}
                                 {{ form_widget(form.typeInput, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="form-group">
-                                {{ form_label(form.compulsory, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_label(form.compulsory, 'Selezione Obbligatoria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_errors(form.compulsory) }}
                                 {{ form_widget(form.compulsory, {'attr': {'class': 'form-control'}}) }}
                             </div>
                             <div class="form-group">
-                                {{ form_label(form.display, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_label(form.display, 'Visualizzazione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_errors(form.display) }}
                                 {{ form_widget(form.display, {'attr': {'class': 'form-control'}}) }}
                             </div>
-                            {#
-                            <div class="form-group">
-                                {{ form_label(form.pub, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                {{ form_errors(form.pub) }}
-                                <div class="checkbox">
-                                    <label>
-                                        {{ form_widget(form.pub) }}
-                                    </label>
-                                </div>
-                            </div>
-                            #}
                         </div>
 
                         <div class="col-md-12">

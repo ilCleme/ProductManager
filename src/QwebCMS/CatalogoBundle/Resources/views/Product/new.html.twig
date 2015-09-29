@@ -5,6 +5,17 @@
 
 {% block stylesheets %}
     <link href="{{ asset('assets/css/html5imageupload.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-style/css/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin-style/css/plugins/switchery/switchery.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-style/css/plugins/chosen/chosen.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block pagetitle %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <h2>Inserisci Nuovo Prodotto</h2>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
@@ -32,6 +43,26 @@
                     <div id="tab-1" class="tab-pane active">
                     {% endif %}
                         <div class="panel-body">
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    {{ form_label(form.categories, 'Categoria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_errors(form.categories) }}
+                                    <div class="input-group" style="width:100%;">
+                                        {{ form_widget(form.categories, {'attr': {'class': 'chosen-select', 'data-placeholder':'Scegli una categoria'}}) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    {{ form_label(form.pub, 'Pubblica'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_errors(form.pub) }}
+                                    <div>
+                                        {{ form_widget(form.pub, { 'attr': {'class': 'js-switch'} }) }}
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="col-lg-12">
                                 <div class="form-group">
@@ -74,11 +105,13 @@
                             </div>
 
                             <div class="col-lg-4">
+                                {#
                                 <div class="form-group">
                                     {{ form_label(form.planimetria, 'Planimetria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.planimetria) }}
                                     {{ form_widget(form.planimetria, {'attr': {'class': 'form-control'}}) }}
                                 </div>
+                                #}
                             </div>
 
                             <div class="col-lg-4">
@@ -99,37 +132,18 @@
 
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    {{ form_label(form.pub, 'Pubblica'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                    {{ form_errors(form.pub) }}
-                                    <div class="checkbox">
-                                        <label>
-                                            {{ form_widget(form.pub) }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4">
-                                <div class="form-group">
                                     {{ form_label(form.position, 'Posizione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.position) }}
                                     {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
                                 </div>
                             </div>
 
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    {{ form_label(form.categories, 'Categorie'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                    {{ form_errors(form.categories) }}
-                                    <div class="col-lg-12 m-l-n">
-                                        {{ form_widget(form.categories, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
-                                    </div>
-                                </div>
+                            <div class="col-lg-6">
                                 <div class="form-group ">
                                     {{ form_label(form.featurevalues, 'Caratteristiche'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.featurevalues) }}
-                                    <div class="col-lg-12 m-l-n">
-                                        {{ form_widget(form.featurevalues, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
+                                    <div>
+                                        {{ form_widget(form.featurevalues, {'attr': {'class': 'form-control', 'multiple':'true', 'style':'height:200px;'}}) }}
                                     </div>
                                 </div>
                             </div>
@@ -205,6 +219,12 @@
     <!-- HTML5 IMAGE UPLOAD -->
     <script src="{{ asset('assets/js/html5imageupload.js') }}"></script>
 
+    <!-- Switchery -->
+    <script src="{{ asset('admin-style/js/plugins/switchery/switchery.js') }}"></script>
+
+    <!-- Chosen -->
+    <script src="{{ asset('admin-style/js/plugins/chosen/chosen.jquery.js') }}"></script>
+
     <!-- SCRIPT UPLOAD IMMAGINI CON DROPZONE PERSONALIZZATO -->
     <script>
         $(document).ready(function(){
@@ -238,7 +258,46 @@
 
             }
 
+            Dropzone.options.dropPlanimetria = {
+
+                url: "{{ oneup_uploader_endpoint('planimetrie') }}",
+                autoProcessQueue: true,
+                //uploadMultiple: true,
+                parallelUploads: 1,
+                maxFiles: 1,
+                addRemoveLinks: true,
+
+                // Dropzone settings
+                init: function() {
+                    var dropPlanimetriaObject = this;
+                    this.on("sendingmultiple", function() {
+                    });
+                    this.on("successmultiple", function(files, response) {
+                    });
+                    this.on("errormultiple", function(files, response) {
+                    });
+                    this.on("queuecomplete", function(files, response) {
+                        //setTimeout("location.reload(true);", 1000);
+                    });
+                }
+
+            }
+
             $('.html5imageupload').html5imageupload({data: {id_album: '{{ id_album }}'}});
+
+            var elem = document.querySelector('.js-switch');
+            var switchery = new Switchery(elem, { color: '#1AB394' });
+
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nessun elemento trovato!'},
+                '.chosen-select'            : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
 
         });
     </script>

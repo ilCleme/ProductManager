@@ -118,4 +118,47 @@ class FeaturevalueController extends Controller
 
         return $this->redirect($this->generateUrl('featurevalues'));
     }
+
+    public function showCategoryFeaturevalueAction($id, Request $request)
+    {
+        $feature = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
+            ->find($id);
+
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a, u FROM QwebCMSCatalogoBundle:TblCatalogueFeaturevalue a JOIN a.features u WHERE u.idTblCatalogueFeature = ".$id;
+        $featurevalue = $em->createQuery($dql);
+
+        if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $featurevalue = $em->createQuery('SELECT a, u FROM QwebCMSCatalogoBundle:TblCatalogueFeaturevalue a JOIN a.features u WHERE u.idTblCatalogueFeature = :id AND a.title LIKE :filterValue ');
+            $featurevalue->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%',
+                'id'    => $id
+            ));
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueFeaturevalue' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $featurevalue = $em->createQuery('SELECT a, u FROM QwebCMSCatalogoBundle:TblCatalogueFeaturevalue a JOIN a.features u WHERE u.idTblCatalogueFeature = :id AND a.idTblCatalogueFeaturevalue LIKE :filterValue ');
+            $featurevalue->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%'
+            ));
+        }
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $featurevalue,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('number', 10)/*limit per page*/
+        );
+
+        // passo l'oggetto $product a un template
+        return $this->render(
+            'QwebCMSCatalogoBundle:Featurevalue:listcategoryfeaturevalues.html.twig',
+            array('featurevalues' => $featurevalue, 'pagination' => $pagination, 'feature' => $feature)
+        );
+    }
+
+
 }

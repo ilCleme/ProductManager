@@ -26,6 +26,10 @@ create_product:
     path:     /products/new
     defaults: { _controller: QwebCMSCatalogoBundle:Product:create }
 
+create_product_new:
+    path:     /products/new/info
+    defaults: { _controller: QwebCMSCatalogoBundle:Product:createNew }
+
 show_product:
     path:     /product/show/{id}
     defaults: { _controller: QwebCMSCatalogoBundle:Product:show }
@@ -66,10 +70,6 @@ create_features:
     path:     /features/new
     defaults: { _controller: QwebCMSCatalogoBundle:Feature:create }
     
-show_features:
-    path:     /feature/show/{id}
-    defaults: { _controller: QwebCMSCatalogoBundle:Feature:show }
-    
 update_features:
     path:     /feature/update/{id}
     defaults: { _controller: QwebCMSCatalogoBundle:Feature:update }
@@ -101,3 +101,7 @@ delete_photo:
 update_position_photo:
     path:     /foto/update
     defaults: { _controller: QwebCMSCatalogoBundle:Foto:updatePosition }
+
+category_featurevalue:
+    path:     /feature/category/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Featurevalue:showCategoryFeaturevalue }

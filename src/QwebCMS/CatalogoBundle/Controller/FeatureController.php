@@ -53,8 +53,8 @@ class FeatureController extends Controller
         }
     
         // passo l'oggetto $feature a un template
-        return $this->render('QwebCMSCatalogoBundle:Feature:showfeature.html.twig',
-            array('feature' => $feature)
+        return $this->render('QwebCMSCatalogoBundle:Featurevalue:showfeature.html.twig',
+            array('feature' => $feature->getFeaturevalues())
         );
     }
     

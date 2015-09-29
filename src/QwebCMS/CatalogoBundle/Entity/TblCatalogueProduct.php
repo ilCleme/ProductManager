@@ -474,39 +474,6 @@ class TblCatalogueProduct
         }
         $this->categories = $categories;
     }
-
-    /**
-     * Add featurevalues
-     *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $featurevalues
-     * @return TblCatalogueProduct
-     */
-    public function addFeaturevalue(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $featurevalues)
-    {
-        $this->featurevalues[] = $featurevalues;
-
-        return $this;
-    }
-
-    /**
-     * Remove featurevalues
-     *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $featurevalues
-     */
-    public function removeFeaturevalue(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $featurevalues)
-    {
-        $this->featurevalues->removeElement($featurevalues);
-    }
-
-    /**
-     * Get featurevalues
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getFeaturevalues()
-    {
-        return $this->featurevalues;
-    }
     
 
     /**
@@ -668,5 +635,38 @@ class TblCatalogueProduct
     public function getPlanimetria()
     {
         return $this->planimetria;
+    }
+
+    /**
+     * Add featurevalues
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalues
+     * @return TblCatalogueProduct
+     */
+    public function addFeaturevalue(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalues)
+    {
+        $this->featurevalues[] = $featurevalues;
+
+        return $this;
+    }
+
+    /**
+     * Remove featurevalues
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalues
+     */
+    public function removeFeaturevalue(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalues)
+    {
+        $this->featurevalues->removeElement($featurevalues);
+    }
+
+    /**
+     * Get featurevalues
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFeaturevalues()
+    {
+        return $this->featurevalues;
     }
 }

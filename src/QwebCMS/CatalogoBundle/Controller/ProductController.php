@@ -237,4 +237,49 @@ class ProductController extends Controller
 
         return new Response($fname);
     }
+
+    public function createNewAction(Request $request){
+        $product = new Product();
+
+        $form = $this->createForm(new TblCatalogueProductType(), $product);
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            // esegue alcune azioni, salvare il prodotto nella base dati
+            $em = $this->getDoctrine()->getManager();
+            // Create a new empty Album for this product
+            $album = new Album();
+            $album->setNome($product->getTitle());
+            $em->persist($album);
+            $em->flush();
+
+            // Save product information on database
+            $product->setIdTblCatalogueProduct(0);
+            $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
+            $product->setIdTblLingua(4);
+            $em->persist($product);
+            $em->flush();
+
+            // Copy id product on idTblCatalogueProduct field
+            $product->setIdTblCatalogueProduct($product->getId());
+            $em->flush();
+
+            if($form->get('saveAndContinue')->isClicked()) {
+                return $this->redirect($this->generateUrl('update_product', array(
+                    'id' => $product->getIdTblCatalogueProduct()
+                )));
+
+            } elseif($form->get('save')->isClicked()) {
+
+                return $this->redirect($this->generateUrl('products'));
+
+            }
+
+        }
+
+        return $this->render('QwebCMSCatalogoBundle:Product:infoproduct.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }
