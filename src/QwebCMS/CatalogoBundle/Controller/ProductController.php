@@ -214,6 +214,7 @@ class ProductController extends Controller
 
         $filename[]				= $fname;
 
+        $dir					= '/uploads/gallery/';
         $foto = new Foto();
         $foto->setNome($fname);
         $foto->setImg($dir.$fname);
@@ -227,7 +228,7 @@ class ProductController extends Controller
         $em->persist($foto);
         $em->flush();
 
-        $dir					= '/uploads/gallery/';
+
         // RedirectResponse object
         $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
