@@ -187,7 +187,7 @@ class ProductController extends Controller
         $webserver              = strstr($absolutedir, 'public_html');
 
         if (strlen($webserver) > 0){
-            $dir					= '/web/uploads/gallery/';
+            $dir					= '/catalogo-demo/web/uploads/gallery/';
         } else {
             $dir					= '/uploads/gallery/';
         }
