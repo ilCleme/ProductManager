@@ -80,11 +80,19 @@ class UploadListener{
 
         $imagemanagerResponse = $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
-            ->filterAction($this->container->get('request'), $file_upload, 'big_thumb');
+            ->filterAction($this->container->get('request'), $file_upload, 'img_preview');
 
         $imagemanagerResponse = $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
-            ->filterAction($this->container->get('request'), $file_upload, 'big_thumb_1');
+            ->filterAction($this->container->get('request'), $file_upload, 'img_small');
+
+        $imagemanagerResponse = $imagemanagerResponse = $this->container
+            ->get('liip_imagine.controller')
+            ->filterAction($this->container->get('request'), $file_upload, 'img_medium');
+
+        $imagemanagerResponse = $imagemanagerResponse = $this->container
+            ->get('liip_imagine.controller')
+            ->filterAction($this->container->get('request'), $file_upload, 'img_large');
 
         $em = $this->doctrine->getManager();
 
