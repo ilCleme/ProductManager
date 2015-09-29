@@ -96,7 +96,7 @@ liip_imagine:
     resolvers:
        default:
           web_path:
-            web_root: "%kernel.root_dir%/../../public_html/public"
+            web_root: "%kernel.root_dir%/../../public"
             cache_prefix: "catalogo"
 
     filter_sets:
