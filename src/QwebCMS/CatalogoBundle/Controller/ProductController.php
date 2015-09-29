@@ -237,12 +237,17 @@ class ProductController extends Controller
         // RedirectResponse object
         $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
-            ->filterAction($request, $dir.$fname, 'big_thumb');
+            ->filterAction($request, $dir.$fname, 'img_small');
 
         // RedirectResponse object
         $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
-            ->filterAction($request, $dir.$fname, 'big_thumb_1');
+            ->filterAction($request, $dir.$fname, 'img_medium');
+
+        // RedirectResponse object
+        $imagemanagerResponse = $this->container
+            ->get('liip_imagine.controller')
+            ->filterAction($request, $dir.$fname, 'img_large');
 
         return new Response($fname);
     }

@@ -36,7 +36,7 @@ class UploadListener{
 
     public function uploadGalleryType(PostPersistEvent $event){
         $request = $event->getRequest();
-        $response = $event->getResponse();
+        //$response = $event->getResponse();
         $id_album = $request->headers->get('id-album');
 
         $file_upload = $event->getFile();
@@ -47,11 +47,15 @@ class UploadListener{
 
         $imagemanagerResponse = $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
-            ->filterAction($this->container->get('request'), $file_upload, 'big_thumb');
+            ->filterAction($this->container->get('request'), $file_upload, 'img_small');
 
         $imagemanagerResponse = $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
-            ->filterAction($this->container->get('request'), $file_upload, 'big_thumb_1');
+            ->filterAction($this->container->get('request'), $file_upload, 'img_medium');
+
+        $imagemanagerResponse = $imagemanagerResponse = $this->container
+            ->get('liip_imagine.controller')
+            ->filterAction($this->container->get('request'), $file_upload, 'img_large');
 
         $foto = new Foto();
         $foto->setNome($file_upload->getFilename());
