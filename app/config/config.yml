@@ -97,7 +97,7 @@ liip_imagine:
        default:
           web_path:
 
-    # Questo è il resolver delle foto per portarle nella cartella pubblica del server,
+    # Questo Ã¨ il resolver delle foto per portarle nella cartella pubblica del server,
     # al di fuori della radice di symfony
     #resolvers:
        #default:
