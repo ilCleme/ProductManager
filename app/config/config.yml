@@ -96,8 +96,14 @@ liip_imagine:
     resolvers:
        default:
           web_path:
-            web_root: "%kernel.root_dir%/../../public"
-            cache_prefix: "catalogo"
+
+    # Questo è il resolver delle foto per portarle nella cartella pubblica del server,
+    # al di fuori della radice di symfony
+    #resolvers:
+       #default:
+          #web_path:
+            #web_root: "%kernel.root_dir%/../../public"
+            #cache_prefix: "catalogo"
 
     filter_sets:
         cache: ~
