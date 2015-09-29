@@ -125,6 +125,33 @@ oneup_uploader:
             storage:
               directory:  'uploads/planimetrie'
 
+
+liip_imagine:
+
+    resolvers:
+       default:
+          web_path: ~
+
+    filter_sets:
+        cache: ~
+        img_preview:
+            quality: 100
+            filters:
+                thumbnail: { size: [196, 147], mode: outbound }
+        big_thumb_1:
+            quality: 100
+            filters:
+                thumbnail: { size: [360, 270], mode: outbound }
+        big_thumb:
+            quality: 100
+            filters:
+                relative_resize: { widen: 700 }
+        big_thumb_2:
+            quality: 100
+            filters:
+                relative_resize: { widen: 1200 }
+
+
 knp_paginator:
     page_range: 10                      # default page range used in pagination control
     default_options:
