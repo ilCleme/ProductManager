@@ -5,9 +5,6 @@ qweb_cms_user:
 qweb_cms_catalogo:
     resource: "@QwebCMSCatalogoBundle/Resources/config/routing.yml"
     prefix:   /
-    
-elfinder:
-    resource: "@FMElfinderBundle/Resources/config/routing.yml"
 
 logout:
     path:   /logout
