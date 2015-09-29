@@ -93,10 +93,11 @@ oneup_uploader:
 
 
 liip_imagine:
-
     resolvers:
        default:
-          web_path: ~
+          web_path:
+            web_root: "%kernel.root_dir%/../../public_html"
+            cache_prefix: "public/catalogo"
 
     filter_sets:
         cache: ~
