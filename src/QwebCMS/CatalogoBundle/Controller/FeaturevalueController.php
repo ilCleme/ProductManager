@@ -31,7 +31,7 @@ class FeaturevalueController extends Controller
             
             $em->persist($featurevalues);
             $em->flush();
-            return $this->redirect($this->generateUrl('featurevalues'));
+            return $this->redirect($this->generateUrl('features'));
         }
         
         
