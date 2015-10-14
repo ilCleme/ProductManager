@@ -63,6 +63,7 @@ class ProductController extends Controller
                 $album = new Album();
                 $album->setNome($product->getTitle());
                 $em->persist($album);
+                $em->flush();
 
                 // Save product information on database
                 $product->setIdTblCatalogueProduct(0);
