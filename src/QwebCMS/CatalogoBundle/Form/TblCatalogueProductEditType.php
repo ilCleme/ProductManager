@@ -43,21 +43,12 @@ class TblCatalogueProductEditType extends AbstractType
                 'expanded' => false,
                 'required' => true
             ))
-            ->add('featurevalues', 'entity', array(
-                'class'     =>  'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
-                'property'  =>  'title',
-                'group_by'  =>  'featureTitle',
-                'expanded'  =>  false,
-                'multiple'  =>  true,
-                'required'  =>  false,
-            ))
             ;
 
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
             $product = $event->getData();
             $form = $event->getForm();
-
             $categorie = $product->getCategories();
             foreach($categorie as $categoria){
                 $features = $categoria->getFeatures();
@@ -66,11 +57,11 @@ class TblCatalogueProductEditType extends AbstractType
                     $featurevalues = $feature->getFeaturevalues();
 
                     if ($feature->getTypeInput() == 'select' ){
-                        $expanded = (bool) false;
-                        $multiple = (bool) false;
+                        $expanded = false;
+                        $multiple = false;
                     } else {
-                        $expanded = (bool) true;
-                        $multiple = (bool) true;
+                        $expanded = true;
+                        $multiple = true;
                     }
 
                     if($feature->getCompulsory()){
@@ -79,38 +70,25 @@ class TblCatalogueProductEditType extends AbstractType
                         $required = false;
                     }
 
-                    //var_dump($feature->getId());
-                    /*$form->add('featurevalues', 'collection', array(
-                        'type'      =>  'entity',
-                        'options'   =>  array(
-                            'class'         =>  'QwebCMSCatalogoBundle:TblCatalogueFeaturevalue',
-                            'data_class'    => null,
-                            'property'      =>  'title',
-                            'group_by'       =>  'featureTitle',
-                            'choices'       =>  $featurevalues,
-                            'expanded'      =>  $expanded,
-                            'required'      =>  $required,
-                            'multiple'      =>  $multiple,
-                            //'mapped'    =>  false
-                        ),
-                        'allow_add' =>  true,
-                    ));*/
+                    $idFeature = $feature->getId();
 
-                    /*$form->add('featurevalues', 'collection', array(
-                        'type'      =>  new TblCatalogueProductFeaturevalueType($featurevalues),
-                        'allow_add' =>  true,
-                    ));*/
-
-                    /*$form->add('featurevalues', 'entity', array(
+                    $form->add('featurevalues_'.$feature->getId(), 'entity', array(
                         'class'     =>  'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
                         'property'  =>  'title',
-                        'group_by'  =>  'featureTitle',
-                        'choices'   =>  $featurevalues,
+                        //'choices'   =>  $featurevalues,
+                        'query_builder' => function (EntityRepository $er) use ($idFeature){
+                            return $er->createQueryBuilder('u')
+                                //->where('u.id > ?1')
+                                ->join('u.features', 'f', 'WITH')
+                                ->where('f.id = ?1')
+                                ->setParameter(1, $idFeature);
+                        },
                         'expanded'  =>  $expanded,
                         'multiple'  =>  $multiple,
                         'required'  =>  $required,
-                        'mapped'    =>  false
-                    ));*/
+                        'mapped'    =>  false,
+                        'placeholder' => 'Scegli un opzione',
+                    ));
                 }
             }
         });

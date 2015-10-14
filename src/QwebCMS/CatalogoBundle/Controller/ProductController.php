@@ -63,7 +63,6 @@ class ProductController extends Controller
                 $album = new Album();
                 $album->setNome($product->getTitle());
                 $em->persist($album);
-                $em->flush();
 
                 // Save product information on database
                 $product->setIdTblCatalogueProduct(0);
@@ -130,11 +129,51 @@ class ProductController extends Controller
                 array('posizione' => 'ASC'));
 
         $form = $this->createForm(new TblCatalogueProductEditType(), $product);
-        
+
+        if ( !($form->isValid()) ) {
+            $featurevalues = $product->getFeaturevalues();
+            $categorie = $product->getCategories();
+            foreach ($categorie as $categoria) {
+                $features = $categoria->getFeatures();
+                foreach ($features as $feature) {
+                    if($feature->getTypeInput() == "select"){
+                        //$form->get('featurevalues_'.$feature->getId())->setData($featurevalues);
+                        foreach($featurevalues as $featurevalue){
+                            $featureChildrens = $feature->getFeaturevalues();
+                            foreach($featureChildrens as $children){
+                                if($children->getIdTblCatalogueFeaturevalue() == $featurevalue->getIdTblCatalogueFeaturevalue()){
+                                    $form->get('featurevalues_'.$feature->getId())->setData($featurevalue);
+                                }
+                            }
+                        }
+                    } else {
+                        $form->get('featurevalues_'.$feature->getId())->setData($featurevalues);
+                    }
+                }
+            }
+        }
+
         $form->handleRequest($request);
+        //$features = null;
 
         if ($form->get('exit')->isClicked() && $form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
+            $categorie = $product->getCategories();
+            foreach($categorie as $categoria){
+                $features = $categoria->getFeatures();
+                foreach($features as $feature){
+                    $featurevalues = $form->get('featurevalues_'.$feature->getId())->getData();
+                    if($feature->getTypeInput() == "select"){
+                        $product->removeFeaturevalue($featurevalues);
+                        $product->addFeaturevalue($featurevalues);
+                    } else {
+                        foreach($featurevalues as $featurevalue){
+                            $product->removeFeaturevalue($featurevalue);
+                            $product->addFeaturevalue($featurevalue);
+                        }
+                    }
+                }
+            }
+
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($product);
@@ -142,6 +181,22 @@ class ProductController extends Controller
 
             return $this->redirect($this->generateUrl('products'));
         } elseif($form->get('save')->isClicked() && $form->isValid()) {
+            $categorie = $product->getCategories();
+            foreach($categorie as $categoria){
+                $features = $categoria->getFeatures();
+                foreach($features as $feature){
+                    $featurevalues = $form->get('featurevalues_'.$feature->getId())->getData();
+                    if($feature->getTypeInput() == "select"){
+                        $product->removeFeaturevalue($featurevalues);
+                        $product->addFeaturevalue($featurevalues);
+                    } else {
+                        foreach($featurevalues as $featurevalue){
+                            $product->removeFeaturevalue($featurevalue);
+                            $product->addFeaturevalue($featurevalue);
+                        }
+                    }
+                }
+            }
             $em = $this->getDoctrine()->getManager();
 
             $em->persist($product);
@@ -152,7 +207,8 @@ class ProductController extends Controller
         return $this->render('QwebCMSCatalogoBundle:Product:update.html.twig', array(
             'form' => $form->createView(),
             'product' => $product,
-            'immagini' => $photos
+            'immagini' => $photos,
+            'features'   =>  $features,
         ));
     }
 
