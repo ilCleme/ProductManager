@@ -10,7 +10,7 @@
 {% block pagetitle %}
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-sm-4">
-        <h2>Categorie di Caratteristiche</h2>
+        <h2>Caratteristiche</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="/">Dashboard</a>
@@ -26,43 +26,69 @@
 {% block content %}
 <div class="ibox float-e-margins">
     <div class="ibox-title">
-        <h5>Categorie trovate <span>{{ pagination.getTotalItemCount }}</span></h5>
+        <h5>Categorie trovate <span>{{ features|length }}</span></h5>
         <div class="ibox-tools">
-            <a class="btn btn-primary btn-xs" href="{{ path('create_featurevalues') }}"><i class="fa fa-lg fa-plus"></i> Aggiungi Categoria</a>
+            <a class="btn btn-primary btn-xs" href="{{ path('create_features') }}"><i class="fa fa-lg fa-plus"></i> Aggiungi Categoria</a>
+            <a class="btn btn-primary btn-xs" href="{{ path('create_featurevalues') }}"><i class="fa fa-lg fa-plus"></i> Aggiungi Caratteristica</a>
         </div>
     </div>
     <div class="ibox-content">
-        {{ knp_pagination_filter(pagination, {'title': 'Nome Feature', 'idTblCatalogueFeature':'Id'}) }}
-        <div class="clearfix"></div>
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover dataTables">
-                <thead>
-                    <tr>
-                        {# sorting of properties based on query components #}
-                        <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.idTblCatalogueFeature') }}</th>
-                        <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Categoria', 'a.title') }}</th>
-                        <th>{{ knp_pagination_sortable(pagination, 'Tipo di input', 'a.typeInput') }}</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for feature in pagination %}
-                    <tr {% if loop.index is odd %}class="color"{% endif %}>
-                        <td>{{feature.idTblCatalogueFeature}}</td>
-                        <td><a href="{{ path('category_featurevalue', {'id' : feature.idTblCatalogueFeature}) }}" title="Modifica" >{{feature.title}}</a></td>
-                        <td>{{feature.typeInput}}</td>
-                        <td>
+        <div class="panel-body">
+            <ul class="col-md-12" style="list-style: none; margin: 0; padding: 0; ">
+                <li class="col-md-12" style="border-bottom: 1px solid #ddd; margin-bottom:5px;">
+                    <div class="col-md-12">
+                        <p class="col-md-2">#</p>
+                        <p class="feature col-md-4">Nome</p>
+                        <p class="col-md-4">Azioni</p>
+                    </div>
+                </li>
+            {% for feature in features %}
+                <li class="col-md-12" style="border-bottom: 1px solid #ddd; margin-bottom:5px;">
+                    <div class="col-md-12">
+                        <p class="col-md-2">
+                            {{feature.idTblCatalogueFeature}}
+                        </p>
+                        <p class="col-md-4">
+                            <a href="{{ path('category_featurevalue', {'id' : feature.idTblCatalogueFeature}) }}" title="Modifica" >{{feature.title}}</a>
+                            <a class="btn btn-outline btn-default btn-xs btn_categoria_apri"><i class="fa fa-lg fa-chevron-down"></i> Apri</a>
+                            <a class="btn btn-outline btn-default btn-xs btn_categoria_chiudi" style="display: none;"><i class="fa fa-lg fa-chevron-up"></i> Chiudi</a>
+                        </p>
+                        <p class="col-md-4">
                             <a href="{{ path('update_features', {'id' : feature.idTblCatalogueFeature}) }}" title="Modifica" class="btn btn-primary btn-xs btn-warning"><i class="fa fa-lg fa-edit"></i> Modifica</a>
                             <a href="{{ path('delete_features', {'id' : feature.idTblCatalogueFeature}) }}" title="Elimina" class="btn btn-primary btn-xs btn-danger"><i class="fa fa-lg fa-times"></i> Elimina</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {# display navigation #}
-            <div class="navigation">
-                {{ knp_pagination_render(pagination) }}
-            </div>
+                        </p>
+                        <div class="col-md-12 featurevalues-container" style="display: none; padding:0 !important">
+                            <ul style="list-style: none; margin: 0; padding: 0;">
+                                <li class="col-md-12" style="border-bottom: 1px solid #ddd; margin-bottom:5px;">
+                                    <div class="col-md-12">
+                                        <p class="col-md-1">ID</p>
+                                        <p class="col-md-11">Nome Caratteristica</p>
+                                    </div>
+                                </li>
+                                {% for featuresvalue in feature.featurevalues %}
+                                <li class="col-md-12">
+                                    <div class="col-md-12">
+                                        <p class="col-md-1">
+                                            {{featuresvalue.idTblCatalogueFeaturevalue}}
+                                        </p>
+                                        <div class="btn-group col-md-4">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ featuresvalue.title }}</a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{ path('update_featurevalues', {'id' : featuresvalue.idTblCatalogueFeaturevalue}) }}" title="Modifica" ><i class="fa fa-lg fa-edit"></i> Modifica</a></li>
+                                                <li><a href="{{ path('delete_featurevalues', {'id' : featuresvalue.idTblCatalogueFeaturevalue}) }}" title="Elimina" ><i class="fa fa-lg fa-times"></i> Elimina</a></li>
+                                                <li class="divider"></li>
+                                                <li><a href="{{ path('create_featurevalues') }}"><i class="fa fa-lg fa-plus"></i> Aggiungi Caratteristica</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
@@ -84,5 +110,23 @@
             });
         </script>
     {% endfor %}
+
+    <script>
+        $(document).ready(function(){
+            $('.btn_categoria_apri').click(function(e) {
+                e.preventDefault();
+                $(this).parent().parent().find('.featurevalues-container').removeClass('categoria_chiusa').addClass('categoria_aperta').show();
+                $(this).parent().find('.btn_categoria_chiudi').show();
+                $(this).hide();
+            });
+
+            $('.btn_categoria_chiudi').click(function(e) {
+                e.preventDefault();
+                $(this).parent().parent().find('.featurevalues-container').removeClass('categoria_aperta').addClass('categoria_chiusa').hide();
+                $(this).parent().find('.btn_categoria_apri').show();
+                $(this).hide();
+            });
+        })
+    </script>
 
 {% endblock %}
