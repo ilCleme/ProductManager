@@ -12,6 +12,10 @@ class FeatureController extends Controller
 {
     public function createAction(Request $request)
     {
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
         $feature = new Feature();
         
         $form = $this->createForm(new TblCatalogueFeatureType(), $feature);
@@ -37,6 +41,7 @@ class FeatureController extends Controller
         
         return $this->render('QwebCMSCatalogoBundle:Feature:new.html.twig', array(
             'form' => $form->createView(),
+            'categories' => $categories
         ));
     }
     
@@ -60,6 +65,10 @@ class FeatureController extends Controller
     
     public function updateAction($id, Request $request)
     {
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
         $feature = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
             ->find($id);
@@ -87,7 +96,8 @@ class FeatureController extends Controller
         // passo l'oggetto $feature a un template
         return $this->render('QwebCMSCatalogoBundle:Feature:update.html.twig', array(
             'form' => $form->createView(),
-            'feature' => $feature
+            'feature' => $feature,
+            'categories' => $categories
         ));
     }
     
