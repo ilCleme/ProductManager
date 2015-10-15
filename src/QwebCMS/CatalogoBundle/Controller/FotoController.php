@@ -15,6 +15,27 @@ class FotoController extends Controller
             ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
             ->find($id);
 
+        $env = $this->container->get('kernel')->getEnvironment();
+
+        if($env == 'dev'){
+            $cacheManager = $this->get('liip_imagine.cache.manager');
+            $cacheManager->remove($foto->getImg());
+
+            $root = $this->get('kernel')->getRootDir();
+
+            $deleteStatus = unlink($root.'/../web'.$foto->getImg());
+            if (!$deleteStatus){
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    'Un errore è stato rilevato durante l\'eliminazione dell\'immagine'
+                );
+
+                return $this->render(
+                    'QwebCMSCatalogoBundle:Photo:delete.html.twig'
+                );
+            }
+        }
+
         $em->remove($foto);
         $em->flush();
 
