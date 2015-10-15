@@ -9,3 +9,15 @@
         });
     </script>
 {% endfor %}
+
+{% for flashMessage in app.session.flashbag.get('error') %}
+    <script>
+        $(document).ready(function(){
+            swal({
+                title: "Errore!",
+                text: "{{ flashMessage }}",
+                type: "error"
+            });
+        });
+    </script>
+{% endfor %}
