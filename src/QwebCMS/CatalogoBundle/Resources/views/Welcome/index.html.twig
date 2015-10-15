@@ -2,6 +2,25 @@
 
 {% block title %}Dashboard{% endblock %}
 
+{% block menu %}
+    <li class="active">
+        <a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">Catalogo</span> <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse in">
+            <li class="active"><a href="{{ path('welcome') }}">Dashboard</a></li>
+            <li>
+                <a href="{{ path('products') }}">Prodotti <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level collapse">
+                    {% for category in categories %}
+                        <li><a href="{{ path('show_category', {id : category.idTblCatalogueCategory}) }}">{{ category.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li><a href="{{ path('categories') }}">Categorie</a></li>
+            <li><a href="{{ path('features') }}">Caratteristiche</a></li>
+        </ul>
+    </li>
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="col-lg-3">

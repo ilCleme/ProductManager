@@ -42,10 +42,10 @@
                 <thead>
                     <tr>
                         {# sorting of properties based on query components #}
-                        <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.idTblCatalogueProduct') }}</th>
+                        <th>{{ knp_pagination_sortable(pagination, 'Codice', 'a.cod') }}</th>
+                        {#<th>{{ knp_pagination_sortable(pagination, 'Id', 'a.idTblCatalogueProduct') }}</th>#}
                         <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Prodotto', 'a.title') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Descrizione', 'a.shortDescription') }}</th>
-                        <th>{{ knp_pagination_sortable(pagination, 'Codice', 'a.cod') }}</th>
                         <th>Categoria</th>
                         <th>Stato</th>
                         <th>Azioni</th>
@@ -54,10 +54,11 @@
                 <tbody>
                 {% for product in pagination %}
                     <tr {% if loop.index is odd %}class="color"{% endif %}>
-                        <td>{{ product.id }}</td>
+                        <td>{{ product.cod }}</td>
+                        {#<td>{{ product.id }}</td>#}
                         <td>{{ product.title }}</td>
                         <td>{{ product.shortDescription }}</td>
-                        <td>{{ product.cod }}</td>
+
                         <td>
                         {% for category in product.categories %}
                         {{ category.title }}

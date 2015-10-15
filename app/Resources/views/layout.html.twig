@@ -69,17 +69,7 @@
                             <img alt="image" class="" src="{{ asset('admin-style/img/q_s.png') }}" />
                         </div>
                     </li>
-
-                    <li class="active">
-                        <a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">Catalogo</span> <span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            {% set currentPath = app.request.attributes.get('_route') %}
-                            <li><a href="{{ path('products') }}">Prodotti</a></li>
-                            <li><a href="{{ path('categories') }}">Categorie</a></li>
-                            <li><a href="{{ path('features') }}">Caratteristiche</a></li>
-                            {#<li><a href="{{ path('featurevalues') }}">Caratteristiche</a></li>#}
-                        </ul>
-                    </li>
+                    {% block menu %}{% endblock %}
                 </ul>
             {% endblock %}
             </div>
