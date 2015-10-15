@@ -36,21 +36,70 @@ class CategoryController extends Controller
         ));
     }
     
-    public function showAction($id)
+    public function showAction($id, Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1";
+        $product = $em->createQuery($dql);
+        $product->setParameter(1,$id);
+
+        if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.title LIKE :filterValue ');
+            $product->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%',
+                1   =>  $id
+            ));
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='shortDescription' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.shortDescription LIKE :filterValue ');
+            $product->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%',
+                1   =>  $id
+            ));
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueProduct' ){
+            $filterValue = $request->query->get('filterValue');
+
+            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblCatalogueProduct LIKE :filterValue ');
+            $product->setParameters(array(
+                'filterValue' => '%'.$filterValue.'%',
+                1   =>  $id
+            ));
+        }
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'Nessun prodotto trovato'
+            );
+        }
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $product,
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('number', 10)/*limit per page*/
+        );
+
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
+        if (!$categories) {
+            throw $this->createNotFoundException(
+                'Nessuna categoria trovata!'
+            );
+        }
+
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
             ->find($id);
-    
-        /*if (!$category) {
-            throw $this->createNotFoundException(
-                'Nessuna categoria trovata per l\'id '.$id
-            );
-        }*/
-    
-        // passo l'oggetto $category a un template
-        return $this->render('QwebCMSCatalogoBundle:Category:showcategory.html.twig',
-            array('category' => $category)
+
+        // passo l'oggetto $product a un template
+        return $this->render(
+            'QwebCMSCatalogoBundle:Welcome:showallcategoryproduct.html.twig',
+            array('category' => $category, 'categories' => $categories, 'pagination' => $pagination, 'id' => $id)
         );
     }
     
