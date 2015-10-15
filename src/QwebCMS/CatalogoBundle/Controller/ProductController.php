@@ -15,6 +15,10 @@ class ProductController extends Controller
 {
     public function createAction(Request $request)
     {
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
         $product = new Product();
 
         $form = $this->createForm(new TblCatalogueProductType(), $product);
@@ -53,8 +57,9 @@ class ProductController extends Controller
                 }
 
                 return $this->render('QwebCMSCatalogoBundle:Product:new.html.twig', array(
-                    'form'     => $form->createView(),
-                    'id_album' => $id_album
+                    'form'          => $form->createView(),
+                    'id_album'      => $id_album,
+                    'categories'    => $categories
                 ));
 
             } elseif($form->get('save')->isClicked()) {
@@ -85,7 +90,8 @@ class ProductController extends Controller
 
         return $this->render('QwebCMSCatalogoBundle:Product:new.html.twig', array(
             'form' => $form->createView(),
-            'id_album' => 0
+            'id_album' => 0,
+            'categories'    =>  $categories
         ));
     }
     
@@ -110,6 +116,10 @@ class ProductController extends Controller
     
     public function updateAction($id, Request $request)
     {
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
         // Getting product information
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
@@ -210,6 +220,7 @@ class ProductController extends Controller
             'product' => $product,
             'immagini' => $photos,
             'features'   =>  $features,
+            'categories'    =>  $categories
         ));
     }
 
