@@ -12,6 +12,10 @@ class CategoryController extends Controller
 {
     public function createAction(Request $request)
     {
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
         $category = new Category();
         $em = $this->getDoctrine()->getManager();
         $form = $this->createForm(new TblCatalogueCategoryType($em), $category);
@@ -33,6 +37,7 @@ class CategoryController extends Controller
         
         return $this->render('QwebCMSCatalogoBundle:Category:new.html.twig', array(
             'form' => $form->createView(),
+            'categories' => $categories
         ));
     }
     
@@ -105,6 +110,10 @@ class CategoryController extends Controller
     
     public function updateAction($id, Request $request)
     {
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
             ->find($id);
@@ -132,6 +141,7 @@ class CategoryController extends Controller
         // passo l'oggetto $category a un template
         return $this->render('QwebCMSCatalogoBundle:Category:new.html.twig', array(
             'form' => $form->createView(),
+            'categories' => $categories
         ));
     }
     
