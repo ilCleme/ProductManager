@@ -156,33 +156,13 @@
 
                             <div class="col-lg-6">
                                 <h3>Caratteristiche</h3>
-                                {#
-                                <div class="form-group ">
-                                    {{ form_label(form.featurevalues, 'Caratteristiche'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                    {{ form_errors(form.featurevalues) }}
-                                    <div>
-                                        {{ form_widget(form.featurevalues, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                #}
-                                {#
-                                <div class="form-group ">
-                                    {{ form_label(form.featurevalues_, 'Caratteristiche'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                    {{ form_errors(form.featurevalues_) }}
-                                    <div>
-                                        {{ form_widget(form.featurevalues_, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                #}
-
                                 {% for feature in features %}
                                     <div class="form-group">
-                                        {{ form_label(form['featurevalues_'~loop.index], feature.title ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form['featurevalues_'~loop.index]) }}
-                                        {{ form_widget(form['featurevalues_'~loop.index], {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form['featurevalues_'~feature.idTblCatalogueFeature], feature.title ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form['featurevalues_'~feature.idTblCatalogueFeature]) }}
+                                        {{ form_widget(form['featurevalues_'~feature.idTblCatalogueFeature], {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 {% endfor %}
-
                             </div>
 
                         </div>

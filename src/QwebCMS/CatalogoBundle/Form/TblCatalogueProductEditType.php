@@ -37,11 +37,12 @@ class TblCatalogueProductEditType extends AbstractType
             ))
             ->add('position')
             ->add('categories', 'entity', array(
-                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
-                'property' => 'title',
-                'multiple' => false,
-                'expanded' => false,
-                'required' => true
+                'class'     => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
+                'property'  => 'title',
+                'multiple'  => false,
+                'expanded'  => false,
+                'required'  => true,
+                'mapped'    => true
             ))
             ;
 
@@ -53,8 +54,6 @@ class TblCatalogueProductEditType extends AbstractType
             foreach($categorie as $categoria){
                 $features = $categoria->getFeatures();
                 foreach($features as $feature){
-
-                    $featurevalues = $feature->getFeaturevalues();
 
                     if ($feature->getTypeInput() == 'select' ){
                         $expanded = false;
