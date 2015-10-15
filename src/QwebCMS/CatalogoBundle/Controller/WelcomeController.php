@@ -21,7 +21,7 @@ class WelcomeController extends Controller
         $feature = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
             ->findAll();
-        
+
         $featurevalue = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')
             ->findAll();
@@ -36,12 +36,6 @@ class WelcomeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a";
         $product = $em->createQuery($dql);
-
-
-        // Getting photo of product
-        //$photos= $this->getDoctrine()
-        //    ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
-        //    ->findBy(array('idTblPhotoCat' => $product->getIdTblPhotoCat() ));
 
         if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
             $filterValue = $request->query->get('filterValue');
@@ -78,11 +72,15 @@ class WelcomeController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             $request->query->getInt('number', 10)/*limit per page*/
         );
+
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
         
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallproduct.html.twig',
-            array('products' => $product, 'pagination' => $pagination)
+            array('products' => $product, 'pagination' => $pagination, 'categories' => $categories)
         );
     }
     
@@ -119,7 +117,11 @@ class WelcomeController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             $request->query->getInt('number', 10)/*limit per page*/
         );
-        
+
+        $category = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallcategory.html.twig',
@@ -131,11 +133,15 @@ class WelcomeController extends Controller
         $feature = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
             ->findAll();
+
+        $category = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
         
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallfeatures.html.twig',
-            array('features' => $feature)
+            array('features' => $feature, 'categories' => $category)
         );
     }
     
