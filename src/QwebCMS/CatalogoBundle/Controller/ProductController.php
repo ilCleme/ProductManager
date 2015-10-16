@@ -148,17 +148,17 @@ class ProductController extends Controller
                 $features = $categoria->getFeatures();
                 foreach ($features as $feature) {
                     if($feature->getTypeInput() == "select"){
-                        //$form->get('featurevalues_'.$feature->getId())->setData($featurevalues);
+                        //$form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
                         foreach($featurevalues as $featurevalue){
                             $featureChildrens = $feature->getFeaturevalues();
                             foreach($featureChildrens as $children){
                                 if($children->getIdTblCatalogueFeaturevalue() == $featurevalue->getIdTblCatalogueFeaturevalue()){
-                                    $form->get('featurevalues_'.$feature->getId())->setData($featurevalue);
+                                    $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalue);
                                 }
                             }
                         }
                     } else {
-                        $form->get('featurevalues_'.$feature->getId())->setData($featurevalues);
+                        $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
                     }
                 }
             }
@@ -172,7 +172,7 @@ class ProductController extends Controller
             foreach($categorie as $categoria){
                 $features = $categoria->getFeatures();
                 foreach($features as $feature){
-                    $featurevalues = $form->get('featurevalues_'.$feature->getId())->getData();
+                    $featurevalues = $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->getData();
                     if($feature->getTypeInput() == "select"){
                         $product->removeFeaturevalue($featurevalues);
                         $product->addFeaturevalue($featurevalues);
@@ -196,7 +196,7 @@ class ProductController extends Controller
             foreach($categorie as $categoria){
                 $features = $categoria->getFeatures();
                 foreach($features as $feature){
-                    $featurevalues = $form->get('featurevalues_'.$feature->getId())->getData();
+                    $featurevalues = $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->getData();
                     if($feature->getTypeInput() == "select"){
                         $product->removeFeaturevalue($featurevalues);
                         $product->addFeaturevalue($featurevalues);
