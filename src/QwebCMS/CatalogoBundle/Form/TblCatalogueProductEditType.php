@@ -39,62 +39,63 @@ class TblCatalogueProductEditType extends AbstractType
             ->add('categories', 'entity', array(
                 'class'     => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
                 'property'  => 'title',
-                'multiple'  => false,
+                'multiple'  => true,
                 'expanded'  => false,
                 'required'  => true,
                 'mapped'    => true
             ))
-            ;
-
-
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
-            $product = $event->getData();
-            $form = $event->getForm();
-            $categorie = $product->getCategories();
-            foreach($categorie as $categoria){
-                $features = $categoria->getFeatures();
-                foreach($features as $feature){
-
-                    if ($feature->getTypeInput() == 'select' ){
-                        $expanded = false;
-                        $multiple = false;
-                    } else {
-                        $expanded = true;
-                        $multiple = true;
-                    }
-
-                    if($feature->getCompulsory()){
-                        $required = true;
-                    } else {
-                        $required = false;
-                    }
-
-                    $idFeature = $feature->getId();
-
-                    $form->add('featurevalues_'.$feature->getId(), 'entity', array(
-                        'class'     =>  'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
-                        'property'  =>  'title',
-                        //'choices'   =>  $featurevalues,
-                        'query_builder' => function (EntityRepository $er) use ($idFeature){
-                            return $er->createQueryBuilder('u')
-                                //->where('u.id > ?1')
-                                ->join('u.features', 'f', 'WITH')
-                                ->where('f.id = ?1')
-                                ->setParameter(1, $idFeature);
-                        },
-                        'expanded'  =>  $expanded,
-                        'multiple'  =>  $multiple,
-                        'required'  =>  $required,
-                        'mapped'    =>  false,
-                        'placeholder' => 'Scegli un opzione',
-                    ));
-                }
-            }
-        });
-
-        $builder
             ->add('exit', 'submit', array('label' => 'Salva ed Esci'))
-            ->add('save', 'submit', array('label' => 'Salva e Continua'));
+            ->add('save', 'submit', array('label' => 'Salva e Continua'))
+            ->addEventListener(FormEvents::PRE_SET_DATA,
+                array($this, 'onPreSetData')
+            )
+            ;
+    }
+
+    public function onPreSetData(FormEvent $event)
+    {
+        $product = $event->getData();
+        $form = $event->getForm();
+        $categorie = $product->getCategories();
+        foreach($categorie as $categoria){
+            $features = $categoria->getFeatures();
+            foreach($features as $feature){
+
+                if ($feature->getTypeInput() == 'select' ){
+                    $expanded = false;
+                    $multiple = false;
+                } else {
+                    $expanded = true;
+                    $multiple = true;
+                }
+
+                if($feature->getCompulsory()){
+                    $required = true;
+                } else {
+                    $required = false;
+                }
+
+                $idFeature = $feature->getIdTblCatalogueFeature();
+
+                $form->add('featurevalues_'.$idFeature, 'entity', array(
+                    'class'     =>  'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
+                    'property'  =>  'title',
+                    //'choices'   =>  $featurevalues,
+                    'query_builder' => function (EntityRepository $er) use ($idFeature){
+                        return $er->createQueryBuilder('u')
+                            //->where('u.id > ?1')
+                            ->join('u.features', 'f', 'WITH')
+                            ->where('f.id = ?1')
+                            ->setParameter(1, $idFeature);
+                    },
+                    'expanded'  =>  $expanded,
+                    'multiple'  =>  $multiple,
+                    'required'  =>  $required,
+                    'mapped'    =>  false,
+                    'placeholder' => 'Scegli un opzione',
+                ));
+            }
+        }
     }
     
     /**

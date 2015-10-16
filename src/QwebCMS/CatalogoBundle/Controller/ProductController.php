@@ -80,10 +80,15 @@ class ProductController extends Controller
                 // Copy id product on idTblCatalogueProduct field
                 $product->setIdTblCatalogueProduct($product->getId());
                 $em->flush();
-                return $this->redirect($this->generateUrl('products'));
+
+                $categoria = $product->getCategories();
+                $categoria = $categoria[0]->getIdTblCatalogueCategory();
+                return $this->redirect($this->generateUrl('show_category', array('id' => $categoria)));
 
             } else {
-                return $this->redirect($this->generateUrl('products'));
+                $categoria = $product->getCategories();
+                $categoria = $categoria[0]->getIdTblCatalogueCategory();
+                return $this->redirect($this->generateUrl('show_category', array('id' => $categoria)));
             }
 
         }
@@ -190,7 +195,10 @@ class ProductController extends Controller
             $em->persist($product);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('products'));
+            $categoria = $product->getCategories();
+            $categoria = $categoria[0]->getIdTblCatalogueCategory();
+
+            return $this->redirect($this->generateUrl('show_category', array('id' => $categoria)));
         } elseif($form->get('save')->isClicked() && $form->isValid()) {
             $categorie = $product->getCategories();
             foreach($categorie as $categoria){
