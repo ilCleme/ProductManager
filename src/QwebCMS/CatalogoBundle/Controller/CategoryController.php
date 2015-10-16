@@ -98,7 +98,7 @@ class CategoryController extends Controller
         // Getting photo of product
         $photos= $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
-            ->findAll(array('position' => 'ASC'));
+            ->findBy(array(), array('posizione' => 'ASC'));
 
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallcategoryproduct.html.twig',
