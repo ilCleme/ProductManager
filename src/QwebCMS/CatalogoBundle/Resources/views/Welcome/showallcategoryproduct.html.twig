@@ -48,6 +48,7 @@
                         {# sorting of properties based on query components #}
                         <th>{{ knp_pagination_sortable(pagination, 'Codice', 'a.cod') }}</th>
                         {#<th>{{ knp_pagination_sortable(pagination, 'Id', 'a.idTblCatalogueProduct') }}</th>#}
+                        <th>Immagine</th>
                         <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Prodotto', 'a.title') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Descrizione', 'a.shortDescription') }}</th>
                         <th>Stato</th>
@@ -59,6 +60,15 @@
                     <tr {% if loop.index is odd %}class="color"{% endif %}>
                         <td>{{ product.cod }}</td>
                         {#<td>{{ product.id }}</td>#}
+                        <td>
+                        {% set trovata = 'false' %}
+                        {% for photo in photos %}
+                            {% if (photo.idTblPhotoCat == product.idTblPhotoCat) and (trovata == 'false') %}
+                                <img src="{{ photo.img | imagine_filter('mini_img') }}"/>
+                                {% set trovata = 'true' %}
+                            {% endif %}
+                        {% endfor %}
+                        </td>
                         <td>{{ product.title }}</td>
                         <td>{{ product.shortDescription }}</td>
                         <td>{% if product.pub == 1 %}<i class="text-info fa fa-lg fa-check"></i>{% else %}<i class="text-danger fa fa-lg fa-times"></i>{% endif %}</td>

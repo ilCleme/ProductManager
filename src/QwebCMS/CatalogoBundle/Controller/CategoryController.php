@@ -74,12 +74,6 @@ class CategoryController extends Controller
             ));
         }
 
-        if (!$product) {
-            throw $this->createNotFoundException(
-                'Nessun prodotto trovato'
-            );
-        }
-
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $product,
@@ -101,10 +95,14 @@ class CategoryController extends Controller
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
             ->find($id);
 
-        // passo l'oggetto $product a un template
+        // Getting photo of product
+        $photos= $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
+            ->findAll(array('position' => 'ASC'));
+
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallcategoryproduct.html.twig',
-            array('category' => $category, 'categories' => $categories, 'pagination' => $pagination, 'id' => $id)
+            array('category' => $category, 'categories' => $categories, 'pagination' => $pagination, 'id' => $id, 'photos' => $photos)
         );
     }
     
