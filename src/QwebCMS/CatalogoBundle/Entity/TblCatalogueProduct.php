@@ -145,16 +145,16 @@ class TblCatalogueProduct
     /**
      *  @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory", inversedBy="products")
      *  @ORM\JoinTable(name="cross_tbl_catalogue_category_x_tbl_catalogue_product",
-     *      joinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id")})
+     *      joinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id_tbl_catalogue_product")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id_tbl_catalogue_category")})
      */
     private $categories;
     
     /**
      *  @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue", inversedBy="productsWithFeaturevalue")
      *  @ORM\JoinTable(name="cross_tbl_catalogue_product_x_tbl_catalogue_featurevalue",
-     *      joinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id")})
+     *      joinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id_tbl_catalogue_product")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id_tbl_catalogue_featurevalue")})
      */
     private $featurevalues;
     

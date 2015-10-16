@@ -103,6 +103,7 @@ class TblCatalogueCategory
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
         $this->parentOfCategories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->categoriesParent = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->features = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
