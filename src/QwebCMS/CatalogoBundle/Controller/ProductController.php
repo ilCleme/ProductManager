@@ -83,11 +83,13 @@ class ProductController extends Controller
 
                 $categoria = $product->getCategories();
                 $categoria = $categoria[0]->getIdTblCatalogueCategory();
+
                 return $this->redirect($this->generateUrl('show_category', array('id' => $categoria)));
 
             } else {
                 $categoria = $product->getCategories();
                 $categoria = $categoria[0]->getIdTblCatalogueCategory();
+
                 return $this->redirect($this->generateUrl('show_category', array('id' => $categoria)));
             }
 
