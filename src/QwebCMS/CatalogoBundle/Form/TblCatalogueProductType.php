@@ -40,14 +40,6 @@ class TblCatalogueProductType extends AbstractType
             'expanded' => false,
             'required' => true
         ))
-        ->add('featurevalues', 'entity', array(
-            'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
-            'property' => 'title',
-            'group_by' => 'featureTitle',
-            'multiple' => true,
-            'expanded' => false,
-            'required' => false
-        ))
         ->add('save', 'submit', array('label' => 'Salva'))
         ->add('saveAndContinue', 'submit', array('label' => 'Salva e continua'))
         ;

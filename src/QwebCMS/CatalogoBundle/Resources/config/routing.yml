@@ -19,10 +19,6 @@ upload_product_photo:
     defaults: { _controller: QwebCMSCatalogoBundle:Product:uploadPhoto }
 
 create_product:
-    path:     /products/new
-    defaults: { _controller: QwebCMSCatalogoBundle:Product:create }
-
-create_product_new:
     path:     /products/new/info
     defaults: { _controller: QwebCMSCatalogoBundle:Product:createNew }
 

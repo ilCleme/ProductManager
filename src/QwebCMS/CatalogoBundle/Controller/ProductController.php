@@ -334,6 +334,10 @@ class ProductController extends Controller
     }
 
     public function createNewAction(Request $request){
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
         $product = new Product();
 
         $form = $this->createForm(new TblCatalogueProductType(), $product);
@@ -361,20 +365,26 @@ class ProductController extends Controller
             $em->flush();
 
             if($form->get('saveAndContinue')->isClicked()) {
-                return $this->redirect($this->generateUrl('update_product', array(
+                return $this->redirect($this->generateUrl('update_product_feature', array(
                     'id' => $product->getIdTblCatalogueProduct()
                 )));
 
             } elseif($form->get('save')->isClicked()) {
 
-                return $this->redirect($this->generateUrl('products'));
+                $categoria = $product->getCategories();
+                $categoria = $categoria[0]->getIdTblCatalogueCategory();
+
+                return $this->redirect($this->generateUrl('show_category', array(
+                    'id' => $categoria
+                )));
 
             }
 
         }
 
-        return $this->render('QwebCMSCatalogoBundle:Product:infoproduct.html.twig', array(
-            'form' => $form->createView()
+        return $this->render('QwebCMSCatalogoBundle:Product:newproductinfo.html.twig', array(
+            'form' => $form->createView(),
+            'categories'    =>  $categories
         ));
     }
 
