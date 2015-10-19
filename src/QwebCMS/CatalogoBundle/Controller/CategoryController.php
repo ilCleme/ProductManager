@@ -78,7 +78,7 @@ class CategoryController extends Controller
         $pagination = $paginator->paginate(
             $product,
             $request->query->getInt('page', 1)/*page number*/,
-            $request->query->getInt('number', 10)/*limit per page*/
+            $request->query->getInt('number', 50)/*limit per page*/
         );
 
         $categories = $this->getDoctrine()
