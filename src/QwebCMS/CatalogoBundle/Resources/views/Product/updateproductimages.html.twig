@@ -1,0 +1,308 @@
+{# src/Acme/DemoBundle/Resources/views/Random/index.html.twig #}
+{% extends '::layout.html.twig' %}
+
+{% block title %}Modifica {{ product.title }}{% endblock %}
+
+{% block stylesheets %}
+    <link href="{{ asset('assets/css/html5imageupload.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-style/css/plugins/sweetalert/sweetalert.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block pagetitle %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <h2>Modifica "{{ product.title }}"</h2>
+            <h4>Categoria:</h4>
+            {% for category  in product.categories %}
+                <span>{{ category.title }}</span>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <li class="active">
+        <a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">Catalogo</span> <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse in">
+            <li><a href="{{ path('welcome') }}">Dashboard</a></li>
+            <li class="active">
+                <a href="{{ path('products') }}">Prodotti <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level collapse">
+                    {% for category in categories %}
+                        <li><a href="{{ path('show_category', {id : category.idTblCatalogueCategory}) }}">{{ category.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li><a href="{{ path('categories') }}">Categorie</a></li>
+            <li><a href="{{ path('features') }}">Caratteristiche</a></li>
+        </ul>
+    </li>
+{% endblock %}
+
+{% block content %}
+
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-container">
+                <ul class="nav nav-tabs">
+                    <li class=""><a href="{{ path('update_product_info', {id : product.idTblCatalogueProduct}) }}">Informazioni Prodotto</a></li>
+                    <li class=""><a href="{{ path('update_product_feature', {id : product.idTblCatalogueProduct}) }}">Caratteristiche</a></li>
+                    <li class="active"><a data-toggle="tab" href="#tab-4">Immagini</a></li>
+                    <li class=""><a data-toggle="tab" href="#tab-5">Personalizza Foto</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="tab-4" class="tab-pane active">
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div id="my-awesome-dropzone" class="dropzone" action="#">
+                                    <div class="dropzone-previews"></div>
+                                    <button type="submit" class="btn btn-primary pull-right save_image">Salva Immagini</button>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <p>
+                                    <button type="button" class="btn btn-warning " id="ordina-foto">
+                                        <i class="fa fa-wrench"></i>&nbsp;&nbsp;
+                                        <span class="bold">Ordina Foto</span>
+                                    </button>
+                                    <button class="btn btn-w-m btn-success" type="button" id="chiudi-ordina-foto">Chiudi</button>
+                                </p>
+
+                                <div class="table-responsive">
+                                    <table id="table-immagini" class="table table-bordered table-stripped">
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                Anteprima
+                                            </th>
+                                            <th>
+                                                Posizione
+                                            </th>
+                                            <th>
+                                                Azioni
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for immagine in immagini %}
+                                            <tr>
+                                                <td>
+                                                    <img class="img-responsive" src="{{ asset(immagine.img) | imagine_filter('img_preview')}}" />
+                                                </td>
+                                                <td>
+                                                    {{ immagine.posizione }}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ path('delete_photo', {'id': immagine.idTblPhoto}) }}" title="Elimina" class="cancella-foto btn btn-danger"><i class="fa fa-lg fa-times"></i></a>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="dd" id="nestable">
+                                    <ol class="dd-list">
+                                        {% for immagine in immagini %}
+                                        <li class="dd-item" data-id="{{ immagine.idTblPhoto }}">
+                                            <div class="dd-handle">
+                                                <img class="img-responsive" src="{{ asset(immagine.img) | imagine_filter('img_preview') }}" />
+                                            </div>
+                                        </li>
+                                        {% endfor %}
+                                    </ol>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="tab-5" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="col-md-12">
+                                <div class="html5imageupload" data-smaller="true" data-canvas-image-only="true" data-originalsize="false" data-width="960" data-height="540" data-url="{{ path('upload_product_photo') }}" data-resize="true" style="width: 800px;">
+                                    <input type="file" name="thumb" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        {{ form_label(form.saveAndContinue, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                        {{ form_widget(form.saveAndContinue, {'attr': {'class': 'btn btn-primary'}}) }}
+
+                        {{ form_label(form.save, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                        {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+    
+</div>
+    
+    
+{% endblock %}
+
+{% block javascripts %}
+
+    <!-- DROPZONE -->
+    <script src="{{ asset('admin-style/js/plugins/dropzone/dropzone.js') }}"></script>
+
+    <!-- HTML5 IMAGE UPLOAD -->
+    <script src="{{ asset('assets/js/html5imageupload.js') }}"></script>
+
+    <!-- SWEET ALERT -->
+    <script src="{{ asset('admin-style/js/plugins/sweetalert/sweetalert.min.js') }}"></script>
+
+    <!-- Nestable List -->
+    <script src="{{ asset('admin-style/js/plugins/nestable/jquery.nestable.js') }}"></script>
+
+    <script>
+        $(document).ready(function(){
+
+            Dropzone.options.myAwesomeDropzone = {
+
+                url: "{{ oneup_uploader_endpoint('gallery') }}",
+                autoProcessQueue: false,
+                //uploadMultiple: true,
+                parallelUploads: 10,
+                maxFiles: 100,
+                addRemoveLinks: true,
+                headers:{"id-album": "{{ product.idTblPhotoCat }}"},
+
+                // Dropzone settings
+                init: function() {
+                    var myDropzone = this;
+
+                    this.element.querySelector(".save_image").addEventListener("click", function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        myDropzone.processQueue();
+                    });
+                    this.on("sendingmultiple", function() {
+                    });
+                    this.on("successmultiple", function(files, response) {
+                    });
+                    this.on("errormultiple", function(files, response) {
+                    });
+                    this.on("queuecomplete", function(files, response) {
+                        setTimeout("location.reload(true);", 1000);
+                    });
+                }
+
+            }
+
+            Dropzone.options.dropPlanimetria = {
+
+                url: "{{ oneup_uploader_endpoint('planimetrie') }}",
+                autoProcessQueue: true,
+                //uploadMultiple: true,
+                parallelUploads: 1,
+                maxFiles: 1,
+                addRemoveLinks: true,
+                headers:{"id-product": "{{ product.idTblCatalogueProduct }}"},
+
+                // Dropzone settings
+                init: function() {
+                    var dropPlanimetriaObject = this;
+                    this.on("sendingmultiple", function() {
+                    });
+                    this.on("successmultiple", function(files, response) {
+                    });
+                    this.on("errormultiple", function(files, response) {
+                    });
+                    this.on("queuecomplete", function(files, response) {
+                        //setTimeout("location.reload(true);", 1000);
+                    });
+                }
+
+            }
+
+            $('.html5imageupload').html5imageupload({data: {id_album: '{{ product.idTblPhotoCat }}', id_prodotto: '{{ product.idTblCatalogueProduct }}'}});
+
+            $('.cancella-foto').click(function(e){
+                e.preventDefault();
+                var tr_parent = $(this).parent().parent();
+                var a_href = $(this).attr('href');
+                //console.log(a_href);
+                $.ajax({
+                    method: "POST",
+                    url: a_href,
+                    dataType: "html"
+                })
+                .done(function( msg ) {
+                    $( "body" ).append( msg );
+                    tr_parent.hide();
+                });
+            });
+
+            /*$('.cancella-foto').click(function () {
+                e.preventDefault();
+                swal({
+                    title: "Are you sure?",
+                    text: "You will not be able to recover this imaginary file!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it!",
+                    closeOnConfirm: true
+                }, function () {
+                    var tr_parent = $(this).parent().parent();
+                    var a_href = $(this).attr('href');
+                    console.log(a_href);
+                    $.ajax({
+                        method: "POST",
+                        url: a_href,
+                        dataType: "html"
+                    })
+                    .done(function( msg ) {
+                        $( "body" ).append( msg );
+                        tr_parent.hide();
+                    });
+
+                });
+            });*/
+
+            var updateOutput = function (e) {
+                var list = e.length ? e : $(e.target);
+                if (window.JSON) {
+                    //output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+                    $.ajax({
+                        type: 'GET',
+                        url: '{{ path('update_position_photo') }}',
+                        data: { foto: window.JSON.stringify(list.nestable('serialize')) },
+                        dataType: 'json'
+                    })
+                    .done(function(data){
+                        //console.log(data.data);
+                    });
+                } else {
+                    output.val('JSON browser support required for this demo.');
+                }
+            };
+            // activate Nestable
+            $('#nestable').nestable({
+                group: 1
+            }).on('change', updateOutput);
+            $('#nestable').hide();
+            $('#chiudi-ordina-foto').hide();
+            $('#ordina-foto').click(function(){
+                $('#nestable').show();
+                $('#chiudi-ordina-foto').show();
+                $('#table-immagini').hide();
+            });
+            $('#chiudi-ordina-foto').click(function(){
+                $('#table-immagini').show();
+                $('#nestable').hide();
+                $('#chiudi-ordina-foto').hide();
+            })
+        });
+    </script>
+{% endblock %}
