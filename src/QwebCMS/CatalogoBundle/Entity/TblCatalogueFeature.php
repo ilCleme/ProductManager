@@ -69,11 +69,12 @@ class TblCatalogueFeature
     private $position = 0;
 
     /**
-     * @var integer
      *
-     * @ORM\Column(name="inherit_from", type="integer", nullable=false)
+     * @ORM\OneToOne(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature")
+     * @ORM\JoinColumn(name="inherit_from", referencedColumnName="id")
+     *
      */
-    private $inheritFrom = 0;
+    private $inheritFrom;
 
     /**
      * @var integer

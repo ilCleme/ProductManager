@@ -31,6 +31,13 @@ class TblCatalogueFeatureType extends AbstractType
             ->add('display', 'choice', array(
                 'choices'   =>  array('float:left' => 'Su unica riga', '' => 'Un valore per riga')
             ))
+            ->add('inheritFrom', 'entity', array(
+                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',
+                'property' => 'title',
+                'multiple' => false,
+                'expanded' => false,
+                'required' => false
+            ))
             ->add('position', 'hidden')
             //->add('featurevalues')
             ->add('save', 'submit', array('label' => 'Salva'))

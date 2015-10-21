@@ -82,6 +82,11 @@
                                 {{ form_errors(form.display) }}
                                 {{ form_widget(form.display, {'attr': {'class': 'form-control'}}) }}
                             </div>
+                            <div class="form-group">
+                                {{ form_label(form.inheritFrom, 'Dipende da'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_errors(form.inheritFrom) }}
+                                {{ form_widget(form.inheritFrom, {'attr': {'class': 'form-control'}}) }}
+                            </div>
                         </div>
 
                         <div class="col-md-12">
