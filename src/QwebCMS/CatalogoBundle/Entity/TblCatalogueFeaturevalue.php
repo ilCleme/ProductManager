@@ -69,6 +69,15 @@ class TblCatalogueFeaturevalue
      */
     private $features;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue")
+     * @ORM\JoinTable(name="tbl_catalogue_featurevalue_inherit",
+     *      joinColumns={@ORM\JoinColumn(name="id_catalogue_featurevalue", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_catalogue_featurevalue_father", referencedColumnName="id", unique=true)}
+     *      )
+     **/
+    private $featurevalue_inherit;
+
 
     /**
      * Set idTblCatalogueFeaturevalue
@@ -200,6 +209,7 @@ class TblCatalogueFeaturevalue
     public function __construct()
     {
         $this->productsWithFeaturevalue = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->featurevalue_inherit = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -275,5 +285,38 @@ class TblCatalogueFeaturevalue
             return $title;
         }
         return null;
+    }
+
+    /**
+     * Add featurevalue_inherit
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalueInherit
+     * @return TblCatalogueFeaturevalue
+     */
+    public function addFeaturevalueInherit(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalueInherit)
+    {
+        $this->featurevalue_inherit[] = $featurevalueInherit;
+
+        return $this;
+    }
+
+    /**
+     * Remove featurevalue_inherit
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalueInherit
+     */
+    public function removeFeaturevalueInherit(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalueInherit)
+    {
+        $this->featurevalue_inherit->removeElement($featurevalueInherit);
+    }
+
+    /**
+     * Get featurevalue_inherit
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getFeaturevalueInherit()
+    {
+        return $this->featurevalue_inherit;
     }
 }

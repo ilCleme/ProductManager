@@ -5,6 +5,9 @@ namespace QwebCMS\CatalogoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class TblCatalogueFeaturevalueType extends AbstractType
 {
@@ -27,9 +30,42 @@ class TblCatalogueFeaturevalueType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false
-              ))
+            ))
             ->add('save', 'submit', array('label' => 'Salva'))
+            ->addEventListener(FormEvents::PRE_SET_DATA,
+                array($this, 'onPreSetData')
+            )
         ;
+    }
+
+    public function onPreSetData(FormEvent $event)
+    {
+        $featurevalue = $event->getData();
+        $form = $event->getForm();
+        $featurevalue_parent = $featurevalue->getFeatures();
+
+        if (method_exists($featurevalue_parent[0], "getInheritFrom")){
+            $id = $featurevalue_parent[0]->getInheritFrom();
+            if (null !== $id){
+                $form->add('featurevalue_inherit', 'entity', array(
+                    'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
+                    'query_builder' => function (EntityRepository $er) use ($id){
+                        return $er->createQueryBuilder('u')
+                            //->where('u.id > ?1')
+                            ->join('u.features', 'f', 'WITH')
+                            ->where('f.id = ?1')
+                            ->setParameter(1, $id);
+                    },
+                    'property' => 'title',
+                    'multiple' => true,
+                    'expanded' => true,
+                    'required' => false
+                ));
+            }
+        }
+
+
+
     }
     
     /**
@@ -47,6 +83,6 @@ class TblCatalogueFeaturevalueType extends AbstractType
      */
     public function getName()
     {
-        return 'acme_demobundle_tblcataloguefeaturevalue';
+        return 'featurevalues_form';
     }
 }

@@ -58,17 +58,26 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ form_label(form.title, label|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_label(form.title, 'Nome valore'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_errors(form.title) }}
                                 {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                             </div>
                         </div>
                         <div class="col-md-6">
-                            {{ form_label(form.features, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                            {{ form_label(form.features, 'Caratteristica Padre'|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
                             {{ form_errors(form.features) }}
                             <div class="col-lg-12 m-l-n">
                                 {{ form_widget(form.features, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
                             </div>
+                        </div>
+                        <div class="col-md-6">
+                            {% if form.featurevalue_inherit is defined %}
+                                {{ form_label(form.featurevalue_inherit, 'Dipende da'|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                                {{ form_errors(form.featurevalue_inherit) }}
+                                <div class="col-lg-12 m-l-n">
+                                    {{ form_widget(form.featurevalue_inherit, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
+                                </div>
+                            {% endif %}
                         </div>
 
                         <div class="col-md-12">
