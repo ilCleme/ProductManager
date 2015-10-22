@@ -1,5 +1,13 @@
 {# src/Acme/DemoBundle/Resources/views/Random/index.html.twig #}
 {% extends 'layout.html.twig' %}
+
+{%  form_theme form _self %}
+
+{% block checkbox_widget %}
+    <br>
+    <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />
+{% endblock checkbox_widget %}
+
 {% block stylesheets %}{% endblock %}
 
 {% block title %}Modifica "{{ featurevalue.title }}"{% endblock %}
@@ -13,10 +21,10 @@
                     <a href="/">Dashboard</a>
                 </li>
                 <li>
-                    <a href="/features">Featurevalues</a>
+                    <a href="/features">Caratteristiche</a>
                 </li>
                 <li class="active">
-                    <strong>Nuova Featurevalues</strong>
+                    <strong>Nuovo Valore Caratteristica</strong>
                 </li>
             </ol>
         </div>
@@ -49,7 +57,7 @@
         {{ form_start(form) }}
         <div class="tabs-container">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#tab-1"> Informazioni Featurevalues</a></li>
+                <li class="active"><a data-toggle="tab" href="#tab-1"> Informazioni Valore Caratteristica</a></li>
             </ul>
             <div class="tab-content">
 
@@ -63,21 +71,26 @@
                                 {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            {{ form_label(form.features, 'Caratteristica Padre'|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
-                            {{ form_errors(form.features) }}
-                            <div class="col-lg-12 m-l-n">
-                                {{ form_widget(form.features, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
+                        <div class="clearfix"></div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                {{ form_label(form.features, 'Caratteristica Padre'|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                                {{ form_errors(form.features) }}
+                                <div class="col-lg-12 m-l-n">
+                                    {{ form_widget(form.features, {'attr': {'class': '', 'multiple':'true'}}) }}
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            {% if form.featurevalue_inherit is defined %}
-                                {{ form_label(form.featurevalue_inherit, 'Dipende da'|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
-                                {{ form_errors(form.featurevalue_inherit) }}
-                                <div class="col-lg-12 m-l-n">
-                                    {{ form_widget(form.featurevalue_inherit, {'attr': {'class': 'form-control', 'multiple':'true'}}) }}
-                                </div>
-                            {% endif %}
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                {% if form.featurevalue_inherit is defined %}
+                                    {{ form_label(form.featurevalue_inherit, 'Dipende da'|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                                    {{ form_errors(form.featurevalue_inherit) }}
+                                    <div class="col-lg-12 m-l-n">
+                                        {{ form_widget(form.featurevalue_inherit, {'attr': {'class': '', 'multiple':'true'}}) }}
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
 
                         <div class="col-md-12">

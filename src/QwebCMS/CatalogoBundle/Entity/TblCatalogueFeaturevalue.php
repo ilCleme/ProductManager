@@ -73,7 +73,7 @@ class TblCatalogueFeaturevalue
      * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue")
      * @ORM\JoinTable(name="tbl_catalogue_featurevalue_inherit",
      *      joinColumns={@ORM\JoinColumn(name="id_catalogue_featurevalue", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_catalogue_featurevalue_father", referencedColumnName="id", unique=true)}
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_catalogue_featurevalue_father", referencedColumnName="id")}
      *      )
      **/
     private $featurevalue_inherit;
