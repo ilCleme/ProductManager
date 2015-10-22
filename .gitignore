@@ -1,5 +1,6 @@
 /app/bootstrap.php.cache
 /app/cache/*
+/app/DoctrineMigrations/*
 !app/cache/.gitkeep
 /app/config/parameters.yml
 /app/logs/*
