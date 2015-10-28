@@ -65,7 +65,12 @@ class ProductController extends Controller
             'Il prodotto è stato eliminato!'
         );
 
-        return $this->redirectToRoute('products');
+        $categoria = $product->getCategories();
+        $categoria = $categoria[0]->getIdTblCatalogueCategory();
+
+        return $this->redirect($this->generateUrl('show_category', array(
+            'id' => $categoria
+        )));
     }
 
     public function uploadPhotoAction(Request $request)
