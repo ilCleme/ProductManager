@@ -44,24 +44,7 @@ class FeatureController extends Controller
             'categories' => $categories
         ));
     }
-    
-    public function showAction($id)
-    {
-        $feature = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
-            ->find($id);
-    
-        if (!$feature) {
-            throw $this->createNotFoundException(
-                'Nessuna categoria di Feature è stata trovata per l\'id '.$id
-            );
-        }
-    
-        // passo l'oggetto $feature a un template
-        return $this->render('QwebCMSCatalogoBundle:Featurevalue:showfeature.html.twig',
-            array('feature' => $feature->getFeaturevalues())
-        );
-    }
+
     
     public function updateAction($id, Request $request)
     {
