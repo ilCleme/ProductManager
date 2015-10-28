@@ -62,7 +62,7 @@ class ProductController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'Il prodotto Ã¨ stato eliminato!'
+            'Il prodotto è stato eliminato!'
         );
 
         return $this->redirectToRoute('products');
@@ -324,8 +324,6 @@ class ProductController extends Controller
                     'id' => $product->getIdTblCatalogueProduct()
                 )));
             }
-
-
 
         }
 
