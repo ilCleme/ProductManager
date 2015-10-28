@@ -4,7 +4,6 @@ namespace QwebCMS\CatalogoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature as Feature;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueFeatureType;
 

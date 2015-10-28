@@ -45,24 +45,6 @@ class FeaturevalueController extends Controller
         ));
     }
     
-    public function showAction($id)
-    {
-        $featurevalues = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')
-            ->find($id);
-    
-        if (!$featurevalues) {
-            throw $this->createNotFoundException(
-                'Nessuna categoria trovata per l\'id '.$id
-            );
-        }
-    
-        // passo l'oggetto $featurevalues a un template
-        return $this->render('QwebCMSCatalogoBundle:Featurevalue:showcategory.html.twig',
-            array('category' => $featurevalues)
-        );
-    }
-    
     public function updateAction($id, Request $request)
     {
         $categories = $this->getDoctrine()
