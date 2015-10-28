@@ -55,6 +55,9 @@ class ProductController extends Controller
             );
         }
 
+        $categories = $product->getCategories();
+        $category_id =  $categories[0]->getIdTblCatalogueCategory();
+
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($product);
@@ -65,11 +68,9 @@ class ProductController extends Controller
             'Il prodotto è stato eliminato!'
         );
 
-        $categoria = $product->getCategories();
-        $categoria = $categoria[0]->getIdTblCatalogueCategory();
 
         return $this->redirect($this->generateUrl('show_category', array(
-            'id' => $categoria
+            'id' => $category_id
         )));
     }
 
@@ -182,11 +183,10 @@ class ProductController extends Controller
 
             } elseif($form->get('save')->isClicked()) {
 
-                $categoria = $product->getCategories();
-                $categoria = $categoria[0]->getIdTblCatalogueCategory();
-
+                $categories = $product->getCategories();
+                $category_id =  $categories[0]->getIdTblCatalogueCategory();
                 return $this->redirect($this->generateUrl('show_category', array(
-                    'id' => $categoria
+                    'id' => $category_id
                 )));
 
             }
