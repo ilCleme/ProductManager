@@ -5,8 +5,11 @@ namespace QwebCMS\CatalogoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
-class TblCatalogueProductType extends AbstractType
+class TblCatalogueProductEditInfoType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -26,25 +29,25 @@ class TblCatalogueProductType extends AbstractType
         ->add('indirizzo')
         ->add('classeEnergetica')
         ->add('prezzo')
-        ->add('planimetria', 'hidden')
         ->add('idTblPhotoCat', 'hidden')
-        ->add('template', 'hidden')
         ->add('pub', 'checkbox', array(
             'required'  => false,
         ))
         ->add('position')
         ->add('categories', 'entity', array(
-            'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
-            'property' => 'title',
-            'multiple' => false,
-            'expanded' => false,
-            'required' => true
+            'class'     => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
+            'property'  => 'title',
+            'multiple'  => true,
+            'expanded'  => false,
+            'required'  => true,
+            'mapped'    => true
         ))
-        ->add('save', 'submit', array('label' => 'Salva'))
-        ->add('saveAndContinue', 'submit', array('label' => 'Salva e continua'))
+        ->add('save', 'submit', array('label' => 'Salva ed Esci'))
+        ->add('saveAndContinue', 'submit', array('label' => 'Salva e Continua'))
         ;
     }
-    
+
+
     /**
      * @param OptionsResolverInterface $resolver
      */
@@ -60,6 +63,6 @@ class TblCatalogueProductType extends AbstractType
      */
     public function getName()
     {
-        return 'product_new';
+        return 'product_edit';
     }
 }

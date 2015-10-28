@@ -9,229 +9,38 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductType;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditType;
+use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditInfoType;
+use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditFeaturesType;
+use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditImagesType;
 use QwebCMS\CatalogoBundle\Entity\TblPhoto as Foto;
 
 class ProductController extends Controller
 {
-    public function createAction(Request $request)
-    {
-        $categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
 
-        $product = new Product();
-
-        $form = $this->createForm(new TblCatalogueProductType(), $product);
-
-        $form->handleRequest($request);
-        
-        if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            $em = $this->getDoctrine()->getManager();
-
-            if($form->get('saveAndContinue')->isClicked()) {
-
-                // Create a new empty Album for this product
-                $album = new Album();
-                $album->setNome($product->getTitle());
-                $em->persist($album);
-                $em->flush();
-
-                // Save product information on database
-                $product->setIdTblCatalogueProduct(0);
-                $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
-                $product->setIdTblLingua(4);
-                $em->persist($product);
-                $em->flush();
-
-                // Copy id product on idTblCatalogueProduct field
-                $product->setIdTblCatalogueProduct($product->getId());
-                $em->flush();
-
-                $form = $this->createForm(new TblCatalogueProductType(), $product);
-
-                if ($product->getIdTblPhotoCat() != null) {
-                    $id_album = $product->getIdTblPhotoCat();
-                } else {
-                    $id_album = 0;
-                }
-
-                return $this->render('QwebCMSCatalogoBundle:Product:new.html.twig', array(
-                    'form'          => $form->createView(),
-                    'id_album'      => $id_album,
-                    'categories'    => $categories
-                ));
-
-            } elseif($form->get('save')->isClicked()) {
-
-                // Create a new empty Album for this product
-                $album = new Album();
-                $album->setNome($product->getTitle());
-                $em->persist($album);
-                $em->flush();
-
-                // Save product information on database
-                $product->setIdTblCatalogueProduct(0);
-                $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
-                $product->setIdTblLingua(4);
-                $em->persist($product);
-                $em->flush();
-
-                // Copy id product on idTblCatalogueProduct field
-                $product->setIdTblCatalogueProduct($product->getId());
-                $em->flush();
-
-                $categoria = $product->getCategories();
-                $categoria = $categoria[0]->getIdTblCatalogueCategory();
-
-                return $this->redirect($this->generateUrl('show_category', array('id' => $categoria)));
-
-            } else {
-                $categoria = $product->getCategories();
-                $categoria = $categoria[0]->getIdTblCatalogueCategory();
-
-                return $this->redirect($this->generateUrl('show_category', array('id' => $categoria)));
-            }
-
-        }
-
-        return $this->render('QwebCMSCatalogoBundle:Product:new.html.twig', array(
-            'form' => $form->createView(),
-            'id_album' => 0,
-            'categories'    =>  $categories
-        ));
-    }
-    
     public function showAction($id)
     {
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
             ->find($id);
-    
+
         if (!$product) {
             throw $this->createNotFoundException(
                 'Nessun prodotto trovato per l\'id '.$id
             );
         }
-    
+
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Product:showproduct.html.twig',
             array('product' => $product)
         );
     }
-    
+
     public function updateAction($id, Request $request)
     {
-        $categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
-
-        // Getting product information
-        $product = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
-            ->find($id);
-
-        $product->setIdTblLingua(4);
-    
-        if (!$product) {
-            throw $this->createNotFoundException(
-                'Nessun prodotto trovato per l\'id '.$id
-            );
-        }
-
-        // Getting photo of product
-        $photos= $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
-            ->findBy( array('idTblPhotoCat' => $product->getIdTblPhotoCat()),
-                array('posizione' => 'ASC'));
-
-        $form = $this->createForm(new TblCatalogueProductEditType(), $product);
-
-        if ( !($form->isValid()) ) {
-            $featurevalues = $product->getFeaturevalues();
-            $categorie = $product->getCategories();
-            foreach ($categorie as $categoria) {
-                $features = $categoria->getFeatures();
-                foreach ($features as $feature) {
-                    if($feature->getTypeInput() == "select"){
-                        //$form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
-                        foreach($featurevalues as $featurevalue){
-                            $featureChildrens = $feature->getFeaturevalues();
-                            foreach($featureChildrens as $children){
-                                if($children->getIdTblCatalogueFeaturevalue() == $featurevalue->getIdTblCatalogueFeaturevalue()){
-                                    $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalue);
-                                }
-                            }
-                        }
-                    } else {
-                        $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
-                    }
-                }
-            }
-        }
-
-        $form->handleRequest($request);
-        //$features = null;
-
-        if ($form->get('exit')->isClicked() && $form->isValid()) {
-            $categorie = $product->getCategories();
-            foreach($categorie as $categoria){
-                $features = $categoria->getFeatures();
-                foreach($features as $feature){
-                    $featurevalues = $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->getData();
-                    if($feature->getTypeInput() == "select"){
-                        $product->removeFeaturevalue($featurevalues);
-                        $product->addFeaturevalue($featurevalues);
-                    } else {
-                        foreach($featurevalues as $featurevalue){
-                            $product->removeFeaturevalue($featurevalue);
-                            $product->addFeaturevalue($featurevalue);
-                        }
-                    }
-                }
-            }
-
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($product);
-            $em->flush();
-
-            $categoria = $product->getCategories();
-            $categoria = $categoria[0]->getIdTblCatalogueCategory();
-
-            return $this->redirect($this->generateUrl('show_category', array('id' => $categoria)));
-        } elseif($form->get('save')->isClicked() && $form->isValid()) {
-            $categorie = $product->getCategories();
-            foreach($categorie as $categoria){
-                $features = $categoria->getFeatures();
-                foreach($features as $feature){
-                    $featurevalues = $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->getData();
-                    if($feature->getTypeInput() == "select"){
-                        $product->removeFeaturevalue($featurevalues);
-                        $product->addFeaturevalue($featurevalues);
-                    } else {
-                        foreach($featurevalues as $featurevalue){
-                            $product->removeFeaturevalue($featurevalue);
-                            $product->addFeaturevalue($featurevalue);
-                        }
-                    }
-                }
-            }
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($product);
-            $em->flush();
-        }
-
-        // passo l'oggetto $product a un template
-        return $this->render('QwebCMSCatalogoBundle:Product:update.html.twig', array(
-            'form' => $form->createView(),
-            'product' => $product,
-            'immagini' => $photos,
-            'features'   =>  $features,
-            'categories'    =>  $categories
-        ));
+        return $this->redirect($this->generateUrl('update_product_info', array(
+            'id' => $id
+        )));
     }
 
     public function deleteAction($id, Request $request)
@@ -246,6 +55,9 @@ class ProductController extends Controller
             );
         }
 
+        $categories = $product->getCategories();
+        $category_id =  $categories[0]->getIdTblCatalogueCategory();
+
         $em = $this->getDoctrine()->getManager();
 
         $em->remove($product);
@@ -256,7 +68,10 @@ class ProductController extends Controller
             'Il prodotto è stato eliminato!'
         );
 
-        return $this->redirectToRoute('products');
+
+        return $this->redirect($this->generateUrl('show_category', array(
+            'id' => $category_id
+        )));
     }
 
     public function uploadPhotoAction(Request $request)
@@ -331,6 +146,10 @@ class ProductController extends Controller
     }
 
     public function createNewAction(Request $request){
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
         $product = new Product();
 
         $form = $this->createForm(new TblCatalogueProductType(), $product);
@@ -358,20 +177,217 @@ class ProductController extends Controller
             $em->flush();
 
             if($form->get('saveAndContinue')->isClicked()) {
-                return $this->redirect($this->generateUrl('update_product', array(
+                return $this->redirect($this->generateUrl('update_product_feature', array(
                     'id' => $product->getIdTblCatalogueProduct()
                 )));
 
             } elseif($form->get('save')->isClicked()) {
 
-                return $this->redirect($this->generateUrl('products'));
+                $categories = $product->getCategories();
+                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                return $this->redirect($this->generateUrl('show_category', array(
+                    'id' => $category_id
+                )));
 
             }
 
         }
 
-        return $this->render('QwebCMSCatalogoBundle:Product:infoproduct.html.twig', array(
-            'form' => $form->createView()
+        return $this->render('QwebCMSCatalogoBundle:Product:newproductinfo.html.twig', array(
+            'form' => $form->createView(),
+            'categories'    =>  $categories
+        ));
+    }
+
+    public function updateInfoAction($id, Request $request){
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
+        $product = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
+            ->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'Nessun prodotto trovato per l\'id '.$id
+            );
+        }
+
+        $form = $this->createForm(new TblCatalogueProductEditInfoType(), $product);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($product);
+            $em->flush();
+
+            if($form->get('saveAndContinue')->isClicked()) {
+
+                return $this->redirect($this->generateUrl('update_product_feature', array(
+                    'id' => $product->getIdTblCatalogueProduct()
+                )));
+
+            } elseif($form->get('save')->isClicked()) {
+
+                $categories = $product->getCategories();
+                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                return $this->redirect($this->generateUrl('show_category', array(
+                    'id' => $category_id
+                )));
+
+            }
+
+        }
+
+        return $this->render('QwebCMSCatalogoBundle:Product:updateproductinfo.html.twig', array(
+            'form' => $form->createView(), 'product' => $product, 'categories' => $categories,
+        ));
+    }
+
+    public function updateFeaturesAction($id, Request $request){
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
+        $product = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
+            ->find($id);
+
+        $categorie = $product->getCategories();
+        foreach($categorie as $categoria){
+            $features = $categoria->getFeatures();
+        }
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'Nessun prodotto trovato per l\'id '.$id
+            );
+        }
+
+        $form = $this->createForm(new TblCatalogueProductEditFeaturesType(), $product);
+
+        if ( !($form->isValid()) ) {
+            $featurevalues = $product->getFeaturevalues();
+            $categorie = $product->getCategories();
+            foreach ($categorie as $categoria) {
+                $features = $categoria->getFeatures();
+                foreach ($features as $feature) {
+                    if($feature->getTypeInput() == "select"){
+                        //$form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
+                        foreach($featurevalues as $featurevalue){
+                            $featureChildrens = $feature->getFeaturevalues();
+                            foreach($featureChildrens as $children){
+                                if($children->getIdTblCatalogueFeaturevalue() == $featurevalue->getIdTblCatalogueFeaturevalue()){
+                                    $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalue);
+                                }
+                            }
+                        }
+                    } else {
+                        $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
+                    }
+                }
+            }
+        }
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $categorie = $product->getCategories();
+            foreach($categorie as $categoria){
+                $features = $categoria->getFeatures();
+                foreach($features as $feature){
+                    $featurevalues = $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->getData();
+                    if($feature->getTypeInput() == "select"){
+                        $product->removeFeaturevalue($featurevalues);
+                        $product->addFeaturevalue($featurevalues);
+                    } else {
+                        foreach($featurevalues as $featurevalue){
+                            $product->removeFeaturevalue($featurevalue);
+                            $product->addFeaturevalue($featurevalue);
+                        }
+                    }
+                }
+            }
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($product);
+            $em->flush();
+
+            if ($form->get('exit')->isClicked()) {
+                $categories = $product->getCategories();
+                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                return $this->redirect($this->generateUrl('show_category', array(
+                    'id' => $category_id
+                )));
+            } elseif($form->get('save')->isClicked()) {
+
+                return $this->redirect($this->generateUrl('update_product_immagini', array(
+                    'id' => $product->getIdTblCatalogueProduct()
+                )));
+            }
+
+        }
+
+        return $this->render('QwebCMSCatalogoBundle:Product:updateproductfeatures.html.twig', array(
+            'form' => $form->createView(), 'product' => $product, 'categories' => $categories, 'features'   =>  $features,
+        ));
+    }
+
+    public function updateImagesAction($id, Request $request){
+        $categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();
+
+        $product = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
+            ->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'Nessun prodotto trovato per l\'id '.$id
+            );
+        }
+
+        // Getting photo of product
+        $photos= $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
+            ->findBy( array('idTblPhotoCat' => $product->getIdTblPhotoCat()),
+                array('posizione' => 'ASC'));
+
+        $form = $this->createForm(new TblCatalogueProductEditImagesType(), $product);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($product);
+            $em->flush();
+
+            if($form->get('saveAndContinue')->isClicked()) {
+
+                return $this->redirect($this->generateUrl('update_product_info', array(
+                    'id' => $product->getIdTblCatalogueProduct()
+                )));
+
+            } elseif($form->get('save')->isClicked()) {
+
+                $categories = $product->getCategories();
+                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                return $this->redirect($this->generateUrl('show_category', array(
+                    'id' => $category_id
+                )));
+
+            }
+
+        }
+
+        return $this->render('QwebCMSCatalogoBundle:Product:updateproductimages.html.twig', array(
+            'form' => $form->createView(), 'product' => $product, 'categories' => $categories, 'immagini' => $photos,
         ));
     }
 }

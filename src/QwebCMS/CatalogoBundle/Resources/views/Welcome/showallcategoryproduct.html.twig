@@ -73,7 +73,7 @@
                         <td>{{ product.shortDescription }}</td>
                         <td>{% if product.pub == 1 %}<i class="text-info fa fa-lg fa-check"></i>{% else %}<i class="text-danger fa fa-lg fa-times"></i>{% endif %}</td>
                         <td>
-                            <a href="{{ path('update_product', {'id' : product.idTblCatalogueProduct}) }}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
+                            <a href="{{ path('update_product_info', {'id' : product.idTblCatalogueProduct}) }}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
                             <a href="{{ path('delete_product', {'id' : product.idTblCatalogueProduct}) }}" title="Elimina" class="btn btn-danger btn-circle"><i class="fa fa-lg fa-times"></i></a>
                         </td>
                     </tr>
@@ -98,7 +98,7 @@
         <script>
             $(document).ready(function(){
                 swal({
-                    title: "Cancellata!",
+                    title: "Cancellato!",
                     text: "{{ flashMessage }}",
                     type: "success"
                 });

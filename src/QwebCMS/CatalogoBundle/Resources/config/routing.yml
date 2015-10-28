@@ -1,7 +1,3 @@
-admin:
-    path:   /admin
-    defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allProduct }
-    
 login_route:
     path:   /login
     defaults: { _controller: QwebCMSCatalogoBundle:Security:login }
@@ -23,10 +19,6 @@ upload_product_photo:
     defaults: { _controller: QwebCMSCatalogoBundle:Product:uploadPhoto }
 
 create_product:
-    path:     /products/new
-    defaults: { _controller: QwebCMSCatalogoBundle:Product:create }
-
-create_product_new:
     path:     /products/new/info
     defaults: { _controller: QwebCMSCatalogoBundle:Product:createNew }
 
@@ -37,6 +29,18 @@ show_product:
 update_product:
     path:     /product/update/{id}
     defaults: { _controller: QwebCMSCatalogoBundle:Product:update }
+
+update_product_info:
+    path:     /product/update/info/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Product:updateInfo }
+
+update_product_feature:
+    path:     /product/update/feature/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Product:updateFeatures }
+
+update_product_immagini:
+    path:     /product/update/immagini/{id}
+    defaults: { _controller: QwebCMSCatalogoBundle:Product:updateImages }
 
 delete_product:
     path:     /product/delete/{id}
