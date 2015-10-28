@@ -421,7 +421,11 @@ class ProductController extends Controller
 
             } elseif($form->get('save')->isClicked()) {
 
-                return $this->redirect($this->generateUrl('products'));
+                $categories = $product->getCategories();
+                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                return $this->redirect($this->generateUrl('show_category', array(
+                    'id' => $category_id
+                )));
 
             }
 
@@ -503,7 +507,11 @@ class ProductController extends Controller
             $em->flush();
 
             if ($form->get('exit')->isClicked()) {
-                return $this->redirect($this->generateUrl('products'));
+                $categories = $product->getCategories();
+                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                return $this->redirect($this->generateUrl('show_category', array(
+                    'id' => $category_id
+                )));
             } elseif($form->get('save')->isClicked()) {
 
                 return $this->redirect($this->generateUrl('update_product_immagini', array(
@@ -559,7 +567,11 @@ class ProductController extends Controller
 
             } elseif($form->get('save')->isClicked()) {
 
-                return $this->redirect($this->generateUrl('products'));
+                $categories = $product->getCategories();
+                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                return $this->redirect($this->generateUrl('show_category', array(
+                    'id' => $category_id
+                )));
 
             }
 
