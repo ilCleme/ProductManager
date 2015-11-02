@@ -29,6 +29,9 @@ class TblCatalogueProductEditInfoType extends AbstractType
         ->add('indirizzo')
         ->add('classeEnergetica')
         ->add('prezzo')
+        ->add('annoCostruzione')
+        ->add('piano')
+        ->add('mq')
         ->add('idTblPhotoCat', 'hidden')
         ->add('pub', 'checkbox', array(
             'required'  => false,

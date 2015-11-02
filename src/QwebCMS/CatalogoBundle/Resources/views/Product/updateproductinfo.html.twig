@@ -114,6 +114,38 @@
                                 </div>
 
                                 <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.prezzo, 'Prezzo'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.prezzo) }}
+                                        {{ form_widget(form.prezzo, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.annoCostruzione, 'Anno Costruzione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.annoCostruzione) }}
+                                        {{ form_widget(form.annoCostruzione, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.piano, 'Piano'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.piano) }}
+                                        {{ form_widget(form.piano, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.mq, 'Mq'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.mq) }}
+                                        {{ form_widget(form.mq, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
                                     {#<div class="form-group">
                                         {{ form_label(form.planimetria, 'Planimetria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                         {{ form_errors(form.planimetria) }}
@@ -122,14 +154,6 @@
                                             <div class="dropzone-previews"></div>
                                         </div>
                                     </div>#}
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.prezzo, 'Prezzo'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.prezzo) }}
-                                        {{ form_widget(form.prezzo, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
                                 </div>
 
                                 <div class="col-lg-4">
