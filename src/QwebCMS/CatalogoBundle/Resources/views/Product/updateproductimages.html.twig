@@ -69,7 +69,10 @@
                                         <i class="fa fa-wrench"></i>&nbsp;&nbsp;
                                         <span class="bold">Ordina Foto</span>
                                     </button>
-                                    <button class="btn btn-w-m btn-success" type="button" id="chiudi-ordina-foto">Chiudi</button>
+                                    <a class="btn btn-w-m btn-success" href="{{ path('update_product_immagini', {id : product.idTblCatalogueProduct}) }}" id="chiudi-ordina-foto">
+                                        <i class="fa fa-wrench"></i>&nbsp;&nbsp;
+                                        <span class="bold">Salva Ordine</span>
+                                    </a>
                                 </p>
 
                                 <div class="table-responsive">
@@ -298,11 +301,11 @@
                 $('#chiudi-ordina-foto').show();
                 $('#table-immagini').hide();
             });
-            $('#chiudi-ordina-foto').click(function(){
+            /*$('#chiudi-ordina-foto').click(function(){
                 $('#table-immagini').show();
                 $('#nestable').hide();
                 $('#chiudi-ordina-foto').hide();
-            })
+            })*/
         });
     </script>
 {% endblock %}
