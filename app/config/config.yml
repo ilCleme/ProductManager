@@ -87,7 +87,7 @@ oneup_uploader:
 
         planimetrie:
             frontend: dropzone
-            namer: custom_namer
+            namer: custom_planimetrie_namer
             storage:
               directory:  'uploads/planimetrie'
 

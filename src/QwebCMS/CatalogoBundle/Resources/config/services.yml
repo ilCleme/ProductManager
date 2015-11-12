@@ -6,3 +6,7 @@ services:
     custom_namer:
         class: QwebCMS\CatalogoBundle\Naming\NomeNamer
         arguments: [ @doctrine.orm.entity_manager ]
+
+    custom_planimetrie_namer:
+            class: QwebCMS\CatalogoBundle\Naming\NomePlanimetrieNamer
+            arguments: [ @doctrine.orm.entity_manager ]
