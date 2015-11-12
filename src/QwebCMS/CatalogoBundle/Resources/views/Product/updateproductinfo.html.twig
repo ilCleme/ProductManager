@@ -146,17 +146,6 @@
                                 </div>
 
                                 <div class="col-lg-4">
-                                    {#<div class="form-group">
-                                        {{ form_label(form.planimetria, 'Planimetria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.planimetria) }}
-                                        {{ form_widget(form.planimetria, {'attr': {'class': 'form-control'}}) }}
-                                        <div id="drop-planimetria" class="dropzone col-lg-12" action="#">
-                                            <div class="dropzone-previews"></div>
-                                        </div>
-                                    </div>#}
-                                </div>
-
-                                <div class="col-lg-4">
                                     <div class="form-group">
                                         {{ form_label(form.cod, 'Codice'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                         {{ form_errors(form.cod) }}
@@ -170,7 +159,17 @@
                                         {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
-
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.planimetria, 'Planimetria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.planimetria) }}
+                                        {{ form_widget(form.planimetria, {'attr': {'class': 'form-control'}}) }}
+                                        <div id="drop-planimetria" class="dropzone col-lg-12" style="width:100%; min-height: 38px !important; padding: 8px !important;" action="#">
+                                            <div class="dropzone-previews"></div>
+                                            <div class="dz-message">Carica <strong>Planimetria</strong></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -200,6 +199,9 @@
     <!-- Chosen -->
     <script src="{{ asset('admin-style/js/plugins/chosen/chosen.jquery.js') }}"></script>
 
+    <!-- DROPZONE -->
+    <script src="{{ asset('admin-style/js/plugins/dropzone/dropzone.js') }}"></script>
+
     <script>
         $(document).ready(function(){
             var elem = document.querySelector('.js-switch');
@@ -214,6 +216,33 @@
             }
             for (var selector in config) {
                 $(selector).chosen(config[selector]);
+            }
+
+            Dropzone.options.dropPlanimetria = {
+
+                url: "{{ oneup_uploader_endpoint('planimetrie') }}",
+                autoProcessQueue: true,
+                //uploadMultiple: true,
+                parallelUploads: 1,
+                maxFiles: 1,
+                acceptedFiles: 'image/*,application/pdf',
+                addRemoveLinks: true,
+                headers:{"id-product": "{{ product.idTblCatalogueProduct }}"},
+
+                // Dropzone settings
+                init: function() {
+                    var dropPlanimetriaObject = this;
+                    dropPlanimetriaObject.on("sendingmultiple", function() {
+                    });
+                    dropPlanimetriaObject.on("successmultiple", function(files, response) {
+                    });
+                    dropPlanimetriaObject.on("errormultiple", function(files, response) {
+                    });
+                    dropPlanimetriaObject.on("queuecomplete", function(files, response) {
+                        //setTimeout("location.reload(true);", 1000);
+                    });
+                }
+
             }
         });
     </script>

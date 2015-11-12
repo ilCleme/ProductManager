@@ -32,6 +32,7 @@ class TblCatalogueProductEditInfoType extends AbstractType
         ->add('annoCostruzione')
         ->add('piano')
         ->add('mq')
+        ->add('planimetria', 'hidden')
         ->add('idTblPhotoCat', 'hidden')
         ->add('pub', 'checkbox', array(
             'required'  => false,
