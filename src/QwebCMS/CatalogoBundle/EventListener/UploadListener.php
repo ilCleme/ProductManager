@@ -78,6 +78,7 @@ class UploadListener{
 
         $file_upload = $event->getFile();
 
+        /*
         $imagemanagerResponse = $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($this->container->get('request'), $file_upload, 'img_preview');
@@ -93,7 +94,7 @@ class UploadListener{
         $imagemanagerResponse = $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($this->container->get('request'), $file_upload, 'img_large');
-
+        */
         $em = $this->doctrine->getManager();
 
         $product = $em->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')->find($id_product);
