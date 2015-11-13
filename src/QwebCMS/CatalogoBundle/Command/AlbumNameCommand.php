@@ -15,7 +15,7 @@ class AlbumNameCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('catalogo:album:nomi')
+            ->setName('catalogo:rename:album')
             ->setDescription('Imposta il nome dell\'album come il nome del prodotto associato');
         ;
     }
