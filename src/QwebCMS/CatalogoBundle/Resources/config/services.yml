@@ -8,5 +8,5 @@ services:
         arguments: [ @doctrine.orm.entity_manager ]
 
     custom_planimetrie_namer:
-            class: QwebCMS\CatalogoBundle\Naming\NomePlanimetrieNamer
-            arguments: [ @doctrine.orm.entity_manager ]
+        class: QwebCMS\CatalogoBundle\Naming\NomePlanimetrieNamer
+        arguments: [ @doctrine.orm.entity_manager ]

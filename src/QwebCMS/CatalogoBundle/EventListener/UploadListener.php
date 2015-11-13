@@ -41,19 +41,19 @@ class UploadListener{
 
         $file_upload = $event->getFile();
 
-        $imagemanagerResponse = $imagemanagerResponse = $this->container
+        $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($this->container->get('request'), $file_upload, 'img_preview');
 
-        $imagemanagerResponse = $imagemanagerResponse = $this->container
+        $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($this->container->get('request'), $file_upload, 'img_small');
 
-        $imagemanagerResponse = $imagemanagerResponse = $this->container
+        $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($this->container->get('request'), $file_upload, 'img_medium');
 
-        $imagemanagerResponse = $imagemanagerResponse = $this->container
+        $imagemanagerResponse = $this->container
             ->get('liip_imagine.controller')
             ->filterAction($this->container->get('request'), $file_upload, 'img_large');
 
