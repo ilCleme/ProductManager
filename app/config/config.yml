@@ -122,7 +122,8 @@ liip_imagine:
         img_large:
             quality: 100
             filters:
-                relative_resize: { widen: 1200 }
+                #relative_resize: { widen: 1200 }
+                upscale: { min: [740, 500] }
         mini_img:
             quality: 100
             filters:
