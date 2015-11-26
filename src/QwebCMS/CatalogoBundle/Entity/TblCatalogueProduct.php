@@ -152,9 +152,9 @@ class TblCatalogueProduct
     /**
      * @var boolean
      *
-     * @ORM\Column(name="featured", type="boolean", nullable=true)
+     * @ORM\Column(name="featured", type="boolean", nullable=false)
      */
-    private $featured = 0;
+    private $featured;
 
     /**
      * @var integer

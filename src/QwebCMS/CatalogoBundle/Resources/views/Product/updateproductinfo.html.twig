@@ -63,12 +63,23 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.pub, 'Pubblica'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.pub) }}
-                                        <div>
-                                            {{ form_widget(form.pub, { 'attr': {'class': 'js-switch'} }) }}
+                                <div class="col-lg-6">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            {{ form_label(form.pub, 'Pubblica'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                            {{ form_errors(form.pub) }}
+                                            <div>
+                                                {{ form_widget(form.pub, { 'attr': {'class': 'js-switch'} }) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            {{ form_label(form.featured, 'Visibile in Homepage'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                            {{ form_errors(form.featured) }}
+                                            <div>
+                                                {{ form_widget(form.featured, { 'attr': {'class': 'js-switch'} }) }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -204,8 +215,11 @@
 
     <script>
         $(document).ready(function(){
-            var elem = document.querySelector('.js-switch');
-            var switchery = new Switchery(elem, { color: '#1AB394' });
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            elems.forEach(function(html) {
+                var switchery = new Switchery(html);
+            });
+            //var switchery = new Switchery(elem, { color: '#1AB394' });
 
             var config = {
                 '.chosen-select'           : {},
