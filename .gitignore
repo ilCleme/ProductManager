@@ -18,3 +18,5 @@
 /web/media/*
 /web/assets/*
 /web/assets/jquery-ui/*
+Vagrantfile
+/ansible
