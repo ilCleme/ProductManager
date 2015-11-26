@@ -75,8 +75,16 @@
                         <td>{% if product.pub == 1 %}<i class="text-info fa fa-lg fa-check"></i>{% else %}<i class="text-danger fa fa-lg fa-times"></i>{% endif %}</td>
                         <td>{% if product.featured == 1 %}<i class="text-info fa fa-lg fa-check"></i>{% else %}<i class="text-danger fa fa-lg fa-times"></i>{% endif %}</td>
                         <td>
-                            <a href="{{ path('update_product_info', {'id' : product.idTblCatalogueProduct}) }}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
-                            <a href="{{ path('delete_product', {'id' : product.idTblCatalogueProduct}) }}" title="Elimina" class="btn btn-danger btn-circle"><i class="fa fa-lg fa-times"></i></a>
+                            <div class="btn-group">
+                                <a href="{{ path('update_product_info', {'id' : product.idTblCatalogueProduct}) }}" title="Modifica" class="btn btn-warning">Modifica</a>
+                                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Apri menù a discesa</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path('delete_product', {'id' : product.idTblCatalogueProduct}) }}" title="Elimina" class="delete_product"><i class="fa fa-times"></i> Elimina</a></li>
+                                </ul>
+                            </div>
                         </td>
                     </tr>
                 {% endfor %}
@@ -107,5 +115,25 @@
             });
         </script>
     {% endfor %}
+
+    <script>
+        $(document).ready(function(){
+            $('.delete_product').click(function(e){
+                e.preventDefault();
+                link = $(this).attr('href');
+                swal({
+                    title: "Sei sicuro?",
+                    text: "Non sarai in grado di recuperare ciò che stai per cancellare",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Si, cancella",
+                    closeOnConfirm: false
+                }, function(){
+                    window.location.href = link;
+                });
+            });
+        })
+    </script>
 
 {% endblock %}
