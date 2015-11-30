@@ -4,7 +4,6 @@ namespace QwebCMS\CatalogoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct as Product;
 
 class WelcomeController extends Controller
 {
