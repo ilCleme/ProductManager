@@ -10,6 +10,10 @@ welcome:
     path:     /
     defaults: { _controller: QwebCMSCatalogoBundle:Welcome:index }
 
+change_language:
+    path:     /change_language
+    defaults: { _controller: QwebCMSCatalogoBundle:Language:setLanguage }
+
 products:
     path:     /products
     defaults: { _controller: QwebCMSCatalogoBundle:Welcome:allProduct }

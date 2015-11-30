@@ -16,3 +16,7 @@ services:
         tags:
             - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
         arguments: ['@doctrine', '@service_container']
+
+    language.manager:
+        class: QwebCMS\CatalogoBundle\Services\LanguageManager
+        arguments: ['@session']

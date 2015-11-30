@@ -12,19 +12,19 @@ class WelcomeController extends Controller
     {
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
-            ->findAll();
-            
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
             
         $feature = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $featurevalue = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
             
         return $this->render('QwebCMSCatalogoBundle:Welcome:index.html.twig',
             array('products' => $product, 'categories' => $category, 'features' => $feature, 'featurevalues' => $featurevalue)
@@ -86,22 +86,27 @@ class WelcomeController extends Controller
     
     public function allCategoryAction(Request $request){
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a";
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.idTblLingua = ?1";
         $category = $em->createQuery($dql);
+        $category->setParameters(array(
+            1   => $this->get('language.manager')->getSessionLanguage()
+        ));
 
         if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
             $filterValue = $request->query->get('filterValue');
 
-            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.title LIKE :filterValue ');
+            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.title LIKE :filterValue AND a.idTblLingua = ?1');
             $category->setParameters(array(
-                'filterValue' => '%'.$filterValue.'%'
+                'filterValue' => '%'.$filterValue.'%',
+                1   => $this->get('language.manager')->getSessionLanguage()
             ));
         } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueCategory' ){
             $filterValue = $request->query->get('filterValue');
 
-            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.idTblCatalogueCategory LIKE :filterValue ');
+            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.idTblCatalogueCategory LIKE :filterValue AND a.idTblLingua = ?1');
             $category->setParameters(array(
-                'filterValue' => '%'.$filterValue.'%'
+                'filterValue' => '%'.$filterValue.'%',
+                1   => $this->get('language.manager')->getSessionLanguage()
             ));
         }
 
@@ -132,7 +137,7 @@ class WelcomeController extends Controller
     public function allFeatureAction(Request $request){
         $feature = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')

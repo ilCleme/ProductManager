@@ -1,0 +1,7 @@
+<form action="{{ path('change_language') }}" method="post" >
+    <select name="lng">
+        <option {% if id_lingua == '4' %} selected="selected" {% endif %} value="4">IT</option>
+        <option {% if id_lingua == '1' %} selected="selected" {% endif %} value="1">EN</option>
+    </select>
+    <button type="submit">Change</button>
+</form>
