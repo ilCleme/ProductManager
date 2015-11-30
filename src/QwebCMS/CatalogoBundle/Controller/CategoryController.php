@@ -4,7 +4,6 @@ namespace QwebCMS\CatalogoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory as Category;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueCategoryType;
 
@@ -44,33 +43,37 @@ class CategoryController extends Controller
     public function showAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1";
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2";
         $product = $em->createQuery($dql);
         $product->setParameter(1,$id);
+        $product->setParameter(2,$this->get('language.manager')->getSessionLanguage());
 
         if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
             $filterValue = $request->query->get('filterValue');
 
-            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.title LIKE :filterValue ');
+            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 AND a.title LIKE :filterValue ');
             $product->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%',
-                1   =>  $id
+                1   =>  $id,
+                2   =>  $this->get('language.manager')->getSessionLanguage()
             ));
         } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='shortDescription' ){
             $filterValue = $request->query->get('filterValue');
 
-            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.shortDescription LIKE :filterValue ');
+            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 AND a.shortDescription LIKE :filterValue ');
             $product->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%',
-                1   =>  $id
+                1   =>  $id,
+                2   =>  $this->get('language.manager')->getSessionLanguage()
             ));
         } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueProduct' ){
             $filterValue = $request->query->get('filterValue');
 
-            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblCatalogueProduct LIKE :filterValue ');
+            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 AND a.idTblCatalogueProduct LIKE :filterValue ');
             $product->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%',
-                1   =>  $id
+                1   =>  $id,
+                2   =>  $this->get('language.manager')->getSessionLanguage()
             ));
         }
 
@@ -83,7 +86,7 @@ class CategoryController extends Controller
 
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         if (!$categories) {
             throw $this->createNotFoundException(
@@ -93,7 +96,7 @@ class CategoryController extends Controller
 
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->find($id);
+            ->findBy(array('idTblCatalogueCategory' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         // Getting photo of product
         $photos= $this->getDoctrine()
@@ -114,7 +117,7 @@ class CategoryController extends Controller
 
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->find($id);
+            ->findBy(array('idTblCatalogueCategory' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$category) {
             throw $this->createNotFoundException(
@@ -122,7 +125,7 @@ class CategoryController extends Controller
             );
         }
         
-        $form = $this->createForm(new TblCatalogueCategoryType(), $category);
+        $form = $this->createForm(new TblCatalogueCategoryType(), $category[0]);
         
         $form->handleRequest($request);
 
@@ -131,7 +134,7 @@ class CategoryController extends Controller
             
             $em = $this->getDoctrine()->getManager();
             
-            $em->persist($category);
+            $em->persist($category[0]);
             $em->flush();
             return $this->redirect($this->generateUrl('categories'));
         }
@@ -147,7 +150,7 @@ class CategoryController extends Controller
     {
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->find($id); 
+            ->findBy(array('idTblCatalogueCategory' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$category) {
             throw $this->createNotFoundException(
@@ -159,7 +162,7 @@ class CategoryController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $em->remove($category);
+        $em->remove($category[0]);
         $em->flush();
 
         $this->get('session')->getFlashBag()->add(
