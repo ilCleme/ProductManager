@@ -125,7 +125,7 @@ class WelcomeController extends Controller
 
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         // passo l'oggetto $product a un template
         return $this->render(
@@ -141,7 +141,7 @@ class WelcomeController extends Controller
 
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
         
         // passo l'oggetto $product a un template
         return $this->render(
