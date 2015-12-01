@@ -80,7 +80,6 @@ class RebuildAlbumCommand extends ContainerAwareCommand
                     $em->flush();
                     echo 'Caught exception: ',  $e->getMessage(), "\n";
                 }
-
             }
         }
     }
