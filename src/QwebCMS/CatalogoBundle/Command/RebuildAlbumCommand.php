@@ -55,7 +55,7 @@ class RebuildAlbumCommand extends ContainerAwareCommand
         if (empty($filters)) {
             $filters = array_keys($filterManager->getFilterConfiguration()->all());
         }
-        var_dump($filters);
+        //var_dump($filters);
         $photos = $em
             ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
             ->findBy(array('idTblPhotoCat' => $id, 'idTblLingua' => $languageManager->getSessionLanguage()));
