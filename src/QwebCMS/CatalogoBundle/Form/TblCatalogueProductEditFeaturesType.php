@@ -11,6 +11,13 @@ use Symfony\Component\Form\FormEvents;
 
 class TblCatalogueProductEditFeaturesType extends AbstractType
 {
+    private $lingua;
+
+    public function __construct($lingua)
+    {
+        $this->lingua = $lingua;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -59,8 +66,9 @@ class TblCatalogueProductEditFeaturesType extends AbstractType
                         return $er->createQueryBuilder('u')
                             //->where('u.id > ?1')
                             ->join('u.features', 'f', 'WITH')
-                            ->where('f.id = ?1')
-                            ->setParameter(1, $idFeature);
+                            ->andwhere('f.id = ?1')
+                            ->andwhere('f.idTblLingua = ?2')
+                            ->setParameters(array('1' => $idFeature, '2' => $this->lingua));
                     },
                     'expanded'  =>  $expanded,
                     'multiple'  =>  $multiple,

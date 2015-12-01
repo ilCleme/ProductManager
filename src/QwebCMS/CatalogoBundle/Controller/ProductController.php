@@ -202,11 +202,11 @@ class ProductController extends Controller
     public function updateInfoAction($id, Request $request){
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
-            ->find($id);
+            ->findOneBy(array('idTblCatalogueProduct' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         if (!$product) {
             throw $this->createNotFoundException(
@@ -214,7 +214,7 @@ class ProductController extends Controller
             );
         }
 
-        $form = $this->createForm(new TblCatalogueProductEditInfoType(), $product);
+        $form = $this->createForm(new TblCatalogueProductEditInfoType($this->get('language.manager')->getSessionLanguage()), $product);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -233,7 +233,7 @@ class ProductController extends Controller
             } elseif($form->get('save')->isClicked()) {
 
                 $categories = $product->getCategories();
-                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                $category_id =  $categories->first()->getIdTblCatalogueCategory();
                 return $this->redirect($this->generateUrl('show_category', array(
                     'id' => $category_id
                 )));
@@ -250,11 +250,11 @@ class ProductController extends Controller
     public function updateFeaturesAction($id, Request $request){
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
-            ->find($id);
+            ->findOneBy(array('idTblCatalogueProduct' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $categorie = $product->getCategories();
         foreach($categorie as $categoria){
@@ -267,7 +267,7 @@ class ProductController extends Controller
             );
         }
 
-        $form = $this->createForm(new TblCatalogueProductEditFeaturesType(), $product);
+        $form = $this->createForm(new TblCatalogueProductEditFeaturesType($this->get('language.manager')->getSessionLanguage()), $product);
 
         if ( !($form->isValid()) ) {
             $featurevalues = $product->getFeaturevalues();
@@ -319,7 +319,7 @@ class ProductController extends Controller
 
             if ($form->get('exit')->isClicked()) {
                 $categories = $product->getCategories();
-                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                $category_id =  $categories->first()->getIdTblCatalogueCategory();
                 return $this->redirect($this->generateUrl('show_category', array(
                     'id' => $category_id
                 )));
@@ -340,11 +340,11 @@ class ProductController extends Controller
     public function updateImagesAction($id, Request $request){
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
-            ->find($id);
+            ->findOneBy(array('idTblCatalogueProduct' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         if (!$product) {
             throw $this->createNotFoundException(
@@ -358,7 +358,7 @@ class ProductController extends Controller
             ->findBy( array('idTblPhotoCat' => $product->getIdTblPhotoCat()),
                 array('posizione' => 'ASC'));
 
-        $form = $this->createForm(new TblCatalogueProductEditImagesType(), $product);
+        $form = $this->createForm(new TblCatalogueProductEditImagesType($this->get('language.manager')->getSessionLanguage()), $product);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -377,7 +377,7 @@ class ProductController extends Controller
             } elseif($form->get('save')->isClicked()) {
 
                 $categories = $product->getCategories();
-                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                $category_id =  $categories->first()->getIdTblCatalogueCategory();
                 return $this->redirect($this->generateUrl('show_category', array(
                     'id' => $category_id
                 )));

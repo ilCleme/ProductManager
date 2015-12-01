@@ -11,6 +11,13 @@ use Symfony\Component\Form\FormEvents;
 
 class TblCatalogueProductEditInfoType extends AbstractType
 {
+    private $lingua;
+
+    public function __construct($lingua)
+    {
+        $this->lingua = $lingua;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -43,6 +50,10 @@ class TblCatalogueProductEditInfoType extends AbstractType
         ->add('position')
         ->add('categories', 'entity', array(
             'class'     => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
+            'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->where('u.idTblLingua = '.$this->lingua);
+            },
             'property'  => 'title',
             'multiple'  => true,
             'expanded'  => false,
