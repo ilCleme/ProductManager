@@ -61,7 +61,6 @@ class RebuildAlbumCommand extends ContainerAwareCommand
             ->findBy(array('idTblPhotoCat' => $id, 'idTblLingua' => $languageManager->getSessionLanguage()));
 
         foreach($photos as $photo){
-            //$output->writeln($photo->getNome());
             $cacheManager->remove($photo->getImg(), $filters);
 
             foreach ($filters as $filter) {
@@ -78,7 +77,7 @@ class RebuildAlbumCommand extends ContainerAwareCommand
                 } catch (NotLoadableException $e){
                     $em->remove($photo);
                     $em->flush();
-                    echo 'Caught exception: ',  $e->getMessage(), "\n";
+                    $output->writeln('Impossibile ricostruire foto per il filtro '.$filter.': '.$e->getMessage().'\n');
                 }
             }
         }
