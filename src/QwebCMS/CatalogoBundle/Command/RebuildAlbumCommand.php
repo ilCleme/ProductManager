@@ -55,12 +55,12 @@ class RebuildAlbumCommand extends ContainerAwareCommand
         if (empty($filters)) {
             $filters = array_keys($filterManager->getFilterConfiguration()->all());
         }
-
+        var_dump($filters);
         $photos = $em
             ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
             ->findBy(array('idTblPhotoCat' => $id, 'idTblLingua' => $languageManager->getSessionLanguage()));
 
-        foreach($photos as $photo){
+        /*foreach($photos as $photo){
             //$output->writeln($photo->getNome());
             $cacheManager->remove($photo->getImg(), $filters);
 
@@ -81,6 +81,6 @@ class RebuildAlbumCommand extends ContainerAwareCommand
                     echo 'Caught exception: ',  $e->getMessage(), "\n";
                 }
             }
-        }
+        }*/
     }
 }
