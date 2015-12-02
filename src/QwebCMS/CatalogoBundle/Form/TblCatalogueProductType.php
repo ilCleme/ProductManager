@@ -5,9 +5,17 @@ namespace QwebCMS\CatalogoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class TblCatalogueProductType extends AbstractType
 {
+    private $lingua;
+
+    public function __construct($lingua)
+    {
+        $this->lingua = $lingua;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -41,6 +49,10 @@ class TblCatalogueProductType extends AbstractType
         ->add('position')
         ->add('categories', 'entity', array(
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
+            'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('u')
+                    ->where('u.idTblLingua = '.$this->lingua);
+            },
             'property' => 'title',
             'multiple' => false,
             'expanded' => false,

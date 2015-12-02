@@ -16,13 +16,14 @@ class CategoryController extends Controller
             ->findAll();
 
         $category = new Category();
-        $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new TblCatalogueCategoryType($em), $category);
+        $category->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
+        $form = $this->createForm(new TblCatalogueCategoryType($this->get('language.manager')->getSessionLanguage()), $category);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
 
+            $em = $this->getDoctrine()->getManager();
             $em->persist($category);
             $em->flush();
 
@@ -117,7 +118,7 @@ class CategoryController extends Controller
 
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findBy(array('idTblCatalogueCategory' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findOneBy(array('idTblCatalogueCategory' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$category) {
             throw $this->createNotFoundException(
@@ -125,7 +126,7 @@ class CategoryController extends Controller
             );
         }
         
-        $form = $this->createForm(new TblCatalogueCategoryType(), $category[0]);
+        $form = $this->createForm(new TblCatalogueCategoryType($this->get('language.manager')->getSessionLanguage()), $category);
         
         $form->handleRequest($request);
 
@@ -134,7 +135,7 @@ class CategoryController extends Controller
             
             $em = $this->getDoctrine()->getManager();
             
-            $em->persist($category[0]);
+            $em->persist($category);
             $em->flush();
             return $this->redirect($this->generateUrl('categories'));
         }
@@ -150,7 +151,7 @@ class CategoryController extends Controller
     {
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findBy(array('idTblCatalogueCategory' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findOneBy(array('idTblCatalogueCategory' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$category) {
             throw $this->createNotFoundException(
@@ -158,11 +159,8 @@ class CategoryController extends Controller
             );
         }
 
-        // esegue alcune azioni, salvare il prodotto nella base dati
-
         $em = $this->getDoctrine()->getManager();
-
-        $em->remove($category[0]);
+        $em->remove($category);
         $em->flush();
 
         $this->get('session')->getFlashBag()->add(

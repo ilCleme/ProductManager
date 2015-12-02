@@ -16,16 +16,13 @@ class FeatureController extends Controller
             ->findAll();
 
         $feature = new Feature();
-        
-        $form = $this->createForm(new TblCatalogueFeatureType(), $feature);
+        $feature->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
+        $form = $this->createForm(new TblCatalogueFeatureType($this->get('language.manager')->getSessionLanguage()), $feature);
         
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            
             $em = $this->getDoctrine()->getManager();
-            
             $em->persist($feature);
             $em->flush();
             
@@ -36,7 +33,6 @@ class FeatureController extends Controller
             $em->flush();
             return $this->redirect($this->generateUrl('features'));
         }
-        
         
         return $this->render('QwebCMSCatalogoBundle:Feature:new.html.twig', array(
             'form' => $form->createView(),
@@ -53,7 +49,7 @@ class FeatureController extends Controller
 
         $feature = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
-            ->find($id);
+            ->findOneBy(array('idTblCatalogueFeature' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$feature) {
             throw $this->createNotFoundException(
@@ -61,21 +57,16 @@ class FeatureController extends Controller
             );
         }
         
-        $form = $this->createForm(new TblCatalogueFeatureType(), $feature);
-        
+        $form = $this->createForm(new TblCatalogueFeatureType($this->get('language.manager')->getSessionLanguage()), $feature);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            
             $em = $this->getDoctrine()->getManager();
-            
             $em->persist($feature);
             $em->flush();
             return $this->redirect($this->generateUrl('features'));
         }
-    
-        // passo l'oggetto $feature a un template
+
         return $this->render('QwebCMSCatalogoBundle:Feature:update.html.twig', array(
             'form' => $form->createView(),
             'feature' => $feature,
@@ -87,7 +78,7 @@ class FeatureController extends Controller
     {
         $feature = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
-            ->find($id); 
+            ->findOneBy(array('idTblCatalogueFeature' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$feature) {
             throw $this->createNotFoundException(
@@ -95,10 +86,7 @@ class FeatureController extends Controller
             );
         }
 
-        // esegue alcune azioni, salvare il prodotto nella base dati
-
         $em = $this->getDoctrine()->getManager();
-
         $em->remove($feature);
         $em->flush();
 

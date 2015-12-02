@@ -17,16 +17,12 @@ class FeaturevalueController extends Controller
             ->findAll();
 
         $featurevalues = new Featurevalue();
-        
-        $form = $this->createForm(new TblCatalogueFeaturevalueType(), $featurevalues);
-        
+        $featurevalues->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
+        $form = $this->createForm(new TblCatalogueFeaturevalueType($this->get('language.manager')->getSessionLanguage()), $featurevalues);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            
             $em = $this->getDoctrine()->getManager();
-            
             $em->persist($featurevalues);
             $em->flush();
             
@@ -37,8 +33,7 @@ class FeaturevalueController extends Controller
             $em->flush();
             return $this->redirect($this->generateUrl('features'));
         }
-        
-        
+
         return $this->render('QwebCMSCatalogoBundle:Featurevalue:new.html.twig', array(
             'form' => $form->createView(),
             'categories' => $categories
@@ -53,7 +48,7 @@ class FeaturevalueController extends Controller
 
         $featurevalues = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')
-            ->find($id);
+            ->findOneBy(array('idTblCatalogueFeaturevalue' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$featurevalues) {
             throw $this->createNotFoundException(
@@ -61,21 +56,16 @@ class FeaturevalueController extends Controller
             );
         }
         
-        $form = $this->createForm(new TblCatalogueFeaturevalueType(), $featurevalues);
-        
+        $form = $this->createForm(new TblCatalogueFeaturevalueType($this->get('language.manager')->getSessionLanguage()), $featurevalues);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
-            
             $em = $this->getDoctrine()->getManager();
-            
             $em->persist($featurevalues);
             $em->flush();
             return $this->redirect($this->generateUrl('features'));
         }
-    
-        // passo l'oggetto $featurevalues a un template
+
         return $this->render('QwebCMSCatalogoBundle:Featurevalue:update.html.twig', array(
             'form' => $form->createView(),
             'featurevalue' => $featurevalues,
@@ -87,7 +77,7 @@ class FeaturevalueController extends Controller
     {
         $featurevalues = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')
-            ->find($id); 
+            ->findOneBy(array('idTblCatalogueFeaturevalue' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$featurevalues) {
             throw $this->createNotFoundException(
@@ -95,11 +85,7 @@ class FeaturevalueController extends Controller
             );
         }
 
-
-        // esegue alcune azioni, salvare il prodotto nella base dati
-
         $em = $this->getDoctrine()->getManager();
-
         $em->remove($featurevalues);
         $em->flush();
 
@@ -108,7 +94,7 @@ class FeaturevalueController extends Controller
             'La featurevalues è stata eliminata!'
         );
 
-        return $this->redirect($this->generateUrl('featurevalues'));
+        return $this->redirect($this->generateUrl('features'));
     }
 
     public function showCategoryFeaturevalueAction($id, Request $request)
@@ -151,6 +137,4 @@ class FeaturevalueController extends Controller
             array('featurevalues' => $featurevalue, 'pagination' => $pagination, 'feature' => $feature)
         );
     }
-
-
 }

@@ -8,6 +8,13 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TblCatalogueFeatureType extends AbstractType
 {
+    private $lingua;
+
+    public function __construct($lingua)
+    {
+        $this->lingua = $lingua;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options

@@ -11,6 +11,13 @@ use Symfony\Component\Form\FormEvents;
 
 class TblCatalogueFeaturevalueType extends AbstractType
 {
+    private $lingua;
+
+    public function __construct($lingua)
+    {
+        $this->lingua = $lingua;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -23,9 +30,12 @@ class TblCatalogueFeaturevalueType extends AbstractType
             ->add('title')
             ->add('img', 'hidden')
             ->add('position', 'hidden')
-            //->add('productsWithFeaturevalue')
             ->add('features', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('f')
+                        ->where('f.idTblLingua = '.$this->lingua);
+                },
                 'property' => 'title',
                 'multiple' => true,
                 'expanded' => true,
@@ -51,10 +61,10 @@ class TblCatalogueFeaturevalueType extends AbstractType
                     'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
                     'query_builder' => function (EntityRepository $er) use ($id){
                         return $er->createQueryBuilder('u')
-                            //->where('u.id > ?1')
                             ->join('u.features', 'f', 'WITH')
-                            ->where('f.id = ?1')
-                            ->setParameter(1, $id);
+                            ->andwhere('f.id = ?1')
+                            ->andwhere('f.idTblLingua = ?2')
+                            ->setParameters(array('1' => $id, '2' => $this->lingua));
                     },
                     'property' => 'title',
                     'multiple' => true,
@@ -63,9 +73,6 @@ class TblCatalogueFeaturevalueType extends AbstractType
                 ));
             }
         }
-
-
-
     }
     
     /**

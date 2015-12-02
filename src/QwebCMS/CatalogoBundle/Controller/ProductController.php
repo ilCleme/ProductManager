@@ -151,8 +151,8 @@ class ProductController extends Controller
             ->findAll();
 
         $product = new Product();
-
-        $form = $this->createForm(new TblCatalogueProductType(), $product);
+        $product->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
+        $form = $this->createForm(new TblCatalogueProductType($this->get('language.manager')->getSessionLanguage()), $product);
 
         $form->handleRequest($request);
 
@@ -168,7 +168,6 @@ class ProductController extends Controller
             // Save product information on database
             $product->setIdTblCatalogueProduct(0);
             $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
-            $product->setIdTblLingua(4);
             $em->persist($product);
             $em->flush();
 
@@ -184,7 +183,7 @@ class ProductController extends Controller
             } elseif($form->get('save')->isClicked()) {
 
                 $categories = $product->getCategories();
-                $category_id =  $categories[0]->getIdTblCatalogueCategory();
+                $category_id =  $categories->first()->getIdTblCatalogueCategory();
                 return $this->redirect($this->generateUrl('show_category', array(
                     'id' => $category_id
                 )));

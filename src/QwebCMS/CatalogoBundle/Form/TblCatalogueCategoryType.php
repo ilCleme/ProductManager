@@ -5,9 +5,17 @@ namespace QwebCMS\CatalogoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class TblCatalogueCategoryType extends AbstractType
 {
+    private $lingua;
+
+    public function __construct($lingua)
+    {
+        $this->lingua = $lingua;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -21,9 +29,12 @@ class TblCatalogueCategoryType extends AbstractType
             ->add('description')
             ->add('pub')
             ->add('position','hidden')
-            //->add('products')
             ->add('categoriesParent', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('c')
+                        ->where('c.idTblLingua = '.$this->lingua);
+                },
                 'property' => 'title',
                 'multiple' => true,
                 'expanded' => true,
@@ -31,13 +42,16 @@ class TblCatalogueCategoryType extends AbstractType
             ))
             ->add('features', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('f')
+                        ->where('f.idTblLingua = '.$this->lingua);
+                },
                 'property' => 'title',
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false
             ))
             ->add('save', 'submit', array('label' => 'Salva'))
-            //->add('categoriesParent')
         ;
     }
     
@@ -56,6 +70,6 @@ class TblCatalogueCategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'acme_demobundle_tblcataloguecategory';
+        return 'form_tblcataloguecategory';
     }
 }
