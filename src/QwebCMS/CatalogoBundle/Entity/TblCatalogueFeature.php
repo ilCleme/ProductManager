@@ -15,9 +15,20 @@ class TblCatalogueFeature
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tbl_catalogue_feature", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idTblCatalogueFeature = 0;
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Id
+     * @ORM\Column(name="id_tbl_catalogue_feature", type="integer")
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
+    private $idTblCatalogueFeature;
 
     /**
      * @var integer
@@ -75,15 +86,6 @@ class TblCatalogueFeature
      *
      */
     private $inheritFrom;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="bigint")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
 
     /**
      * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue", mappedBy="features")

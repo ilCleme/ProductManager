@@ -15,7 +15,18 @@ class TblCatalogueFeaturevalue
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tbl_catalogue_featurevalue", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Id
+     * @ORM\Column(name="id_tbl_catalogue_featurevalue", type="integer", nullable=false)
+     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $idTblCatalogueFeaturevalue = 0;
 
@@ -47,14 +58,6 @@ class TblCatalogueFeaturevalue
      */
     private $position = 0;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="bigint")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
     
     /**
      * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct", mappedBy="featurevalues")
@@ -64,8 +67,8 @@ class TblCatalogueFeaturevalue
     /**
      *  @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature", inversedBy="featurevalues")
      *  @ORM\JoinTable(name="cross_tbl_catalogue_feature_x_tbl_catalogue_featurevalue",
-     *      joinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id")})
+     *      joinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id_tbl_catalogue_featurevalue")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id_tbl_catalogue_feature")})
      */
     private $features;
 
