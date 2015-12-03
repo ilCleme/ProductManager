@@ -55,15 +55,11 @@
                                     <span class="text-muted text-xs block">{{ app.user.username }}</span>
                                 </span>
                             </a>
-                            {#
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="profile.html">Profile</a></li>
-                                <li><a href="contacts.html">Contacts</a></li>
-                                <li><a href="mailbox.html">Mailbox</a></li>
+                                <li><a href="#">Profile</a></li>
                                 <li class="divider"></li>
-                                <li><a href="login.html">Logout</a></li>
+                                <li><a href="{{ path('logout') }}"><i class="fa fa-sign-out"></i> Log out</a></li>
                             </ul>
-                            #}
                         </div>
                         <div class="logo-element">
                             <img alt="image" class="" src="{{ asset('admin-style/img/q_s.png') }}" />
@@ -88,9 +84,11 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
+                            {% block lingua %}
                             <div id="lingua">
                                 {{ render(controller('QwebCMSCatalogoBundle:Language:index')) }}
                             </div>
+                            {% endblock %}
                         </li>
                         <li>
                             <a href="{{ path('logout') }}">
@@ -173,5 +171,10 @@
     <!-- Toastr -->
     <script src="{{ asset('admin-style/js/plugins/toastr/toastr.min.js') }}"></script>
 
+    <script>
+        $('#lng').change(function(){
+            $('#lngForm').submit();
+        });
+    </script>
     {% block javascripts %}{% endblock %}
 </body>
