@@ -24,9 +24,7 @@ class TblCatalogueFeature
     /**
      * @var integer
      *
-     * @ORM\Id
      * @ORM\Column(name="id_tbl_catalogue_feature", type="integer")
-     * @ORM\GeneratedValue(strategy="NONE")
      */
     private $idTblCatalogueFeature;
 
