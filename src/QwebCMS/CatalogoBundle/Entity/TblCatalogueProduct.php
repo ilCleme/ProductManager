@@ -162,6 +162,13 @@ class TblCatalogueProduct
      * @ORM\Column(name="position", type="integer", nullable=true)
      */
     private $position;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="posti_letto", type="string", length=255, nullable=true)
+     */
+    private $postiLetto;
     
     /**
      *  @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory", inversedBy="products")
@@ -758,5 +765,28 @@ class TblCatalogueProduct
     public function getMq()
     {
         return $this->mq;
+    }
+
+    /**
+     * Set postiLetto
+     *
+     * @param string $postiLetto
+     * @return TblCatalogueProduct
+     */
+    public function setPostiLetto($postiLetto)
+    {
+        $this->postiLetto = $postiLetto;
+
+        return $this;
+    }
+
+    /**
+     * Get postiLetto
+     *
+     * @return string 
+     */
+    public function getPostiLetto()
+    {
+        return $this->postiLetto;
     }
 }

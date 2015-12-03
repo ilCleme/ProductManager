@@ -36,6 +36,7 @@ class TblCatalogueProductType extends AbstractType
         ->add('prezzo')
         ->add('annoCostruzione')
         ->add('piano')
+        ->add('postiLetto')
         ->add('mq')
         ->add('featured', 'checkbox', array(
             'required'  => false,

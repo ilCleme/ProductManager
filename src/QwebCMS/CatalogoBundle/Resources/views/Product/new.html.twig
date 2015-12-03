@@ -151,6 +151,14 @@
 
                             <div class="col-lg-4">
                                 <div class="form-group">
+                                    {{ form_label(form.postiLetto, 'Posti Letto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_errors(form.postiLetto) }}
+                                    {{ form_widget(form.postiLetto, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
                                     {{ form_label(form.position, 'Posizione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.position) }}
                                     {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
