@@ -41,7 +41,7 @@ class NomeNamer extends EntityManager implements NamerInterface
         $productCategory = $this->transformSpaceToHyphen($productCategories[0]->getTitle());
 
 
-        return sprintf('appartamenti-%s-%s-%s-%s.%s', strtolower($productCategory), strtolower($productName), count($photo), date('i-s'), strtolower($file->getExtension()) );
+        return sprintf('appartamenti-%s-%s-%s-%s-%s.%s', strtolower($productCategory), strtolower($productName), 'jesolo', count($photo), date('i-s'), strtolower($file->getExtension()) );
     }
 
     protected function transformSpaceToHyphen($string){
