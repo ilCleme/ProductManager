@@ -28,7 +28,12 @@ class TblCatalogueFeaturevalueType extends AbstractType
             ->add('idTblCatalogueFeaturevalue', 'hidden')
             ->add('idTblLingua', 'hidden')
             ->add('title')
-            ->add('img', 'hidden')
+            ->add('imageFile', 'vich_image', array(
+                'required'      => false,
+                'label'         => 'Icona',
+                'allow_delete'  => false, // not mandatory, default is true
+                'download_link' => false, // not mandatory, default is true
+            ))
             ->add('position', 'hidden')
             ->add('features', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',

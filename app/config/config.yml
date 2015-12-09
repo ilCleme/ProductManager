@@ -29,6 +29,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_themes:
+            # other form themes
+            - 'VichUploaderBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -144,3 +147,15 @@ knp_paginator:
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
         #filtration: KnpPaginatorBundle:Pagination:filtration.html.twig
         filtration: QwebCMSCatalogoBundle:Welcome:filter.html.twig
+
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        product_image:
+            uri_prefix:         /public/ico-caratteristiche
+            upload_destination: %kernel.root_dir%/../web/public/ico-caratteristiche
+
+            inject_on_load:     false
+            delete_on_update:   true
+            delete_on_remove:   true

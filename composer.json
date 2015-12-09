@@ -27,7 +27,8 @@
         "doctrine/migrations": "1.0.*@dev",
         "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
         "knplabs/knp-paginator-bundle": "^2.4",
-        "stfalcon/tinymce-bundle": "dev-master"
+        "stfalcon/tinymce-bundle": "dev-master",
+        "vich/uploader-bundle": "^0.14.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
