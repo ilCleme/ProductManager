@@ -95,6 +95,13 @@ class TblPhotoCat
      */
     private $setRandom = 0;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="foto_big", type="string", length=255)
+     */
+    private $fotoBig;
+
 
     /**
      * Get id
@@ -342,5 +349,28 @@ class TblPhotoCat
     public function getSmartyTemplateAlternativo()
     {
         return $this->smartyTemplateAlternativo;
+    }
+
+    /**
+     * Set fotoBig
+     *
+     * @param string $fotoBig
+     * @return TblPhotoCat
+     */
+    public function setFotoBig($fotoBig)
+    {
+        $this->fotoBig = $fotoBig;
+
+        return $this;
+    }
+
+    /**
+     * Get fotoBig
+     *
+     * @return string 
+     */
+    public function getFotoBig()
+    {
+        return $this->fotoBig;
     }
 }
