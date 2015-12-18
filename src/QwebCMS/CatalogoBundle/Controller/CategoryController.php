@@ -44,7 +44,7 @@ class CategoryController extends Controller
     public function showAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2";
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 ORDER BY a.title ASC";
         $product = $em->createQuery($dql);
         $product->setParameter(1,$id);
         $product->setParameter(2,$this->get('language.manager')->getSessionLanguage());
