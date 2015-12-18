@@ -126,7 +126,8 @@ liip_imagine:
             quality: 100
             filters:
                 #relative_resize: { widen: 1200 }
-                downscale: { max: [740, 500] }
+                #downscale: { max: [740, 500] }
+                thumbnail: { size: [1200, 900], mode: outbound }
         mini_img:
             quality: 100
             filters:
