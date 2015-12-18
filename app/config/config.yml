@@ -126,7 +126,7 @@ liip_imagine:
             quality: 100
             filters:
                 #relative_resize: { widen: 1200 }
-                downscale: { min: [740, 500] }
+                downscale: { max: [740, 500] }
         mini_img:
             quality: 100
             filters:
