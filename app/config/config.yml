@@ -114,16 +114,16 @@ liip_imagine:
             filters:
                 thumbnail: { size: [196, 147], mode: outbound }
         img_small:
-            quality: 100
+            quality: 70
             filters:
                 thumbnail: { size: [360, 270], mode: outbound }
         img_medium:
-            quality: 100
+            quality: 70
             filters:
                 #relative_resize: { widen: 700 }
                 thumbnail: { size: [740, 500], mode: outbound }
         img_large:
-            quality: 100
+            quality: 70
             filters:
                 #relative_resize: { widen: 1200 }
                 #downscale: { max: [740, 500] }
