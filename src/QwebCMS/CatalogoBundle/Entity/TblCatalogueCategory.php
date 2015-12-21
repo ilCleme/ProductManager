@@ -410,4 +410,22 @@ class TblCatalogueCategory
     {
         return $this->features;
     }
+
+    /**
+     * Get features for a specific Language
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFeaturesByLanguage($id_language)
+    {
+        $features = $this->features;
+        $arrayFeature = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($features as $feature){
+            if ($feature->getIdTblLingua() == $id_language){
+                $arrayFeature->add($feature);
+            }
+        }
+
+        return $arrayFeature;
+    }
 }

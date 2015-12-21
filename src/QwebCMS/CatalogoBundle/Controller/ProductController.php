@@ -269,10 +269,14 @@ class ProductController extends Controller
         $form = $this->createForm(new TblCatalogueProductEditFeaturesType($this->get('language.manager')->getSessionLanguage()), $product);
 
         if ( !($form->isValid()) ) {
-            $featurevalues = $product->getFeaturevalues();
+
+            $featurevalues = $this->getDoctrine()
+                ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
+                ->findFeaturevaluesProductByLanguage($id, $this->get('language.manager')->getSessionLanguage());
+
             $categorie = $product->getCategories();
             foreach ($categorie as $categoria) {
-                $features = $categoria->getFeatures();
+                $features = $categoria->getFeaturesByLanguage($this->get('language.manager')->getSessionLanguage());
                 foreach ($features as $feature) {
                     if($feature->getTypeInput() == "select"){
                         //$form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);

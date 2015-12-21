@@ -12,15 +12,17 @@ use Doctrine\ORM\EntityRepository;
  */
 class TblCatalogueProductRepository extends EntityRepository
 {
-    public function findAllFeatureByLanguage($id_language = null)
+    public function findFeaturevaluesProductByLanguage($id_product, $id_language = null)
     {
         $query = $this->getEntityManager()
-            ->createQuery('SELECT p, f FROM QwebCMSCatalogoBundle:TblCatalogueProduct p JOIN p.featurevalues f WHERE f.idTblLingua = ?1 AND p.idTblLingua = ?1');
-        $query->setParameter(1, $id_language);
-
+            ->createQuery('SELECT p, f FROM QwebCMSCatalogoBundle:TblCatalogueProduct p JOIN p.featurevalues f WHERE f.idTblLingua = ?1 AND p.idTblLingua = ?1 AND p.idTblCatalogueProduct = ?2');
+        $query->setParameters(array(
+            1 => $id_language,
+            2 => $id_product));
 
         try {
-            return $query->getResult();
+            $product = $query->getSingleResult();
+            return $product->getFeaturevalues();
         } catch (\Doctrine\ORM\NoResultException $e) {
             return null;
         }

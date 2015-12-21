@@ -64,7 +64,7 @@ class TblCatalogueProductEditFeaturesType extends AbstractType
                     //'choices'   =>  $featurevalues,
                     'query_builder' => function (EntityRepository $er) use ($idFeature){
                         return $er->createQueryBuilder('u')
-                            //->where('u.id > ?1')
+                            ->where('u.idTblLingua = ?2')
                             ->join('u.features', 'f', 'WITH')
                             ->andwhere('f.id = ?1')
                             ->andwhere('f.idTblLingua = ?2')

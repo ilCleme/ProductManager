@@ -12,22 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class TblCatalogueFeatureRepository extends EntityRepository
 {
-    public function findAllByLanguage($id_language = null)
+    public function findFeaturesByLanguage($id_language)
     {
-        if (null !== $id_language){
-            return $this->getEntityManager()
-                ->createQuery(
-                    'SELECT f FROM CatalogueBundle:TblCatalogueFeature f WHERE f.idTblLingua = ?1'
-                )
-                ->setParameter(1, $id_language)
-                ->getResult();
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT f FROM QwebCMSCatalogoBundle:TblCatalogueFeature f WHERE f.idTblLingua = ?1 ');
+        $query->setParameters(array(
+            1 => $id_language
+        ));
+
+        try{
+            return $query->getSingleResult();
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
         }
 
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT f FROM CatalogueBundle:TblCatalogueFeature f WHERE f.idTblLingua = ?1'
-            )
-            ->setParameter(1, $this->get('language.manager')->getSessionLanguage())
-            ->getResult();
     }
 }
