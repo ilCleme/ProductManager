@@ -111,6 +111,7 @@ class ProductController extends Controller
         $foto = new Foto();
         $foto->setNome($fname);
         $foto->setImg($dir.$fname);
+        $foto->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
         $foto->setIdTblPhotoCat($json['id_album']);
 
         $em = $this->getDoctrine()->getManager();
@@ -358,7 +359,7 @@ class ProductController extends Controller
         // Getting photo of product
         $photos= $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblPhoto')
-            ->findBy( array('idTblPhotoCat' => $product->getIdTblPhotoCat()),
+            ->findBy( array('idTblPhotoCat' => $product->getIdTblPhotoCat(), 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()),
                 array('posizione' => 'ASC'));
 
         $form = $this->createForm(new TblCatalogueProductEditImagesType($this->get('language.manager')->getSessionLanguage()), $product);

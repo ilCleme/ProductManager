@@ -61,6 +61,7 @@ class UploadListener{
         $foto->setNome($file_upload->getFilename());
         $foto->setImg('/'.$file_upload->getPathname());
         $foto->setIdTblPhotoCat($id_album);
+        $foto->setIdTblLingua($this->container->get('language.manager')->getSessionLanguage());
 
         $em = $this->doctrine->getManager();
 
