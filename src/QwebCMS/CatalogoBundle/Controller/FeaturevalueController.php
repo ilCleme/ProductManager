@@ -14,7 +14,7 @@ class FeaturevalueController extends Controller
     {
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $featurevalues = new Featurevalue();
         $featurevalues->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
@@ -44,7 +44,7 @@ class FeaturevalueController extends Controller
     {
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $featurevalues = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')

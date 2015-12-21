@@ -114,7 +114,7 @@ class CategoryController extends Controller
     {
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $category = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')

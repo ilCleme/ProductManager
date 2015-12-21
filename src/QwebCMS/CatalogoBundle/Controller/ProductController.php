@@ -146,7 +146,8 @@ class ProductController extends Controller
         return new Response($fname);
     }
 
-    public function createNewAction(Request $request){
+    public function createNewAction(Request $request)
+    {
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
             ->findAll();
@@ -199,14 +200,17 @@ class ProductController extends Controller
         ));
     }
 
-    public function updateInfoAction($id, Request $request){
-        $categories = $this->getDoctrine()
+    public function updateInfoAction($id, Request $request)
+    {
+        /*$categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));*/
 
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
             ->findOneBy(array('idTblCatalogueProduct' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+
+        $categories = $product->getCategoriesByLanguage($this->get('language.manager')->getSessionLanguage());
 
         if (!$product) {
             throw $this->createNotFoundException(

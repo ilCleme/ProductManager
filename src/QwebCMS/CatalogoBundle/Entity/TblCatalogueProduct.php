@@ -491,6 +491,24 @@ class TblCatalogueProduct
     }
 
     /**
+     * Get categories for a specific Language
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategoriesByLanguage($id_language)
+    {
+        $categories = $this->getCategories();
+        $arrayCategories = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($categories as $category){
+            if ($category->getIdTblLingua() == $id_language){
+                $arrayCategories->add($category);
+            }
+        }
+
+        return $arrayCategories;
+    }
+
+    /**
      * Set categories
      *
      * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories

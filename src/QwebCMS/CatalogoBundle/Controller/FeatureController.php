@@ -13,7 +13,7 @@ class FeatureController extends Controller
     {
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $feature = new Feature();
         $feature->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
@@ -45,7 +45,7 @@ class FeatureController extends Controller
     {
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $feature = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
