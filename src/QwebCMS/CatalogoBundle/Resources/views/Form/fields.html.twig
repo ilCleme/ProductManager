@@ -21,7 +21,9 @@
     {% spaceless %}
         {{ block('form_widget_simple') }}
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-map" id="open-modal-map">Mappa</button>
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-map" id="open-modal-map">
+            <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+        </button>
         <!-- Modal -->
         <div class="modal fade modal-map" id="modal-map" tabindex="-1" role="dialog" aria-labelledby="modal-map" aria-hidden="true">
             <div class="modal-dialog">

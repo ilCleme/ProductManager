@@ -30,9 +30,6 @@ class TblCatalogueCategoryType extends AbstractType
             ->add('description')
             ->add('pub')
             ->add('position','hidden')
-            ->add('gender_code', new GPSCoordinateType(), array(
-                'mapped'   => false,
-            ))
             ->add('categoriesParent', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
                 'query_builder' => function(EntityRepository $er) {
