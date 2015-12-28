@@ -1,7 +1,127 @@
 {# src/Acme/DemoBundle/Resources/views/Form/fields.html.twig #}
-{% block integer_widget %}
-    <div class="integer_widget">
-        {% set type = type|default('number') %}
+{% block gender_widget %}
+    {% spaceless %}
+        {% if expanded %}
+            <ul {{ block('widget_container_attributes') }}>
+                {% for child in form %}
+                    <li>
+                        {{ form_widget(child) }}
+                        {{ form_label(child) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            {# far rendere il tag select al widget choice #}
+            {{ block('choice_widget') }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+{% block gps_coordinate_widget %}
+    {% spaceless %}
         {{ block('form_widget_simple') }}
-    </div>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-map" id="open-modal-map">Mappa</button>
+        <!-- Modal -->
+        <div class="modal fade modal-map" id="modal-map" tabindex="-1" role="dialog" aria-labelledby="modal-map" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <style>
+                        #map-holder { height: 400px; }
+                        #map { height: 100%; }
+                    </style>
+                    <div class="modal-body">
+                        <div id="map-holder">
+                            <div id="map"></div>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <button type="submit" name="update_pit_lla" id="update_pit_lla" class="btn btnsuccess">Salva</button>
+                            <button type="submit" id="update_pit_cancel" class="btn btn-danger">Esci</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% block javascripts %}
+            <script>
+                var llamap = {
+                    marker: {},
+                    map: {},
+                    initialPosition: { lat: 45.650048378307, lng: 11.936645507812 },
+                    lastInputs: false,
+                    currentPosition: false,
+                    initialized: false,
+                    currentId: false,
+                    changeMapCenter: function (coords) {
+                        'use strict';
+                        this.map.setCenter(coords);
+                        this.marker.setPosition(coords);
+                    },
+                    moveMarker: function (coords) {
+                        'use strict';
+                        this.marker.setPosition(coords);
+                        this.currentPosition = coords;
+                    },
+                    initMap: function (coords) {
+                        'use strict';
+                        if (undefined === coords ){
+                            coords = this.initialPosition;
+                        }
+                        this.map = new google.maps.Map(document.getElementById('map'), { center: coords, zoom: 12 });
+                        this.marker = new google.maps.Marker({ position: coords, map: this.map });
+                        this.map.addListener('click', function (e) {
+                            var coords = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+                            llamap.moveMarker(coords);
+                        });
+
+                        this.initialized = true;
+                    }
+                };
+            </script>
+            <script>
+                window.onload = function() {
+                    $("#open-modal-map").on("click", function () {
+                        var id = "{{ form.vars.id }}";
+                        var str = $("#"+id).val();
+                        var strsplit = str.split(",");
+                        console.log(parseFloat(strsplit[0]));console.log(parseFloat(strsplit[1]));
+                        var lat = strsplit[0], lng = strsplit[1];
+
+                        if (lat !== '' && lng !== ''){
+                            coords = {
+                                lat: parseFloat(strsplit[0]),
+                                lng: parseFloat(strsplit[1])
+                            };
+                        } else {
+                            coords = undefined;
+                        }
+
+                        if (!llamap.initialized) {
+                            setTimeout(function () {llamap.initMap(coords); }, 500);
+                            llamap.currentPosition = coords;
+                        } else {
+                            llamap.currentPosition = coords;
+                            llamap.changeMapCenter(coords);
+                        }
+                    });
+
+                    $("#update_pit_lla").on("click", function () {
+                        var id = "{{ form.vars.id }}";
+                        var coords = {
+                            lat: llamap.currentPosition.lat,
+                            lng: llamap.currentPosition.lng
+                        };
+
+                        $("#"+id).val(coords.lat+", "+coords.lng);
+                        $("#modal-map").modal("hide");
+                    });
+
+                    $("#update_pit_cancel").on("click", function () {
+                        $("#modal-map").modal("hide");
+                    });
+                }
+            </script>
+        {% endblock %}
+    {% endspaceless %}
 {% endblock %}
