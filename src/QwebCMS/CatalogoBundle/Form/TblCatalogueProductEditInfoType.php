@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use QwebCMS\CatalogoBundle\Form\Type\GPSCoordinateType;
 
 class TblCatalogueProductEditInfoType extends AbstractType
 {
@@ -32,7 +33,8 @@ class TblCatalogueProductEditInfoType extends AbstractType
         ->add('cod')
         ->add('descriptionNotag', 'hidden')
         ->add('shortDescription')
-        ->add('coordinate')
+        //->add('coordinate')
+        ->add('coordinate', new GPSCoordinateType())
         ->add('indirizzo')
         ->add('classeEnergetica')
         ->add('prezzo')

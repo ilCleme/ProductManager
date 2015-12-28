@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b2668814f52f677550e89165c1bea8bc",
-    "content-hash": "ce0f736eb5859eaa664cdd4fb0c47037",
+    "hash": "f65c602de3c536852e64b4adbd39fc11",
+    "content-hash": "383390218f202636a2bac87f2b9c456b",
     "packages": [
         {
             "name": "components/elfinder",
@@ -2013,17 +2013,17 @@
         },
         {
             "name": "stfalcon/tinymce-bundle",
-            "version": "dev-master",
+            "version": "v0.3.9",
             "target-dir": "Stfalcon/Bundle/TinymceBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stfalcon/TinymceBundle.git",
-                "reference": "5f8ed022dd6a606c8f0b4da97f524b9864cd0e29"
+                "reference": "435c855f546fda9e4a05a1558f843f1712416ecb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/5f8ed022dd6a606c8f0b4da97f524b9864cd0e29",
-                "reference": "5f8ed022dd6a606c8f0b4da97f524b9864cd0e29",
+                "url": "https://api.github.com/repos/stfalcon/TinymceBundle/zipball/435c855f546fda9e4a05a1558f843f1712416ecb",
+                "reference": "435c855f546fda9e4a05a1558f843f1712416ecb",
                 "shasum": ""
             },
             "require": {
@@ -2067,7 +2067,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2015-12-15 15:50:30"
+            "time": "2015-12-08 12:12:45"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2664,8 +2664,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "doctrine/migrations": 20,
-        "doctrine/doctrine-migrations-bundle": 20,
-        "stfalcon/tinymce-bundle": 20
+        "doctrine/doctrine-migrations-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

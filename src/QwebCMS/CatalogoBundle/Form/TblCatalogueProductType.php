@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
+use QwebCMS\CatalogoBundle\Form\Type\GPSCoordinateType;
 
 class TblCatalogueProductType extends AbstractType
 {
@@ -30,7 +31,7 @@ class TblCatalogueProductType extends AbstractType
         ->add('cod')
         ->add('descriptionNotag', 'hidden')
         ->add('shortDescription')
-        ->add('coordinate')
+        ->add('coordinate', new GPSCoordinateType())
         ->add('indirizzo')
         ->add('classeEnergetica')
         ->add('prezzo')
