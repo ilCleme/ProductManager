@@ -9,9 +9,11 @@ Il nuovo catalogo di **Enteweb** è stato completamente riscritto, usando Symfon
 	1. Inserimento informazioni nuovo Prodotto
     2. Aggiunta di Caratteristiche
     3. Aggiunta di Immagini
+    
 * Gestione delle **_Categorie_**
     1. Inserimento informazioni nuova Categoria
     2. Modifica informazioni Categoria
+    
 * Gestione delle **_Caratteristiche_**
     1. Aggiunta di nuova Carateristica
     2. Modifica di nuova Caratteristica
