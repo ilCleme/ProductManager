@@ -164,6 +164,7 @@ class ProductController extends Controller
             // Create a new empty Album for this product
             $album = new Album();
             $album->setNome($product->getTitle());
+            $album->setFotoBig(" ");
             $em->persist($album);
             $em->flush();
 
