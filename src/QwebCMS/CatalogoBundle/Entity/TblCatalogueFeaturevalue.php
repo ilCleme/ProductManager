@@ -230,6 +230,7 @@ class TblCatalogueFeaturevalue
     {
         $this->productsWithFeaturevalue = new \Doctrine\Common\Collections\ArrayCollection();
         $this->featurevalue_inherit = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->updatedAt = new \DateTime('now');
     }
 
     /**
@@ -366,5 +367,28 @@ class TblCatalogueFeaturevalue
     public function getImageFile()
     {
         return $this->imageFile;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return TblCatalogueFeaturevalue
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }
