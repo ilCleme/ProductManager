@@ -51,6 +51,7 @@
 {% endblock %}
 
 {% block content %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 <div class="row">
 
     <div class="col-lg-12">
@@ -66,7 +67,7 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                {{ form_label(form.title, 'Nome valore'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_label(form.title, 'Nome singola caratteristica'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_errors(form.title) }}
                                 {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                             </div>
@@ -80,7 +81,7 @@
                         <div class="clearfix"></div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                {{ form_label(form.features, 'Caratteristica Padre'|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                                {{ form_label(form.features, 'Caratteristica Padre'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                 {{ form_errors(form.features) }}
                                 <div class="col-lg-12 m-l-n">
                                     {{ form_widget(form.features, {'attr': {'class': '', 'multiple':'true'}}) }}
@@ -90,7 +91,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 {% if form.featurevalue_inherit is defined %}
-                                    {{ form_label(form.featurevalue_inherit, 'Dipende da'|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                                    {{ form_label(form.featurevalue_inherit, 'Dipende da'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.featurevalue_inherit) }}
                                     <div class="col-lg-12 m-l-n">
                                         {{ form_widget(form.featurevalue_inherit, {'attr': {'class': '', 'multiple':'true'}}) }}
