@@ -332,29 +332,6 @@ class TblCatalogueProduct
     }
 
     /**
-     * Set img
-     *
-     * @param string $img
-     * @return TblCatalogueProduct
-     */
-    public function setImg($img)
-    {
-        $this->img = $img;
-
-        return $this;
-    }
-
-    /**
-     * Get img
-     *
-     * @return string
-     */
-    public function getImg()
-    {
-        return $this->img;
-    }
-
-    /**
      * Set idTblPhotoCat
      *
      * @param integer $idTblPhotoCat
@@ -493,12 +470,14 @@ class TblCatalogueProduct
     /**
      * Get categories for a specific Language
      *
+     * @param $id_language
+     *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getCategoriesByLanguage($id_language)
     {
         $categories = $this->getCategories();
-        $arrayCategories = new \Doctrine\Common\Collections\ArrayCollection();
+        $arrayCategories = new ArrayCollection();
         foreach($categories as $category){
             if ($category->getIdTblLingua() == $id_language){
                 $arrayCategories->add($category);

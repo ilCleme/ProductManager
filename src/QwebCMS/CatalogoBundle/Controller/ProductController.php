@@ -253,13 +253,16 @@ class ProductController extends Controller
     }
 
     public function updateFeaturesAction($id, Request $request){
-        $categories = $this->getDoctrine()
+        /*$categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+        */
 
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
             ->findOneBy(array('idTblCatalogueProduct' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+
+        $categories = $product->getCategoriesByLanguage($this->get('language.manager')->getSessionLanguage());
 
         $categorie = $product->getCategories();
         foreach($categorie as $categoria){
@@ -347,13 +350,15 @@ class ProductController extends Controller
     }
 
     public function updateImagesAction($id, Request $request){
-        $categories = $this->getDoctrine()
+        /*$categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));*/
 
         $product = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
             ->findOneBy(array('idTblCatalogueProduct' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+
+        $categories = $product->getCategoriesByLanguage($this->get('language.manager')->getSessionLanguage());
 
         if (!$product) {
             throw $this->createNotFoundException(
