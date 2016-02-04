@@ -9,7 +9,9 @@ class GPSCoordinateType extends AbstractType
 {
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-
+        $resolver->setDefaults(array(
+            'required'   => false,
+        ));
     }
 
     public function getParent()
