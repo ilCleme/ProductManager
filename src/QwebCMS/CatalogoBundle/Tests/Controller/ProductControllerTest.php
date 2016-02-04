@@ -37,7 +37,7 @@ class ProductControllerTest extends WebTestCase
         );
     }
 
-    public function testupdateImagesAction()
+    public function testUpdateImagesAction()
     {
         $client = static::createClient();
 
