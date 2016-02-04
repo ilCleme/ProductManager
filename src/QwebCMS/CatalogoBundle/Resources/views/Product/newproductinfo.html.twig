@@ -131,33 +131,33 @@
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        {{ form_label(form.annoCostruzione, 'Anno Costruzione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.annoCostruzione) }}
-                                        {{ form_widget(form.annoCostruzione, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.comfort, 'Comfort'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.comfort) }}
+                                        {{ form_widget(form.comfort, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        {{ form_label(form.piano, 'Piano'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.piano) }}
-                                        {{ form_widget(form.piano, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.accessori, 'Accessori'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.accessori) }}
+                                        {{ form_widget(form.accessori, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        {{ form_label(form.mq, 'Mq'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.mq) }}
-                                        {{ form_widget(form.mq, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.parcheggio, 'Parcheggio'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.parcheggio) }}
+                                        {{ form_widget(form.parcheggio, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        {{ form_label(form.postiLetto, 'Posti Letto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.postiLetto) }}
-                                        {{ form_widget(form.postiLetto, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.valoreCatastale, 'Valore Catastale'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.valoreCatastale) }}
+                                        {{ form_widget(form.valoreCatastale, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
 
@@ -179,10 +179,10 @@
                                 <div class="col-lg-4">
                                     {#
                                     <div class="form-group">
-                                        {{ form_label(form.planimetria, 'Planimetria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.planimetria) }}
-                                        {{ form_widget(form.planimetria, {'attr': {'class': 'form-control'}}) }}
-                                        <div id="drop-planimetria" class="dropzone col-lg-12" action="#">
+                                        {{ form_label(form.download, 'Download'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.download) }}
+                                        {{ form_widget(form.download, {'attr': {'class': 'form-control'}}) }}
+                                        <div id="drop-download" class="dropzone col-lg-12" action="#">
                                             <div class="dropzone-previews"></div>
                                         </div>
                                     </div>
