@@ -115,7 +115,27 @@
                                         {{ form_widget(form.coordinate, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
-
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.comfort, 'Comfort'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.comfort) }}
+                                        {{ form_widget(form.comfort, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.accessori, 'Accessori'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.accessori) }}
+                                        {{ form_widget(form.accessori, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.parcheggio, 'Parcheggio'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.parcheggio) }}
+                                        {{ form_widget(form.parcheggio, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         {{ form_label(form.classeEnergetica, 'Classe Energetica'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
@@ -123,7 +143,6 @@
                                         {{ form_widget(form.classeEnergetica, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
-
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         {{ form_label(form.prezzo, 'Prezzo'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
@@ -131,43 +150,18 @@
                                         {{ form_widget(form.prezzo, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
-
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        {{ form_label(form.annoCostruzione, 'Anno Costruzione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.annoCostruzione) }}
-                                        {{ form_widget(form.annoCostruzione, {'attr': {'class': 'form-control'}}) }}
+                                        {{ form_label(form.valoreCatastale, 'Posti Letto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.valoreCatastale) }}
+                                        {{ form_widget(form.valoreCatastale, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.piano, 'Piano'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.piano) }}
-                                        {{ form_widget(form.piano, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.mq, 'Mq'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.mq) }}
-                                        {{ form_widget(form.mq, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         {{ form_label(form.cod, 'Codice'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                         {{ form_errors(form.cod) }}
                                         {{ form_widget(form.cod, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.postiLetto, 'Posti Letto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.postiLetto) }}
-                                        {{ form_widget(form.postiLetto, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -179,12 +173,12 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        {{ form_label(form.planimetria, 'Planimetria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.planimetria) }}
-                                        {{ form_widget(form.planimetria, {'attr': {'class': 'form-control'}}) }}
-                                        <div id="drop-planimetria" class="dropzone col-lg-12" style="width:100%; min-height: 38px !important; padding: 8px !important;" action="#">
+                                        {{ form_label(form.download, 'download'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.download) }}
+                                        {{ form_widget(form.download, {'attr': {'class': 'form-control'}}) }}
+                                        <div id="drop-download" class="dropzone col-lg-12" style="width:100%; min-height: 38px !important; padding: 8px !important;" action="#">
                                             <div class="dropzone-previews"></div>
-                                            <div class="dz-message">Carica <strong>Planimetria</strong></div>
+                                            <div class="dz-message">Carica <strong>download</strong></div>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +233,7 @@
                 $(selector).chosen(config[selector]);
             }
 
-            Dropzone.options.dropPlanimetria = {
+            Dropzone.options.dropdownload = {
 
                 url: "{{ oneup_uploader_endpoint('planimetrie') }}",
                 autoProcessQueue: true,
@@ -252,14 +246,14 @@
 
                 // Dropzone settings
                 init: function() {
-                    var dropPlanimetriaObject = this;
-                    dropPlanimetriaObject.on("sendingmultiple", function() {
+                    var dropdownloadObject = this;
+                    dropdownloadObject.on("sendingmultiple", function() {
                     });
-                    dropPlanimetriaObject.on("successmultiple", function(files, response) {
+                    dropdownloadObject.on("successmultiple", function(files, response) {
                     });
-                    dropPlanimetriaObject.on("errormultiple", function(files, response) {
+                    dropdownloadObject.on("errormultiple", function(files, response) {
                     });
-                    dropPlanimetriaObject.on("queuecomplete", function(files, response) {
+                    dropdownloadObject.on("queuecomplete", function(files, response) {
                         //setTimeout("location.reload(true);", 1000);
                     });
                 }

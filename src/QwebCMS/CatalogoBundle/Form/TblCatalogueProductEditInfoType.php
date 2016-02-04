@@ -38,14 +38,14 @@ class TblCatalogueProductEditInfoType extends AbstractType
         ->add('indirizzo')
         ->add('classeEnergetica')
         ->add('prezzo')
-        ->add('annoCostruzione')
-        ->add('piano')
-        ->add('postiLetto')
-        ->add('mq')
+        ->add('comfort')
+        ->add('accessori')
+        ->add('valoreCatastale')
+        ->add('parcheggio')
         ->add('featured', 'checkbox', array(
             'required'  => false,
         ))
-        ->add('planimetria', 'hidden')
+        ->add('download', 'hidden')
         ->add('idTblPhotoCat', 'hidden')
         ->add('pub', 'checkbox', array(
             'required'  => false,
