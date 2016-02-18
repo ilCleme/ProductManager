@@ -30,6 +30,7 @@ class AlbumNameCommand extends ContainerAwareCommand
 
         foreach($products as $product){
             $id_album = $product->getIdTblPhotoCat();
+            $output->writeln($id_album);
             $album = $em
                 ->getRepository('QwebCMSCatalogoBundle:TblPhotoCat')
                 ->find($id_album);
