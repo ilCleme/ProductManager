@@ -164,6 +164,13 @@ class TblCatalogueProduct
     private $position;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="offerta", type="boolean", nullable=false)
+     */
+    private $offerta;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="valore_catastale", type="string", length=255, nullable=true)
@@ -900,5 +907,28 @@ class TblCatalogueProduct
     public function getValoreCatastale()
     {
         return $this->valoreCatastale;
+    }
+
+    /**
+     * Set offerta
+     *
+     * @param boolean $offerta
+     * @return TblCatalogueProduct
+     */
+    public function setOfferta($offerta)
+    {
+        $this->offerta = $offerta;
+
+        return $this;
+    }
+
+    /**
+     * Get offerta
+     *
+     * @return boolean 
+     */
+    public function getOfferta()
+    {
+        return $this->offerta;
     }
 }

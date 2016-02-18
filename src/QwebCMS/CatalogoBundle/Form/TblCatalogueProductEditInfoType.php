@@ -44,6 +44,9 @@ class TblCatalogueProductEditInfoType extends AbstractType
         ->add('featured', 'checkbox', array(
             'required'  => false,
         ))
+        ->add('offerta', 'checkbox', array(
+            'required'  => false,
+        ))
         ->add('download', 'hidden')
         ->add('idTblPhotoCat', 'hidden')
         ->add('pub', 'checkbox', array(
