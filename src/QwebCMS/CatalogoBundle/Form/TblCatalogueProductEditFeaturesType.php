@@ -66,7 +66,7 @@ class TblCatalogueProductEditFeaturesType extends AbstractType
                         return $er->createQueryBuilder('u')
                             ->where('u.idTblLingua = ?2')
                             ->join('u.features', 'f', 'WITH')
-                            ->andwhere('f.id = ?1')
+                            ->andwhere('f.idTblCatalogueFeature = ?1')
                             ->andwhere('f.idTblLingua = ?2')
                             ->setParameters(array('1' => $idFeature, '2' => $this->lingua));
                     },
