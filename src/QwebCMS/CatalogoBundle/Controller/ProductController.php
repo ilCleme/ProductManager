@@ -8,7 +8,6 @@ use QwebCMS\CatalogoBundle\Entity\TblPhotoCat as Album;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductType;
-use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditType;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditInfoType;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditFeaturesType;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditImagesType;
