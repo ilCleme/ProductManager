@@ -157,7 +157,7 @@ vich_uploader:
     db_driver: orm
 
     mappings:
-        product_image:
+        featurevalues_image:
             uri_prefix:         /public/ico-caratteristiche
             upload_destination: %kernel.root_dir%/../web/public/ico-caratteristiche
 

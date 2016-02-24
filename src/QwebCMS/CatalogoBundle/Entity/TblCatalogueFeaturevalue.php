@@ -48,7 +48,7 @@ class TblCatalogueFeaturevalue
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="img")
+     * @Vich\UploadableField(mapping="featurevalues_image", fileNameProperty="img")
      *
      * @var File
      */
