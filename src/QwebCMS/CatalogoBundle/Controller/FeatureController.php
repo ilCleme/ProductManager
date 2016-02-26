@@ -23,6 +23,7 @@ class FeatureController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $feature->setIdTblCatalogueFeature(0);
             $em->persist($feature);
             $em->flush();
             

@@ -36,7 +36,7 @@ class TblCatalogueFeatureType extends AbstractType
                 'multiple'  =>  false
             ))
             ->add('display', 'choice', array(
-                'choices'   =>  array('float:left' => 'Su unica riga', '' => 'Un valore per riga')
+                'choices'   =>  array('float:left' => 'Su unica riga', 'float:none' => 'Un valore per riga')
             ))
             ->add('inheritFrom', 'entity', array(
                 'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',
