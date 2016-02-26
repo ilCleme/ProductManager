@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="ibox-content">
-        {{ knp_pagination_filter(pagination, {'title': 'Nome Prodotto', 'shortDescription': 'Descrizione', 'idTblCatalogueProduct':'Id'}) }}
+        {{ knp_pagination_filter(pagination, {'a.title': 'Nome Prodotto', 'a.shortDescription': 'Descrizione'}) }}
         <div class="clearfix"></div>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables">
@@ -49,7 +49,7 @@
                         <th>{{ knp_pagination_sortable(pagination, 'Codice', 'a.cod') }}</th>
                         {#<th>{{ knp_pagination_sortable(pagination, 'Id', 'a.idTblCatalogueProduct') }}</th>#}
                         <th>Immagine</th>
-                        <th{% if pagination.isSorted('a.Title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Prodotto', 'a.title') }}</th>
+                        <th{% if pagination.isSorted('a.title') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Nome Prodotto', 'a.title') }}</th>
                         <th>{{ knp_pagination_sortable(pagination, 'Descrizione', 'a.shortDescription') }}</th>
                         <th>Stato</th>
                         <th>Home</th>

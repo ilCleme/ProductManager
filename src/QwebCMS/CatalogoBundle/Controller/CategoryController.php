@@ -44,21 +44,20 @@ class CategoryController extends Controller
     public function showAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 ORDER BY a.title ASC";
-        $product = $em->createQuery($dql);
-        $product->setParameter(1,$id);
-        $product->setParameter(2,$this->get('language.manager')->getSessionLanguage());
 
-        if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
+        if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='a.title' ){
             $filterValue = $request->query->get('filterValue');
 
-            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 AND a.title LIKE :filterValue ');
+            $dql = 'SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 AND a.title LIKE :filterValue ORDER BY a.title ASC';
+            $product = $em->createQuery($dql);
             $product->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%',
                 1   =>  $id,
                 2   =>  $this->get('language.manager')->getSessionLanguage()
             ));
-        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='shortDescription' ){
+
+            $product = $product->getResult();
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='a.shortDescription' ){
             $filterValue = $request->query->get('filterValue');
 
             $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 AND a.shortDescription LIKE :filterValue ');
@@ -67,22 +66,20 @@ class CategoryController extends Controller
                 1   =>  $id,
                 2   =>  $this->get('language.manager')->getSessionLanguage()
             ));
-        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueProduct' ){
-            $filterValue = $request->query->get('filterValue');
 
-            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 AND a.idTblCatalogueProduct LIKE :filterValue ');
-            $product->setParameters(array(
-                'filterValue' => '%'.$filterValue.'%',
-                1   =>  $id,
-                2   =>  $this->get('language.manager')->getSessionLanguage()
-            ));
+            $product = $product->getResult();
+        } else {
+            $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a JOIN a.categories c WHERE c.idTblCatalogueCategory = ?1 AND a.idTblLingua = ?2 ORDER BY a.title ASC";
+            $product = $em->createQuery($dql);
+            $product->setParameter(1,$id);
+            $product->setParameter(2,$this->get('language.manager')->getSessionLanguage());
         }
 
         $paginator  = $this->get('knp_paginator');
         $pagination = $paginator->paginate(
             $product,
             $request->query->getInt('page', 1)/*page number*/,
-            $request->query->getInt('number', 50)/*limit per page*/
+            $request->query->getInt('number', 5)/*limit per page*/
         );
 
         $categories = $this->getDoctrine()
