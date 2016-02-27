@@ -157,6 +157,13 @@ class TblCatalogueProduct
     private $featured;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="venduto", type="boolean", nullable=false)
+     */
+    private $venduto;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="position", type="integer", nullable=true)
@@ -930,5 +937,28 @@ class TblCatalogueProduct
     public function getOfferta()
     {
         return $this->offerta;
+    }
+
+    /**
+     * Set venduto
+     *
+     * @param boolean $venduto
+     * @return TblCatalogueProduct
+     */
+    public function setVenduto($venduto)
+    {
+        $this->venduto = $venduto;
+
+        return $this;
+    }
+
+    /**
+     * Get venduto
+     *
+     * @return boolean 
+     */
+    public function getVenduto()
+    {
+        return $this->venduto;
     }
 }

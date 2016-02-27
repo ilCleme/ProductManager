@@ -147,9 +147,13 @@ class ProductController extends Controller
 
     public function createNewAction(Request $request)
     {
+        /*$categories = $this->getDoctrine()
+            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->findAll();*/
+
         $categories = $this->getDoctrine()
             ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $product = new Product();
         $product->setIdTblLingua($this->get('language.manager')->getSessionLanguage());

@@ -51,6 +51,9 @@ class TblCatalogueProductType extends AbstractType
         ->add('pub', 'checkbox', array(
             'required'  => false,
         ))
+        ->add('venduto', 'checkbox', array(
+            'required'  => false,
+        ))
         ->add('position')
         ->add('categories', 'entity', array(
             'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
