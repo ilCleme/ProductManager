@@ -145,7 +145,7 @@ class WelcomeController extends Controller
         // passo l'oggetto $product a un template
         return $this->render(
             'QwebCMSCatalogoBundle:Welcome:showallfeatures.html.twig',
-            array('features' => $feature, 'categories' => $category)
+            array('features' => $feature, 'categories' => $category, 'lingua' => $this->get('language.manager')->getSessionLanguage(),)
         );
     }
     
