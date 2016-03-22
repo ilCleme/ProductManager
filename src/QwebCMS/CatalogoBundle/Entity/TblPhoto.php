@@ -49,7 +49,7 @@ class TblPhoto
     /**
      * @var string
      *
-     * @ORM\Column(name="img", type="string", length=255)
+     * @ORM\Column(name="img", type="string", length=255, nullable=true)
      */
     private $img;
 
@@ -91,7 +91,7 @@ class TblPhoto
     /**
      * @var integer
      *
-     * @ORM\Column(name="pub", type="bigint")
+     * @ORM\Column(name="pub", type="boolean")
      */
     private $pub = 1;
 
