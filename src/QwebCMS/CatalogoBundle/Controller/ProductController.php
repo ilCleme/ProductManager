@@ -286,22 +286,24 @@ class ProductController extends Controller
                 ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
                 ->findFeaturevaluesProductByLanguage($id, $this->get('language.manager')->getSessionLanguage());
 
-            $categorie = $product->getCategories();
-            foreach ($categorie as $categoria) {
-                $features = $categoria->getFeaturesByLanguage($this->get('language.manager')->getSessionLanguage());
-                foreach ($features as $feature) {
-                    if($feature->getTypeInput() == "select"){
-                        //$form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
-                        foreach($featurevalues as $featurevalue){
-                            $featureChildrens = $feature->getFeaturevalues();
-                            foreach($featureChildrens as $children){
-                                if($children->getIdTblCatalogueFeaturevalue() == $featurevalue->getIdTblCatalogueFeaturevalue()){
-                                    $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalue);
+            if ($featurevalues != null){
+                $categorie = $product->getCategories();
+                foreach ($categorie as $categoria) {
+                    $features = $categoria->getFeaturesByLanguage($this->get('language.manager')->getSessionLanguage());
+                    foreach ($features as $feature) {
+                        if($feature->getTypeInput() == "select"){
+                            //$form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
+                            foreach($featurevalues as $featurevalue){
+                                $featureChildrens = $feature->getFeaturevalues();
+                                foreach($featureChildrens as $children){
+                                    if($children->getIdTblCatalogueFeaturevalue() == $featurevalue->getIdTblCatalogueFeaturevalue()){
+                                        $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalue);
+                                    }
                                 }
                             }
+                        } else {
+                            $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
                         }
-                    } else {
-                        $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
                     }
                 }
             }
@@ -314,14 +316,18 @@ class ProductController extends Controller
             foreach($categorie as $categoria){
                 $features = $categoria->getFeatures();
                 foreach($features as $feature){
-                    $featurevalues = $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->getData();
-                    if($feature->getTypeInput() == "select"){
-                        $product->removeFeaturevalue($featurevalues);
-                        $product->addFeaturevalue($featurevalues);
-                    } else {
-                        foreach($featurevalues as $featurevalue){
-                            $product->removeFeaturevalue($featurevalue);
-                            $product->addFeaturevalue($featurevalue);
+                    if ($form->has('featurevalues_'.$feature->getIdTblCatalogueFeature())){
+                        $featurevalues = $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->getData();
+                        if (!empty($featurevalues)){
+                            if($feature->getTypeInput() == "select"){
+                                $product->removeFeaturevalue($featurevalues);
+                                $product->addFeaturevalue($featurevalues);
+                            } else {
+                                foreach($featurevalues as $featurevalue){
+                                    $product->removeFeaturevalue($featurevalue);
+                                    $product->addFeaturevalue($featurevalue);
+                                }
+                            }
                         }
                     }
                 }
