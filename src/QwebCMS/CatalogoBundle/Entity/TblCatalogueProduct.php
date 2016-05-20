@@ -47,6 +47,202 @@ class TblCatalogueProduct
     /**
      * @var string
      *
+     * @ORM\Column(name="costo_totale", type="float", nullable=true)
+     */
+    private $costoTotale;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="contributo", type="float", nullable=true)
+     */
+    private $contributo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="responsabile_progetto", type="string", length=255, nullable=true)
+     */
+    private $responsabileProgetto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email_riferimento", type="string", length=255, nullable=true)
+     */
+    private $emailRiferimento;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="partner", type="string", length=255, nullable=true)
+     */
+    private $partner;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tempi_realizzazione", type="string", length=400, nullable=true)
+     */
+    private $tempiRealizzazione;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="descrizione_progetto", type="text", nullable=true)
+     */
+    private $descrizioneProgetto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="beneficiario", type="string", length=250, nullable=true)
+     */
+    private $beneficiario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="obbiettivi", type="text", nullable=true)
+     */
+    private $obbiettivi;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="attivita_progetto", type="text", nullable=true)
+     */
+    private $attivitaProgetto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="informazioni", type="text", nullable=true)
+     */
+    private $informazioni;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link_esterni", type="string", length=400, nullable=true)
+     */
+    private $linkEsterni;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="allegati_progetto", type="string", length=250, nullable=true)
+     */
+    private $allegatiProgetto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fotogallery", type="string", length=250, nullable=true)
+     */
+    private $fotogallery;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="parole_chiave", type="string", length=255, nullable=false)
+     */
+    private $paroleChiave;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="stato_progetto", type="integer", nullable=false)
+     */
+    private $statoProgetto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="visibilita", type="integer", nullable=false)
+     */
+    private $visibilita;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ruolo_gal_venezia_orientale", type="string", length=255, nullable=true)
+     */
+    private $ruoloGalVeneziaOrientale;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="procedura_attuazione", type="text", nullable=true)
+     */
+    private $proceduraAttuazione;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="soggetto_promotore", type="string", length=500, nullable=true)
+     */
+    private $soggettoPromotore;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="gal_partner_progetto", type="string", length=300, nullable=true)
+     */
+    private $galPartnerProgetto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="partner_promotore", type="string", length=500, nullable=true)
+     */
+    private $partnerPromotore;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="anno_inizio", type="integer", nullable=false)
+     */
+    private $annoInizio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="costo_ammesso", type="float", nullable=true)
+     */
+    private $costoAmmesso;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="recapito_beneficiario", type="string", length=255, nullable=true)
+     */
+    private $recapitoBeneficiario;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="richiesta_variante", type="text", nullable=true)
+     */
+    private $richiestaVariante;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="richiesta_anticipo", type="text", nullable=true)
+     */
+    private $richiestaAnticipo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="atto_fine_intervento", type="text", nullable=true)
+     */
+    private $attoFineIntervento;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -87,62 +283,6 @@ class TblCatalogueProduct
     private $template;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="coordinate", type="string", length=255, nullable=true)
-     */
-    private $coordinate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="indirizzo", type="string", length=255, nullable=true)
-     */
-    private $indirizzo;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="classe_energetica", type="string", length=255, nullable=true)
-     */
-    private $classe_energetica;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="prezzo", type="string", length=255, nullable=true)
-     */
-    private $prezzo;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="comfort", type="string", length=255, nullable=true)
-     */
-    private $comfort;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="accessori", type="string", length=255, nullable=true)
-     */
-    private $accessori;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="parcheggio", type="string", length=255, nullable=true)
-     */
-    private $parcheggio;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="download", type="string", length=255, nullable=true)
-     */
-    private $download;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="pub", type="boolean", nullable=false)
@@ -157,32 +297,11 @@ class TblCatalogueProduct
     private $featured;
 
     /**
-     * @var boolean
-     *
-     * @ORM\Column(name="venduto", type="boolean", nullable=false)
-     */
-    private $venduto;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="position", type="integer", nullable=true)
      */
     private $position;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="offerta", type="boolean", nullable=false)
-     */
-    private $offerta;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="valore_catastale", type="string", length=255, nullable=true)
-     */
-    private $valoreCatastale;
     
     /**
      *  @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory", inversedBy="products")
@@ -562,121 +681,6 @@ class TblCatalogueProduct
     }
 
     /**
-     * Set coordinate
-     *
-     * @param string $coordinate
-     * @return TblCatalogueProduct
-     */
-    public function setCoordinate($coordinate)
-    {
-        $this->coordinate = $coordinate;
-
-        return $this;
-    }
-
-    /**
-     * Get coordinate
-     *
-     * @return string 
-     */
-    public function getCoordinate()
-    {
-        return $this->coordinate;
-    }
-
-    /**
-     * Set indirizzo
-     *
-     * @param string $indirizzo
-     * @return TblCatalogueProduct
-     */
-    public function setIndirizzo($indirizzo)
-    {
-        $this->indirizzo = $indirizzo;
-
-        return $this;
-    }
-
-    /**
-     * Get indirizzo
-     *
-     * @return string 
-     */
-    public function getIndirizzo()
-    {
-        return $this->indirizzo;
-    }
-
-    /**
-     * Set classe_energetica
-     *
-     * @param string $classeEnergetica
-     * @return TblCatalogueProduct
-     */
-    public function setClasseEnergetica($classeEnergetica)
-    {
-        $this->classe_energetica = $classeEnergetica;
-
-        return $this;
-    }
-
-    /**
-     * Get classe_energetica
-     *
-     * @return string 
-     */
-    public function getClasseEnergetica()
-    {
-        return $this->classe_energetica;
-    }
-
-    /**
-     * Set prezzo
-     *
-     * @param string $prezzo
-     * @return TblCatalogueProduct
-     */
-    public function setPrezzo($prezzo)
-    {
-        $this->prezzo = $prezzo;
-
-        return $this;
-    }
-
-    /**
-     * Get prezzo
-     *
-     * @return string 
-     */
-    public function getPrezzo()
-    {
-        return $this->prezzo;
-    }
-
-    /**
-     * Set planimetria
-     *
-     * @param string $planimetria
-     * @return TblCatalogueProduct
-     */
-    public function setPlanimetria($planimetria)
-    {
-        $this->planimetria = $planimetria;
-
-        return $this;
-    }
-
-    /**
-     * Get planimetria
-     *
-     * @return string 
-     */
-    public function getPlanimetria()
-    {
-        return $this->planimetria;
-    }
-
-    /**
      * Add featurevalues
      *
      * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalues
@@ -710,255 +714,646 @@ class TblCatalogueProduct
     }
 
     /**
-     * Set anno_costruzione
+     * Set costoTotale
      *
-     * @param string $annoCostruzione
+     * @param float $costoTotale
      * @return TblCatalogueProduct
      */
-    public function setAnnoCostruzione($annoCostruzione)
+    public function setCostoTotale($costoTotale)
     {
-        $this->anno_costruzione = $annoCostruzione;
+        $this->costoTotale = $costoTotale;
 
         return $this;
     }
 
     /**
-     * Get anno_costruzione
+     * Get costoTotale
+     *
+     * @return float 
+     */
+    public function getCostoTotale()
+    {
+        return $this->costoTotale;
+    }
+
+    /**
+     * Set contributo
+     *
+     * @param float $contributo
+     * @return TblCatalogueProduct
+     */
+    public function setContributo($contributo)
+    {
+        $this->contributo = $contributo;
+
+        return $this;
+    }
+
+    /**
+     * Get contributo
+     *
+     * @return float 
+     */
+    public function getContributo()
+    {
+        return $this->contributo;
+    }
+
+    /**
+     * Set responsabileProgetto
+     *
+     * @param string $responsabileProgetto
+     * @return TblCatalogueProduct
+     */
+    public function setResponsabileProgetto($responsabileProgetto)
+    {
+        $this->responsabileProgetto = $responsabileProgetto;
+
+        return $this;
+    }
+
+    /**
+     * Get responsabileProgetto
      *
      * @return string 
      */
-    public function getAnnoCostruzione()
+    public function getResponsabileProgetto()
     {
-        return $this->anno_costruzione;
+        return $this->responsabileProgetto;
     }
 
     /**
-     * Set piano
+     * Set emailRiferimento
      *
-     * @param string $piano
+     * @param string $emailRiferimento
      * @return TblCatalogueProduct
      */
-    public function setPiano($piano)
+    public function setEmailRiferimento($emailRiferimento)
     {
-        $this->piano = $piano;
+        $this->emailRiferimento = $emailRiferimento;
 
         return $this;
     }
 
     /**
-     * Get piano
+     * Get emailRiferimento
      *
      * @return string 
      */
-    public function getPiano()
+    public function getEmailRiferimento()
     {
-        return $this->piano;
+        return $this->emailRiferimento;
     }
 
     /**
-     * Set mq
+     * Set partner
      *
-     * @param string $mq
+     * @param string $partner
      * @return TblCatalogueProduct
      */
-    public function setMq($mq)
+    public function setPartner($partner)
     {
-        $this->mq = $mq;
+        $this->partner = $partner;
 
         return $this;
     }
 
     /**
-     * Get mq
+     * Get partner
      *
      * @return string 
      */
-    public function getMq()
+    public function getPartner()
     {
-        return $this->mq;
+        return $this->partner;
     }
 
     /**
-     * Set postiLetto
+     * Set tempiRealizzazione
      *
-     * @param string $postiLetto
+     * @param string $tempiRealizzazione
      * @return TblCatalogueProduct
      */
-    public function setPostiLetto($postiLetto)
+    public function setTempiRealizzazione($tempiRealizzazione)
     {
-        $this->postiLetto = $postiLetto;
+        $this->tempiRealizzazione = $tempiRealizzazione;
 
         return $this;
     }
 
     /**
-     * Get postiLetto
+     * Get tempiRealizzazione
      *
      * @return string 
      */
-    public function getPostiLetto()
+    public function getTempiRealizzazione()
     {
-        return $this->postiLetto;
+        return $this->tempiRealizzazione;
     }
 
     /**
-     * Set comfort
+     * Set descrizioneProgetto
      *
-     * @param string $comfort
+     * @param string $descrizioneProgetto
      * @return TblCatalogueProduct
      */
-    public function setComfort($comfort)
+    public function setDescrizioneProgetto($descrizioneProgetto)
     {
-        $this->comfort = $comfort;
+        $this->descrizioneProgetto = $descrizioneProgetto;
 
         return $this;
     }
 
     /**
-     * Get comfort
+     * Get descrizioneProgetto
      *
      * @return string 
      */
-    public function getComfort()
+    public function getDescrizioneProgetto()
     {
-        return $this->comfort;
+        return $this->descrizioneProgetto;
     }
 
     /**
-     * Set accessori
+     * Set beneficiario
      *
-     * @param string $accessori
+     * @param string $beneficiario
      * @return TblCatalogueProduct
      */
-    public function setAccessori($accessori)
+    public function setBeneficiario($beneficiario)
     {
-        $this->accessori = $accessori;
+        $this->beneficiario = $beneficiario;
 
         return $this;
     }
 
     /**
-     * Get accessori
+     * Get beneficiario
      *
      * @return string 
      */
-    public function getAccessori()
+    public function getBeneficiario()
     {
-        return $this->accessori;
+        return $this->beneficiario;
     }
 
     /**
-     * Set parcheggio
+     * Set obbiettivi
      *
-     * @param string $parcheggio
+     * @param string $obbiettivi
      * @return TblCatalogueProduct
      */
-    public function setParcheggio($parcheggio)
+    public function setObbiettivi($obbiettivi)
     {
-        $this->parcheggio = $parcheggio;
+        $this->obbiettivi = $obbiettivi;
 
         return $this;
     }
 
     /**
-     * Get parcheggio
+     * Get obbiettivi
      *
      * @return string 
      */
-    public function getParcheggio()
+    public function getObbiettivi()
     {
-        return $this->parcheggio;
+        return $this->obbiettivi;
     }
 
     /**
-     * Set download
+     * Set attivitaProgetto
      *
-     * @param string $download
+     * @param string $attivitaProgetto
      * @return TblCatalogueProduct
      */
-    public function setDownload($download)
+    public function setAttivitaProgetto($attivitaProgetto)
     {
-        $this->download = $download;
+        $this->attivitaProgetto = $attivitaProgetto;
 
         return $this;
     }
 
     /**
-     * Get download
+     * Get attivitaProgetto
      *
      * @return string 
      */
-    public function getDownload()
+    public function getAttivitaProgetto()
     {
-        return $this->download;
+        return $this->attivitaProgetto;
     }
 
     /**
-     * Set valoreCatastale
+     * Set informazioni
      *
-     * @param string $valoreCatastale
+     * @param string $informazioni
      * @return TblCatalogueProduct
      */
-    public function setValoreCatastale($valoreCatastale)
+    public function setInformazioni($informazioni)
     {
-        $this->valoreCatastale = $valoreCatastale;
+        $this->informazioni = $informazioni;
 
         return $this;
     }
 
     /**
-     * Get valoreCatastale
+     * Get informazioni
      *
      * @return string 
      */
-    public function getValoreCatastale()
+    public function getInformazioni()
     {
-        return $this->valoreCatastale;
+        return $this->informazioni;
     }
 
     /**
-     * Set offerta
+     * Set linkEsterni
      *
-     * @param boolean $offerta
+     * @param string $linkEsterni
      * @return TblCatalogueProduct
      */
-    public function setOfferta($offerta)
+    public function setLinkEsterni($linkEsterni)
     {
-        $this->offerta = $offerta;
+        $this->linkEsterni = $linkEsterni;
 
         return $this;
     }
 
     /**
-     * Get offerta
+     * Get linkEsterni
      *
-     * @return boolean 
+     * @return string 
      */
-    public function getOfferta()
+    public function getLinkEsterni()
     {
-        return $this->offerta;
+        return $this->linkEsterni;
     }
 
     /**
-     * Set venduto
+     * Set allegatiProgetto
      *
-     * @param boolean $venduto
+     * @param string $allegatiProgetto
      * @return TblCatalogueProduct
      */
-    public function setVenduto($venduto)
+    public function setAllegatiProgetto($allegatiProgetto)
     {
-        $this->venduto = $venduto;
+        $this->allegatiProgetto = $allegatiProgetto;
 
         return $this;
     }
 
     /**
-     * Get venduto
+     * Get allegatiProgetto
      *
-     * @return boolean 
+     * @return string 
      */
-    public function getVenduto()
+    public function getAllegatiProgetto()
     {
-        return $this->venduto;
+        return $this->allegatiProgetto;
+    }
+
+    /**
+     * Set fotogallery
+     *
+     * @param string $fotogallery
+     * @return TblCatalogueProduct
+     */
+    public function setFotogallery($fotogallery)
+    {
+        $this->fotogallery = $fotogallery;
+
+        return $this;
+    }
+
+    /**
+     * Get fotogallery
+     *
+     * @return string 
+     */
+    public function getFotogallery()
+    {
+        return $this->fotogallery;
+    }
+
+    /**
+     * Set paroleChiave
+     *
+     * @param string $paroleChiave
+     * @return TblCatalogueProduct
+     */
+    public function setParoleChiave($paroleChiave)
+    {
+        $this->paroleChiave = $paroleChiave;
+
+        return $this;
+    }
+
+    /**
+     * Get paroleChiave
+     *
+     * @return string 
+     */
+    public function getParoleChiave()
+    {
+        return $this->paroleChiave;
+    }
+
+    /**
+     * Set statoProgetto
+     *
+     * @param integer $statoProgetto
+     * @return TblCatalogueProduct
+     */
+    public function setStatoProgetto($statoProgetto)
+    {
+        $this->statoProgetto = $statoProgetto;
+
+        return $this;
+    }
+
+    /**
+     * Get statoProgetto
+     *
+     * @return integer 
+     */
+    public function getStatoProgetto()
+    {
+        return $this->statoProgetto;
+    }
+
+    /**
+     * Set visibilita
+     *
+     * @param integer $visibilita
+     * @return TblCatalogueProduct
+     */
+    public function setVisibilita($visibilita)
+    {
+        $this->visibilita = $visibilita;
+
+        return $this;
+    }
+
+    /**
+     * Get visibilita
+     *
+     * @return integer 
+     */
+    public function getVisibilita()
+    {
+        return $this->visibilita;
+    }
+
+    /**
+     * Set ruoloGalVeneziaOrientale
+     *
+     * @param string $ruoloGalVeneziaOrientale
+     * @return TblCatalogueProduct
+     */
+    public function setRuoloGalVeneziaOrientale($ruoloGalVeneziaOrientale)
+    {
+        $this->ruoloGalVeneziaOrientale = $ruoloGalVeneziaOrientale;
+
+        return $this;
+    }
+
+    /**
+     * Get ruoloGalVeneziaOrientale
+     *
+     * @return string 
+     */
+    public function getRuoloGalVeneziaOrientale()
+    {
+        return $this->ruoloGalVeneziaOrientale;
+    }
+
+    /**
+     * Set proceduraAttuazione
+     *
+     * @param string $proceduraAttuazione
+     * @return TblCatalogueProduct
+     */
+    public function setProceduraAttuazione($proceduraAttuazione)
+    {
+        $this->proceduraAttuazione = $proceduraAttuazione;
+
+        return $this;
+    }
+
+    /**
+     * Get proceduraAttuazione
+     *
+     * @return string 
+     */
+    public function getProceduraAttuazione()
+    {
+        return $this->proceduraAttuazione;
+    }
+
+    /**
+     * Set soggettoPromotore
+     *
+     * @param string $soggettoPromotore
+     * @return TblCatalogueProduct
+     */
+    public function setSoggettoPromotore($soggettoPromotore)
+    {
+        $this->soggettoPromotore = $soggettoPromotore;
+
+        return $this;
+    }
+
+    /**
+     * Get soggettoPromotore
+     *
+     * @return string 
+     */
+    public function getSoggettoPromotore()
+    {
+        return $this->soggettoPromotore;
+    }
+
+    /**
+     * Set galPartnerProgetto
+     *
+     * @param string $galPartnerProgetto
+     * @return TblCatalogueProduct
+     */
+    public function setGalPartnerProgetto($galPartnerProgetto)
+    {
+        $this->galPartnerProgetto = $galPartnerProgetto;
+
+        return $this;
+    }
+
+    /**
+     * Get galPartnerProgetto
+     *
+     * @return string 
+     */
+    public function getGalPartnerProgetto()
+    {
+        return $this->galPartnerProgetto;
+    }
+
+    /**
+     * Set partnerPromotore
+     *
+     * @param string $partnerPromotore
+     * @return TblCatalogueProduct
+     */
+    public function setPartnerPromotore($partnerPromotore)
+    {
+        $this->partnerPromotore = $partnerPromotore;
+
+        return $this;
+    }
+
+    /**
+     * Get partnerPromotore
+     *
+     * @return string 
+     */
+    public function getPartnerPromotore()
+    {
+        return $this->partnerPromotore;
+    }
+
+    /**
+     * Set annoInizio
+     *
+     * @param integer $annoInizio
+     * @return TblCatalogueProduct
+     */
+    public function setAnnoInizio($annoInizio)
+    {
+        $this->annoInizio = $annoInizio;
+
+        return $this;
+    }
+
+    /**
+     * Get annoInizio
+     *
+     * @return integer 
+     */
+    public function getAnnoInizio()
+    {
+        return $this->annoInizio;
+    }
+
+    /**
+     * Set costoAmmesso
+     *
+     * @param float $costoAmmesso
+     * @return TblCatalogueProduct
+     */
+    public function setCostoAmmesso($costoAmmesso)
+    {
+        $this->costoAmmesso = $costoAmmesso;
+
+        return $this;
+    }
+
+    /**
+     * Get costoAmmesso
+     *
+     * @return float 
+     */
+    public function getCostoAmmesso()
+    {
+        return $this->costoAmmesso;
+    }
+
+    /**
+     * Set recapitoBeneficiario
+     *
+     * @param string $recapitoBeneficiario
+     * @return TblCatalogueProduct
+     */
+    public function setRecapitoBeneficiario($recapitoBeneficiario)
+    {
+        $this->recapitoBeneficiario = $recapitoBeneficiario;
+
+        return $this;
+    }
+
+    /**
+     * Get recapitoBeneficiario
+     *
+     * @return string 
+     */
+    public function getRecapitoBeneficiario()
+    {
+        return $this->recapitoBeneficiario;
+    }
+
+    /**
+     * Set richiestaVariante
+     *
+     * @param string $richiestaVariante
+     * @return TblCatalogueProduct
+     */
+    public function setRichiestaVariante($richiestaVariante)
+    {
+        $this->richiestaVariante = $richiestaVariante;
+
+        return $this;
+    }
+
+    /**
+     * Get richiestaVariante
+     *
+     * @return string 
+     */
+    public function getRichiestaVariante()
+    {
+        return $this->richiestaVariante;
+    }
+
+    /**
+     * Set richiestaAnticipo
+     *
+     * @param string $richiestaAnticipo
+     * @return TblCatalogueProduct
+     */
+    public function setRichiestaAnticipo($richiestaAnticipo)
+    {
+        $this->richiestaAnticipo = $richiestaAnticipo;
+
+        return $this;
+    }
+
+    /**
+     * Get richiestaAnticipo
+     *
+     * @return string 
+     */
+    public function getRichiestaAnticipo()
+    {
+        return $this->richiestaAnticipo;
+    }
+
+    /**
+     * Set attoFineIntervento
+     *
+     * @param string $attoFineIntervento
+     * @return TblCatalogueProduct
+     */
+    public function setAttoFineIntervento($attoFineIntervento)
+    {
+        $this->attoFineIntervento = $attoFineIntervento;
+
+        return $this;
+    }
+
+    /**
+     * Get attoFineIntervento
+     *
+     * @return string 
+     */
+    public function getAttoFineIntervento()
+    {
+        return $this->attoFineIntervento;
     }
 }

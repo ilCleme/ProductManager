@@ -46,6 +46,13 @@ class TblCatalogueFeaturevalue
     private $title;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=false)
+     */
+    private $description;
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="featurevalues_image", fileNameProperty="img")
@@ -390,5 +397,28 @@ class TblCatalogueFeaturevalue
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return TblCatalogueFeaturevalue
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }
