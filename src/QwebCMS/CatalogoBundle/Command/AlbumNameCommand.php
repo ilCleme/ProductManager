@@ -3,7 +3,7 @@
 namespace QwebCMS\CatalogoBundle\Command;
 
 
-use QwebCMS\CatalogoBundle\Entity\TblPhotoCat;
+use QwebCMS\CatalogoBundle\Entity\TblPhotoCat as Album;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -30,16 +30,30 @@ class AlbumNameCommand extends ContainerAwareCommand
 
         foreach($products as $product){
             $id_album = $product->getIdTblPhotoCat();
-            $output->writeln($id_album);
-            $album = $em
-                ->getRepository('QwebCMSCatalogoBundle:TblPhotoCat')
-                ->find($id_album);
+            if ($id_album != 0){
+                $album = $em
+                    ->getRepository('QwebCMSCatalogoBundle:TblPhotoCat')
+                    ->find($id_album);
 
-            $output->writeln("Album con id ".$id_album." collegato al prodotto con nome ".$product->getTitle()." e rinominato come tale");
+                $album->setNome($product->getTitle());
+            } else {
+                $output->writeln("Prodotto senza album, creo album nuovo");
+                $album = new Album();
+                $album->setIdTblLingua(4);
+                $album->setNome($product->getTitle());
+                $album->setFotoBig("");
+            }
 
-            $album->setNome($product->getTitle());
             $em->persist($album);
             $em->flush();
+
+            if ($id_album == 0){
+                $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
+                $em->persist($product);
+                $em->flush();
+            }
+
+            $output->writeln("Album con id ".$album->getId()." collegato al prodotto con nome ".$product->getTitle()." e rinominato come tale");
         }
     }
 }
