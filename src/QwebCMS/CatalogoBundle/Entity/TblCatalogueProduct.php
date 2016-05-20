@@ -133,6 +133,13 @@ class TblCatalogueProduct
      *
      * @ORM\Column(name="allegati_progetto", type="string", length=250, nullable=true)
      */
+    /**
+     * @ORM\ManyToMany(targetEntity="Allegato")
+     * @ORM\JoinTable(name="prodotto_allegato",
+     *      joinColumns={@ORM\JoinColumn(name="prodotto_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="allegato_id", referencedColumnName="id")}
+     *      )
+     */
     private $allegatiProgetto;
 
     /**
