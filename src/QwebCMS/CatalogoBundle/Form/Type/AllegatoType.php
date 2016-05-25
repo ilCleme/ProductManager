@@ -19,7 +19,6 @@ class AllegatoType extends AbstractType
             ->add('idTblLingua', 'hidden')
             ->add('nome')
             ->add('imageFile', 'vich_file', array(
-                'required'      => false,
                 'label'         => false,
                 'allow_delete'  => false, // not mandatory, default is true
                 'download_link' => false, // not mandatory, default is true

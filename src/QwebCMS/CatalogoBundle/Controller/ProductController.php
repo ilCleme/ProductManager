@@ -12,6 +12,7 @@ use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditInfoType;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditFeaturesType;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueProductEditImagesType;
 use QwebCMS\CatalogoBundle\Entity\TblPhoto as Foto;
+use QwebCMS\CatalogoBundle\Entity\Allegato;
 
 class ProductController extends Controller
 {
@@ -156,6 +157,8 @@ class ProductController extends Controller
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $product = new Product();
+        //$allegato = new Allegato();
+        //$product->addAllegatiProgetto($allegato);
         $product->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
         $form = $this->createForm(new TblCatalogueProductType($this->get('language.manager')->getSessionLanguage()), $product);
 

@@ -1024,7 +1024,7 @@ class TblCatalogueProduct
      * @param string $allegatiProgetto
      * @return TblCatalogueProduct
      */
-    public function setAllegatiProgetto($allegatiProgetto)
+    public function setAllegatiProgetto(ArrayCollection  $allegatiProgetto)
     {
         $this->allegatiProgetto = $allegatiProgetto;
 
