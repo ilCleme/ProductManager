@@ -5,12 +5,15 @@ namespace QwebCMS\CatalogoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * TblCatalogueProduct
  *
  * @ORM\Table(name="tbl_catalogue_product")
  * @ORM\Entity(repositoryClass="QwebCMS\CatalogoBundle\Entity\TblCatalogueProductRepository")
+ * @Vich\Uploadable
  */
 class TblCatalogueProduct
 {
@@ -129,12 +132,7 @@ class TblCatalogueProduct
     private $linkEsterni;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="allegati_progetto", type="string", length=250, nullable=true)
-     */
-    /**
-     * @ORM\ManyToMany(targetEntity="Allegato")
+     * @ORM\ManyToMany(targetEntity="Allegato", cascade={"persist"})
      * @ORM\JoinTable(name="prodotto_allegato",
      *      joinColumns={@ORM\JoinColumn(name="prodotto_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="allegato_id", referencedColumnName="id")}
@@ -309,6 +307,29 @@ class TblCatalogueProduct
      * @ORM\Column(name="position", type="integer", nullable=true)
      */
     private $position;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="allegati", fileNameProperty="logoPath")
+     *
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     *
+     * @var string
+     */
+    private $logoPath;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
     
     /**
      *  @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory", inversedBy="products")
@@ -329,6 +350,7 @@ class TblCatalogueProduct
     public function __construct() {
         $this->categories = new ArrayCollection();
         $this->featurevalues = new ArrayCollection();
+        $this->allegatiProgetto = new ArrayCollection();
         $this->setIdTblLingua(4);
     }
 
@@ -1362,5 +1384,114 @@ class TblCatalogueProduct
     public function getAttoFineIntervento()
     {
         return $this->attoFineIntervento;
+    }
+
+    public function addAllegatiProgetto(Allegato $allegato)
+    {
+        $allegato->setIdTblLingua(4);
+        $this->allegatiProgetto->add($allegato);
+    }
+
+    public function removeAllegatiProgetto(Allegato $allegato)
+    {
+        $this->allegatiProgetto->removeElement($allegato);
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return TblCatalogueProduct
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set logoPath
+     *
+     * @param string $logoPath
+     * @return TblCatalogueProduct
+     */
+    public function setLogoPath($logoPath)
+    {
+        $this->logoPath = $logoPath;
+
+        return $this;
+    }
+
+    /**
+     * Get logoPath
+     *
+     * @return string 
+     */
+    public function getLogoPath()
+    {
+        return $this->logoPath;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the  update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $image
+     *
+     * @return Product
+     */
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        if ($image) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param string $imageName
+     *
+     * @return Product
+     */
+    public function setImageName($imageName)
+    {
+        $this->logoPath = $imageName;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageName()
+    {
+        return $this->logoPath;
     }
 }

@@ -307,30 +307,61 @@
                                     </div>
                                 </div>
 
-
-
-
-                                {#<div class="col-lg-4">
+                                <div class="col-lg-4">
                                     <div class="form-group">
-                                        {{ form_label(form.download, 'download'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.download) }}
-                                        {{ form_widget(form.download, {'attr': {'class': 'form-control'}}) }}
-                                        <div id="drop-download" class="dropzone col-lg-12" style="width:100%; min-height: 38px !important; padding: 8px !important;" action="#">
-                                            <div class="dropzone-previews"></div>
-                                            <div class="dz-message">Carica <strong>download</strong></div>
-                                        </div>
+                                        {{ form_errors(form.imageFile) }}
+                                        {{ form_widget(form.imageFile, {'attr': {'class': 'form-control img-responsive'}}) }}
                                     </div>
-                                </div>#}
+                                </div>
 
                                 <div class="col-lg-12">
                                     {{ form_label(form.allegatiProgetto, 'Allegati progetto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                     {{ form_errors(form.allegatiProgetto) }}
-                                    <ul class="tags" data-prototype="{{ form_widget(form.allegatiProgetto.vars.prototype)|e }}" class="">
-                                        {# itera per ogni tag esistente e rende il suo unico campo: name #}
-                                        {% for allegato in form.allegatiProgetto %}
-                                            <li class="col-lg-12">{{ form_widget(allegato) }}</li>
-                                        {% endfor %}
-                                    </ul>
+                                    <div class="table-responsive table_allegato">
+                                        <table class="table table-stripped table-bordered">
+
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    Allegato ID
+                                                </th>
+                                                <th>
+                                                    Nome Allegato
+                                                </th>
+                                                <th>
+                                                    Nome File Allegato
+                                                </th>
+                                                <th>
+                                                    ImageFile
+                                                </th>
+                                                <th>
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="allegati" data-prototype="{% filter escape %}{% include 'QwebCMSCatalogoBundle:Form:allegato_prototype.html.twig' with { 'allegato': form.allegatiProgetto.vars.prototype } %}{% endfilter %}">
+                                            {% for allegato in form.allegatiProgetto %}
+                                            <tr>
+                                                <td>
+                                                    {{ form_widget(allegato.id) }}
+                                                </td>
+                                                <td>
+                                                    {{ form_widget(allegato.nome) }}
+                                                </td>
+                                                <td>
+                                                    {{ form_widget(allegato.imageName) }}
+                                                </td>
+                                                <td>
+                                                    {{ form_widget(allegato.imageFile) }}
+                                                </td>
+                                                <td class="delete_allegato">
+                                                    {{ form_widget(allegato.idTblLingua) }}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -366,22 +397,23 @@
 
     <script>
         var $collectionHolder;
+        var $tableAllegati = $('.table_allegato');
 
         // prepara un collegamento "aggiungere un tag"
-        var $addTagLink = $('<a href="#" class="add_tag_link">Aggiungere un tag</a>');
-        var $newLinkLi = $('<li></li>').append($addTagLink);
+        var $addTagLink = $('<a href="#" class="btn btn-white add_tag_link">Aggiungere un Allegato</a>');
+        var $newLinkLi = $('<tr></tr>').append($addTagLink);
 
         $(document).ready(function() {
             // Prende l'ul che contiene la lista di tag
-            $collectionHolder = $('ul.tags');
+            $collectionHolder = $('tbody.allegati');
 
             // aggiunge un collegamento di eliminazione a ogni elemento tag esistente
-            $collectionHolder.find('li').each(function() {
+            $collectionHolder.find('tr').each(function() {
                 addTagFormDeleteLink($(this));
             });
 
             // aggiunge l'ancora "aggiungere un tag" e il li all'ul dei tag
-            $collectionHolder.append($newLinkLi);
+            $tableAllegati.append($newLinkLi);
 
             // conta gli input correnti (p.e. 2), usando il valore come nuovo
             // indice per inserire un nuovo elemento (p.e. 2)
@@ -411,16 +443,16 @@
             $collectionHolder.data('index', index + 1);
 
             // Mostra il form nella pagina, dentro un li, prima del collegamento "Aggiungere un tag"
-            var $newFormLi = $('<li></li>').append(newForm);
-            $newLinkLi.before($newFormLi);
+            var $newFormLi = $('<tr></tr>').append(newForm);
+            $collectionHolder.append($newFormLi);
 
             // aggiunge un collegamento di eliminazione al nuovo form
             addTagFormDeleteLink($newFormLi);
         }
 
         function addTagFormDeleteLink($tagFormLi) {
-            var $removeFormA = $('<a href="#">delete this tag</a>');
-            $tagFormLi.append($removeFormA);
+            var $removeFormA = $('<a class="btn btn-white" href="#"><i class="fa fa-trash"></i></a>');
+            $tagFormLi.find('td.delete_allegato').append($removeFormA);
 
             $removeFormA.on('click', function(e) {
                 // previene il "#" nell'URL

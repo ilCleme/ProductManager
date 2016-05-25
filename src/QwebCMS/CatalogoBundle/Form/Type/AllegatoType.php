@@ -15,7 +15,7 @@ class AllegatoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'hidden')
+            ->add('id', 'text', array('disabled' => true))
             ->add('idTblLingua', 'hidden')
             ->add('nome')
             ->add('imageFile', 'vich_file', array(
@@ -24,6 +24,7 @@ class AllegatoType extends AbstractType
                 'allow_delete'  => false, // not mandatory, default is true
                 'download_link' => false, // not mandatory, default is true
             ))
+            ->add('imageName', 'url', array('disabled' => true))
         ;
     }
 

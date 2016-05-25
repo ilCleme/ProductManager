@@ -171,3 +171,11 @@ vich_uploader:
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
+
+
+        logo:
+            uri_prefix:         /logo
+            upload_destination: %kernel.root_dir%/../web/logo
+            inject_on_load:     true
+            delete_on_update:   true
+            delete_on_remove:   true

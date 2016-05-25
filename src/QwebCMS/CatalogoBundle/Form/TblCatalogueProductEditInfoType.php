@@ -51,6 +51,13 @@ class TblCatalogueProductEditInfoType extends AbstractType
                 'allow_delete'  => true,
                 'by_reference' => false,
             ))
+            ->add('imageFile', 'vich_image', array(
+                'required'      => false,
+                'label'         => 'Logo',
+                'allow_delete'  => false, // not mandatory, default is true
+                'download_link' => false, // not mandatory, default is true
+            ))
+            ->add('logoPath', 'hidden')
             ->add('fotogallery')
             ->add('paroleChiave')
             ->add('statoProgetto')
