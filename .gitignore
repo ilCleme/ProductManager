@@ -19,6 +19,7 @@
 /web/assets/*
 /web/assets/jquery-ui/*
 /web/allegati/*
+/web/logo/*
 Vagrantfile
 /ansible
 /.vagrant
