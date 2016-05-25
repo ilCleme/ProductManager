@@ -60,7 +60,7 @@ class TblCatalogueProductType extends AbstractType
             ->add('fotogallery')
             ->add('paroleChiave')
             ->add('statoProgetto')
-            ->add('visibilita')
+            ->add('areaRiservata')
             ->add('ruoloGalVeneziaOrientale')
             ->add('proceduraAttuazione')
             ->add('soggettoPromotore')

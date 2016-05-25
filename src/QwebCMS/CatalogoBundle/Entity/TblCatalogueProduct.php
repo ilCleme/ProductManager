@@ -164,9 +164,9 @@ class TblCatalogueProduct
     /**
      * @var string
      *
-     * @ORM\Column(name="visibilita", type="integer", nullable=false)
+     * @ORM\Column(name="area_riservata", type="boolean", nullable=false)
      */
-    private $visibilita;
+    private $areaRiservata;
 
     /**
      * @var string
@@ -1493,5 +1493,28 @@ class TblCatalogueProduct
     public function getImageName()
     {
         return $this->logoPath;
+    }
+
+    /**
+     * Set areaRiservata
+     *
+     * @param boolean $areaRiservata
+     * @return TblCatalogueProduct
+     */
+    public function setAreaRiservata($areaRiservata)
+    {
+        $this->areaRiservata = $areaRiservata;
+
+        return $this;
+    }
+
+    /**
+     * Get areaRiservata
+     *
+     * @return boolean 
+     */
+    public function getAreaRiservata()
+    {
+        return $this->areaRiservata;
     }
 }
