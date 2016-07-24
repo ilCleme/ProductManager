@@ -5,12 +5,12 @@ namespace QwebCMS\CatalogoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TblCatalogueCategory
+ * Categoria
  *
  * @ORM\Table(name="tbl_catalogue_category")
  * @ORM\Entity
  */
-class TblCatalogueCategory
+class Categoria
 {
     /**
      * @var integer
@@ -76,12 +76,12 @@ class TblCatalogueCategory
     private $products;
     
     /**
-     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory", mappedBy="categoriesParent")
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Categoria", mappedBy="categoriesParent")
      **/
     protected $parentOfCategories;
 
     /**
-     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory", inversedBy="parentOfCategories")
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Categoria", inversedBy="parentOfCategories")
      * @ORM\JoinTable(name="cross_tbl_catalogue_category_x_tbl_catalogue_category",
      *      joinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id_tbl_catalogue_category")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id_tbl_catalogue_category")}
@@ -111,7 +111,7 @@ class TblCatalogueCategory
      * Set idTblCatalogueCategory
      *
      * @param integer $idTblCatalogueCategory
-     * @return TblCatalogueCategory
+     * @return Categoria
      */
     public function setIdTblCatalogueCategory($idTblCatalogueCategory)
     {
@@ -134,7 +134,7 @@ class TblCatalogueCategory
      * Set idTblLingua
      *
      * @param boolean $idTblLingua
-     * @return TblCatalogueCategory
+     * @return Categoria
      */
     public function setIdTblLingua($idTblLingua)
     {
@@ -157,7 +157,7 @@ class TblCatalogueCategory
      * Set title
      *
      * @param string $title
-     * @return TblCatalogueCategory
+     * @return Categoria
      */
     public function setTitle($title)
     {
@@ -180,7 +180,7 @@ class TblCatalogueCategory
      * Set description
      *
      * @param string $description
-     * @return TblCatalogueCategory
+     * @return Categoria
      */
     public function setDescription($description)
     {
@@ -203,7 +203,7 @@ class TblCatalogueCategory
      * Set position
      *
      * @param integer $position
-     * @return TblCatalogueCategory
+     * @return Categoria
      */
     public function setPosition($position)
     {
@@ -236,7 +236,7 @@ class TblCatalogueCategory
      * Add products
      *
      * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct $products
-     * @return TblCatalogueCategory
+     * @return Categoria
      */
     public function addProduct(\QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct $products)
     {
@@ -269,10 +269,10 @@ class TblCatalogueCategory
     /**
      * Add parentOfCategories
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $parentOfCategories
-     * @return TblCatalogueCategory
+     * @param \QwebCMS\CatalogoBundle\Entity\Categoria $parentOfCategories
+     * @return Categoria
      */
-    public function addParentOfCategory(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $parentOfCategories)
+    public function addParentOfCategory(\QwebCMS\CatalogoBundle\Entity\Categoria $parentOfCategories)
     {
         $this->parentOfCategories[] = $parentOfCategories;
 
@@ -282,9 +282,9 @@ class TblCatalogueCategory
     /**
      * Remove parentOfCategories
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $parentOfCategories
+     * @param \QwebCMS\CatalogoBundle\Entity\Categoria $parentOfCategories
      */
-    public function removeParentOfCategory(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $parentOfCategories)
+    public function removeParentOfCategory(\QwebCMS\CatalogoBundle\Entity\Categoria $parentOfCategories)
     {
         $this->parentOfCategories->removeElement($parentOfCategories);
     }
@@ -302,10 +302,10 @@ class TblCatalogueCategory
     /**
      * Add categoriesParent
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categoriesParent
-     * @return TblCatalogueCategory
+     * @param \QwebCMS\CatalogoBundle\Entity\Categoria $categoriesParent
+     * @return Categoria
      */
-    public function addCategoriesParent(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categoriesParent)
+    public function addCategoriesParent(\QwebCMS\CatalogoBundle\Entity\Categoria $categoriesParent)
     {
         $this->categoriesParent[] = $categoriesParent;
 
@@ -315,9 +315,9 @@ class TblCatalogueCategory
     /**
      * Remove categoriesParent
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categoriesParent
+     * @param \QwebCMS\CatalogoBundle\Entity\Categoria $categoriesParent
      */
-    public function removeCategoriesParent(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categoriesParent)
+    public function removeCategoriesParent(\QwebCMS\CatalogoBundle\Entity\Categoria $categoriesParent)
     {
         $this->categoriesParent->removeElement($categoriesParent);
     }
@@ -336,7 +336,7 @@ class TblCatalogueCategory
      * Set img
      *
      * @param string $img
-     * @return TblCatalogueCategory
+     * @return Categoria
      */
     public function setImg($img)
     {
@@ -359,7 +359,7 @@ class TblCatalogueCategory
      * Set pub
      *
      * @param boolean $pub
-     * @return TblCatalogueCategory
+     * @return Categoria
      */
     public function setPub($pub)
     {
@@ -382,7 +382,7 @@ class TblCatalogueCategory
      * Add features
      *
      * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features
-     * @return TblCatalogueCategory
+     * @return Categoria
      */
     public function addFeature(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features)
     {

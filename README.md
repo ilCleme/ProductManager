@@ -1,21 +1,7 @@
-#Catalogo Enteweb
+# Catalogo Prodotti
 
-E' un progetto [symfony](https://symfony.com/doc/2.6/book/index.html) creato il 30 Aprile 2015, 6:15 pm.
+E' un progetto [symfony](https://symfony.com/doc/2.6/book/index.html), nato per imparare ad utilizzare symfony.
 
-Il nuovo catalogo di **Enteweb** è stato completamente riscritto, usando Symfony 2.6, al momento abbiamo riportato e riscritto dal vecchio Enteweb i seguenti Elementi:
+Il software deve dare la possibilità di gestire un catalogo prodotti e di conseguenza tutta una serie di altre entità che ne derivano.
+ 
 
-* Gestione dei **Prodotti**
-	1. Inserimento informazioni nuovo Prodotto
-    2. Aggiunta di Caratteristiche
-    3. Aggiunta di Immagini
-    
-* Gestione delle **Categorie**
-    1. Inserimento informazioni nuova Categoria
-    2. Modifica informazioni Categoria
-    
-* Gestione delle **Caratteristiche**
-    1. Aggiunta di nuova Carateristica
-    2. Modifica di nuova Caratteristica
-    3. Aggiunta di nuovi valori alla Caratteristica
-    4. Modifica dei valori di una Caratteristica
-  
