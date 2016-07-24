@@ -1,4 +1,4 @@
-# Catalogo Prodotti
+# Product Manager
 
 E' un progetto [symfony](https://symfony.com/doc/2.6/book/index.html), nato per imparare ad utilizzare symfony.
 
