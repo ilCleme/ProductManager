@@ -5,28 +5,21 @@ namespace QwebCMS\CatalogoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Categoria
+ * Category
  *
- * @ORM\Table(name="tbl_catalogue_category")
+ * @ORM\Table(name="category")
  * @ORM\Entity
  */
-class Categoria
+class Category
 {
     /**
      * @var integer
      *
      * @ORM\Column(name="id", type="bigint")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_tbl_catalogue_category", type="bigint", nullable=false)
-     */
-    private $idTblCatalogueCategory = 0;
 
     /**
      * @var integer
@@ -71,30 +64,23 @@ class Categoria
     private $pub;
 
     /**
-     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct", mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Product", mappedBy="categories")
      **/
     private $products;
     
     /**
-     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Categoria", mappedBy="categoriesParent")
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Category", mappedBy="categoriesParent")
      **/
     protected $parentOfCategories;
 
     /**
-     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Categoria", inversedBy="parentOfCategories")
-     * @ORM\JoinTable(name="cross_tbl_catalogue_category_x_tbl_catalogue_category",
-     *      joinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id_tbl_catalogue_category")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id_tbl_catalogue_category")}
-     *      )
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Category", inversedBy="parentOfCategories")
      **/
     protected $categoriesParent;
 
     /**
-     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature", inversedBy="categories")
-     * @ORM\JoinTable(name="cross_tbl_catalogue_category_x_tbl_catalogue_feature",
-     *      joinColumns={@ORM\JoinColumn(name="id_parent", referencedColumnName="id_tbl_catalogue_category")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_item", referencedColumnName="id_tbl_catalogue_feature")}
-     *      )
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Feature", inversedBy="categories")
+     * @ORM\JoinTable(name="categories_features")
      **/
     protected $features;
     
@@ -106,35 +92,39 @@ class Categoria
         $this->features = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-
     /**
-     * Set idTblCatalogueCategory
+     * Get features for a specific Language
      *
-     * @param integer $idTblCatalogueCategory
-     * @return Categoria
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setIdTblCatalogueCategory($idTblCatalogueCategory)
+    public function getFeaturesByLanguage($id_language)
     {
-        $this->idTblCatalogueCategory = $idTblCatalogueCategory;
+        $features = $this->features;
+        $arrayFeature = new \Doctrine\Common\Collections\ArrayCollection();
+        foreach($features as $feature){
+            if ($feature->getIdTblLingua() == $id_language){
+                $arrayFeature->add($feature);
+            }
+        }
 
-        return $this;
+        return $arrayFeature;
     }
 
     /**
-     * Get idTblCatalogueCategory
+     * Get id
      *
      * @return integer 
      */
-    public function getIdTblCatalogueCategory()
+    public function getId()
     {
-        return $this->idTblCatalogueCategory;
+        return $this->id;
     }
 
     /**
      * Set idTblLingua
      *
-     * @param boolean $idTblLingua
-     * @return Categoria
+     * @param integer $idTblLingua
+     * @return Category
      */
     public function setIdTblLingua($idTblLingua)
     {
@@ -146,7 +136,7 @@ class Categoria
     /**
      * Get idTblLingua
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getIdTblLingua()
     {
@@ -157,7 +147,7 @@ class Categoria
      * Set title
      *
      * @param string $title
-     * @return Categoria
+     * @return Category
      */
     public function setTitle($title)
     {
@@ -180,7 +170,7 @@ class Categoria
      * Set description
      *
      * @param string $description
-     * @return Categoria
+     * @return Category
      */
     public function setDescription($description)
     {
@@ -200,143 +190,10 @@ class Categoria
     }
 
     /**
-     * Set position
-     *
-     * @param integer $position
-     * @return Categoria
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * Get position
-     *
-     * @return integer 
-     */
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Add products
-     *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct $products
-     * @return Categoria
-     */
-    public function addProduct(\QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct $products)
-    {
-        $this->products[] = $products;
-
-        return $this;
-    }
-
-    /**
-     * Remove products
-     *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct $products
-     */
-    public function removeProduct(\QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct $products)
-    {
-        $this->products->removeElement($products);
-    }
-
-    /**
-     * Get products
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-
-    /**
-     * Add parentOfCategories
-     *
-     * @param \QwebCMS\CatalogoBundle\Entity\Categoria $parentOfCategories
-     * @return Categoria
-     */
-    public function addParentOfCategory(\QwebCMS\CatalogoBundle\Entity\Categoria $parentOfCategories)
-    {
-        $this->parentOfCategories[] = $parentOfCategories;
-
-        return $this;
-    }
-
-    /**
-     * Remove parentOfCategories
-     *
-     * @param \QwebCMS\CatalogoBundle\Entity\Categoria $parentOfCategories
-     */
-    public function removeParentOfCategory(\QwebCMS\CatalogoBundle\Entity\Categoria $parentOfCategories)
-    {
-        $this->parentOfCategories->removeElement($parentOfCategories);
-    }
-
-    /**
-     * Get parentOfCategories
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getParentOfCategories()
-    {
-        return $this->parentOfCategories;
-    }
-
-    /**
-     * Add categoriesParent
-     *
-     * @param \QwebCMS\CatalogoBundle\Entity\Categoria $categoriesParent
-     * @return Categoria
-     */
-    public function addCategoriesParent(\QwebCMS\CatalogoBundle\Entity\Categoria $categoriesParent)
-    {
-        $this->categoriesParent[] = $categoriesParent;
-
-        return $this;
-    }
-
-    /**
-     * Remove categoriesParent
-     *
-     * @param \QwebCMS\CatalogoBundle\Entity\Categoria $categoriesParent
-     */
-    public function removeCategoriesParent(\QwebCMS\CatalogoBundle\Entity\Categoria $categoriesParent)
-    {
-        $this->categoriesParent->removeElement($categoriesParent);
-    }
-
-    /**
-     * Get categoriesParent
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getCategoriesParent()
-    {
-        return $this->categoriesParent;
-    }
-
-    /**
      * Set img
      *
      * @param string $img
-     * @return Categoria
+     * @return Category
      */
     public function setImg($img)
     {
@@ -356,10 +213,33 @@ class Categoria
     }
 
     /**
+     * Set position
+     *
+     * @param integer $position
+     * @return Category
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return integer 
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
      * Set pub
      *
      * @param boolean $pub
-     * @return Categoria
+     * @return Category
      */
     public function setPub($pub)
     {
@@ -379,12 +259,111 @@ class Categoria
     }
 
     /**
+     * Add products
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\Product $products
+     * @return Category
+     */
+    public function addProduct(\QwebCMS\CatalogoBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\Product $products
+     */
+    public function removeProduct(\QwebCMS\CatalogoBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Add parentOfCategories
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\Category $parentOfCategories
+     * @return Category
+     */
+    public function addParentOfCategory(\QwebCMS\CatalogoBundle\Entity\Category $parentOfCategories)
+    {
+        $this->parentOfCategories[] = $parentOfCategories;
+
+        return $this;
+    }
+
+    /**
+     * Remove parentOfCategories
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\Category $parentOfCategories
+     */
+    public function removeParentOfCategory(\QwebCMS\CatalogoBundle\Entity\Category $parentOfCategories)
+    {
+        $this->parentOfCategories->removeElement($parentOfCategories);
+    }
+
+    /**
+     * Get parentOfCategories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getParentOfCategories()
+    {
+        return $this->parentOfCategories;
+    }
+
+    /**
+     * Add categoriesParent
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\Category $categoriesParent
+     * @return Category
+     */
+    public function addCategoriesParent(\QwebCMS\CatalogoBundle\Entity\Category $categoriesParent)
+    {
+        $this->categoriesParent[] = $categoriesParent;
+
+        return $this;
+    }
+
+    /**
+     * Remove categoriesParent
+     *
+     * @param \QwebCMS\CatalogoBundle\Entity\Category $categoriesParent
+     */
+    public function removeCategoriesParent(\QwebCMS\CatalogoBundle\Entity\Category $categoriesParent)
+    {
+        $this->categoriesParent->removeElement($categoriesParent);
+    }
+
+    /**
+     * Get categoriesParent
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCategoriesParent()
+    {
+        return $this->categoriesParent;
+    }
+
+    /**
      * Add features
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features
-     * @return Categoria
+     * @param \QwebCMS\CatalogoBundle\Entity\Feature $features
+     * @return Category
      */
-    public function addFeature(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features)
+    public function addFeature(\QwebCMS\CatalogoBundle\Entity\Feature $features)
     {
         $this->features[] = $features;
 
@@ -394,9 +373,9 @@ class Categoria
     /**
      * Remove features
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features
+     * @param \QwebCMS\CatalogoBundle\Entity\Feature $features
      */
-    public function removeFeature(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature $features)
+    public function removeFeature(\QwebCMS\CatalogoBundle\Entity\Feature $features)
     {
         $this->features->removeElement($features);
     }
@@ -409,23 +388,5 @@ class Categoria
     public function getFeatures()
     {
         return $this->features;
-    }
-
-    /**
-     * Get features for a specific Language
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getFeaturesByLanguage($id_language)
-    {
-        $features = $this->features;
-        $arrayFeature = new \Doctrine\Common\Collections\ArrayCollection();
-        foreach($features as $feature){
-            if ($feature->getIdTblLingua() == $id_language){
-                $arrayFeature->add($feature);
-            }
-        }
-
-        return $arrayFeature;
     }
 }

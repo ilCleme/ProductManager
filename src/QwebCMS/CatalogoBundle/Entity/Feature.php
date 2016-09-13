@@ -5,28 +5,21 @@ namespace QwebCMS\CatalogoBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * TblCatalogueFeature
+ * Feature
  *
- * @ORM\Table(name="tbl_catalogue_feature")
- * @ORM\Entity(repositoryClass="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeatureRepository")
+ * @ORM\Table(name="feature")
+ * @ORM\Entity(repositoryClass="QwebCMS\CatalogoBundle\Entity\FeatureRepository")
  */
-class TblCatalogueFeature
+class Feature
 {
     /**
      * @var integer
      *
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_tbl_catalogue_feature", type="integer")
-     */
-    private $idTblCatalogueFeature;
 
     /**
      * @var integer
@@ -79,51 +72,45 @@ class TblCatalogueFeature
 
     /**
      *
-     * @ORM\OneToOne(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature")
+     * @ORM\OneToOne(targetEntity="QwebCMS\CatalogoBundle\Entity\Feature")
      * @ORM\JoinColumn(name="inherit_from", referencedColumnName="id")
      *
      */
     private $inheritFrom;
 
     /**
-     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue", mappedBy="features")
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Featurevalue", mappedBy="features")
      **/
     private $featurevalues;
 
     /**
-     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory", mappedBy="features")
+     * @ORM\ManyToMany(targetEntity="QwebCMS\CatalogoBundle\Entity\Category", mappedBy="features")
      **/
     private $categories;
-
-
     /**
-     * Set idTblCatalogueFeature
-     *
-     * @param integer $idTblCatalogueFeature
-     * @return TblCatalogueFeature
+     * Constructor
      */
-    public function setIdTblCatalogueFeature($idTblCatalogueFeature)
+    public function __construct()
     {
-        $this->idTblCatalogueFeature = $idTblCatalogueFeature;
-
-        return $this;
+        $this->featurevalues = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Get idTblCatalogueFeature
+     * Get id
      *
      * @return integer 
      */
-    public function getIdTblCatalogueFeature()
+    public function getId()
     {
-        return $this->idTblCatalogueFeature;
+        return $this->id;
     }
 
     /**
      * Set idTblLingua
      *
-     * @param boolean $idTblLingua
-     * @return TblCatalogueFeature
+     * @param integer $idTblLingua
+     * @return Feature
      */
     public function setIdTblLingua($idTblLingua)
     {
@@ -135,7 +122,7 @@ class TblCatalogueFeature
     /**
      * Get idTblLingua
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getIdTblLingua()
     {
@@ -146,7 +133,7 @@ class TblCatalogueFeature
      * Set title
      *
      * @param string $title
-     * @return TblCatalogueFeature
+     * @return Feature
      */
     public function setTitle($title)
     {
@@ -169,7 +156,7 @@ class TblCatalogueFeature
      * Set description
      *
      * @param string $description
-     * @return TblCatalogueFeature
+     * @return Feature
      */
     public function setDescription($description)
     {
@@ -192,7 +179,7 @@ class TblCatalogueFeature
      * Set typeInput
      *
      * @param string $typeInput
-     * @return TblCatalogueFeature
+     * @return Feature
      */
     public function setTypeInput($typeInput)
     {
@@ -214,8 +201,8 @@ class TblCatalogueFeature
     /**
      * Set compulsory
      *
-     * @param boolean $compulsory
-     * @return TblCatalogueFeature
+     * @param integer $compulsory
+     * @return Feature
      */
     public function setCompulsory($compulsory)
     {
@@ -227,7 +214,7 @@ class TblCatalogueFeature
     /**
      * Get compulsory
      *
-     * @return boolean 
+     * @return integer 
      */
     public function getCompulsory()
     {
@@ -238,7 +225,7 @@ class TblCatalogueFeature
      * Set display
      *
      * @param string $display
-     * @return TblCatalogueFeature
+     * @return Feature
      */
     public function setDisplay($display)
     {
@@ -261,7 +248,7 @@ class TblCatalogueFeature
      * Set position
      *
      * @param integer $position
-     * @return TblCatalogueFeature
+     * @return Feature
      */
     public function setPosition($position)
     {
@@ -281,29 +268,35 @@ class TblCatalogueFeature
     }
 
     /**
-     * Get id
+     * Set inheritFrom
      *
-     * @return integer 
+     * @param \QwebCMS\CatalogoBundle\Entity\Feature $inheritFrom
+     * @return Feature
      */
-    public function getId()
+    public function setInheritFrom(\QwebCMS\CatalogoBundle\Entity\Feature $inheritFrom = null)
     {
-        return $this->id;
+        $this->inheritFrom = $inheritFrom;
+
+        return $this;
     }
+
     /**
-     * Constructor
+     * Get inheritFrom
+     *
+     * @return \QwebCMS\CatalogoBundle\Entity\Feature 
      */
-    public function __construct()
+    public function getInheritFrom()
     {
-        $this->featurevalues = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->inheritFrom;
     }
 
     /**
      * Add featurevalues
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalues
-     * @return TblCatalogueFeature
+     * @param \QwebCMS\CatalogoBundle\Entity\Featurevalue $featurevalues
+     * @return Feature
      */
-    public function addFeaturevalue(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalues)
+    public function addFeaturevalue(\QwebCMS\CatalogoBundle\Entity\Featurevalue $featurevalues)
     {
         $this->featurevalues[] = $featurevalues;
 
@@ -313,9 +306,9 @@ class TblCatalogueFeature
     /**
      * Remove featurevalues
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalues
+     * @param \QwebCMS\CatalogoBundle\Entity\Featurevalue $featurevalues
      */
-    public function removeFeaturevalue(\QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue $featurevalues)
+    public function removeFeaturevalue(\QwebCMS\CatalogoBundle\Entity\Featurevalue $featurevalues)
     {
         $this->featurevalues->removeElement($featurevalues);
     }
@@ -331,35 +324,12 @@ class TblCatalogueFeature
     }
 
     /**
-     * Set inheritFrom
-     *
-     * @param integer $inheritFrom
-     * @return TblCatalogueFeature
-     */
-    public function setInheritFrom($inheritFrom)
-    {
-        $this->inheritFrom = $inheritFrom;
-
-        return $this;
-    }
-
-    /**
-     * Get inheritFrom
-     *
-     * @return integer 
-     */
-    public function getInheritFrom()
-    {
-        return $this->inheritFrom;
-    }
-
-    /**
      * Add categories
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories
-     * @return TblCatalogueFeature
+     * @param \QwebCMS\CatalogoBundle\Entity\Category $categories
+     * @return Feature
      */
-    public function addCategory(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories)
+    public function addCategory(\QwebCMS\CatalogoBundle\Entity\Category $categories)
     {
         $this->categories[] = $categories;
 
@@ -369,9 +339,9 @@ class TblCatalogueFeature
     /**
      * Remove categories
      *
-     * @param \QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories
+     * @param \QwebCMS\CatalogoBundle\Entity\Category $categories
      */
-    public function removeCategory(\QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory $categories)
+    public function removeCategory(\QwebCMS\CatalogoBundle\Entity\Category $categories)
     {
         $this->categories->removeElement($categories);
     }
