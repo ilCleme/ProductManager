@@ -18,9 +18,9 @@ use Symfony\Component\HttpFoundation\File\File;
 class Product
 {
     /**
-     * @var integer
+     * @var UUID
      *
-     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Column(name="id", type="guid")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
      */

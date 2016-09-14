@@ -13,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 class Category
 {
     /**
-     * @var integer
+     * @var UUID
      *
-     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Column(name="id", type="guid")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
      */

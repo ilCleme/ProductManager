@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Feature
 {
     /**
-     * @var integer
+     * @var UUID
      *
+     * @ORM\Column(name="id", type="guid")
      * @ORM\Id
-     * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
