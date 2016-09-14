@@ -15,10 +15,10 @@
                 <a href="{{ path('products') }}">Prodotti <span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level collapse in">
                     {% for categ in categories %}
-                        {% if id ==  categ.idTblCatalogueCategory %}
-                            <li class="active"><a href="{{ path('show_category', {id : categ.idTblCatalogueCategory}) }}">{{ categ.title }}</a></li>
+                        {% if id ==  categ.id %}
+                            <li class="active"><a href="{{ path('show_category', {id : categ.id}) }}">{{ categ.title }}</a></li>
                         {% else %}
-                            <li><a href="{{ path('show_category', {id : categ.idTblCatalogueCategory}) }}">{{ categ.title }}</a></li>
+                            <li><a href="{{ path('show_category', {id : categ.id}) }}">{{ categ.title }}</a></li>
                         {% endif %}
                     {% endfor %}
                 </ul>

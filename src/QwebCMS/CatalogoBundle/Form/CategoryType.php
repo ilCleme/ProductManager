@@ -7,7 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 
-class TblCatalogueCategoryType extends AbstractType
+class CategoryType extends AbstractType
 {
     private $lingua;
 
@@ -23,14 +23,13 @@ class TblCatalogueCategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblCatalogueCategory', 'hidden')
             ->add('idTblLingua', 'hidden')
             ->add('title')
             ->add('description')
             ->add('pub')
             ->add('position','hidden')
             ->add('categoriesParent', 'entity', array(
-                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
+                'class' => 'QwebCMS\CatalogoBundle\Entity\Category',
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('c')
                         ->where('c.idTblLingua = '.$this->lingua);
@@ -41,7 +40,7 @@ class TblCatalogueCategoryType extends AbstractType
                 'required' => false
             ))
             ->add('features', 'entity', array(
-                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',
+                'class' => 'QwebCMS\CatalogoBundle\Entity\Feature',
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('f')
                         ->where('f.idTblLingua = '.$this->lingua);
@@ -61,7 +60,7 @@ class TblCatalogueCategoryType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory'
+            'data_class' => 'QwebCMS\CatalogoBundle\Entity\Category'
         ));
     }
 
@@ -70,6 +69,6 @@ class TblCatalogueCategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'form_tblcataloguecategory';
+        return 'new_category';
     }
 }
