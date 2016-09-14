@@ -3,7 +3,7 @@
 namespace QwebCMS\CatalogoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct as Product;
+use QwebCMS\CatalogoBundle\Entity\Product as Product;
 use QwebCMS\CatalogoBundle\Entity\TblPhotoCat as Album;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -148,26 +148,21 @@ class ProductController extends Controller
 
     public function createNewAction(Request $request)
     {
-        /*$categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
-            ->findAll();*/
-
         $categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $product = new Product();
-        //$allegato = new Allegato();
-        //$product->addAllegatiProgetto($allegato);
+
         $product->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
         $form = $this->createForm(new TblCatalogueProductType($this->get('language.manager')->getSessionLanguage()), $product);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // esegue alcune azioni, salvare il prodotto nella base dati
+
             $em = $this->getDoctrine()->getManager();
-            // Create a new empty Album for this product
+
             $album = new Album();
             $album->setNome($product->getTitle());
             $album->setFotoBig(" ");
@@ -175,24 +170,19 @@ class ProductController extends Controller
             $em->flush();
 
             // Save product information on database
-            $product->setIdTblCatalogueProduct(0);
             $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
             $em->persist($product);
             $em->flush();
 
-            // Copy id product on idTblCatalogueProduct field
-            $product->setIdTblCatalogueProduct($product->getId());
-            $em->flush();
-
             if($form->get('saveAndContinue')->isClicked()) {
                 return $this->redirect($this->generateUrl('update_product_feature', array(
-                    'id' => $product->getIdTblCatalogueProduct()
+                    'id' => $product->getId()
                 )));
 
             } elseif($form->get('save')->isClicked()) {
 
                 $categories = $product->getCategories();
-                $category_id =  $categories->first()->getIdTblCatalogueCategory();
+                $category_id =  $categories->first()->getId();
                 return $this->redirect($this->generateUrl('show_category', array(
                     'id' => $category_id
                 )));
@@ -210,12 +200,12 @@ class ProductController extends Controller
     public function updateInfoAction($id, Request $request)
     {
         /*$categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));*/
 
         $product = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
-            ->findOneBy(array('idTblCatalogueProduct' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->getRepository('QwebCMSCatalogoBundle:Product')
+            ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $categories = $product->getCategoriesByLanguage($this->get('language.manager')->getSessionLanguage());
 
@@ -238,13 +228,13 @@ class ProductController extends Controller
             if($form->get('saveAndContinue')->isClicked()) {
 
                 return $this->redirect($this->generateUrl('update_product_feature', array(
-                    'id' => $product->getIdTblCatalogueProduct()
+                    'id' => $product->getId()
                 )));
 
             } elseif($form->get('save')->isClicked()) {
 
                 $categories = $product->getCategories();
-                $category_id =  $categories->first()->getIdTblCatalogueCategory();
+                $category_id =  $categories->first()->getId();
                 return $this->redirect($this->generateUrl('show_category', array(
                     'id' => $category_id
                 )));
@@ -260,13 +250,13 @@ class ProductController extends Controller
 
     public function updateFeaturesAction($id, Request $request){
         /*$categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
         */
 
         $product = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
-            ->findOneBy(array('idTblCatalogueProduct' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->getRepository('QwebCMSCatalogoBundle:Product')
+            ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $categories = $product->getCategoriesByLanguage($this->get('language.manager')->getSessionLanguage());
 
@@ -286,7 +276,7 @@ class ProductController extends Controller
         if ( !($form->isValid()) ) {
 
             $featurevalues = $this->getDoctrine()
-                ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
+                ->getRepository('QwebCMSCatalogoBundle:Product')
                 ->findFeaturevaluesProductByLanguage($id, $this->get('language.manager')->getSessionLanguage());
 
             if ($featurevalues != null){
@@ -299,13 +289,13 @@ class ProductController extends Controller
                             foreach($featurevalues as $featurevalue){
                                 $featureChildrens = $feature->getFeaturevalues();
                                 foreach($featureChildrens as $children){
-                                    if($children->getIdTblCatalogueFeaturevalue() == $featurevalue->getIdTblCatalogueFeaturevalue()){
-                                        $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalue);
+                                    if($children->getId() == $featurevalue->getId()){
+                                        $form->get('featurevalues_'.$feature->getId())->setData($featurevalue);
                                     }
                                 }
                             }
                         } else {
-                            $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->setData($featurevalues);
+                            $form->get('featurevalues_'.$feature->getId())->setData($featurevalues);
                         }
                     }
                 }
@@ -319,8 +309,8 @@ class ProductController extends Controller
             foreach($categorie as $categoria){
                 $features = $categoria->getFeatures();
                 foreach($features as $feature){
-                    if ($form->has('featurevalues_'.$feature->getIdTblCatalogueFeature())){
-                        $featurevalues = $form->get('featurevalues_'.$feature->getIdTblCatalogueFeature())->getData();
+                    if ($form->has('featurevalues_'.$feature->getId())){
+                        $featurevalues = $form->get('featurevalues_'.$feature->getId())->getData();
                         if (!empty($featurevalues)){
                             if($feature->getTypeInput() == "select"){
                                 $product->removeFeaturevalue($featurevalues);
@@ -343,7 +333,7 @@ class ProductController extends Controller
 
             if ($form->get('exit')->isClicked()) {
                 $categories = $product->getCategories();
-                $category_id =  $categories->first()->getIdTblCatalogueCategory();
+                $category_id =  $categories->first()->getId();
                 return $this->redirect($this->generateUrl('show_category', array(
                     'id' => $category_id
                 )));
@@ -363,12 +353,12 @@ class ProductController extends Controller
 
     public function updateImagesAction($id, Request $request){
         /*$categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));*/
 
         $product = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
-            ->findOneBy(array('idTblCatalogueProduct' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->getRepository('QwebCMSCatalogoBundle:Product')
+            ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $categories = $product->getCategoriesByLanguage($this->get('language.manager')->getSessionLanguage());
 
@@ -397,13 +387,13 @@ class ProductController extends Controller
             if($form->get('saveAndContinue')->isClicked()) {
 
                 return $this->redirect($this->generateUrl('update_product_info', array(
-                    'id' => $product->getIdTblCatalogueProduct()
+                    'id' => $product->getId()
                 )));
 
             } elseif($form->get('save')->isClicked()) {
 
                 $categories = $product->getCategories();
-                $category_id =  $categories->first()->getIdTblCatalogueCategory();
+                $category_id =  $categories->first()->getId();
                 return $this->redirect($this->generateUrl('show_category', array(
                     'id' => $category_id
                 )));

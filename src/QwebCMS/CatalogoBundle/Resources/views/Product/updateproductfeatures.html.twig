@@ -24,7 +24,7 @@
                 <a href="{{ path('products') }}">Prodotti <span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level collapse">
                     {% for category in categories %}
-                        <li><a href="{{ path('show_category', {id : category.idTblCatalogueCategory}) }}">{{ category.title }}</a></li>
+                        <li><a href="{{ path('show_category', {id : category.id}) }}">{{ category.title }}</a></li>
                     {% endfor %}
                 </ul>
             </li>
@@ -43,9 +43,9 @@
         <div class="col-lg-12">
             <div class="tabs-container">
                 <ul class="nav nav-tabs">
-                    <li class=""><a href="{{ path('update_product_info', {id : product.idTblCatalogueProduct}) }}">Informazioni Prodotto</a></li>
+                    <li class=""><a href="{{ path('update_product_info', {id : product.id}) }}">Informazioni Prodotto</a></li>
                     <li class="active"><a data-toggle="tab" href="#tab-4">Caratteristiche</a></li>
-                    <li class=""><a href="{{ path('update_product_immagini', {id : product.idTblCatalogueProduct}) }}">Immagini</a></li>
+                    <li class=""><a href="{{ path('update_product_immagini', {id : product.id}) }}">Immagini</a></li>
                 </ul>
                 <div class="tab-content">
 
@@ -55,9 +55,9 @@
                                 <h3>Caratteristiche</h3>
                                 {% for feature in features %}
                                     <div class="form-group">
-                                        {{ form_label(form['featurevalues_'~feature.idTblCatalogueFeature], feature.title ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form['featurevalues_'~feature.idTblCatalogueFeature]) }}
-                                        {{ form_widget(form['featurevalues_'~feature.idTblCatalogueFeature], {'attr': {'class': ''}}) }}
+                                        {{ form_label(form['featurevalues_'~feature.id], feature.title ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form['featurevalues_'~feature.id]) }}
+                                        {{ form_widget(form['featurevalues_'~feature.id], {'attr': {'class': ''}}) }}
                                     </div>
                                 {% endfor %}
                             </div>

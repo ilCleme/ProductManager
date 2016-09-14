@@ -27,7 +27,7 @@
                 <a href="{{ path('products') }}">Prodotti <span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level collapse">
                     {% for category in categories %}
-                        <li><a href="{{ path('show_category', {id : category.idTblCatalogueCategory}) }}">{{ category.title }}</a></li>
+                        <li><a href="{{ path('show_category', {id : category.id}) }}">{{ category.title }}</a></li>
                     {% endfor %}
                 </ul>
             </li>
@@ -47,8 +47,8 @@
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="">Informazioni Prodotto</a></li>
-                        <li class=""><a href="{{ path('update_product_feature', {id : product.idTblCatalogueProduct}) }}">Caratteristiche</a></li>
-                        <li class=""><a href="{{ path('update_product_immagini', {id : product.idTblCatalogueProduct}) }}">Immagini</a></li>
+                        <li class=""><a href="{{ path('update_product_feature', {id : product.id}) }}">Caratteristiche</a></li>
+                        <li class=""><a href="{{ path('update_product_immagini', {id : product.id}) }}">Immagini</a></li>
                     </ul>
                     <div class="tab-content">
 
@@ -82,15 +82,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            {{ form_label(form.areaRiservata, 'Area Riservata'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                            {{ form_errors(form.areaRiservata) }}
-                                            <div>
-                                                {{ form_widget(form.areaRiservata, { 'attr': {'class': 'js-switch'} }) }}
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
@@ -98,11 +90,7 @@
                                         {{ form_errors(form.title) }}
                                         {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
                                     </div>
-                                    <div class="form-group">
-                                        {{ form_label(form.shortDescription, 'Breve Descrizione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.shortDescription) }}
-                                        {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
+
                                     <div class="form-group">
                                         {{ form_label(form.description, 'Descrizione Completa Immobile'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
                                         {{ form_errors(form.description) }}
@@ -110,62 +98,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        {{ form_label(form.costoTotale, 'Costo Totale'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.costoTotale) }}
-                                        {{ form_widget(form.costoTotale, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        {{ form_label(form.contributo, 'contributo'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.contributo) }}
-                                        {{ form_widget(form.contributo, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.responsabileProgetto, 'Responsabile Progetto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.responsabileProgetto) }}
-                                        {{ form_widget(form.responsabileProgetto, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.emailRiferimento, 'Email Riferimento'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.emailRiferimento) }}
-                                        {{ form_widget(form.emailRiferimento, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.partner, 'Partner'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.partner) }}
-                                        {{ form_widget(form.partner, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.tempiRealizzazione, 'Tempi Realizzazione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.tempiRealizzazione) }}
-                                        {{ form_widget(form.tempiRealizzazione, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.descrizioneProgetto, 'Descrizione Progetto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.descrizioneProgetto) }}
-                                        {{ form_widget(form.descrizioneProgetto, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.beneficiario, 'Beneficiario'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.beneficiario) }}
-                                        {{ form_widget(form.beneficiario, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
+
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         {{ form_label(form.cod, 'Codice'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
@@ -180,132 +113,7 @@
                                         {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.obbiettivi, 'Obiettivi'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.obbiettivi) }}
-                                        {{ form_widget(form.obbiettivi, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.attivitaProgetto, 'Attività Progetto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.attivitaProgetto) }}
-                                        {{ form_widget(form.attivitaProgetto, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.informazioni, 'Informazioni'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.informazioni) }}
-                                        {{ form_widget(form.informazioni, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.linkEsterni, 'Link esterni'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.linkEsterni) }}
-                                        {{ form_widget(form.linkEsterni, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.fotogallery, 'Fotogallery'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.fotogallery) }}
-                                        {{ form_widget(form.fotogallery, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.paroleChiave, 'Parole Chiave'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.paroleChiave) }}
-                                        {{ form_widget(form.paroleChiave, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.statoProgetto, 'Stato Progetto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.statoProgetto) }}
-                                        {{ form_widget(form.statoProgetto, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.ruoloGalVeneziaOrientale, 'Ruolo gal venezia orientale'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.ruoloGalVeneziaOrientale) }}
-                                        {{ form_widget(form.ruoloGalVeneziaOrientale, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.proceduraAttuazione, 'Procedura Attuazione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.proceduraAttuazione) }}
-                                        {{ form_widget(form.proceduraAttuazione, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.soggettoPromotore, 'Soggetto Promotore'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.soggettoPromotore) }}
-                                        {{ form_widget(form.soggettoPromotore, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.galPartnerProgetto, 'Gal Partner Progetto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.galPartnerProgetto) }}
-                                        {{ form_widget(form.galPartnerProgetto, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.partnerPromotore, 'Partner Promotore'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.partnerPromotore) }}
-                                        {{ form_widget(form.partnerPromotore, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.annoInizio, 'Anno Inizio'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.annoInizio) }}
-                                        {{ form_widget(form.annoInizio, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.costoAmmesso, 'Costo Ammesso'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.costoAmmesso) }}
-                                        {{ form_widget(form.costoAmmesso, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.recapitoBeneficiario, 'Recapito Beneficiario'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.recapitoBeneficiario) }}
-                                        {{ form_widget(form.recapitoBeneficiario, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.richiestaVariante, 'Richiesta Variante'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.richiestaVariante) }}
-                                        {{ form_widget(form.richiestaVariante, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.richiestaAnticipo, 'Richiesta Anticipo'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.richiestaAnticipo) }}
-                                        {{ form_widget(form.richiestaAnticipo, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        {{ form_label(form.attoFineIntervento, 'Atto Fine Intervento'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
-                                        {{ form_errors(form.attoFineIntervento) }}
-                                        {{ form_widget(form.attoFineIntervento, {'attr': {'class': 'form-control'}}) }}
-                                    </div>
-                                </div>
+
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
@@ -490,7 +298,7 @@
                 maxFiles: 1,
                 acceptedFiles: 'image/*,application/pdf',
                 addRemoveLinks: true,
-                headers:{"id-product": "{{ product.idTblCatalogueProduct }}"},
+                headers:{"id-product": "{{ product.id }}"},
 
                 // Dropzone settings
                 init: function() {

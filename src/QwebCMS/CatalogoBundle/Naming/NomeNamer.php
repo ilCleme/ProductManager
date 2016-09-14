@@ -21,7 +21,7 @@ class NomeNamer extends EntityManager implements NamerInterface
 
         $query = $this->em->createQuery(
             'SELECT p
-            FROM QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct p
+            FROM QwebCMS\CatalogoBundle\Entity\Product p
             WHERE p.idTblPhotoCat =  :id'
         )->setParameter('id', $id_album);
 

@@ -56,17 +56,17 @@ class TblCatalogueProductEditFeaturesType extends AbstractType
                     $required = false;
                 }
 
-                $idFeature = $feature->getIdTblCatalogueFeature();
+                $idFeature = $feature->getId();
 
                 $form->add('featurevalues_'.$idFeature, 'entity', array(
-                    'class'     =>  'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
+                    'class'     =>  'QwebCMS\CatalogoBundle\Entity\Featurevalue',
                     'property'  =>  'title',
                     //'choices'   =>  $featurevalues,
                     'query_builder' => function (EntityRepository $er) use ($idFeature){
                         return $er->createQueryBuilder('u')
                             ->where('u.idTblLingua = ?2')
                             ->join('u.features', 'f', 'WITH')
-                            ->andwhere('f.idTblCatalogueFeature = ?1')
+                            ->andwhere('f.id = ?1')
                             ->andwhere('f.idTblLingua = ?2')
                             ->setParameters(array('1' => $idFeature, '2' => $this->lingua));
                     },
@@ -86,7 +86,7 @@ class TblCatalogueProductEditFeaturesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct'
+            'data_class' => 'QwebCMS\CatalogoBundle\Entity\Product'
         ));
     }
 

@@ -108,7 +108,7 @@ class Product
     private $imageFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      *
      * @var string
      */
@@ -137,6 +137,7 @@ class Product
         $this->categories = new ArrayCollection();
         $this->featurevalues = new ArrayCollection();
         $this->allegatiProgetto = new ArrayCollection();
+        $this->setUpdatedAt(new \DateTime());
         $this->setIdTblLingua(4);
     }
 

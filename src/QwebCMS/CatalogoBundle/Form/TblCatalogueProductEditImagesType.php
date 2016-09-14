@@ -38,7 +38,7 @@ class TblCatalogueProductEditImagesType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct'
+            'data_class' => 'QwebCMS\CatalogoBundle\Entity\Product'
         ));
     }
 

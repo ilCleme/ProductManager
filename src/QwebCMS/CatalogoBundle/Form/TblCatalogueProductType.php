@@ -24,25 +24,10 @@ class TblCatalogueProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblCatalogueProduct','hidden')
             ->add('idTblLingua', 'hidden')
             ->add('title')
             ->add('description')
             ->add('cod')
-            ->add('descriptionNotag', 'hidden')
-            ->add('shortDescription')
-            ->add('costoTotale')
-            ->add('contributo')
-            ->add('responsabileProgetto')
-            ->add('emailRiferimento')
-            ->add('partner')
-            ->add('tempiRealizzazione')
-            ->add('descrizioneProgetto')
-            ->add('beneficiario')
-            ->add('obbiettivi')
-            ->add('attivitaProgetto')
-            ->add('informazioni')
-            ->add('linkEsterni')
             ->add('allegatiProgetto', 'collection', array(
                 'type' => new AllegatoType(),
                 'allow_add'    => true,
@@ -56,22 +41,9 @@ class TblCatalogueProductType extends AbstractType
                 'allow_delete'  => false, // not mandatory, default is true
                 'download_link' => false, // not mandatory, default is true
             ))
-            ->add('logoPath', 'hidden')
-            ->add('fotogallery')
-            ->add('paroleChiave')
-            ->add('statoProgetto')
-            ->add('areaRiservata')
-            ->add('ruoloGalVeneziaOrientale')
-            ->add('proceduraAttuazione')
-            ->add('soggettoPromotore')
-            ->add('galPartnerProgetto')
-            ->add('partnerPromotore')
-            ->add('annoInizio')
-            ->add('costoAmmesso')
-            ->add('recapitoBeneficiario')
-            ->add('richiestaVariante')
-            ->add('richiestaAnticipo')
-            ->add('attoFineIntervento')
+            ->add('logoPath', 'hidden', array(
+                'required'  =>  false
+            ))
             ->add('position')
             ->add('featured', 'checkbox', array(
                 'required'  => false,
@@ -81,7 +53,7 @@ class TblCatalogueProductType extends AbstractType
                 'required'  => false,
             ))
             ->add('categories', 'entity', array(
-                'class'     => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueCategory',
+                'class'     => 'QwebCMS\CatalogoBundle\Entity\Category',
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->where('u.idTblLingua = '.$this->lingua);
@@ -103,7 +75,7 @@ class TblCatalogueProductType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct'
+            'data_class' => 'QwebCMS\CatalogoBundle\Entity\Product'
         ));
     }
 

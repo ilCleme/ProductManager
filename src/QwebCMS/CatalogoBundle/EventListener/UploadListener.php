@@ -4,7 +4,7 @@ namespace QwebCMS\CatalogoBundle\EventListener;
 
 use Oneup\UploaderBundle\Event\PostPersistEvent;
 use QwebCMS\CatalogoBundle\Entity\TblPhoto as Foto;
-use QwebCMS\CatalogoBundle\Entity\TblCatalogueProduct as Prodotto;
+use QwebCMS\CatalogoBundle\Entity\Product as Prodotto;
 
 
 class UploadListener{
@@ -98,7 +98,7 @@ class UploadListener{
         */
         $em = $this->doctrine->getManager();
 
-        $product = $em->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')->find($id_product);
+        $product = $em->getRepository('QwebCMSCatalogoBundle:Product')->find($id_product);
         $product->setPlanimetria('/'.$file_upload->getPathname());
 
         $em->persist($product);

@@ -29,7 +29,7 @@
                 <a href="{{ path('products') }}">Prodotti <span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level collapse">
                     {% for category in categories %}
-                        <li><a href="{{ path('show_category', {id : category.idTblCatalogueCategory}) }}">{{ category.title }}</a></li>
+                        <li><a href="{{ path('show_category', {id : category.id}) }}">{{ category.title }}</a></li>
                     {% endfor %}
                 </ul>
             </li>
@@ -48,8 +48,8 @@
         <div class="col-lg-12">
             <div class="tabs-container">
                 <ul class="nav nav-tabs">
-                    <li class=""><a href="{{ path('update_product_info', {id : product.idTblCatalogueProduct}) }}">Informazioni Prodotto</a></li>
-                    <li class=""><a href="{{ path('update_product_feature', {id : product.idTblCatalogueProduct}) }}">Caratteristiche</a></li>
+                    <li class=""><a href="{{ path('update_product_info', {id : product.id}) }}">Informazioni Prodotto</a></li>
+                    <li class=""><a href="{{ path('update_product_feature', {id : product.id}) }}">Caratteristiche</a></li>
                     <li class="active"><a data-toggle="tab" href="#tab-4">Immagini</a></li>
                     <li class=""><a data-toggle="tab" href="#tab-5">Personalizza Foto</a></li>
                 </ul>
@@ -69,7 +69,7 @@
                                         <i class="fa fa-wrench"></i>&nbsp;&nbsp;
                                         <span class="bold">Ordina Foto</span>
                                     </button>
-                                    <a class="btn btn-w-m btn-success" href="{{ path('update_product_immagini', {id : product.idTblCatalogueProduct}) }}" id="chiudi-ordina-foto">
+                                    <a class="btn btn-w-m btn-success" href="{{ path('update_product_immagini', {id : product.id}) }}" id="chiudi-ordina-foto">
                                         <i class="fa fa-wrench"></i>&nbsp;&nbsp;
                                         <span class="bold">Salva Ordine</span>
                                     </a>
@@ -210,7 +210,7 @@
                 parallelUploads: 1,
                 maxFiles: 1,
                 addRemoveLinks: true,
-                headers:{"id-product": "{{ product.idTblCatalogueProduct }}"},
+                headers:{"id-product": "{{ product.id }}"},
 
                 // Dropzone settings
                 init: function() {
@@ -228,7 +228,7 @@
 
             }
 
-            $('.html5imageupload').html5imageupload({data: {id_album: '{{ product.idTblPhotoCat }}', id_prodotto: '{{ product.idTblCatalogueProduct }}'}});
+            $('.html5imageupload').html5imageupload({data: {id_album: '{{ product.idTblPhotoCat }}', id_prodotto: '{{ product.id }}'}});
 
             $('.cancella-foto').click(function(e){
                 e.preventDefault();
