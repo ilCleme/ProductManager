@@ -10,19 +10,19 @@ class WelcomeController extends Controller
     public function indexAction()
     {
         $product = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueProduct')
+            ->getRepository('QwebCMSCatalogoBundle:Product')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $category = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
             
         $feature = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
+            ->getRepository('QwebCMSCatalogoBundle:Feature')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $featurevalue = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeaturevalue')
+            ->getRepository('QwebCMSCatalogoBundle:Featurevalue')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
             
         return $this->render('QwebCMSCatalogoBundle:Welcome:index.html.twig',
@@ -30,30 +30,30 @@ class WelcomeController extends Controller
             );
     }
 
-    public function allProductAction(Request $request){
-
+    public function allProductAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a";
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:Product a";
         $product = $em->createQuery($dql);
 
         if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
             $filterValue = $request->query->get('filterValue');
 
-            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a WHERE a.title LIKE :filterValue ');
+            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:Product a WHERE a.title LIKE :filterValue ');
             $product->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%'
             ));
         } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='shortDescription' ){
             $filterValue = $request->query->get('filterValue');
 
-            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a WHERE a.shortDescription LIKE :filterValue ');
+            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:Product a WHERE a.shortDescription LIKE :filterValue ');
             $product->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%'
             ));
-        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueProduct' ){
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idProduct' ){
             $filterValue = $request->query->get('filterValue');
 
-            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueProduct a WHERE a.idTblCatalogueProduct LIKE :filterValue ');
+            $product = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:Product a WHERE a.id LIKE :filterValue ');
             $product->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%'
             ));
@@ -73,7 +73,7 @@ class WelcomeController extends Controller
         );
 
         $categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findAll();
         
         // passo l'oggetto $product a un template
@@ -83,9 +83,10 @@ class WelcomeController extends Controller
         );
     }
     
-    public function allCategoryAction(Request $request){
+    public function allCategoryAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.idTblLingua = ?1";
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:Category a WHERE a.idTblLingua = ?1";
         $category = $em->createQuery($dql);
         $category->setParameters(array(
             1   => $this->get('language.manager')->getSessionLanguage()
@@ -94,15 +95,15 @@ class WelcomeController extends Controller
         if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
             $filterValue = $request->query->get('filterValue');
 
-            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.title LIKE :filterValue AND a.idTblLingua = ?1');
+            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:Category a WHERE a.title LIKE :filterValue AND a.idTblLingua = ?1');
             $category->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%',
                 1   => $this->get('language.manager')->getSessionLanguage()
             ));
-        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueCategory' ){
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='id' ){
             $filterValue = $request->query->get('filterValue');
 
-            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueCategory a WHERE a.idTblCatalogueCategory LIKE :filterValue AND a.idTblLingua = ?1');
+            $category = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:Category a WHERE a.id LIKE :filterValue AND a.idTblLingua = ?1');
             $category->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%',
                 1   => $this->get('language.manager')->getSessionLanguage()
@@ -123,7 +124,7 @@ class WelcomeController extends Controller
         );
 
         $category = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         // passo l'oggetto $product a un template
@@ -133,13 +134,14 @@ class WelcomeController extends Controller
         );
     }
     
-    public function allFeatureAction(Request $request){
+    public function allFeatureAction(Request $request)
+    {
         $feature = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
+            ->getRepository('QwebCMSCatalogoBundle:Feature')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $category = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
         
         // passo l'oggetto $product a un template
@@ -149,22 +151,23 @@ class WelcomeController extends Controller
         );
     }
     
-    public function allFeatureValueAction(Request $request){
+    public function allFeatureValueAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueFeaturevalue a";
+        $dql   = "SELECT a FROM QwebCMSCatalogoBundle:Featurevalue a";
         $featurevalue = $em->createQuery($dql);
 
         if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
             $filterValue = $request->query->get('filterValue');
 
-            $featurevalue = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueFeaturevalue a WHERE a.title LIKE :filterValue ');
+            $featurevalue = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:Featurevalue a WHERE a.title LIKE :filterValue ');
             $featurevalue->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%'
             ));
-        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueFeaturevalue' ){
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='id' ){
             $filterValue = $request->query->get('filterValue');
 
-            $featurevalue = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:TblCatalogueFeaturevalue a WHERE a.idTblCatalogueFeaturevalue LIKE :filterValue ');
+            $featurevalue = $em->createQuery('SELECT a FROM QwebCMSCatalogoBundle:Featurevalue a WHERE a.id LIKE :filterValue ');
             $featurevalue->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%'
             ));
