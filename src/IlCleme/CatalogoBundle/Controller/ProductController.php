@@ -16,37 +16,10 @@ use IlCleme\CatalogoBundle\Entity\Allegato;
 
 class ProductController extends Controller
 {
-
-    public function showAction($id)
-    {
-        $product = $this->getDoctrine()
-            ->getRepository('IlClemeCatalogoBundle:TblCatalogueProduct')
-            ->find($id);
-
-        if (!$product) {
-            throw $this->createNotFoundException(
-                'Nessun prodotto trovato per l\'id '.$id
-            );
-        }
-
-        // passo l'oggetto $product a un template
-        return $this->render(
-            'IlClemeCatalogoBundle:Product:showproduct.html.twig',
-            array('product' => $product)
-        );
-    }
-
-    public function updateAction($id, Request $request)
-    {
-        return $this->redirect($this->generateUrl('update_product_info', array(
-            'id' => $id
-        )));
-    }
-
     public function deleteAction($id, Request $request)
     {
         $product = $this->getDoctrine()
-            ->getRepository('IlClemeCatalogoBundle:TblCatalogueProduct')
+            ->getRepository('IlClemeCatalogoBundle:Product')
             ->find($id);
 
         if (!$product) {
@@ -56,7 +29,7 @@ class ProductController extends Controller
         }
 
         $categories = $product->getCategories();
-        $category_id =  $categories[0]->getIdTblCatalogueCategory();
+        $category_id =  $categories[0]->getId();
 
         $em = $this->getDoctrine()->getManager();
 

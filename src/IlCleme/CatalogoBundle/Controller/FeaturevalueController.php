@@ -85,7 +85,7 @@ class FeaturevalueController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'La featurevalues è stata eliminata!'
+            'Il valore di questa caratteristica è stato eliminato!'
         );
 
         return $this->redirect($this->generateUrl('features'));
@@ -94,25 +94,28 @@ class FeaturevalueController extends Controller
     public function showCategoryFeaturevalueAction($id, Request $request)
     {
         $feature = $this->getDoctrine()
-            ->getRepository('IlClemeCatalogoBundle:TblCatalogueFeature')
+            ->getRepository('IlClemeCatalogoBundle:Feature')
             ->find($id);
 
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a, u FROM IlClemeCatalogoBundle:TblCatalogueFeaturevalue a JOIN a.features u WHERE u.idTblCatalogueFeature = ".$id;
+        $dql   = "SELECT a, u FROM IlClemeCatalogoBundle:Featurevalue a JOIN a.features u WHERE u.id = :id";
         $featurevalue = $em->createQuery($dql);
+        $featurevalue->setParameters(array(
+            'id'    => $id
+        ));
 
         if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
             $filterValue = $request->query->get('filterValue');
 
-            $featurevalue = $em->createQuery('SELECT a, u FROM IlClemeCatalogoBundle:TblCatalogueFeaturevalue a JOIN a.features u WHERE u.idTblCatalogueFeature = :id AND a.title LIKE :filterValue ');
+            $featurevalue = $em->createQuery('SELECT a, u FROM IlClemeCatalogoBundle:Featurevalue a JOIN a.features u WHERE u.id = :id AND a.title LIKE :filterValue ');
             $featurevalue->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%',
                 'id'    => $id
             ));
-        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idTblCatalogueFeaturevalue' ){
+        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='id' ){
             $filterValue = $request->query->get('filterValue');
 
-            $featurevalue = $em->createQuery('SELECT a, u FROM IlClemeCatalogoBundle:TblCatalogueFeaturevalue a JOIN a.features u WHERE u.idTblCatalogueFeature = :id AND a.idTblCatalogueFeaturevalue LIKE :filterValue ');
+            $featurevalue = $em->createQuery('SELECT a, u FROM IlClemeCatalogoBundle:Featurevalue a JOIN a.features u WHERE u.id = :id AND a.id LIKE :filterValue ');
             $featurevalue->setParameters(array(
                 'filterValue' => '%'.$filterValue.'%'
             ));

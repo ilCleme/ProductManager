@@ -14,7 +14,7 @@ change_language:
     path:     /change_language
     defaults: { _controller: IlClemeCatalogoBundle:Language:setLanguage }
 
-products:
+products: #inutilizzata - dev
     path:     /products
     defaults: { _controller: IlClemeCatalogoBundle:Welcome:allProduct }
 
@@ -25,14 +25,6 @@ upload_product_photo:
 create_product:
     path:     /products/new/info
     defaults: { _controller: IlClemeCatalogoBundle:Product:createNew }
-
-show_product:
-    path:     /product/show/{id}
-    defaults: { _controller: IlClemeCatalogoBundle:Product:show }
-
-update_product:
-    path:     /product/update/{id}
-    defaults: { _controller: IlClemeCatalogoBundle:Product:update }
 
 update_product_info:
     path:     /product/update/info/{id}
@@ -86,7 +78,7 @@ delete_features:
     path:     /feature/delete/{id}
     defaults: { _controller: IlClemeCatalogoBundle:Feature:delete }
 
-featurevalues:
+featurevalues: #inutilizzata - dev
     path:     /featurevalues
     defaults: { _controller: IlClemeCatalogoBundle:Welcome:allFeatureValue }
     
@@ -110,6 +102,6 @@ update_position_photo:
     path:     /foto/update
     defaults: { _controller: IlClemeCatalogoBundle:Foto:updatePosition }
 
-category_featurevalue:
+category_featurevalue: #inutilizzata - dev
     path:     /feature/category/{id}
     defaults: { _controller: IlClemeCatalogoBundle:Featurevalue:showCategoryFeaturevalue }

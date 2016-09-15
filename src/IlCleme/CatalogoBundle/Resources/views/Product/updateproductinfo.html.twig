@@ -1,6 +1,8 @@
 {# src/Acme/DemoBundle/Resources/views/Random/index.html.twig #}
 {% extends '::layout.html.twig' %}
+
 {% block title %}Modifica {{ product.title }}{% endblock %}
+
 {% block stylesheets %}
     <link href="{{ asset('admin-style/css/plugins/switchery/switchery.css') }}" rel="stylesheet">
     <link href="{{ asset('admin-style/css/plugins/chosen/chosen.css') }}" rel="stylesheet">
@@ -147,7 +149,7 @@
                                                 </th>
                                             </tr>
                                             </thead>
-                                            <tbody class="allegati" data-prototype="{% filter escape %}{% include 'QwebCMSCatalogoBundle:Form:allegato_prototype.html.twig' with { 'allegato': form.allegatiProgetto.vars.prototype } %}{% endfilter %}">
+                                            <tbody class="allegati" data-prototype="{% filter escape %}{% include 'IlClemeCatalogoBundle:Form:allegato_prototype.html.twig' with { 'allegato': form.allegatiProgetto.vars.prototype } %}{% endfilter %}">
                                             {% for allegato in form.allegatiProgetto %}
                                             <tr>
                                                 <td>

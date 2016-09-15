@@ -35,7 +35,7 @@
         </div>
     </div>
     <div class="ibox-content">
-        {{ knp_pagination_filter(pagination, {'title': 'Nome Prodotto', 'shortDescription': 'Descrizione', 'idTblCatalogueProduct':'Id'}) }}
+        {{ knp_pagination_filter(pagination, {'title': 'Nome Prodotto', 'description': 'Descrizione', 'id':'Id'}) }}
         <div class="clearfix"></div>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover dataTables">
@@ -58,7 +58,7 @@
                         <td>{{ product.cod }}</td>
                         {#<td>{{ product.id }}</td>#}
                         <td>{{ product.title }}</td>
-                        <td>{{ product.shortDescription }}</td>
+                        <td>{{ product.description }}</td>
 
                         <td>
                         {% for category in product.categories %}
@@ -68,8 +68,8 @@
                         <td>{% if product.pub == 1 %}<i class="text-info fa fa-lg fa-check"></i>{% else %}<i class="text-danger fa fa-lg fa-times"></i>{% endif %}</td>
                         <td>{% if product.featured == 1 %}<i class="text-info fa fa-lg fa-check"></i>{% else %}<i class="text-danger fa fa-lg fa-times"></i>{% endif %}</td>
                         <td>
-                            <a href="{{ path('update_product_info', {'id' : product.idTblCatalogueProduct}) }}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
-                            <a href="{{ path('delete_product', {'id' : product.idTblCatalogueProduct}) }}" title="Elimina" class="btn btn-danger btn-circle"><i class="fa fa-lg fa-times"></i></a>
+                            <a href="{{ path('update_product_info', {'id' : product.id}) }}" title="Modifica" class="btn btn-warning btn-circle"><i class="fa fa-lg fa-edit"></i></a>
+                            <a href="{{ path('delete_product', {'id' : product.id}) }}" title="Elimina" class="btn btn-danger btn-circle"><i class="fa fa-lg fa-times"></i></a>
                         </td>
                     </tr>
                 {% endfor %}

@@ -23,9 +23,7 @@ class TblCatalogueFeatureType extends AbstractType
     {
         $builder
             ->add('idTblLingua','hidden')
-            ->add('title', array(
-                'label' => 'Nome'
-            ))
+            ->add('title')
             ->add('description')
             ->add('typeInput', 'choice', array(
                 'choices'   =>  array('select' => 'Insieme con selezione singola (select)', 'checkbox' => 'Insieme con selezione multipla (checkbox)'),
