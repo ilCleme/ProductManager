@@ -1,0 +1,283 @@
+{# src/Acme/DemoBundle/Resources/views/Random/index.html.twig #}
+{% extends '::layout.html.twig' %}
+
+{% block title %}Crea Nuovo Prodotto{% endblock %}
+{% block stylesheets %}
+    <link href="{{ asset('admin-style/css/plugins/switchery/switchery.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-style/css/plugins/chosen/chosen.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block pagetitle %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-12">
+            <h2>Crea Nuovo Prodotto</h2>
+        </div>
+    </div>
+{% endblock %}
+
+{% block menu %}
+    <li class="active">
+        <a href="/"><i class="fa fa-th-large"></i> <span class="nav-label">Catalogo</span> <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse in">
+            <li><a href="{{ path('welcome') }}">Dashboard</a></li>
+            <li class="active">
+                <a href="{{ path('products') }}">Prodotti <span class="fa arrow"></span></a>
+                <ul class="nav nav-third-level collapse">
+                    {% for category in categories %}
+                        <li><a href="{{ path('show_category', {id : category.id}) }}">{{ category.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li><a href="{{ path('categories') }}">Categorie</a></li>
+            <li><a href="{{ path('features') }}">Caratteristiche</a></li>
+        </ul>
+    </li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper wrapper-content animated fadeInRight ecommerce">
+        {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="">Informazioni Prodotto</a></li>
+                        <li class="disabled"><a href="">Caratteristiche</a></li>
+                        <li class="disabled"><a href="">Immagini</a></li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        {{ form_label(form.categories, 'Categoria'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.categories) }}
+                                        <div class="input-group" style="width:100%;">
+                                            {{ form_widget(form.categories, {'attr': {'class': 'chosen-select', 'data-placeholder':'Scegli una categoria'}}) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            {{ form_label(form.pub, 'Pubblica'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                            {{ form_errors(form.pub) }}
+                                            <div>
+                                                {{ form_widget(form.pub, { 'attr': {'class': 'js-switch'} }) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            {{ form_label(form.featured, 'Visibile in Homepage'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                            {{ form_errors(form.featured) }}
+                                            <div>
+                                                {{ form_widget(form.featured, { 'attr': {'class': 'js-switch'} }) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        {{ form_label(form.title, 'Titolo / Nome immobile'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.title) }}
+                                        {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                    <div class="form-group">
+                                        {{ form_label(form.description, 'Descrizione Completa Immobile'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.description) }}
+                                        {{ form_widget(form.description, {'attr': {'class': 'form-control tinymce'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.cod, 'Codice'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.cod) }}
+                                        {{ form_widget(form.cod, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_label(form.position, 'Posizione'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                        {{ form_errors(form.position) }}
+                                        {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        {{ form_errors(form.imageFile) }}
+                                        {{ form_widget(form.imageFile, {'attr': {'class': 'form-control img-responsive'}}) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    {{ form_label(form.allegatiProgetto, 'Allegati progetto'|default(null) ,{'label_attr': {'class': 'control-label'}}) }}
+                                    {{ form_errors(form.allegatiProgetto) }}
+                                    <div class="table-responsive table_allegato">
+                                        <table class="table table-stripped table-bordered">
+
+                                            <thead>
+                                            <tr>
+                                                <th>
+                                                    Allegato ID
+                                                </th>
+                                                <th>
+                                                    Nome Allegato
+                                                </th>
+                                                <th>
+                                                    Nome File Allegato
+                                                </th>
+                                                <th>
+                                                    ImageFile
+                                                </th>
+                                                <th>
+                                                    Actions
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="allegati" data-prototype="{% filter escape %}{% include 'IlClemeCatalogoBundle:Form:allegato_prototype.html.twig' with { 'allegato': form.allegatiProgetto.vars.prototype } %}{% endfilter %}">
+                                            {% for allegato in form.allegatiProgetto %}
+                                            <tr>
+                                                <td>
+                                                    {{ form_widget(allegato.id) }}
+                                                </td>
+                                                <td>
+                                                    {{ form_widget(allegato.nome) }}
+                                                </td>
+                                                <td>
+                                                    {{ form_widget(allegato.imageName) }}
+                                                </td>
+                                                <td>
+                                                    {{ form_widget(allegato.imageFile) }}
+                                                </td>
+                                                <td class="delete_allegato">
+                                                    {{ form_widget(allegato.idTblLingua) }}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <div class="col-md-12">
+                            {{ form_label(form.saveAndContinue, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                            {{ form_widget(form.saveAndContinue, {'attr': {'class': 'btn btn-primary'}}) }}
+
+                            {{ form_label(form.save, label|default(null) ,{'label_attr': {'class': 'control-label col-sm-12'}}) }}
+                            {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Switchery -->
+    <script src="{{ asset('admin-style/js/plugins/switchery/switchery.js') }}"></script>
+
+    <!-- Chosen -->
+    <script src="{{ asset('admin-style/js/plugins/chosen/chosen.jquery.js') }}"></script>
+
+    <script>
+        var $collectionHolder;
+        var $tableAllegati = $('.table_allegato');
+
+        // prepara un collegamento "aggiungere un tag"
+        var $addTagLink = $('<a href="#" class="btn btn-white add_tag_link">Aggiungere un Allegato</a>');
+        var $newLinkLi = $('<tr></tr>').append($addTagLink);
+
+        $(document).ready(function() {
+            // Prende l'ul che contiene la lista di tag
+            $collectionHolder = $('tbody.allegati');
+
+            // aggiunge un collegamento di eliminazione a ogni elemento tag esistente
+            $collectionHolder.find('tr').each(function() {
+                addTagFormDeleteLink($(this));
+            });
+
+            // aggiunge l'ancora "aggiungere un tag" e il li all'ul dei tag
+            $tableAllegati.append($newLinkLi);
+
+            // conta gli input correnti (p.e. 2), usando il valore come nuovo
+            // indice per inserire un nuovo elemento (p.e. 2)
+            $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+            $addTagLink.on('click', function(e) {
+                // previene il "#" nell'URL
+                e.preventDefault();
+
+                // aggiunge un nuovo form tag (vedere il prossimo blocco di codice)
+                addTagForm($collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addTagForm() {
+            // Prende data-prototype, come spiegato in precedenza
+            var prototype = $collectionHolder.data('prototype');
+
+            // prende il nuovo indice
+            var index = $collectionHolder.data('index');
+
+            // Sostituisce '__name__' nell'HTML del prototipo per essere
+            // invece un numero basato su quanti elementi ci sono
+            var newForm = prototype.replace(/__nome__/g, index);
+
+            // incrementa l'indice di 1 per l'elemento successivo
+            $collectionHolder.data('index', index + 1);
+
+            // Mostra il form nella pagina, dentro un li, prima del collegamento "Aggiungere un tag"
+            var $newFormLi = $('<tr></tr>').append(newForm);
+            $collectionHolder.append($newFormLi);
+
+            // aggiunge un collegamento di eliminazione al nuovo form
+            addTagFormDeleteLink($newFormLi);
+        }
+
+        function addTagFormDeleteLink($tagFormLi) {
+            var $removeFormA = $('<a class="btn btn-white" href="#"><i class="fa fa-trash"></i></a>');
+            $tagFormLi.find('td.delete_allegato').append($removeFormA);
+
+            $removeFormA.on('click', function(e) {
+                // previene il "#" nell'URL
+                e.preventDefault();
+
+                // rimuove l'elemento li per i form del tag
+                $tagFormLi.remove();
+            });
+        }
+
+        $(document).ready(function(){
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            elems.forEach(function(html) {
+                var switchery = new Switchery(html);
+            });
+            //var switchery = new Switchery(elem, { color: '#1AB394' });
+
+            var config = {
+                '.chosen-select'           : {},
+                '.chosen-select-deselect'  : {allow_single_deselect:true},
+                '.chosen-select-no-single' : {disable_search_threshold:10},
+                '.chosen-select-no-results': {no_results_text:'Oops, nessun elemento trovato!'},
+                '.chosen-select'           : {width:"95%"}
+            }
+            for (var selector in config) {
+                $(selector).chosen(config[selector]);
+            }
+        });
+    </script>
+    {{ tinymce_init() }}
+{% endblock %}

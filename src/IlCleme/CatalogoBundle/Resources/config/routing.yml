@@ -1,0 +1,115 @@
+login_route:
+    path:   /login
+    defaults: { _controller: IlClemeCatalogoBundle:Security:login }
+    
+login_check:
+    path:   /login_check
+    defaults: { _controller: IlClemeCatalogoBundle:Security:loginCheck }
+
+welcome:
+    path:     /
+    defaults: { _controller: IlClemeCatalogoBundle:Welcome:index }
+
+change_language:
+    path:     /change_language
+    defaults: { _controller: IlClemeCatalogoBundle:Language:setLanguage }
+
+products:
+    path:     /products
+    defaults: { _controller: IlClemeCatalogoBundle:Welcome:allProduct }
+
+upload_product_photo:
+    path:     /products/uploadphoto
+    defaults: { _controller: IlClemeCatalogoBundle:Product:uploadPhoto }
+
+create_product:
+    path:     /products/new/info
+    defaults: { _controller: IlClemeCatalogoBundle:Product:createNew }
+
+show_product:
+    path:     /product/show/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Product:show }
+
+update_product:
+    path:     /product/update/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Product:update }
+
+update_product_info:
+    path:     /product/update/info/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Product:updateInfo }
+
+update_product_feature:
+    path:     /product/update/feature/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Product:updateFeatures }
+
+update_product_immagini:
+    path:     /product/update/immagini/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Product:updateImages }
+
+delete_product:
+    path:     /product/delete/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Product:delete }
+    
+categories:
+    path:     /categories
+    defaults: { _controller: IlClemeCatalogoBundle:Welcome:allCategory }
+    
+create_category:
+    path:     /categories/new
+    defaults: { _controller: IlClemeCatalogoBundle:Category:create }
+
+show_category:
+    path:     /category/show/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Category:show }
+
+update_category:
+    path:     /category/update/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Category:update }
+
+delete_category:
+    path:     /category/delete/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Category:delete }
+
+features:
+    path:     /features
+    defaults: { _controller: IlClemeCatalogoBundle:Welcome:allFeature }
+    
+create_features:
+    path:     /features/new
+    defaults: { _controller: IlClemeCatalogoBundle:Feature:create }
+    
+update_features:
+    path:     /feature/update/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Feature:update }
+    
+delete_features:
+    path:     /feature/delete/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Feature:delete }
+
+featurevalues:
+    path:     /featurevalues
+    defaults: { _controller: IlClemeCatalogoBundle:Welcome:allFeatureValue }
+    
+create_featurevalues:
+    path:     /featurevalues/new
+    defaults: { _controller: IlClemeCatalogoBundle:Featurevalue:create }
+
+update_featurevalues:
+    path:     /featurevalues/update/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Featurevalue:update }
+
+delete_featurevalues:
+    path:     /featurevalues/delete/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Featurevalue:delete }
+
+delete_photo:
+    path:     /foto/cancella/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Foto:cancella }
+
+update_position_photo:
+    path:     /foto/update
+    defaults: { _controller: IlClemeCatalogoBundle:Foto:updatePosition }
+
+category_featurevalue:
+    path:     /feature/category/{id}
+    defaults: { _controller: IlClemeCatalogoBundle:Featurevalue:showCategoryFeaturevalue }
