@@ -15,20 +15,32 @@ class WelcomeController extends Controller
             ->getRepository('IlClemeCatalogoBundle:Product')
             ->countProduct($lingua);
 
+        $count['product'] = $product;
+
         $category = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Category')
             ->countCategory($lingua);
-            
+
+        $count['category'] = $category;
+
         $feature = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Feature')
             ->countFeature($lingua);
 
+        $count['feature'] = $feature;
+
         $featurevalue = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Featurevalue')
             ->countFeaturevalues($lingua);
-            
+
+        $count['featurevalues'] = $featurevalue;
+
+        $category = $this->getDoctrine()
+            ->getRepository('IlClemeCatalogoBundle:Category')
+            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+
         return $this->render('IlClemeCatalogoBundle:Welcome:index.html.twig',
-            array('products' => $product, 'categories' => $category, 'features' => $feature, 'featurevalues' => $featurevalue)
+            array('count' => $count, 'categories' => $category)
             );
     }
 
