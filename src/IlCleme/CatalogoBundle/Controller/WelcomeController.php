@@ -9,21 +9,23 @@ class WelcomeController extends Controller
 {
     public function indexAction()
     {
+        $lingua = $this->get('language.manager')->getSessionLanguage();
+
         $product = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Product')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->countProduct($lingua);
 
         $category = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Category')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->countCategory($lingua);
             
         $feature = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Feature')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->countFeature($lingua);
 
         $featurevalue = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Featurevalue')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->countFeaturevalues($lingua);
             
         return $this->render('IlClemeCatalogoBundle:Welcome:index.html.twig',
             array('products' => $product, 'categories' => $category, 'features' => $feature, 'featurevalues' => $featurevalue)

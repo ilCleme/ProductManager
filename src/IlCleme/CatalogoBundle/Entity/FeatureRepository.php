@@ -12,6 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class FeatureRepository extends EntityRepository
 {
+    public function countFeature($id_language = 4){
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT COUNT (f.id) FROM IlClemeCatalogoBundle:Feature f WHERE f.idTblLingua = ?1');
+        $query->setParameters(array(
+            1 => $id_language
+        ));
+
+        try {
+            $count = $query->getSingleScalarResult();
+            return $count;
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
     public function findFeaturesByLanguage($id_language)
     {
         $query = $this->getEntityManager()

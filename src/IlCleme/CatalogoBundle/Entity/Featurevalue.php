@@ -10,7 +10,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * Featurevalue
  *
  * @ORM\Table(name="featurevalue")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="IlCleme\CatalogoBundle\Entity\FeaturevalueRepository")
  * @Vich\Uploadable
  */
 class Featurevalue

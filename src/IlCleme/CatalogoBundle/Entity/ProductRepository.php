@@ -12,6 +12,21 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    public function countProduct($id_language = 4){
+        $query = $this->getEntityManager()
+            ->createQuery('SELECT COUNT (p.id) FROM IlClemeCatalogoBundle:Product p WHERE p.idTblLingua = ?1');
+        $query->setParameters(array(
+            1 => $id_language
+        ));
+
+        try {
+            $count = $query->getSingleScalarResult();
+            return $count;
+        } catch (\Doctrine\ORM\NoResultException $e) {
+            return null;
+        }
+    }
+
     public function findFeaturevaluesProductByLanguage($id_product, $id_language = null)
     {
         $query = $this->getEntityManager()
