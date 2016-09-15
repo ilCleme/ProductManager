@@ -25,7 +25,6 @@ class TblCatalogueFeaturevalueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblCatalogueFeaturevalue', 'hidden')
             ->add('idTblLingua', 'hidden')
             ->add('title')
             ->add('imageFile', 'vich_image', array(
@@ -36,7 +35,7 @@ class TblCatalogueFeaturevalueType extends AbstractType
             ))
             ->add('position', 'hidden')
             ->add('features', 'entity', array(
-                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',
+                'class' => 'QwebCMS\CatalogoBundle\Entity\Feature',
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('f')
                         ->where('f.idTblLingua = '.$this->lingua);
@@ -63,7 +62,7 @@ class TblCatalogueFeaturevalueType extends AbstractType
             $id = $featurevalue_parent[0]->getInheritFrom();
             if (null !== $id){
                 $form->add('featurevalue_inherit', 'entity', array(
-                    'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
+                    'class' => 'QwebCMS\CatalogoBundle\Entity\Featurevalue',
                     'query_builder' => function (EntityRepository $er) use ($id){
                         return $er->createQueryBuilder('u')
                             ->join('u.features', 'f', 'WITH')
@@ -86,7 +85,7 @@ class TblCatalogueFeaturevalueType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeaturevalue'
+            'data_class' => 'QwebCMS\CatalogoBundle\Entity\Featurevalue'
         ));
     }
 

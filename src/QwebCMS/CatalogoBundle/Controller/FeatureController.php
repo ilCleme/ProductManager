@@ -3,7 +3,7 @@
 namespace QwebCMS\CatalogoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature as Feature;
+use QwebCMS\CatalogoBundle\Entity\Feature as Feature;
 use Symfony\Component\HttpFoundation\Request;
 use QwebCMS\CatalogoBundle\Form\TblCatalogueFeatureType;
 
@@ -12,7 +12,7 @@ class FeatureController extends Controller
     public function createAction(Request $request)
     {
         $categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $feature = new Feature();
@@ -23,15 +23,9 @@ class FeatureController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $feature->setIdTblCatalogueFeature(0);
             $em->persist($feature);
             $em->flush();
-            
-            //Aggiornare il valore del campo id_tbl_catalogue_category con il nuovo id
-            $feature->setIdTblCatalogueFeature($feature->getId());
-            
-            $em->persist($feature);
-            $em->flush();
+
             return $this->redirect($this->generateUrl('features'));
         }
         
@@ -45,12 +39,12 @@ class FeatureController extends Controller
     public function updateAction($id, Request $request)
     {
         $categories = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueCategory')
+            ->getRepository('QwebCMSCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
         $feature = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
-            ->findOneBy(array('idTblCatalogueFeature' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->getRepository('QwebCMSCatalogoBundle:Feature')
+            ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$feature) {
             throw $this->createNotFoundException(
@@ -78,8 +72,8 @@ class FeatureController extends Controller
     public function deleteAction($id, Request $request)
     {
         $feature = $this->getDoctrine()
-            ->getRepository('QwebCMSCatalogoBundle:TblCatalogueFeature')
-            ->findOneBy(array('idTblCatalogueFeature' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->getRepository('QwebCMSCatalogoBundle:Feature')
+            ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
     
         if (!$feature) {
             throw $this->createNotFoundException(

@@ -40,7 +40,7 @@
                 <a href="{{ path('products') }}">Prodotti <span class="fa arrow"></span></a>
                 <ul class="nav nav-third-level collapse">
                     {% for category in categories %}
-                        <li><a href="{{ path('show_category', {id : category.idTblCatalogueCategory}) }}">{{ category.title }}</a></li>
+                        <li><a href="{{ path('show_category', {id : category.id}) }}">{{ category.title }}</a></li>
                     {% endfor %}
                 </ul>
             </li>

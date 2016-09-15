@@ -22,9 +22,10 @@ class TblCatalogueFeatureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblCatalogueFeature','hidden')
             ->add('idTblLingua','hidden')
-            ->add('title')
+            ->add('title', array(
+                'label' => 'Nome'
+            ))
             ->add('description')
             ->add('typeInput', 'choice', array(
                 'choices'   =>  array('select' => 'Insieme con selezione singola (select)', 'checkbox' => 'Insieme con selezione multipla (checkbox)'),
@@ -39,7 +40,7 @@ class TblCatalogueFeatureType extends AbstractType
                 'choices'   =>  array('float:left' => 'Su unica riga', 'float:none' => 'Un valore per riga')
             ))
             ->add('inheritFrom', 'entity', array(
-                'class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature',
+                'class' => 'QwebCMS\CatalogoBundle\Entity\Feature',
                 'property' => 'title',
                 'multiple' => false,
                 'expanded' => false,
@@ -57,7 +58,7 @@ class TblCatalogueFeatureType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'QwebCMS\CatalogoBundle\Entity\TblCatalogueFeature'
+            'data_class' => 'QwebCMS\CatalogoBundle\Entity\Feature'
         ));
     }
 
