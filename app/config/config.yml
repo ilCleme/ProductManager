@@ -29,7 +29,7 @@ framework:
 twig:
     form:
         resources:
-            - 'QwebCMSCatalogoBundle:Form:fields.html.twig'
+            - 'IlClemeCatalogoBundle:Form:fields.html.twig'
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
     form_themes:
@@ -81,7 +81,7 @@ swiftmailer:
 
 services:
     autenticatore_apikey:
-        class:     QwebCMS\CatalogoBundle\Security\ApiKeyAuthenticator
+        class:     IlCleme\CatalogoBundle\Security\ApiKeyAuthenticator
         arguments: ["@fornitore_utenti_apikey"]
 
 oneup_uploader:
@@ -151,7 +151,7 @@ knp_paginator:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
         sortable: KnpPaginatorBundle:Pagination:sortable_link.html.twig
         #filtration: KnpPaginatorBundle:Pagination:filtration.html.twig
-        filtration: QwebCMSCatalogoBundle:Welcome:filter.html.twig
+        filtration: IlClemeCatalogoBundle:Welcome:filter.html.twig
 
 vich_uploader:
     db_driver: orm

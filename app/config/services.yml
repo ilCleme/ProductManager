@@ -8,15 +8,15 @@ services:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
 #    fornitore_utenti_apikey:
-#        class: QwebCMS\CatalogoBundle\Security\ApiKeyUserProvider
+#        class: IlCleme\CatalogoBundle\Security\ApiKeyUserProvider
 
 
     catalogobundle.upload_listener:
-        class: QwebCMS\CatalogoBundle\EventListener\UploadListener
+        class: IlCleme\CatalogoBundle\EventListener\UploadListener
         tags:
             - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
         arguments: ['@doctrine', '@service_container']
 
     language.manager:
-        class: QwebCMS\CatalogoBundle\Services\LanguageManager
+        class: IlCleme\CatalogoBundle\Services\LanguageManager
         arguments: ['@session']

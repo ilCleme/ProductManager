@@ -3,7 +3,7 @@
 security:
     # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
     encoders:
-        QwebCMS\UserBundle\Entity\User:
+        IlCleme\UserBundle\Entity\User:
             algorithm: bcrypt
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
@@ -23,7 +23,7 @@ security:
         #                password: $2a$04$zOkekOi0GH.N96V0eXAkQ.irzdMnK/ihT/Ncm.wE4TR3MzMNoQShu
         #                roles: 'ROLE_ADMIN'
         administrators:
-            entity: { class: QwebCMSUserBundle:User }
+            entity: { class: IlClemeUserBundle:User }
         
         apiprovider:
             id: fornitore_utenti_apikey

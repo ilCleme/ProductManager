@@ -1,9 +1,9 @@
 qweb_cms_user:
-    resource: "@QwebCMSUserBundle/Resources/config/routing.yml"
+    resource: "@IlClemeUserBundle/Resources/config/routing.yml"
     prefix:   /
 
 qweb_cms_catalogo:
-    resource: "@QwebCMSCatalogoBundle/Resources/config/routing.yml"
+    resource: "@IlClemeCatalogoBundle/Resources/config/routing.yml"
     prefix:   /
 
 logout:
