@@ -28,13 +28,6 @@ class Album
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_padre", type="bigint", nullable=false)
-     */
-    private $idPadre = 0;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="id_tbl_lingua", type="bigint")
      */
     private $idTblLingua = 4;
