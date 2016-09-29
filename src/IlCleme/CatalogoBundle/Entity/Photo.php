@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  * Photo
  *
@@ -77,4 +76,175 @@ class Photo
      * @var \DateTime
      */
     private $datamod;
+
+    /**
+     * Get id
+     *
+     * @return guid 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set idTblLingua
+     *
+     * @param integer $idTblLingua
+     * @return Photo
+     */
+    public function setIdTblLingua($idTblLingua)
+    {
+        $this->idTblLingua = $idTblLingua;
+
+        return $this;
+    }
+
+    /**
+     * Get idTblLingua
+     *
+     * @return integer 
+     */
+    public function getIdTblLingua()
+    {
+        return $this->idTblLingua;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     * @return Photo
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string 
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * Set img
+     *
+     * @param string $img
+     * @return Photo
+     */
+    public function setImg($img)
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    /**
+     * Get img
+     *
+     * @return string 
+     */
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    /**
+     * Set imgBig
+     *
+     * @param string $imgBig
+     * @return Photo
+     */
+    public function setImgBig($imgBig)
+    {
+        $this->imgBig = $imgBig;
+
+        return $this;
+    }
+
+    /**
+     * Get imgBig
+     *
+     * @return string 
+     */
+    public function getImgBig()
+    {
+        return $this->imgBig;
+    }
+
+    /**
+     * Set posizione
+     *
+     * @param integer $posizione
+     * @return Photo
+     */
+    public function setPosizione($posizione)
+    {
+        $this->posizione = $posizione;
+
+        return $this;
+    }
+
+    /**
+     * Get posizione
+     *
+     * @return integer 
+     */
+    public function getPosizione()
+    {
+        return $this->posizione;
+    }
+
+    /**
+     * Set pub
+     *
+     * @param boolean $pub
+     * @return Photo
+     */
+    public function setPub($pub)
+    {
+        $this->pub = $pub;
+
+        return $this;
+    }
+
+    /**
+     * Get pub
+     *
+     * @return boolean 
+     */
+    public function getPub()
+    {
+        return $this->pub;
+    }
+
+    /**
+     * Set album
+     *
+     * @param \IlCleme\CatalogoBundle\Entity\Album $album
+     * @return Photo
+     */
+    public function setAlbum(\IlCleme\CatalogoBundle\Entity\Album $album = null)
+    {
+        $this->album = $album;
+
+        return $this;
+    }
+
+    /**
+     * Get album
+     *
+     * @return \IlCleme\CatalogoBundle\Entity\Album 
+     */
+    public function getAlbum()
+    {
+        return $this->album;
+    }
 }

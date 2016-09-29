@@ -343,9 +343,8 @@ class ProductController extends Controller
 
         // Getting photo of product
         $photos= $this->getDoctrine()
-            ->getRepository('IlClemeCatalogoBundle:TblPhoto')
-            ->findBy( array('idTblPhotoCat' => $product->getIdTblPhotoCat(), 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()),
-                array('posizione' => 'ASC'));
+            ->getRepository('IlClemeCatalogoBundle:Photo')
+            ->findBy( array('album' => $product->getIdTblPhotoCat(), 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()), array('posizione' => 'ASC'));
 
         $form = $this->createForm(new TblCatalogueProductEditImagesType($this->get('language.manager')->getSessionLanguage()), $product);
         $form->handleRequest($request);
