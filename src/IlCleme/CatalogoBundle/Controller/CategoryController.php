@@ -94,7 +94,7 @@ class CategoryController extends Controller
 
         // Getting photo of product
         $photos= $this->getDoctrine()
-            ->getRepository('IlClemeCatalogoBundle:TblPhoto')
+            ->getRepository('IlClemeCatalogoBundle:Photo')
             ->findBy(array(), array('posizione' => 'ASC'));
 
         return $this->render(
