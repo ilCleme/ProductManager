@@ -4,14 +4,14 @@ namespace IlCleme\CatalogoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use IlCleme\CatalogoBundle\Entity\Product as Product;
-use IlCleme\CatalogoBundle\Entity\TblPhotoCat as Album;
+use IlCleme\CatalogoBundle\Entity\Album as Album;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use IlCleme\CatalogoBundle\Form\TblCatalogueProductType;
 use IlCleme\CatalogoBundle\Form\TblCatalogueProductEditInfoType;
 use IlCleme\CatalogoBundle\Form\TblCatalogueProductEditFeaturesType;
 use IlCleme\CatalogoBundle\Form\TblCatalogueProductEditImagesType;
-use IlCleme\CatalogoBundle\Entity\TblPhoto as Foto;
+use IlCleme\CatalogoBundle\Entity\Photo as Foto;
 use IlCleme\CatalogoBundle\Entity\Allegato;
 
 class ProductController extends Controller
@@ -138,12 +138,11 @@ class ProductController extends Controller
 
             $album = new Album();
             $album->setNome($product->getTitle());
-            $album->setFotoBig(" ");
             $em->persist($album);
             $em->flush();
 
             // Save product information on database
-            $product->setIdTblPhotoCat($album->getIdTblPhotoCat());
+            $product->setIdTblPhotoCat($album->getId());
             $em->persist($product);
             $em->flush();
 
