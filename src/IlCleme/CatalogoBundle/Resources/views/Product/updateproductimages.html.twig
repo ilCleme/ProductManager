@@ -100,7 +100,7 @@
                                                     {{ immagine.posizione }}
                                                 </td>
                                                 <td>
-                                                    <a href="{{ path('delete_photo', {'id': immagine.idTblPhoto}) }}" title="Elimina" class="cancella-foto btn btn-danger"><i class="fa fa-lg fa-times"></i></a>
+                                                    <a href="{{ path('delete_photo', {'id': immagine.id}) }}" title="Elimina" class="cancella-foto btn btn-danger"><i class="fa fa-lg fa-times"></i></a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
@@ -111,7 +111,7 @@
                                 <div class="dd" id="nestable">
                                     <ol class="dd-list">
                                         {% for immagine in immagini %}
-                                        <li class="dd-item" data-id="{{ immagine.idTblPhoto }}">
+                                        <li class="dd-item" data-id="{{ immagine.id }}">
                                             <div class="dd-handle">
                                                 <img class="img-responsive" src="{{ asset(immagine.img) | imagine_filter('img_preview') }}" />
                                             </div>

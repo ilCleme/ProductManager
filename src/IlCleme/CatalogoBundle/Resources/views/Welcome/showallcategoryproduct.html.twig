@@ -64,7 +64,7 @@
                         <td>
                         {% set trovata = 'false' %}
                         {% for photo in photos %}
-                            {% if (photo.idTblPhotoCat == product.idTblPhotoCat) and (trovata == 'false') %}
+                            {% if (photo.album == product.idTblPhotoCat) and (trovata == 'false') %}
                                 <img src="{{ photo.img | imagine_filter('mini_img') }}"/>
                                 {% set trovata = 'true' %}
                             {% endif %}

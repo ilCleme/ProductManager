@@ -29,8 +29,8 @@ class NomeNamer extends EntityManager implements NamerInterface
 
         $query = $this->em->createQuery(
             'SELECT p
-            FROM IlCleme\CatalogoBundle\Entity\TblPhoto p
-            WHERE p.idTblPhotoCat =  :id'
+            FROM IlCleme\CatalogoBundle\Entity\Photo p
+            WHERE p.album =  :id'
         )->setParameter('id', $id_album);
 
         $photo = $query->getResult();

@@ -3,13 +3,14 @@
 namespace IlCleme\CatalogoBundle\EventListener;
 
 use Oneup\UploaderBundle\Event\PostPersistEvent;
-use IlCleme\CatalogoBundle\Entity\TblPhoto as Foto;
-use IlCleme\CatalogoBundle\Entity\Product as Prodotto;
+use IlCleme\CatalogoBundle\Entity\Photo as Foto;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Doctrine\Bundle\DoctrineBundle\Registry;
 
 
 class UploadListener{
 
-    public function __construct($doctrine, $container)
+    public function __construct(Registry $doctrine, ContainerInterface $container)
     {
         $this->doctrine = $doctrine;
         $this->container = $container;
@@ -24,14 +25,6 @@ class UploadListener{
         } elseif ($type == 'planimetrie') {
             $this->uploadPlanimetriaType($event);
         }
-
-        /*
-         * Torno dei dati informativi tramite la response
-         */
-        //$response->offsetSet('id-album', $id_album );
-        //$response->offsetSet('config', $event->getConfig() );
-        //$response->offsetSet('src_path', $foto->getImg() );
-        //$response->offsetSet('type', $event->getType() );
     }
 
     public function uploadGalleryType(PostPersistEvent $event){
@@ -39,36 +32,26 @@ class UploadListener{
         //$response = $event->getResponse();
         $id_album = $request->headers->get('id-album');
 
+        $em = $this->doctrine->getManager();
+        $album = $em->getRepository('IlClemeCatalogoBundle:Album')
+            ->find($id_album);
+
         $file_upload = $event->getFile();
 
-        $imagemanagerResponse = $this->container
-            ->get('liip_imagine.controller')
-            ->filterAction($this->container->get('request'), $file_upload, 'img_preview');
+        $imagemanagerResponse = $this->container->get('liip_imagine.controller');
 
-        $imagemanagerResponse = $this->container
-            ->get('liip_imagine.controller')
-            ->filterAction($this->container->get('request'), $file_upload, 'img_small');
+        $filters = $this->container->get('liip_imagine.filter.manager')->getFilterConfiguration()->all();
 
-        $imagemanagerResponse = $this->container
-            ->get('liip_imagine.controller')
-            ->filterAction($this->container->get('request'), $file_upload, 'img_medium');
-
-        $imagemanagerResponse = $this->container
-            ->get('liip_imagine.controller')
-            ->filterAction($this->container->get('request'), $file_upload, 'img_large');
+        foreach($filters as $key => $value){
+            $imagemanagerResponse->filterAction($request, $file_upload, $key);
+        }
 
         $foto = new Foto();
         $foto->setNome($file_upload->getFilename());
         $foto->setImg('/'.$file_upload->getPathname());
-        $foto->setIdTblPhotoCat($id_album);
+        $foto->setAlbum($album);
         $foto->setIdTblLingua($this->container->get('language.manager')->getSessionLanguage());
 
-        $em = $this->doctrine->getManager();
-
-        $em->persist($foto);
-        $em->flush();
-
-        $foto->setIdTblPhoto($foto->getId());
         $em->persist($foto);
         $em->flush();
     }

@@ -4,7 +4,6 @@ namespace IlCleme\CatalogoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use IlCleme\CatalogoBundle\Entity\TblPhoto as Foto;
 
 class FotoController extends Controller
 {
@@ -12,26 +11,22 @@ class FotoController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $foto = $this->getDoctrine()
-            ->getRepository('IlClemeCatalogoBundle:TblPhoto')
+            ->getRepository('IlClemeCatalogoBundle:Photo')
             ->find($id);
 
         $env = $this->container->get('kernel')->getEnvironment();
 
+        $cacheManager = $this->get('liip_imagine.cache.manager');
+        $cacheManager->remove($foto->getImg());
+
+        $root = $this->get('kernel')->getRootDir();
+
         if($env == 'dev'){
-            $cacheManager = $this->get('liip_imagine.cache.manager');
-            $cacheManager->remove($foto->getImg());
-
-            $root = $this->get('kernel')->getRootDir();
-
             $deleteStatus = unlink($root.'/../web'.$foto->getImg());
             if (!$deleteStatus){
                 $this->get('session')->getFlashBag()->add(
                     'error',
-                    'Un errore è stato rilevato durante l\'eliminazione dell\'immagine'
-                );
-
-                return $this->render(
-                    'IlClemeCatalogoBundle:Photo:delete.html.twig'
+                    'É stato impossibile eliminare l\'immagine dal sistema'
                 );
             }
         }
@@ -41,7 +36,7 @@ class FotoController extends Controller
 
         $this->get('session')->getFlashBag()->add(
             'notice',
-            'La foto è stata eliminata!'
+            'La foto è stata cancellata dal prodotto!'
         );
 
         return $this->render(
@@ -63,7 +58,7 @@ class FotoController extends Controller
 
             if($response['success']){
                 $foto = $this->getDoctrine()
-                    ->getRepository('IlClemeCatalogoBundle:TblPhoto')
+                    ->getRepository('IlClemeCatalogoBundle:Photo')
                     ->find($value['id']);
 
                 if (!$foto) {
