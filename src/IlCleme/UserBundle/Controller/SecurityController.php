@@ -1,10 +1,10 @@
 <?php
 
-namespace IlCleme\CatalogoBundle\Controller;
+namespace IlCleme\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class SecurityController extends Controller
 {
@@ -19,16 +19,12 @@ class SecurityController extends Controller
         $lastUsername = $authenticationUtils->getLastUsername();
     
         return $this->render(
-            'IlClemeCatalogoBundle:Security:login.html.twig',
+            'IlClemeUserBundle:Security:login.html.twig',
             array(
                 // last username entered by the user
                 'last_username' => $lastUsername,
                 'error'         => $error,
             )
         );
-    }
-    
-    public function loginCheckAction()
-    {
     }
 }

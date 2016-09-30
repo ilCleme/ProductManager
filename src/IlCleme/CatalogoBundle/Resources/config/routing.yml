@@ -1,11 +1,3 @@
-login_route:
-    path:   /login
-    defaults: { _controller: IlClemeCatalogoBundle:Security:login }
-    
-login_check:
-    path:   /login_check
-    defaults: { _controller: IlClemeCatalogoBundle:Security:loginCheck }
-
 welcome:
     path:     /
     defaults: { _controller: IlClemeCatalogoBundle:Welcome:index }

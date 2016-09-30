@@ -13,15 +13,13 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        #in_memory:
-        #    memory:
-        #        users:
-        #            ryan:
-        #                password: $2a$04$EwryGipYcXGxtfoPt7pKKevu9XG3wz7ZlXI3rAJIqB8z9eWcMoC2e
-        #                roles: 'ROLE_USER'
-        #            admin:
-        #                password: $2a$04$zOkekOi0GH.N96V0eXAkQ.irzdMnK/ihT/Ncm.wE4TR3MzMNoQShu
-        #                roles: 'ROLE_ADMIN'
+        our_db_provider:
+            entity:
+                class: IlClemeUserBundle:User
+                # property: username !!! commentando questa riga symfony non fa la query automaticamente ma usa il metodo loadUserByUsername() della UserRepository
+                # if you're using multiple entity managers
+                # manager_name: customer
+
         administrators:
             entity: { class: IlClemeUserBundle:User }
         
@@ -36,8 +34,8 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         
-        secured_area:
-            pattern: ^/
+        secured_area: # questo firewall controlla tutte le richieste che inizia per /hello
+            pattern: ^/hello
             stateless: false
             simple_preauth:
                 authenticator: autenticatore_apikey
@@ -45,15 +43,19 @@ security:
                 path:   /logout
                 target: /login
 
-        default:
+        main:
+            #pattern:    ^/
             anonymous: ~
-            http_basic: ~
+            provider: our_db_provider
             form_login:
-                login_path: /login
-                check_path: /login_check
+                login_path: login_route
+                check_path: login_route
             logout:
                 path:   /logout
                 target: /
+
+        default:
+            anonymous: ~
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods

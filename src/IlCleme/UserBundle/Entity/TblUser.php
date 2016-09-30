@@ -1,12 +1,12 @@
 <?php
-// src/IlCleme/UserBundle/Entity/User.php
+
 namespace IlCleme\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * IlCleme\UserBundle\Entity\TblUser
+ * UserBundle\Entity\TblUser
  *
  * @ORM\Table(name="tbl_user")
  * @ORM\Entity(repositoryClass="IlCleme\UserBundle\Entity\TblUserRepository")

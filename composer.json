@@ -29,7 +29,8 @@
         "stfalcon/tinymce-bundle": "0.3.9",
         "vich/uploader-bundle": "^0.14.0",
         "doctrine/common": "v2.5.3",
-        "doctrine/doctrine-migrations-bundle": "^1.1"
+        "doctrine/doctrine-migrations-bundle": "^1.1",
+        "ircmaxell/password-compat": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

@@ -1,3 +1,14 @@
+login_route:
+    path:   /login
+    defaults: { _controller: IlClemeUserBundle:Security:login }
+
+login_check:
+    path:   /login_check
+    defaults: { _controller: IlClemeUserBundle:Security:loginCheck }
+
+logout:
+    path:   /logout
+
 qweb_cms_user_homepage:
-    path:     /hello/{name}
+    path:     /admin/{name}
     defaults: { _controller: IlClemeUserBundle:Default:index }

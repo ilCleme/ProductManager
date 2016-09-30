@@ -1,5 +1,5 @@
 <?php
-// src/IlCleme/UserBundle/Entity/User.php
+
 namespace IlCleme\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -8,7 +8,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 /**
  * IlCleme\UserBundle\Entity\User
  *
- * @ORM\Table(name="acme_users")
+ * @ORM\Table(name="users")
  * @ORM\Entity(repositoryClass="IlCleme\UserBundle\Entity\UserRepository")
  */
 class User implements AdvancedUserInterface, \Serializable
@@ -39,6 +39,16 @@ class User implements AdvancedUserInterface, \Serializable
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $nome;
+
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $cognome;
 
     public function __construct()
     {
@@ -98,6 +108,8 @@ class User implements AdvancedUserInterface, \Serializable
             $this->username,
             $this->password,
             $this->isActive,
+            $this->nome,
+            $this->cognome,
             // vedere la sezione sul salt più avanti
             // $this->salt,
         ));
@@ -113,6 +125,8 @@ class User implements AdvancedUserInterface, \Serializable
             $this->username,
             $this->password,
             $this->isActive,
+            $this->nome,
+            $this->cognome,
             // vedere la sezione sul salt più avanti
             // $this->salt
         ) = unserialize($serialized);
@@ -218,5 +232,51 @@ class User implements AdvancedUserInterface, \Serializable
     public function isEnabled()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     * @return User
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string 
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * Set cognome
+     *
+     * @param string $cognome
+     * @return User
+     */
+    public function setCognome($cognome)
+    {
+        $this->cognome = $cognome;
+
+        return $this;
+    }
+
+    /**
+     * Get cognome
+     *
+     * @return string 
+     */
+    public function getCognome()
+    {
+        return $this->cognome;
     }
 }
