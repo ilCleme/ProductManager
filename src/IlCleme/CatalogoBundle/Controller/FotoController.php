@@ -59,7 +59,7 @@ class FotoController extends Controller
             if($response['success']){
                 $foto = $this->getDoctrine()
                     ->getRepository('IlClemeCatalogoBundle:Photo')
-                    ->find($value['id']);
+                    ->findOneBy(array('idTblPhoto' => $value['id'], 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
 
                 if (!$foto) {
                     /*$this->get('session')->getFlashBag()->add(
