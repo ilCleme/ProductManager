@@ -4,9 +4,10 @@ namespace IlCleme\CatalogoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 use IlCleme\CatalogoBundle\Form\Type\AllegatoType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class TblCatalogueProductType extends AbstractType
 {
@@ -35,7 +36,7 @@ class TblCatalogueProductType extends AbstractType
                 'by_reference' => false,
                 'label' => false,
             ))
-            ->add('imageFile', 'vich_image', array(
+            ->add('imageFile', VichImageType::class, array(
                 'required'      => false,
                 'label'         => 'Logo',
                 'allow_delete'  => false, // not mandatory, default is true
@@ -68,11 +69,11 @@ class TblCatalogueProductType extends AbstractType
             ->add('saveAndContinue', 'submit', array('label' => 'Salva e continua'))
         ;
     }
-    
+
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'IlCleme\CatalogoBundle\Entity\Product'

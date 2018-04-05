@@ -4,10 +4,11 @@ namespace IlCleme\CatalogoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class TblCatalogueFeaturevalueType extends AbstractType
 {
@@ -27,7 +28,7 @@ class TblCatalogueFeaturevalueType extends AbstractType
         $builder
             ->add('idTblLingua', 'hidden')
             ->add('title')
-            ->add('imageFile', 'vich_image', array(
+            ->add('imageFile', VichImageType::class, array(
                 'required'      => false,
                 'label'         => 'Icona',
                 'allow_delete'  => false, // not mandatory, default is true
@@ -78,11 +79,11 @@ class TblCatalogueFeaturevalueType extends AbstractType
             }
         }
     }
-    
+
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'IlCleme\CatalogoBundle\Entity\Featurevalue'

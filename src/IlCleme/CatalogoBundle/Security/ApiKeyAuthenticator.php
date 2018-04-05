@@ -2,17 +2,15 @@
 // src/IlCleme/CatalogoBundle/Security/ApiKeyAuthenticator.php
 namespace IlCleme\CatalogoBundle\Security;
 
-use Symfony\Component\Security\Core\Authentication\SimplePreAuthenticatorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use IlCleme\UserBundle\Entity\TblUser as User;
 use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerInterface;
+use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
 
 class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, AuthenticationFailureHandlerInterface
 {
@@ -43,7 +41,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
     {
         $apiKey = $token->getCredentials();
         $username = $this->userProvider->getUsernameForApiKey($apiKey);
-        
+
         // User è l'entità che rappresenta l'utente
         $user = $token->getUser();
         if ($user instanceof User) {
@@ -62,7 +60,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
         }
 
         $user = $this->userProvider->loadUserByUsername($username);
-    
+
         return new PreAuthenticatedToken(
             $user,
             $apiKey,
@@ -75,7 +73,7 @@ class ApiKeyAuthenticator implements SimplePreAuthenticatorInterface, Authentica
     {
         return $token instanceof PreAuthenticatedToken && $token->getProviderKey() === $providerKey;
     }
-    
+
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         //var_dump($exception);
