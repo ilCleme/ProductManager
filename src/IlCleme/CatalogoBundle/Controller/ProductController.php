@@ -312,7 +312,7 @@ class ProductController extends Controller
             } elseif($form->get('save')->isClicked()) {
 
                 return $this->redirect($this->generateUrl('update_product_immagini', array(
-                    'id' => $product->getIdTblCatalogueProduct()
+                    'id' => $product->getId()
                 )));
             }
 
