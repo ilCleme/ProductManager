@@ -3,7 +3,12 @@
 namespace IlCleme\CatalogoBundle\Form;
 
 use IlCleme\CatalogoBundle\Form\Type\AllegatoType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
@@ -13,24 +18,20 @@ class TblCatalogueProductEditInfoType extends AbstractType
 {
     private $lingua;
 
-    public function __construct($lingua)
-    {
-        $this->lingua = $lingua;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->lingua = $options['language'];
         $builder
-            ->add('idTblLingua', 'hidden')
+            ->add('idTblLingua', HiddenType::class)
             ->add('title')
             ->add('description')
             ->add('cod')
-            ->add('allegatiProgetto', 'collection', array(
-                'type' => new AllegatoType(),
+            ->add('allegatiProgetto', CollectionType::class, array(
+                'entry_type' => AllegatoType::class,
                 'allow_add'    => true,
                 'allow_delete'  => true,
                 'by_reference' => false,
@@ -40,31 +41,31 @@ class TblCatalogueProductEditInfoType extends AbstractType
                 'required'      => false,
                 'label'         => 'Logo',
                 'allow_delete'  => false, // not mandatory, default is true
-                'download_link' => false, // not mandatory, default is true
+                'download_uri' => false, // not mandatory, default is true
             ))
-            ->add('logoPath', 'hidden')
+            ->add('logoPath', HiddenType::class)
             ->add('position')
-            ->add('featured', 'checkbox', array(
+            ->add('featured', CheckboxType::class, array(
                 'required'  => false,
             ))
-            ->add('idTblPhotoCat', 'hidden')
-            ->add('pub', 'checkbox', array(
+            ->add('idTblPhotoCat', HiddenType::class)
+            ->add('pub', CheckboxType::class, array(
                 'required'  => false,
             ))
-            ->add('categories', 'entity', array(
+            ->add('categories', EntityType::class, array(
                 'class'     => 'IlCleme\CatalogoBundle\Entity\Category',
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->where('u.idTblLingua = '.$this->lingua);
                 },
-                'property'  => 'title',
+                'choice_label'  => 'title',
                 'multiple'  => true,
                 'expanded'  => false,
                 'required'  => true,
                 'mapped'    => true
             ))
-            ->add('save', 'submit', array('label' => 'Salva ed Esci'))
-            ->add('saveAndContinue', 'submit', array('label' => 'Salva e Continua'))
+            ->add('save', SubmitType::class, array('label' => 'Salva ed Esci'))
+            ->add('saveAndContinue', SubmitType::class, array('label' => 'Salva e Continua'))
         ;
     }
 
@@ -77,12 +78,14 @@ class TblCatalogueProductEditInfoType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'IlCleme\CatalogoBundle\Entity\Product'
         ));
+
+        $resolver->setRequired('language');
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'product_edit';
     }

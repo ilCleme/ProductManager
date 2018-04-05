@@ -187,7 +187,9 @@ class ProductController extends Controller
             );
         }
 
-        $form = $this->createForm(new TblCatalogueProductEditInfoType($this->get('language.manager')->getSessionLanguage()), $product);
+        $form = $this->createForm(TblCatalogueProductEditInfoType::class, $product, array(
+            'language' => $this->get('language.manager')->getSessionLanguage(),
+        ));
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -345,7 +347,7 @@ class ProductController extends Controller
             ->getRepository('IlClemeCatalogoBundle:Photo')
             ->findBy( array('album' => $product->getIdTblPhotoCat(), 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()), array('posizione' => 'ASC'));
 
-        $form = $this->createForm(new TblCatalogueProductEditImagesType($this->get('language.manager')->getSessionLanguage()), $product);
+        $form = $this->createForm(TblCatalogueProductEditImagesType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

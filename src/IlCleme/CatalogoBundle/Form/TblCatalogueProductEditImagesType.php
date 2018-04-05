@@ -3,18 +3,13 @@
 namespace IlCleme\CatalogoBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TblCatalogueProductEditImagesType extends AbstractType
 {
-    private $lingua;
-
-    public function __construct($lingua)
-    {
-        $this->lingua = $lingua;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -22,9 +17,9 @@ class TblCatalogueProductEditImagesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('idTblPhotoCat', 'hidden')
-        ->add('save', 'submit', array('label' => 'Salva ed Esci'))
-        ->add('saveAndContinue', 'submit', array('label' => 'Salva e Continua'))
+        ->add('idTblPhotoCat', HiddenType::class)
+        ->add('save', SubmitType::class, array('label' => 'Salva ed Esci'))
+        ->add('saveAndContinue', SubmitType::class, array('label' => 'Salva e Continua'))
         ;
     }
 
@@ -42,7 +37,7 @@ class TblCatalogueProductEditImagesType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'product_edit';
     }

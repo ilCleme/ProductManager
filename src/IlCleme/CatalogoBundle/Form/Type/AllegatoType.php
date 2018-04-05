@@ -3,6 +3,9 @@
 namespace IlCleme\CatalogoBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichFileType;
@@ -16,15 +19,15 @@ class AllegatoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'text', array('disabled' => true))
-            ->add('idTblLingua', 'hidden')
+            ->add('id', TextType::class, array('disabled' => true))
+            ->add('idTblLingua', HiddenType::class)
             ->add('nome')
             ->add('imageFile', VichFileType::class, array(
                 'label'         => false,
                 'allow_delete'  => false, // not mandatory, default is true
-                'download_link' => false, // not mandatory, default is true
+                'download_uri' => false, // not mandatory, default is true
             ))
-            ->add('imageName', 'url', array('disabled' => true))
+            ->add('imageName', UrlType::class, array('disabled' => true))
         ;
     }
 
@@ -35,7 +38,7 @@ class AllegatoType extends AbstractType
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'allegato';
     }
