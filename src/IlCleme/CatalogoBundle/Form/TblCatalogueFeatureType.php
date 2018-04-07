@@ -2,18 +2,18 @@
 
 namespace IlCleme\CatalogoBundle\Form;
 
+use IlCleme\CatalogoBundle\Entity\Feature;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TblCatalogueFeatureType extends AbstractType
 {
     private $lingua;
-
-    public function __construct($lingua)
-    {
-        $this->lingua = $lingua;
-    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -22,31 +22,42 @@ class TblCatalogueFeatureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('idTblLingua','hidden')
+            ->add('idTblLingua', HiddenType::class)
             ->add('title')
             ->add('description')
-            ->add('typeInput', 'choice', array(
-                'choices'   =>  array('select' => 'Insieme con selezione singola (select)', 'checkbox' => 'Insieme con selezione multipla (checkbox)'),
+            ->add('typeInput', ChoiceType::class, array(
+                'choices'   =>  array(
+                    'select' => 'Insieme con selezione singola (select)',
+                    'checkbox' => 'Insieme con selezione multipla (checkbox)'
+                ),
+                'choices_as_values' => true,
                 'required'  =>  true
             ))
-            ->add('compulsory', 'choice', array(
-                'choices'   =>  array('1' => 'Si', '0' => 'No'),
+            ->add('compulsory', ChoiceType::class, array(
+                'choices'   =>  array(
+                    'Si' => '1',
+                    'No' => '0'
+                ),
+                'choices_as_values' => true,
                 'expanded'  =>  true,
                 'multiple'  =>  false
             ))
-            ->add('display', 'choice', array(
-                'choices'   =>  array('float:left' => 'Su unica riga', 'float:none' => 'Un valore per riga')
+            ->add('display', ChoiceType::class, array(
+                'choices'   =>  array(
+                    'Su unica riga' => 'float:left',
+                    'Un valore per riga' => 'float:none'
+                ),
+                'choices_as_values' => true
             ))
-            ->add('inheritFrom', 'entity', array(
-                'class' => 'IlCleme\CatalogoBundle\Entity\Feature',
-                'property' => 'title',
+            ->add('inheritFrom', EntityType::class, array(
+                'class' => Feature::class,
+                'choice_label' => 'title',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => false
             ))
-            ->add('position', 'hidden')
-            //->add('featurevalues')
-            ->add('save', 'submit', array('label' => 'Salva'))
+            ->add('position', HiddenType::class)
+            ->add('save', SubmitType::class, array('label' => 'Salva'))
         ;
     }
 
@@ -56,14 +67,16 @@ class TblCatalogueFeatureType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IlCleme\CatalogoBundle\Entity\Feature'
+            'data_class' => Feature::class
         ));
+
+        $resolver->setRequired('language');
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'feature';
     }

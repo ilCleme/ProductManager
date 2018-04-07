@@ -11,14 +11,17 @@ class FeatureController extends Controller
 {
     public function createAction(Request $request)
     {
+        $lingua = $this->get('language.manager')->getSessionLanguage();
         $categories = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Category')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findBy(array('idTblLingua' => $lingua));
 
         $feature = new Feature();
         $feature->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
-        $form = $this->createForm(new TblCatalogueFeatureType($this->get('language.manager')->getSessionLanguage()), $feature);
-        
+        $form = $this->createForm(TblCatalogueFeatureType::class, $feature, array(
+            'language' => $lingua
+        ));
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -28,31 +31,34 @@ class FeatureController extends Controller
 
             return $this->redirect($this->generateUrl('features'));
         }
-        
+
         return $this->render('IlClemeCatalogoBundle:Feature:new.html.twig', array(
             'form' => $form->createView(),
             'categories' => $categories
         ));
     }
 
-    
+
     public function updateAction($id, Request $request)
     {
+        $lingua = $this->get('language.manager')->getSessionLanguage();
         $categories = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Category')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findBy(array('idTblLingua' => $lingua));
 
         $feature = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Feature')
-            ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
-    
+            ->findOneBy(array('id' => $id, 'idTblLingua' => $lingua));
+
         if (!$feature) {
             throw $this->createNotFoundException(
                 'Nessuna categoria di feature trovata per l\'id '.$id
             );
         }
-        
-        $form = $this->createForm(new TblCatalogueFeatureType($this->get('language.manager')->getSessionLanguage()), $feature);
+
+        $form = $this->createForm(TblCatalogueFeatureType::class, $feature, array(
+            'language' => $lingua
+        ));
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -68,13 +74,13 @@ class FeatureController extends Controller
             'categories' => $categories
         ));
     }
-    
+
     public function deleteAction($id, Request $request)
     {
         $feature = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Feature')
             ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
-    
+
         if (!$feature) {
             throw $this->createNotFoundException(
                 'Nessuna categoria di feature trovata per l\'id '.$id

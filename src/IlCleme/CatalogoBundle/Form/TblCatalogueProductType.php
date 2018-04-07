@@ -13,17 +13,13 @@ class TblCatalogueProductType extends AbstractType
 {
     private $lingua;
 
-    public function __construct($lingua)
-    {
-        $this->lingua = $lingua;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->lingua = $options['language'];
         $builder
             ->add('idTblLingua', 'hidden')
             ->add('title')
@@ -78,6 +74,8 @@ class TblCatalogueProductType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'IlCleme\CatalogoBundle\Entity\Product'
         ));
+
+        $resolver->setRequired('language');
     }
 
     /**

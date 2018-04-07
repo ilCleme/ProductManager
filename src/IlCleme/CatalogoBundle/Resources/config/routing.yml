@@ -16,7 +16,7 @@ upload_product_photo:
 
 create_product:
     path:     /products/new/info
-    defaults: { _controller: IlClemeCatalogoBundle:Product:createNew }
+    defaults: { _controller: IlClemeCatalogoBundle:Product:create }
 
 update_product_info:
     path:     /product/update/info/{id}
@@ -33,11 +33,11 @@ update_product_immagini:
 delete_product:
     path:     /product/delete/{id}
     defaults: { _controller: IlClemeCatalogoBundle:Product:delete }
-    
+
 categories:
     path:     /categories
     defaults: { _controller: IlClemeCatalogoBundle:Welcome:allCategory }
-    
+
 create_category:
     path:     /categories/new
     defaults: { _controller: IlClemeCatalogoBundle:Category:create }
@@ -57,15 +57,15 @@ delete_category:
 features:
     path:     /features
     defaults: { _controller: IlClemeCatalogoBundle:Welcome:allFeature }
-    
+
 create_features:
     path:     /features/new
     defaults: { _controller: IlClemeCatalogoBundle:Feature:create }
-    
+
 update_features:
     path:     /feature/update/{id}
     defaults: { _controller: IlClemeCatalogoBundle:Feature:update }
-    
+
 delete_features:
     path:     /feature/delete/{id}
     defaults: { _controller: IlClemeCatalogoBundle:Feature:delete }
@@ -73,7 +73,7 @@ delete_features:
 featurevalues: #inutilizzata - dev
     path:     /featurevalues
     defaults: { _controller: IlClemeCatalogoBundle:Welcome:allFeatureValue }
-    
+
 create_featurevalues:
     path:     /featurevalues/new
     defaults: { _controller: IlClemeCatalogoBundle:Featurevalue:create }

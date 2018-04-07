@@ -17,7 +17,9 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
-        $form = $this->createForm(new CategoryType($this->get('language.manager')->getSessionLanguage()), $category);
+        $form = $this->createForm(CategoryType::class, $category, array(
+            'language' => $this->get('language.manager')->getSessionLanguage()
+        ));
 
         $form->handleRequest($request);
 
@@ -29,14 +31,14 @@ class CategoryController extends Controller
 
             return $this->redirect($this->generateUrl('categories'));
         }
-        
-        
+
+
         return $this->render('IlClemeCatalogoBundle:Category:new.html.twig', array(
             'form' => $form->createView(),
             'categories' => $categories
         ));
     }
-    
+
     public function showAction($id, Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -102,7 +104,7 @@ class CategoryController extends Controller
             array('category' => $category, 'categories' => $categories, 'pagination' => $pagination, 'id' => $id, 'photos' => $photos)
         );
     }
-    
+
     public function updateAction($id, Request $request)
     {
         $categories = $this->getDoctrine()
@@ -112,27 +114,29 @@ class CategoryController extends Controller
         $category = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Category')
             ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
-    
+
         if (!$category) {
             throw $this->createNotFoundException(
                 'Nessun categoria trovato per l\'id '.$id
             );
         }
-        
-        $form = $this->createForm(new CategoryType($this->get('language.manager')->getSessionLanguage()), $category);
-        
+
+        $form = $this->createForm(CategoryType::class, $category, array(
+            'language' => $this->get('language.manager')->getSessionLanguage()
+        ));
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             // esegue alcune azioni, salvare il prodotto nella base dati
-            
+
             $em = $this->getDoctrine()->getManager();
-            
+
             $em->persist($category);
             $em->flush();
             return $this->redirect($this->generateUrl('categories'));
         }
-    
+
         // passo l'oggetto $category a un template
         return $this->render('IlClemeCatalogoBundle:Category:update.html.twig', array(
             'form' => $form->createView(),
@@ -140,13 +144,13 @@ class CategoryController extends Controller
             'category' => $category
         ));
     }
-    
+
     public function deleteAction($id, Request $request)
     {
         $category = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Category')
             ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
-    
+
         if (!$category) {
             throw $this->createNotFoundException(
                 'Nessun categoria trovato per l\'id '.$id

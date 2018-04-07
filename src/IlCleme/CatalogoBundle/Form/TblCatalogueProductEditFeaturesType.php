@@ -2,7 +2,11 @@
 
 namespace IlCleme\CatalogoBundle\Form;
 
+use IlCleme\CatalogoBundle\Entity\Featurevalue;
+use IlCleme\CatalogoBundle\Entity\Product;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
@@ -13,20 +17,16 @@ class TblCatalogueProductEditFeaturesType extends AbstractType
 {
     private $lingua;
 
-    public function __construct($lingua)
-    {
-        $this->lingua = $lingua;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->lingua = $options['language'];
         $builder
-            ->add('exit', 'submit', array('label' => 'Salva ed Esci'))
-            ->add('save', 'submit', array('label' => 'Salva e Continua'))
+            ->add('exit', SubmitType::class, array('label' => 'Salva ed Esci'))
+            ->add('save', SubmitType::class, array('label' => 'Salva e Continua'))
             ->addEventListener(FormEvents::PRE_SET_DATA,
                 array($this, 'onPreSetData')
             )
@@ -58,10 +58,9 @@ class TblCatalogueProductEditFeaturesType extends AbstractType
 
                 $idFeature = $feature->getId();
 
-                $form->add('featurevalues_'.$idFeature, 'entity', array(
-                    'class'     =>  'IlCleme\CatalogoBundle\Entity\Featurevalue',
-                    'property'  =>  'title',
-                    //'choices'   =>  $featurevalues,
+                $form->add('featurevalues_'.$idFeature, EntityType::class, array(
+                    'class'     =>  Featurevalue::class,
+                    'choice_label'  =>  'title',
                     'query_builder' => function (EntityRepository $er) use ($idFeature){
                         return $er->createQueryBuilder('u')
                             ->where('u.idTblLingua = ?2')
@@ -86,14 +85,16 @@ class TblCatalogueProductEditFeaturesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IlCleme\CatalogoBundle\Entity\Product'
+            'data_class' => Product::class
         ));
+
+        $resolver->setRequired('language');
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'product_edit';
     }

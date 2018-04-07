@@ -2,6 +2,7 @@
 
 namespace IlCleme\CatalogoBundle\Form;
 
+use IlCleme\CatalogoBundle\Entity\Product;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -30,7 +31,7 @@ class TblCatalogueProductEditImagesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IlCleme\CatalogoBundle\Entity\Product'
+            'data_class' => Product::class
         ));
     }
 

@@ -2,6 +2,8 @@
 
 namespace IlCleme\CatalogoBundle\Form;
 
+use IlCleme\CatalogoBundle\Entity\Category;
+use IlCleme\CatalogoBundle\Entity\Product;
 use IlCleme\CatalogoBundle\Form\Type\AllegatoType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -53,7 +55,7 @@ class TblCatalogueProductEditInfoType extends AbstractType
                 'required'  => false,
             ))
             ->add('categories', EntityType::class, array(
-                'class'     => 'IlCleme\CatalogoBundle\Entity\Category',
+                'class'     => Category::class,
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->where('u.idTblLingua = '.$this->lingua);
@@ -76,7 +78,7 @@ class TblCatalogueProductEditInfoType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'IlCleme\CatalogoBundle\Entity\Product'
+            'data_class' => Product::class
         ));
 
         $resolver->setRequired('language');

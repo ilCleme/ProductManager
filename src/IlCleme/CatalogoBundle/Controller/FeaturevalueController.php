@@ -17,7 +17,9 @@ class FeaturevalueController extends Controller
 
         $featurevalues = new Featurevalue();
         $featurevalues->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
-        $form = $this->createForm(new TblCatalogueFeaturevalueType($this->get('language.manager')->getSessionLanguage()), $featurevalues);
+        $form = $this->createForm(TblCatalogueFeaturevalueType::class, $featurevalues, array(
+            'language' => $this->get('language.manager')->getSessionLanguage()
+        ));
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -33,7 +35,7 @@ class FeaturevalueController extends Controller
             'categories' => $categories
         ));
     }
-    
+
     public function updateAction($id, Request $request)
     {
         $categories = $this->getDoctrine()
@@ -43,14 +45,16 @@ class FeaturevalueController extends Controller
         $featurevalues = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Featurevalue')
             ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
-    
+
         if (!$featurevalues) {
             throw $this->createNotFoundException(
                 'Nessun categoria trovato per l\'id '.$id
             );
         }
-        
-        $form = $this->createForm(new TblCatalogueFeaturevalueType($this->get('language.manager')->getSessionLanguage()), $featurevalues);
+
+        $form = $this->createForm(TblCatalogueFeaturevalueType::class, $featurevalues, array(
+            'language' => $this->get('language.manager')->getSessionLanguage()
+        ));
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -66,13 +70,13 @@ class FeaturevalueController extends Controller
             'categories' => $categories
         ));
     }
-    
+
     public function deleteAction($id, Request $request)
     {
         $featurevalues = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Featurevalue')
             ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
-    
+
         if (!$featurevalues) {
             throw $this->createNotFoundException(
                 'Nessun categoria trovato per l\'id '.$id

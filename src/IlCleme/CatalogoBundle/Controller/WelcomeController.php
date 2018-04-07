@@ -44,59 +44,6 @@ class WelcomeController extends Controller
             );
     }
 
-    public function allProductAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM IlClemeCatalogoBundle:Product a";
-        $product = $em->createQuery($dql);
-
-        if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='title' ){
-            $filterValue = $request->query->get('filterValue');
-
-            $product = $em->createQuery('SELECT a FROM IlClemeCatalogoBundle:Product a WHERE a.title LIKE :filterValue ');
-            $product->setParameters(array(
-                'filterValue' => '%'.$filterValue.'%'
-            ));
-        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='shortDescription' ){
-            $filterValue = $request->query->get('filterValue');
-
-            $product = $em->createQuery('SELECT a FROM IlClemeCatalogoBundle:Product a WHERE a.shortDescription LIKE :filterValue ');
-            $product->setParameters(array(
-                'filterValue' => '%'.$filterValue.'%'
-            ));
-        } else if ( null !== $request->query->get('filterField') && $request->query->get('filterField')=='idProduct' ){
-            $filterValue = $request->query->get('filterValue');
-
-            $product = $em->createQuery('SELECT a FROM IlClemeCatalogoBundle:Product a WHERE a.id LIKE :filterValue ');
-            $product->setParameters(array(
-                'filterValue' => '%'.$filterValue.'%'
-            ));
-        }
-
-        if (!$product) {
-            throw $this->createNotFoundException(
-                'Nessun prodotto trovato'
-            );
-        }
-
-        $paginator  = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $product,
-            $request->query->getInt('page', 1)/*page number*/,
-            $request->query->getInt('number', 50)/*limit per page*/
-        );
-
-        $categories = $this->getDoctrine()
-            ->getRepository('IlClemeCatalogoBundle:Category')
-            ->findAll();
-        
-        // passo l'oggetto $product a un template
-        return $this->render(
-            'IlClemeCatalogoBundle:Welcome:showallproduct.html.twig',
-            array('products' => $product, 'pagination' => $pagination, 'categories' => $categories)
-        );
-    }
-    
     public function allCategoryAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -147,7 +94,7 @@ class WelcomeController extends Controller
             array('categories' => $category, 'pagination' => $pagination)
         );
     }
-    
+
     public function allFeatureAction(Request $request)
     {
         $feature = $this->getDoctrine()
@@ -157,14 +104,14 @@ class WelcomeController extends Controller
         $category = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
-        
+
         // passo l'oggetto $product a un template
         return $this->render(
             'IlClemeCatalogoBundle:Welcome:showallfeatures.html.twig',
             array('features' => $feature, 'categories' => $category, 'lingua' => $this->get('language.manager')->getSessionLanguage(),)
         );
     }
-    
+
     public function allFeatureValueAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
@@ -193,7 +140,7 @@ class WelcomeController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             $request->query->getInt('number', 10)/*limit per page*/
         );
-        
+
         // passo l'oggetto $product a un template
         return $this->render(
             'IlClemeCatalogoBundle:Welcome:showallfeaturevalues.html.twig',

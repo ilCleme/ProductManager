@@ -2,7 +2,10 @@
 
 namespace IlCleme\CatalogoBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
@@ -14,39 +17,35 @@ class TblCatalogueFeaturevalueType extends AbstractType
 {
     private $lingua;
 
-    public function __construct($lingua)
-    {
-        $this->lingua = $lingua;
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $this->lingua = $options['language'];
         $builder
-            ->add('idTblLingua', 'hidden')
+            ->add('idTblLingua', HiddenType::class)
             ->add('title')
             ->add('imageFile', VichImageType::class, array(
                 'required'      => false,
                 'label'         => 'Icona',
                 'allow_delete'  => false, // not mandatory, default is true
-                'download_link' => false, // not mandatory, default is true
+                'download_uri' => false, // not mandatory, default is true
             ))
-            ->add('position', 'hidden')
-            ->add('features', 'entity', array(
+            ->add('position', HiddenType::class)
+            ->add('features', EntityType::class, array(
                 'class' => 'IlCleme\CatalogoBundle\Entity\Feature',
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('f')
                         ->where('f.idTblLingua = '.$this->lingua);
                 },
-                'property' => 'title',
+                'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
                 'required' => false
             ))
-            ->add('save', 'submit', array('label' => 'Salva'))
+            ->add('save', SubmitType::class, array('label' => 'Salva'))
             ->addEventListener(FormEvents::PRE_SET_DATA,
                 array($this, 'onPreSetData')
             )
@@ -62,7 +61,7 @@ class TblCatalogueFeaturevalueType extends AbstractType
         if (method_exists($featurevalue_parent[0], "getInheritFrom")){
             $id = $featurevalue_parent[0]->getInheritFrom();
             if (null !== $id){
-                $form->add('featurevalue_inherit', 'entity', array(
+                $form->add('featurevalue_inherit', EntityType::class, array(
                     'class' => 'IlCleme\CatalogoBundle\Entity\Featurevalue',
                     'query_builder' => function (EntityRepository $er) use ($id){
                         return $er->createQueryBuilder('u')
@@ -88,12 +87,14 @@ class TblCatalogueFeaturevalueType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'IlCleme\CatalogoBundle\Entity\Featurevalue'
         ));
+
+        $resolver->setRequired('language');
     }
 
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'featurevalues_form';
     }

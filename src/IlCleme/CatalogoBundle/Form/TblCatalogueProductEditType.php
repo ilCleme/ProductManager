@@ -78,12 +78,10 @@ class TblCatalogueProductEditType extends AbstractType
                 $idFeature = $feature->getIdTblCatalogueFeature();
 
                 $form->add('featurevalues_'.$idFeature, 'entity', array(
-                    'class'     =>  'IlCleme\CatalogoBundle\Entity\TblCatalogueFeaturevalue',
+                    'class'     =>  TblCatalogueFeaturevalueType::class,
                     'property'  =>  'title',
-                    //'choices'   =>  $featurevalues,
                     'query_builder' => function (EntityRepository $er) use ($idFeature){
                         return $er->createQueryBuilder('u')
-                            //->where('u.id > ?1')
                             ->join('u.features', 'f', 'WITH')
                             ->where('f.id = ?1')
                             ->setParameter(1, $idFeature);

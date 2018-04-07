@@ -12,7 +12,6 @@ use IlCleme\CatalogoBundle\Form\TblCatalogueProductEditInfoType;
 use IlCleme\CatalogoBundle\Form\TblCatalogueProductEditFeaturesType;
 use IlCleme\CatalogoBundle\Form\TblCatalogueProductEditImagesType;
 use IlCleme\CatalogoBundle\Entity\Photo as Foto;
-use IlCleme\CatalogoBundle\Entity\Allegato;
 
 class ProductController extends Controller
 {
@@ -119,16 +118,18 @@ class ProductController extends Controller
         return new Response($fname);
     }
 
-    public function createNewAction(Request $request)
+    public function createAction(Request $request)
     {
+        $lingua = $this->get('language.manager')->getSessionLanguage();
         $categories = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Category')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findBy(array('idTblLingua' => $lingua));
 
         $product = new Product();
-
-        $product->setIdTblLingua($this->get('language.manager')->getSessionLanguage());
-        $form = $this->createForm(new TblCatalogueProductType($this->get('language.manager')->getSessionLanguage()), $product);
+        $product->setIdTblLingua($lingua);
+        $form = $this->createForm(TblCatalogueProductType::class, $product, array(
+            'language' => $lingua
+        ));
 
         $form->handleRequest($request);
 
@@ -175,11 +176,12 @@ class ProductController extends Controller
             ->getRepository('IlClemeCatalogoBundle:Category')
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));*/
 
+        $lingua = $this->get('language.manager')->getSessionLanguage();
         $product = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Product')
-            ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findOneBy(array('id' => $id, 'idTblLingua' => $lingua));
 
-        $categories = $product->getCategoriesByLanguage($this->get('language.manager')->getSessionLanguage());
+        $categories = $product->getCategoriesByLanguage($lingua);
 
         if (!$product) {
             throw $this->createNotFoundException(
@@ -188,7 +190,7 @@ class ProductController extends Controller
         }
 
         $form = $this->createForm(TblCatalogueProductEditInfoType::class, $product, array(
-            'language' => $this->get('language.manager')->getSessionLanguage(),
+            'language' => $lingua,
         ));
         $form->handleRequest($request);
 
@@ -228,11 +230,12 @@ class ProductController extends Controller
             ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
         */
 
+        $lingua = $this->get('language.manager')->getSessionLanguage();
         $product = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Product')
-            ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findOneBy(array('id' => $id, 'idTblLingua' => $lingua));
 
-        $categories = $product->getCategoriesByLanguage($this->get('language.manager')->getSessionLanguage());
+        $categories = $product->getCategoriesByLanguage($lingua);
 
         $categorie = $product->getCategories();
         foreach($categorie as $categoria){
@@ -245,7 +248,9 @@ class ProductController extends Controller
             );
         }
 
-        $form = $this->createForm(new TblCatalogueProductEditFeaturesType($this->get('language.manager')->getSessionLanguage()), $product);
+        $form = $this->createForm(TblCatalogueProductEditFeaturesType::class, $product, array(
+            'language' => $lingua
+        ));
 
         if ( !($form->isValid()) ) {
 
@@ -326,15 +331,12 @@ class ProductController extends Controller
     }
 
     public function updateImagesAction($id, Request $request){
-        /*$categories = $this->getDoctrine()
-            ->getRepository('IlClemeCatalogoBundle:Category')
-            ->findBy(array('idTblLingua' => $this->get('language.manager')->getSessionLanguage()));*/
-
+        $lingua = $this->get('language.manager')->getSessionLanguage();
         $product = $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Product')
-            ->findOneBy(array('id' => $id, 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()));
+            ->findOneBy(array('id' => $id, 'idTblLingua' => $lingua));
 
-        $categories = $product->getCategoriesByLanguage($this->get('language.manager')->getSessionLanguage());
+        $categories = $product->getCategoriesByLanguage($lingua);
 
         if (!$product) {
             throw $this->createNotFoundException(
@@ -345,7 +347,12 @@ class ProductController extends Controller
         // Getting photo of product
         $photos= $this->getDoctrine()
             ->getRepository('IlClemeCatalogoBundle:Photo')
-            ->findBy( array('album' => $product->getIdTblPhotoCat(), 'idTblLingua' => $this->get('language.manager')->getSessionLanguage()), array('posizione' => 'ASC'));
+            ->findBy( array(
+                'album' => $product->getIdTblPhotoCat(),
+                'idTblLingua' => $lingua
+            ), array(
+                'posizione' => 'ASC'
+            ));
 
         $form = $this->createForm(TblCatalogueProductEditImagesType::class, $product);
         $form->handleRequest($request);
