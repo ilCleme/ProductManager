@@ -43,7 +43,7 @@ class TblCatalogueProductType extends AbstractType
                 'required'      => false,
                 'label'         => 'Logo',
                 'allow_delete'  => false, // not mandatory, default is true
-                'download_uri' => false, // not mandatory, default is true
+                'download_link' => false, // not mandatory, default is true
             ))
             ->add('logoPath', HiddenType::class, array(
                 'required'  =>  false

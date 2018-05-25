@@ -23,7 +23,7 @@ class CategoryController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($category);
@@ -127,7 +127,7 @@ class CategoryController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             // esegue alcune azioni, salvare il prodotto nella base dati
 
             $em = $this->getDoctrine()->getManager();

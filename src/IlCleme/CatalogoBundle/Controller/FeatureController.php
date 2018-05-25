@@ -24,7 +24,7 @@ class FeatureController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($feature);
             $em->flush();
@@ -61,7 +61,7 @@ class FeatureController extends Controller
         ));
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($feature);
             $em->flush();

@@ -30,6 +30,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
             // Il metodo Query::getSingleResult() lancia un'eccezione
             // se nessuna riga corrisponde ai criteri
             $user = $q->getSingleResult();
+            dump($user);
         } catch (NoResultException $e) {
             $message = sprintf(
                 'Impossibile trovare un oggetto QwebCMSBundle:User identificato da  "%s".',

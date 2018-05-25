@@ -30,7 +30,6 @@ class TblCatalogueFeatureType extends AbstractType
                     'select' => 'Insieme con selezione singola (select)',
                     'checkbox' => 'Insieme con selezione multipla (checkbox)'
                 ),
-                'choices_as_values' => true,
                 'required'  =>  true
             ))
             ->add('compulsory', ChoiceType::class, array(
@@ -38,7 +37,6 @@ class TblCatalogueFeatureType extends AbstractType
                     'Si' => '1',
                     'No' => '0'
                 ),
-                'choices_as_values' => true,
                 'expanded'  =>  true,
                 'multiple'  =>  false
             ))
@@ -47,7 +45,6 @@ class TblCatalogueFeatureType extends AbstractType
                     'Su unica riga' => 'float:left',
                     'Un valore per riga' => 'float:none'
                 ),
-                'choices_as_values' => true
             ))
             ->add('inheritFrom', EntityType::class, array(
                 'class' => Feature::class,

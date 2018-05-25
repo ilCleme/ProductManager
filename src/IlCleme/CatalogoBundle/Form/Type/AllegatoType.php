@@ -26,7 +26,7 @@ class AllegatoType extends AbstractType
             ->add('imageFile', VichFileType::class, array(
                 'label'         => false,
                 'allow_delete'  => false, // not mandatory, default is true
-                'download_uri' => false, // not mandatory, default is true
+                'download_link' => false, // not mandatory, default is true
             ))
             ->add('imageName', UrlType::class, array('disabled' => true))
         ;

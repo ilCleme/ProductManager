@@ -13,29 +13,23 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
-        #assets_version: SomeVersionScheme
     default_locale:  "%locale%"
     trusted_hosts:   ~
-    trusted_proxies: ~
     session:
-        # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
     fragments:       ~
     http_method_override: true
+    assets: ~
 
 # Twig Configuration
 twig:
-    form:
-        resources:
-            - 'IlClemeCatalogoBundle:Form:fields.html.twig'
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form_themes:
-            # other form themes
-            #- 'bootstrap_3_layout.html.twig'
-            - 'VichUploaderBundle:Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -159,7 +153,7 @@ vich_uploader:
     mappings:
         featurevalues_image:
             uri_prefix:         /public/ico-caratteristiche
-            upload_destination: %kernel.root_dir%/../web/public/ico-caratteristiche
+            upload_destination: "%kernel.root_dir%/../web/public/ico-caratteristiche"
 
             inject_on_load:     false
             delete_on_update:   true
@@ -167,7 +161,7 @@ vich_uploader:
 
         allegati:
             uri_prefix:         /allegati
-            upload_destination: %kernel.root_dir%/../web/allegati
+            upload_destination: "%kernel.root_dir%/../web/allegati"
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true
@@ -175,7 +169,7 @@ vich_uploader:
 
         logo:
             uri_prefix:         /logo
-            upload_destination: %kernel.root_dir%/../web/logo
+            upload_destination: "%kernel.root_dir%/../web/logo"
             inject_on_load:     true
             delete_on_update:   true
             delete_on_remove:   true

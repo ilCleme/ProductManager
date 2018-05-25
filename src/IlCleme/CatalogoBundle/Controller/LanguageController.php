@@ -3,6 +3,7 @@
 namespace IlCleme\CatalogoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class LanguageController extends Controller
 {
@@ -20,32 +21,11 @@ class LanguageController extends Controller
         );
     }
 
-    public function setLanguageAction()
+    public function setLanguageAction(Request $attributes)
     {
-
-        $attributes = $this->getRequest();
         $id = $attributes->get('lng');
         $route = $attributes->get('_route');
         $this->get('language.manager')->setSessionLanguage($id);
-
-        /*if ($this->getRequest()->isMethod('GET')){
-            if( null !== $id ){
-                $this->get('session')->set('lingua', $id);
-            } else {
-                $this->get('session')->set('lingua', 4);
-            }
-        } else if ($this->getRequest()->isMethod('POST')){
-            $attributes = $this->getRequest();
-            $id = $attributes->get('lng');
-
-            if( null !== $id ){
-                $this->get('session')->set('lingua', $id);
-            } else {
-                $this->get('session')->set('lingua', 4);
-            }
-            return $this->redirect($this->generateUrl('welcome'));
-
-        }*/
 
         return $this->redirectToRoute('welcome');
     }

@@ -22,7 +22,7 @@ class FeaturevalueController extends Controller
         ));
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($featurevalues);
             $em->flush();
@@ -57,7 +57,7 @@ class FeaturevalueController extends Controller
         ));
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($featurevalues);
             $em->flush();

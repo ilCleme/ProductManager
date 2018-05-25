@@ -133,7 +133,7 @@ class ProductController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
 
@@ -194,7 +194,7 @@ class ProductController extends Controller
         ));
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
 
@@ -282,7 +282,7 @@ class ProductController extends Controller
         }
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $categorie = $product->getCategories();
             foreach($categorie as $categoria){
@@ -357,7 +357,7 @@ class ProductController extends Controller
         $form = $this->createForm(TblCatalogueProductEditImagesType::class, $product);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
 

@@ -10,13 +10,17 @@ services:
 #    fornitore_utenti_apikey:
 #        class: IlCleme\CatalogoBundle\Security\ApiKeyUserProvider
 
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: true
 
-    catalogobundle.upload_listener:
-        class: IlCleme\CatalogoBundle\EventListener\UploadListener
-        tags:
-            - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
-        arguments: ['@doctrine', '@service_container']
+  catalogobundle.upload_listener:
+      class: IlCleme\CatalogoBundle\EventListener\UploadListener
+      tags:
+          - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
+      arguments: ["@doctrine", "@service_container"]
 
-    language.manager:
-        class: IlCleme\CatalogoBundle\Services\LanguageManager
-        arguments: ['@session']
+  language.manager:
+      class: IlCleme\CatalogoBundle\Services\LanguageManager
+      arguments: ["@session"]

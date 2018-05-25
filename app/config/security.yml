@@ -16,13 +16,13 @@ security:
         our_db_provider:
             entity:
                 class: IlClemeUserBundle:User
-                # property: username !!! commentando questa riga symfony non fa la query automaticamente ma usa il metodo loadUserByUsername() della UserRepository
+                property: username
                 # if you're using multiple entity managers
                 # manager_name: customer
 
         administrators:
             entity: { class: IlClemeUserBundle:User }
-        
+
         apiprovider:
             id: fornitore_utenti_apikey
 
@@ -33,15 +33,6 @@ security:
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        
-        secured_area: # questo firewall controlla tutte le richieste che inizia per /hello
-            pattern: ^/hello
-            stateless: false
-            simple_preauth:
-                authenticator: autenticatore_apikey
-            logout:
-                path:   /logout
-                target: /login
 
         main:
             #pattern:    ^/
@@ -53,9 +44,11 @@ security:
             logout:
                 path:   /logout
                 target: /
+            logout_on_user_change: true
 
         default:
             anonymous: ~
+            logout_on_user_change: true
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods

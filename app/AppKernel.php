@@ -19,7 +19,7 @@ class AppKernel extends Kernel
             new IlCleme\CatalogoBundle\IlClemeCatalogoBundle(),
             new IlCleme\UserBundle\IlClemeUserBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
-            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+            //new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
@@ -39,5 +39,18 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->getRootDir().'/config/config_'.$this->getEnvironment().'.yml');
+    }
+
+    public function getRootDir()
+    {
+        return __DIR__;
+    }
+    public function getCacheDir()
+    {
+        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+    }
+    public function getLogDir()
+    {
+        return dirname(__DIR__).'/var/logs';
     }
 }

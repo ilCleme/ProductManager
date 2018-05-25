@@ -31,7 +31,7 @@ class TblCatalogueFeaturevalueType extends AbstractType
                 'required'      => false,
                 'label'         => 'Icona',
                 'allow_delete'  => false, // not mandatory, default is true
-                'download_uri' => false, // not mandatory, default is true
+                'download_link' => false, // not mandatory, default is true
             ))
             ->add('position', HiddenType::class)
             ->add('features', EntityType::class, array(
